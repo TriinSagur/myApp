@@ -1,7 +1,7 @@
 package ee.bcs.myApp.infrastructure;
 
 import ee.bcs.myApp.infrastructure.error.ApiError;
-import ee.bcs.myApp.infrastructure.error.BankError;
+import ee.bcs.myApp.infrastructure.error.MyAppError;
 import ee.bcs.myApp.infrastructure.exception.SomeBusinessException;
 import ee.bcs.myApp.infrastructure.exception.DataNotFoundException;
 import org.springframework.http.HttpHeaders;
@@ -22,19 +22,19 @@ import java.util.List;
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<BankError> handleDataNotFoundException(DataNotFoundException exception) {
-        BankError bankError = new BankError();
-        bankError.setMessage(exception.getMessage());
-        bankError.setErrorCode(exception.getErrorCode());
-        return new ResponseEntity<>(bankError, HttpStatus.NOT_FOUND);
+    public ResponseEntity<MyAppError> handleDataNotFoundException(DataNotFoundException exception) {
+        MyAppError myAppError = new MyAppError();
+        myAppError.setMessage(exception.getMessage());
+        myAppError.setErrorCode(exception.getErrorCode());
+        return new ResponseEntity<>(myAppError, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler
-    public ResponseEntity<BankError> handleBankServiceException(SomeBusinessException exception) {
-        BankError bankError = new BankError();
-        bankError.setMessage(exception.getMessage());
-        bankError.setErrorCode(exception.getErrorCode());
-        return new ResponseEntity<>(bankError, HttpStatus.FORBIDDEN);
+    public ResponseEntity<MyAppError> handleBankServiceException(SomeBusinessException exception) {
+        MyAppError myAppError = new MyAppError();
+        myAppError.setMessage(exception.getMessage());
+        myAppError.setErrorCode(exception.getErrorCode());
+        return new ResponseEntity<>(myAppError, HttpStatus.FORBIDDEN);
     }
 
     @Override
