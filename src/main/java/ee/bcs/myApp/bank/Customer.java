@@ -14,5 +14,4 @@ public class Customer {
         id = idCounter;
         idCounter++;
     }
-
 }

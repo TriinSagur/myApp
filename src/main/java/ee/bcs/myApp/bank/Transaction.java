@@ -14,5 +14,4 @@ public class Transaction {
     private Integer balance;
     private Character type;
     private LocalDateTime transactionDateTime;
-
 }

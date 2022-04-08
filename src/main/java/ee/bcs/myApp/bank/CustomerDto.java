@@ -7,5 +7,4 @@ public class CustomerDto { // ainult klientide liigutamiseks tehtud klass
     private String firstName;
     private String lastName;
     private String isikukood;
-
 }

@@ -50,7 +50,6 @@ public class CustomerController {
     @Operation(summary = "Eemaldab kliendi id järgi")
     public void removeCustomerById(@RequestParam Integer id) {
         List<Customer> customers = bankRepository.getCustomers();
-
         Customer result = new Customer();
         for (Customer customer : customers) {
             if (customer.getId().equals(id)) { // see id tuleb parameetrist(mida me küsime tagasi)
