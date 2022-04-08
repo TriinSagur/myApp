@@ -51,6 +51,8 @@ public class CustomerController {
         return result;
     }
 
+
+
     @DeleteMapping("/remove")
     public void removeCustomerById(@RequestParam Integer id) {
 

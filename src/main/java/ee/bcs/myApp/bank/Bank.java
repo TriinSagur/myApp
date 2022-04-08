@@ -1,6 +1,7 @@
 package ee.bcs.myApp.bank;
 
 
+
 import lombok.Data;
 
 import java.util.ArrayList;
