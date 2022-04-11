@@ -4,6 +4,7 @@ import ee.bcs.myApp.MyAppApplication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,12 +23,15 @@ public class CustomerService {
     public List<CustomerDto> getAllCustomers() {
         List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
 
+        List<CustomerDto> customerDtos = new ArrayList<>();
+
         for (Customer customer : customers) {
-            toDto(customer);
+            CustomerDto customerDto = toDto(customer);
+            customerDtos.add(customerDto);
         }
 
 
-        return ;
+        return customerDtos;
     }
 
     public Customer findCustomerById(@RequestParam Integer id) {
