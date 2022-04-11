@@ -14,9 +14,19 @@ public class AccountService {
         Account account = toEntity(accountDto);
 
         account.updateId();
+        accounts.add(account);
 
-        // lisada tagasi Dto ks tehtud asi
-        return null;
+        return toDto(account);
+    }
+
+    private AccountDto toDto(Account account) {
+        AccountDto accountDtoResponse = new AccountDto();
+        accountDtoResponse.setId(account.getId());
+        accountDtoResponse.setCustomerId(account.getCustomerId());
+        accountDtoResponse.setAccountNumber(account.getAccountNumber());
+        accountDtoResponse.setBalance(account.getBalance());
+        accountDtoResponse.setLocked(account.getLocked());
+        return accountDtoResponse;
     }
 
     private Account toEntity(AccountDto accountDto) {
