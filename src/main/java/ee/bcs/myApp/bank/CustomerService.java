@@ -17,7 +17,6 @@ public class CustomerService {
 
         List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
         customers.add(customer);
-        //        bankRepository.getCustomers().add(customer);
 
         return customer.getId();
     }
