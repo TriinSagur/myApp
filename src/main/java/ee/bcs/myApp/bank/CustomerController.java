@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,39 +24,25 @@ public class CustomerController {
     @GetMapping("/all")
     @Operation(summary = "Tagastab kõik kliendid.")
     public List<Customer> getAllCustomers() {
-
-        return MyAppApplication.bankRepository.getCustomers();
+        return customerService.getAllCustomers();
     }
 
     @GetMapping("/id")
     @Operation(summary = "Leiab andmebaasi id järgi kliendi.")
     public Customer findCustomerById(@RequestParam Integer id) {
-        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
-        Customer result = new Customer();
-        for (Customer customer : customers) {
-            if (customer.getId().equals(id)) {
-                result = customer;
-            }
-        }
-        return result;
-
+        return customerService.findCustomerById(id);
     }
 
     @DeleteMapping("/id")
     @Operation(summary = "Kustutab andmebaasi id järgi kliendi.")
     public void removeCustomerById(@RequestParam Integer id) {
-        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
+        customerService.removeCustomerById(id);
+    }
 
-        Customer result = new Customer();
-
-        for (Customer customer : customers) {
-            if (customer.getId().equals(id)) {
-                result = customer;
-            }
-        }
-
-        customers.remove(result);
-
+    @PutMapping("/id")
+    @Operation(summary = "Uuendab andmebaasi id järgi klienti.")
+    public void updateCustomerById(@RequestParam Integer id, @Valid @RequestParam CustomerDto customerDto) {
+        customerService.updateCustomerById(id, customerDto);
     }
 
 }
