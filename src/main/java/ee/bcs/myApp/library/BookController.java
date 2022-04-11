@@ -18,7 +18,7 @@ public class BookController {
 
     @PostMapping("/new")
     @Operation(summary = "Lisab uue raamatu")
-    public Integer addNewBook(@Valid @RequestBody BookDto bookDto) {
+    public BookDto addNewBook(@Valid @RequestBody BookDto bookDto) {
 
         return bookService.addNewBook(bookDto);
 
@@ -32,7 +32,7 @@ public class BookController {
 
     @GetMapping("/all")
     @Operation(summary = "otsib koik raamatud")
-    public List<Book> findAllBooks() {
+    public List<BookDto> findAllBooks() {
         return bookService.findAllBooks();
     }
 
