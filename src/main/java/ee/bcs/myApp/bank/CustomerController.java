@@ -1,46 +1,40 @@
 package ee.bcs.myApp.bank;
 
 
+import ee.bcs.myApp.MyAppApplication;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping ("/customer")
+@RequestMapping("/customer")
 public class CustomerController {
 
-    public static Bank bankRepository = new Bank();
+    @Resource
+    private CustomerService customerService;
 
-    @PostMapping("/add")
+    @PostMapping
     @Operation(summary = "lisab uue kliendi")
     public Integer addNewCustomer(@RequestBody CustomerDto customerDto) {
 
-        Customer customer = new Customer();
-        customer.setFirstName(customerDto.getFirstName());
-        customer.setLastName(customerDto.getLastName());
-        customer.setIsikukood(customerDto.getIsikukood());
-        customer.updateId();
-
-        List<Customer> customers = bankRepository.getCustomers();
-        customers.add(customer);
-
-
-        return customer.getId();
+        return customerService.addNewCustomer(customerDto);
 
     }
-@GetMapping("/all")
-@Operation (summary = "tagastab koik kliendid")
+
+    @GetMapping("/all")
+    @Operation(summary = "tagastab koik kliendid")
     public List<Customer> getAllCustomers() {
 
-        return bankRepository.getCustomers();
+        return MyAppApplication.bankRepository.getCustomers();
     }
 
-    @GetMapping("/find")
+    @GetMapping("/id")
     @Operation(summary = "leiab andmebaasi ID jargi kliendi")
     public Customer findCustomerById(@RequestParam Integer id) {
 
-        List<Customer> customers = bankRepository.getCustomers();
+        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
 
         Customer result = new Customer();
         for (Customer customer : customers) {
@@ -52,11 +46,10 @@ public class CustomerController {
     }
 
 
-
-    @DeleteMapping("/remove")
+    @DeleteMapping("/id")
     public void removeCustomerById(@RequestParam Integer id) {
 
-        List<Customer> customers = bankRepository.getCustomers();
+        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
 
         Customer result = new Customer();
 
