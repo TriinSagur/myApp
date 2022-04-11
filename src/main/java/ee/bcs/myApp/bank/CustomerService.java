@@ -1,6 +1,8 @@
 package ee.bcs.myApp.bank;
 
 import ee.bcs.myApp.MyAppApplication;
+import ee.bcs.myApp.library.Book;
+import ee.bcs.myApp.library.BookDto;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -71,4 +73,5 @@ public class CustomerService {
 
 
     }
+
 }
