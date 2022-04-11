@@ -21,11 +21,9 @@ public class CustomerController {
     }
 
 
-
-
     @GetMapping("/all")
     @Operation(summary = "Tagastab kõik kliendid.")
-    public List<Customer> getAllCustomers() {
+    public List<CustomerDto> getAllCustomers() {
         return customerService.getAllCustomers();
     }
 

@@ -19,8 +19,15 @@ public class CustomerService {
         return toDto(customer);
     }
 
-    public List<Customer> getAllCustomers() {
-        return MyAppApplication.bankRepository.getCustomers();
+    public List<CustomerDto> getAllCustomers() {
+        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
+
+        for (Customer customer : customers) {
+            toDto(customer);
+        }
+
+
+        return ;
     }
 
     public Customer findCustomerById(@RequestParam Integer id) {
