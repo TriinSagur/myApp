@@ -25,14 +25,15 @@ public class CustomerController {
 
     @GetMapping("/all")
     @Operation(summary = "tagastab koik kliendid")
-    public List<Customer> getAllCustomers() {
+    public List<CustomerDto> getAllCustomers() {
 
         return customerService.getAllCustomers();
     }
 
     @GetMapping("/id")
     @Operation(summary = "leiab andmebaasi ID jargi kliendi")
-    public Customer findCustomerById(@RequestParam Integer id) {
+    public CustomerDto findCustomerById(@RequestParam Integer id) {
+
 
         return customerService.findCustomerById(id);
     }
