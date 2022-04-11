@@ -17,20 +17,31 @@ public class BookController {
     @PostMapping
     @Operation(summary = "Lisab uue raamatu")
     public Integer addNewBook(@RequestBody BookDto bookDto) {
-
-        return BookService.addNewBook(bookDto);
+        return bookService.addNewBook(bookDto);
     }
 
-    @GetMapping ("/all")
+    @GetMapping("/all")
     @Operation(summary = "Tagastab kõik raamatud")
     public List getAllBooks() {
-
         return MyAppApplication.libraryRepository.getBooks();
     }
 
-//    public Book findBookById(Integer id) {
-//
-//        return BookService.findBookById(id);
-//    }
+    @GetMapping("/id")
+    @Operation (summary = "Leiab raamatu id järgi")
+    public Book findBookById(@RequestParam Integer id) {
+        return bookService.findBookById(id);
+    }
+
+    @DeleteMapping("/id")
+    @Operation (summary = "Kustutab raamatu id järgi")
+    public void removeBookById(@RequestParam Integer id) {
+        bookService.removeBookById(id);
+    }
+
+    @PutMapping("/id")
+    @Operation (summary = "Uuendab raamatu id ja uute andmete järgi")
+    public void updateBookById(@RequestParam Integer id,@RequestBody BookDto bookDto) {
+        bookService.updateBookById(id, bookDto);
+    }
 
 }

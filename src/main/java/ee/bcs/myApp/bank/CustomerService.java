@@ -22,6 +22,7 @@ public class CustomerService {
     }
 
     public List<Customer> getAllCustomers() {
+
         return MyAppApplication.bankRepository.getCustomers();
     }
 
