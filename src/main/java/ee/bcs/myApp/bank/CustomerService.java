@@ -61,4 +61,14 @@ public class CustomerService {
     }
 
 
+    public void updateCustomerById(Integer id, CustomerDto customerDto) {
+
+
+        Customer customer = findCustomerById(id);
+        customer.setFirstName(customerDto.getFirstName());
+        customer.setLastName(customerDto.getLastName());
+        customer.setIsikukood(customerDto.getIsikukood());
+
+
+    }
 }
