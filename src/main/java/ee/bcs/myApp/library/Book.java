@@ -10,9 +10,8 @@ public class Book {
     private Integer id;
     private String title;
     private Integer year;
-//    List<Author> authors;
 
-    public void updateId () {
+    public void updatedId () {
         id = idCounter;
         idCounter++;
     }

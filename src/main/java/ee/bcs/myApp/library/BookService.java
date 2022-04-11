@@ -12,7 +12,7 @@ public class BookService {
         Book book = new Book();
         book.setTitle(bookDto.getTitle());
         book.setYear(bookDto.getYear());
-        book.updateId();
+        book.updatedId();
         List<Book> books = MyAppApplication.libraryRepository.getBooks();
         books.add(book);
         return book.getId();

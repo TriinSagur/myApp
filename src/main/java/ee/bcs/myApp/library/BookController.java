@@ -20,7 +20,7 @@ public class BookController {
         return bookService.addNewBook(bookDto);
     }
 
-    @PostMapping("/all")
+    @GetMapping("/all")
     @Operation(summary = "Kuvab kõik raamatud")
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
