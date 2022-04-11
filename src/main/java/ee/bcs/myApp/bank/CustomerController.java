@@ -17,7 +17,7 @@ public class CustomerController {
 
     @PostMapping
     @Operation(summary = "Lisab uue kliendi.")
-    public Integer addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
+    public CustomerDto addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
         return customerService.addNewCustomer(customerDto);
     }
 

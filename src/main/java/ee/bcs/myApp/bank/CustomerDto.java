@@ -10,6 +10,8 @@ import javax.validation.constraints.Size;
 @Data
 public class CustomerDto {
 
+    private Integer id;
+
     @NotNull
     private String firstName;
 
