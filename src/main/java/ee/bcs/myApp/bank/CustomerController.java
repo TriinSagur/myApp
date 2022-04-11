@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,42 +18,33 @@ public class CustomerController {
     private  CustomerService customerService;
 
     @PostMapping
-    @Operation(summary = "Lisa uus klient.")
-    public Integer addNewCustomer(@RequestBody CustomerDto customerDto) {
+    @Operation(summary = "Lisab uue kliendi.")
+    public Integer addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
         return customerService.addNewCustomer(customerDto);
     }
 
     @GetMapping("/all")
     @Operation(summary = "Tagastab kõik kliendid.")
     public List<Customer> getAllCustomers() {
-        return MyAppApplication.bankRepository.getCustomers();
+        return customerService.getAllCustomers();
     }
 
     @GetMapping("/id")
     @Operation(summary = "Leiab kliendi andmebaasi ID järgi")
     public Customer findCustomerById(@RequestParam Integer id) {
-        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
-        Customer result = new Customer();
-        for (Customer customer : customers) {
-            if (customer.getId().equals(id)) {
-                result = customer;
-            }
-        }
-
-        return result;
+        return customerService.findCustomerById(id);
     }
 
     @DeleteMapping("/id")
+    @Operation(summary =  "Kustutab kliendi andmebaasi ID järgi.")
     public void removeCustomerById(@RequestParam Integer id) {
-        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
-
-        Customer result = new Customer();
-        for (Customer customer : customers) {
-            if (customer.getId().equals(id)) {
-                result = customer;
-            }
-        }
-
-        customers.remove(result);
+        customerService.removeCustomerById(id);
     }
+
+    @PutMapping("/id")
+    @Operation(summary =  "Uuendab kliendi andmebaasi ID järgi.")
+    public void updateCustomerById(@RequestParam Integer id, @Valid @RequestBody CustomerDto customerDto) {
+        customerService.updateCustomerById(id, customerDto);
+    }
+
 }
