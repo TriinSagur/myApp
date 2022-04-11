@@ -27,38 +27,21 @@ public class CustomerController {
     @Operation(summary = "tagastab koik kliendid")
     public List<Customer> getAllCustomers() {
 
-        return MyAppApplication.bankRepository.getCustomers();
+        return customerService.getAllCustomers();
     }
 
     @GetMapping("/id")
     @Operation(summary = "leiab andmebaasi ID jargi kliendi")
     public Customer findCustomerById(@RequestParam Integer id) {
 
-        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
-
-        Customer result = new Customer();
-        for (Customer customer : customers) {
-            if (customer.getId().equals(id)) {
-                result = customer;
-            }
-        }
-        return result;
+        return customerService.findCustomerById(id);
     }
 
 
     @DeleteMapping("/id")
     public void removeCustomerById(@RequestParam Integer id) {
 
-        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
-
-        Customer result = new Customer();
-
-        for (Customer customer : customers) {
-            if (customer.getId().equals(id)) {
-                result = customer;
-            }
-        }
-        customers.remove(result);
+        customerService.removeCustomerById(id);
     }
 //    TODO: customeri lisami
 
