@@ -42,7 +42,6 @@ public class AccountService {
         account.setAccountNumber(accountDto.getAccountNumber());
         account.setBalance(accountDto.getBalance());
         account.setLocked(accountDto.getLocked());
-        account.updateId();
         return account;
     }
 }
