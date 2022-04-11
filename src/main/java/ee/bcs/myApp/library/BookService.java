@@ -1,6 +1,7 @@
 package ee.bcs.myApp.library;
 
 import ee.bcs.myApp.MyAppApplication;
+import ee.bcs.myApp.bank.Customer;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -35,21 +36,20 @@ public class BookService {
         return result;
     }
 
-    public void removeBookById(@RequestParam Integer id) {
-        List<Book> books = MyAppApplication.libraryRepository.getBooks();
-        Book result = new Book();
-        for (Book book : books) {
-            if (book.getId().equals(id)) {
-                result = book;
-            }
-        }
-        books.remove(result);
-    }
-
     public void updateBookById(Integer id, BookDto bookDto) {
         Book book = findBookById(id);
         book.setYear(bookDto.getYear());
         book.setTitle(bookDto.getTitle());
     }
 
+    public void removeBookById(Integer id) {
+        List<Book> books = MyAppApplication.libraryRepository.getBooks();
+        Book result = new Book();
+        for (Book book : books) {
+            if (book.getId().equals(id)) { // see id tuleb parameetrist(mida me küsime tagasi)
+                result = book;
+            }
+        }
+        books.remove(result);
+    }
 }
