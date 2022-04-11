@@ -1,5 +1,6 @@
 package ee.bcs.myApp.bank;
 
+import ee.bcs.myApp.MyAppApplication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class CustomerService {
         customer.setIsikukood(customerDto.getIsikukood());
         customer.updateId();
 
-        List<Customer> customers = CustomerController.bankRepository.getCustomers();
+        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
         customers.add(customer);
 
         return customer.getId();
