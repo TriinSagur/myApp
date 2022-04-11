@@ -9,16 +9,14 @@ import java.util.List;
 @Service
 public class CustomerService {
 
-    public Integer addNewCustomer(CustomerDto customerDto) {
-        Customer customer = new Customer();
-        customer.setFirstName(customerDto.getFirstName());
-        customer.setLastName(customerDto.getLastName());
-        customer.setIsikukood(customerDto.getIsikukood());
+    public CustomerDto addNewCustomer(CustomerDto customerDto) {
+        Customer customer = toEntity(customerDto);
         customer.updateId();
+
         List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
         customers.add(customer);
 
-        return customer.getId();
+        return toDto(customer);
     }
 
     public List<Customer> getAllCustomers() {
@@ -37,6 +35,7 @@ public class CustomerService {
         }
         return result;
     }
+
     public void removeCustomerById(@RequestParam Integer id) {
         List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
         Customer result = new Customer();
@@ -54,5 +53,22 @@ public class CustomerService {
         customer.setLastName(customerDto.getLastName());
         customer.setIsikukood(customerDto.getIsikukood());
 
+    }
+
+    private CustomerDto toDto(Customer customer) {
+        CustomerDto customerDto = new CustomerDto();
+        customerDto.setId(customer.getId());
+        customerDto.setFirstName(customer.getFirstName());
+        customerDto.setLastName(customer.getLastName());
+        customerDto.setIsikukood(customer.getIsikukood());
+        return customerDto;
+    }
+
+    private Customer toEntity(CustomerDto customerDto) {
+        Customer customer = new Customer();
+        customer.setFirstName(customerDto.getFirstName());
+        customer.setLastName(customerDto.getLastName());
+        customer.setIsikukood(customerDto.getIsikukood());
+        return customer;
     }
 }
