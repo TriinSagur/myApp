@@ -2,6 +2,7 @@ package ee.bcs.myApp.bank;
 
 import ee.bcs.myApp.MyAppApplication;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -21,4 +22,41 @@ public class CustomerService {
         return customer.getId();
     }
 
+    public List<Customer> getAllCustomers() {
+        return MyAppApplication.bankRepository.getCustomers();
+    }
+
+    public Customer findCustomerById(@RequestParam Integer id) {
+        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
+        Customer result = new Customer();
+        for (Customer customer : customers) {
+            if (customer.getId().equals(id)) {
+                result = customer;
+            }
+        }
+
+        return result;
+    }
+
+    public void removeCustomerById(@RequestParam Integer id) {
+        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
+
+        Customer result = new Customer();
+        for (Customer customer : customers) {
+            if (customer.getId().equals(id)) {
+                result = customer;
+            }
+        }
+
+        customers.remove(result);
+    }
+
+
+    public void updateCustomerById(Integer id, CustomerDto customerDto) {
+        Customer customer = findCustomerById(id);
+        customer.setFirstName(customerDto.getFirstName());
+        customer.setLastName(customerDto.getLastName());
+        customer.setIsikukood(customerDto.getIsikukood());
+
+    }
 }
