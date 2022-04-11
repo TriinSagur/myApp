@@ -11,15 +11,20 @@ public class BookService {
 
     public Integer addNewBook(BookDto bookDto) {
 
-        Book book = new Book();
-        book.setTitle(bookDto.getTitle());
-        book.setYear(bookDto.getYear());
+        Book book = toEntity(bookDto);
         book.updateId();
 
         List<Book> books = MyAppApplication.libraryRepository.getBooks();
         books.add(book);
 
         return book.getId();
+    }
+
+    private Book toEntity(BookDto bookDto) {
+        Book book = new Book();
+        book.setTitle(bookDto.getTitle());
+        book.setYear(bookDto.getYear());
+        return book;
     }
 
 
