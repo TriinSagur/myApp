@@ -7,9 +7,9 @@ import java.util.List;
 @Data
 public class Book {
     public static Integer idCounter = 1;
-    Integer id;
-    String title;
-    Integer year;
+    private Integer id;
+    private String title;
+    private Integer year;
 //    List<Author> authors;
 
     public void updateId () {

@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class BookDto {
-    String title;
-    Integer year;
+    private String title;
+    private Integer year;
 //    Integer quantity;
 }

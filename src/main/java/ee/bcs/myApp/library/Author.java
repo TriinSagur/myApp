@@ -4,7 +4,14 @@ import lombok.Data;
 
 @Data
 public class Author {
-    Integer id;
-    String firstName;
-    String lastName;
+    public static Integer idCounter = 1;
+    private Integer id;
+    private String firstName;
+    private String lastName;
+
+    public void updateId() {
+        id = idCounter;
+        idCounter++;
+    }
 }
+

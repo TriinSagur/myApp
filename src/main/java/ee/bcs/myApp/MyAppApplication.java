@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class MyAppApplication {
+
 	public static Bank bankRepository = new Bank();
+
 	public static Library libraryRepository =new Library();
 
 	public static void main(String[] args) {
