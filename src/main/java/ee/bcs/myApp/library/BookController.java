@@ -1,6 +1,5 @@
 package ee.bcs.myApp.library;
 
-import ee.bcs.myApp.bank.CustomerDto;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 

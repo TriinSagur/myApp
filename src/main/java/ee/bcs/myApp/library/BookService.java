@@ -1,8 +1,6 @@
 package ee.bcs.myApp.library;
 
 import ee.bcs.myApp.MyAppApplication;
-import ee.bcs.myApp.bank.CustomerDto;
-import org.apache.catalina.webresources.ClasspathURLStreamHandler;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
