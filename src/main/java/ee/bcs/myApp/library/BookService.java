@@ -1,7 +1,6 @@
 package ee.bcs.myApp.library;
 
 import ee.bcs.myApp.MyAppApplication;
-import ee.bcs.myApp.bank.Customer;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
