@@ -16,9 +16,7 @@ public class CustomerService {
         List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
         customers.add(customer);
 
-        customerDto = toDto(customer);
-
-        return customerDto;
+        return toDto(customer);
     }
 
 
@@ -63,7 +61,7 @@ public class CustomerService {
     private CustomerDto toDto(Customer customer) {
         CustomerDto customerDto;
         customerDto = new CustomerDto();
-        customerDto.setId(customerDto.getId());
+        customerDto.setId(customer.getId());
         customerDto.setFirstName(customer.getFirstName());
         customerDto.setLastName(customer.getLastName());
         customerDto.setIsikukood(customer.getIsikukood());
