@@ -1,4 +1,4 @@
-package ee.bcs.myApp.bank;
+package ee.bcs.myApp.bank.customer;
 
 import ee.bcs.myApp.MyAppApplication;
 import org.springframework.stereotype.Service;
