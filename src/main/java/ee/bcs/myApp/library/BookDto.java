@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class BookDto {
+    private Integer id;
     @NotNull
     private String title;
     @NotNull

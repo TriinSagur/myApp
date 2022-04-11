@@ -13,11 +13,11 @@ import java.util.List;
 public class BookController {
 
     @Resource
-    BookService bookService;
+    private BookService bookService;
 
     @PostMapping()
     @Operation(summary = "Lisab uue raamatu")
-    public Integer addNewBook(@RequestBody @Valid BookDto bookDto) {
+    public BookDto addNewBook(@RequestBody @Valid BookDto bookDto) {
         return bookService.addNewBook(bookDto);
     }
 
@@ -29,7 +29,7 @@ public class BookController {
 
     @GetMapping("/all")
     @Operation(summary = "Kuvab kõik raamatud")
-    public List<Book> getAllBooks() {
+    public List<BookDto> getAllBooks() {
        return bookService.getAllBooks();
     }
 

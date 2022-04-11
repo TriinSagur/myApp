@@ -5,20 +5,26 @@ import ee.bcs.myApp.bank.CustomerDto;
 import org.apache.catalina.webresources.ClasspathURLStreamHandler;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class BookService {
 
-    public Integer addNewBook(BookDto bookDto) {
-        Book book = new Book();
-        book.setTitle(bookDto.getTitle());
-        book.setYear(bookDto.getYear());
+    public BookDto addNewBook(BookDto bookDto) {
+        Book book = toEntity(bookDto);
         book.updateId();
 
         List<Book> books = MyAppApplication.libraryRepository.getBooks();
         books.add(book);
-        return book.getId();
+        return toDto(book);
+    }
+
+    private Book toEntity(BookDto bookDto) {
+        Book book = new Book();
+        book.setTitle(bookDto.getTitle());
+        book.setYear(bookDto.getYear());
+        return book;
     }
 
 
@@ -34,8 +40,24 @@ public class BookService {
         return result;
     }
 
-    public List<Book> getAllBooks() {
-        return MyAppApplication.libraryRepository.getBooks();
+    public List<BookDto> getAllBooks() {
+        Library libraryRepository = MyAppApplication.libraryRepository;
+        List<Book> books = libraryRepository.getBooks();
+
+        List<BookDto> bookDtos = new ArrayList<>();
+        for (Book book : books) {
+            BookDto bookDto = toDto(book);
+            bookDtos.add(bookDto);
+        }
+        return bookDtos;
+    }
+
+    private BookDto toDto(Book book) {
+        BookDto bookDto = new BookDto();
+        bookDto.setId(book.getId());
+        bookDto.setTitle(book.getTitle());
+        bookDto.setYear(book.getYear());
+        return bookDto;
     }
 
     public void removeBookById(Integer id) {
