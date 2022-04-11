@@ -29,7 +29,12 @@ public class CustomerService {
         return customerDtos;
     }
 
-    public Customer findCustomerById(Integer id) {
+    public CustomerDto findCustomerById(Integer id) {
+        Customer result = findCustomerEntityById(id);
+        return toDto(result);
+    }
+
+    private Customer findCustomerEntityById(Integer id) {
         List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
         Customer result = new Customer();
         for (Customer customer : customers) {
@@ -53,7 +58,7 @@ public class CustomerService {
 
 
     public void updateCustomerById(Integer id, CustomerDto customerDto) {
-        Customer customer = findCustomerById(id);
+        Customer customer = findCustomerEntityById(id);
         customer.setFirstName(customerDto.getFirstName());
         customer.setLastName(customerDto.getLastName());
         customer.setIsikukood(customerDto.getIsikukood());

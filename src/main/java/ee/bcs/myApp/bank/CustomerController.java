@@ -1,6 +1,5 @@
 package ee.bcs.myApp.bank;
 
-import ee.bcs.myApp.MyAppApplication;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +28,7 @@ public class CustomerController {
 
     @GetMapping("/id")
     @Operation(summary = "Otsib kasutaja id järgi")
-    public Customer findCustomerById(@RequestParam Integer id) {
+    public CustomerDto findCustomerById(@RequestParam Integer id) {
         return customerService.findCustomerById(id);
     }
 
