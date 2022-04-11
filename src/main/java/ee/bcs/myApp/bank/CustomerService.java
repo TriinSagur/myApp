@@ -29,18 +29,12 @@ public class CustomerService {
         return customerDtos;
     }
 
-    public Customer findCustomerById(Integer id) {
-        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
+    public CustomerDto findCustomerById(Integer id) {
+        Customer result = findCustomerEntityById(id);
 
-        Customer result = new Customer();
-
-        for (Customer customer : customers) {
-            if (customer.getId().equals(id)) {
-                result = customer;
-            }
-        }
-        return result;
+        return toDto(result);
     }
+
 
     public void removeCustomerById(Integer id) {
         List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
@@ -56,7 +50,7 @@ public class CustomerService {
 
     public void updateCustomerById(Integer id, CustomerDto customerDto) {
 
-        Customer customer = findCustomerById(id);
+        Customer customer = findCustomerEntityById(id);
         customer.setFirstName(customerDto.getFirstName());
         customer.setLastName(customerDto.getLastName());
         customer.setIsikukood(customerDto.getIsikukood());
@@ -78,5 +72,17 @@ public class CustomerService {
         customer.setLastName(customerDto.getLastName());
         customer.setIsikukood(customerDto.getIsikukood());
         return customer;
+    }
+
+
+    private Customer findCustomerEntityById(Integer id) {
+        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
+        Customer result = new Customer();
+        for (Customer customer : customers) {
+            if (customer.getId().equals(id)) {
+                result = customer;
+            }
+        }
+        return result;
     }
 }
