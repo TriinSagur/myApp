@@ -14,14 +14,14 @@ public class CustomerController {
     @Resource
     private CustomerService customerService;
 
-    // TODO: refaktoreeri kood ümber, et action käib vaid service klassis
-
-
     @PostMapping
     @Operation(summary = "Lisab uue kliendi.")
-    public Integer addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
+    public CustomerDto addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
         return customerService.addNewCustomer(customerDto);
     }
+
+
+
 
     @GetMapping("/all")
     @Operation(summary = "Tagastab kõik kliendid.")
