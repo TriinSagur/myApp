@@ -1,5 +1,6 @@
-package ee.bcs.myApp.bank;
+package ee.bcs.myApp.bank.customer;
 
+import ee.bcs.myApp.bank.Customer;
 import lombok.Data;
 
 import java.util.ArrayList;

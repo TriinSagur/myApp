@@ -1,6 +1,6 @@
 package ee.bcs.myApp;
 
-import ee.bcs.myApp.bank.Bank;
+import ee.bcs.myApp.bank.customer.Bank;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
