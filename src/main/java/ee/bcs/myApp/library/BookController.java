@@ -22,7 +22,7 @@ public class BookController {
 
     @GetMapping("/all")
     @Operation(summary = "Tagastab kõik raamatud")
-    public List getAllBooks() {
+    public List<Book> getAllBooks() {
         return MyAppApplication.libraryRepository.getBooks();
     }
 
