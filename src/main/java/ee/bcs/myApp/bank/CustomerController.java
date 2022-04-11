@@ -1,8 +1,11 @@
 package ee.bcs.myApp.bank;
 
+import ee.bcs.myApp.MyAppApplication;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -10,55 +13,39 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController {
 
-    public static Bank bankRepository = new Bank();
 
-    @PostMapping("/add")
+    @Resource
+    private CustomerService customerService;
+
+    @PostMapping
     @Operation(summary = "Lisab uue kliendi.")
-    public Integer addNewCustomer(@RequestBody CustomerDto customerDto) {
-        Customer customer = new Customer();
-        customer.setFirstName(customerDto.getFirstName());
-        customer.setLastName(customerDto.getLastName());
-        customer.setIsikukood(customerDto.getIsikukood());
-        customer.updateId();
-        List<Customer> customers = bankRepository.getCustomers();
-        customers.add(customer);
-
-        return customer.getId();
+    public Integer addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
+        return customerService.addNewCustomer(customerDto);
     }
 
     @GetMapping("/all")
     @Operation(summary = "Tagastab kõik kliendid")
     public List<Customer> getAllCustomers() {
-        return bankRepository.getCustomers();
+
+        return customerService.getAllCustomers();
     }
 
-    @GetMapping("/find")
+    @GetMapping("/id")
     @Operation(summary = "Leiab andmebaasi ID jargi kliendi")
     public Customer findCustomerById(@RequestParam Integer id) {
-        List<Customer> customers = bankRepository.getCustomers();
-        Customer result = new Customer();
-
-        for (Customer customer : customers) {
-            if (customer.getId().equals(id)) {
-                result = customer;
-            }
-        }
-        return result;
+        return customerService.findCustomerById(id);
     }
 
-    @DeleteMapping("/remove")
+    @DeleteMapping("/id")
     @Operation(summary = "Kustutab kliendi nimekirjast")
     public void removeCustomerById(@RequestParam Integer id) {
-        List<Customer> customers = bankRepository.getCustomers();
+        customerService.removeCustomerById(id);
+    }
 
-        Customer result = new Customer();
-
-        for (Customer customer : customers) {
-            if (customer.getId().equals(id)) {
-                result = customer;
-            }
-        }
-        customers.remove(result);
+    @PutMapping("/id")
+    @Operation(summary = "Uuendab andmebaasi id jargi kliendi")
+    public void updateCustomerById(@RequestParam Integer id,@Valid @RequestBody CustomerDto customerDto) {
+        customerService.updateCustomerById(id, customerDto);
     }
 
 }
