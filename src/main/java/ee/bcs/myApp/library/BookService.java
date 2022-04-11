@@ -45,4 +45,18 @@ public class BookService {
         bookToUpdate.setYear(bookDto.getYear());
         bookToUpdate.setTitle(bookDto.getTitle());
     }
+
+    public List<BookDto> getAllBooks() {
+        Library libraryRepository = MyAppApplication.libraryRepository;
+        List<Book> books = libraryRepository.getBooks();
+
+        List<BookDto> bookDtos = new ArrayList<>();
+        for (Book book : books) {
+            BookDto bookDto = new BookDto();
+            bookDto.setTitle(book.getTitle());
+            bookDto.setYear(book.getYear());
+            bookDtos.add(bookDto);
+        }
+        return bookDtos;
+    }
 }

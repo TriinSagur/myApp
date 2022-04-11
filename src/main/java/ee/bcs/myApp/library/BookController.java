@@ -22,8 +22,8 @@ public class BookController {
 
     @GetMapping("/all")
     @Operation(summary = "Tagastab kõik raamatud")
-    public List<Book> getAllBooks() {
-        return MyAppApplication.libraryRepository.getBooks();
+    public List<BookDto> getAllBooks() {
+        return bookService.getAllBooks();
     }
 
     @GetMapping("/id")
