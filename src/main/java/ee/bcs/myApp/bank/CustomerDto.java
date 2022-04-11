@@ -7,6 +7,7 @@ import javax.validation.constraints.Size;
 
 @Data
 public class CustomerDto {
+    private Integer id;
 
     @NotNull
     private String firstName;
@@ -15,6 +16,6 @@ public class CustomerDto {
     private String lastName;
 
     @NotNull
-    @Size(min = 11,max = 11)
+    @Size(min = 11, max = 11)
     private String isikukood;
 }
