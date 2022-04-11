@@ -1,7 +1,6 @@
 package ee.bcs.myApp.bank.account;
 
 import ee.bcs.myApp.MyAppApplication;
-import ee.bcs.myApp.bank.Bank;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,6 +36,5 @@ public class AccountService {
         account.setLocked(false);
         return account;
     }
-
 
 }
