@@ -29,7 +29,7 @@ public class CustomerController {
 
     @GetMapping("/id")
     @Operation(summary = "Leiab andmebaasi id järgi kliendi.")
-    public Customer findCustomerById(@RequestParam Integer id) {
+    public CustomerDto findCustomerById(@RequestParam Integer id) {
         return customerService.findCustomerById(id);
     }
 
