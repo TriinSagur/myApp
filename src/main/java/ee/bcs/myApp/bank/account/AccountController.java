@@ -1,7 +1,6 @@
 package ee.bcs.myApp.bank.account;
 
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -23,13 +22,28 @@ public class AccountController {
     }
 
     @GetMapping ("/all")
+    @Operation(summary = "naitab koik kontod")
     public List<AccountDto> findAllAccounts() {
         return accountService.findAllAccounts();
     }
 
     @GetMapping("/id")
+    @Operation(summary = "otsib konto ID jargi")
     public AccountDto findAccountById(@RequestParam Integer id) {
         return accountService.findAccountById(id);
+    }
+
+    @DeleteMapping("/id")
+    @Operation(summary = "kustutab konto ID jargi")
+    public void removeAccountById(@RequestParam Integer id) {
+        accountService.removeAccountById(id);
+    }
+
+    @PutMapping("/id")
+    @Operation(summary = "muudab konto andmed id jargi")
+    public void updateAccountById(@RequestParam Integer id, @ Valid @RequestBody AccountDto accountDto) {
+        accountService.updateAccountById(id, accountDto);
+
     }
 
 }
