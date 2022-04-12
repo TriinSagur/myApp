@@ -1,4 +1,4 @@
-package ee.bcs.myApp.library;
+package ee.bcs.myApp.library.book;
 
 import ee.bcs.myApp.MyAppApplication;
 import org.springframework.stereotype.Service;
@@ -9,15 +9,16 @@ import java.util.List;
 @Service
 public class BookService {
 
-    public Integer addNewBook(BookDto bookDto) {
-        Book book = new Book();
-        book.setTitle(bookDto.getTitle());
-        book.setYear(bookDto.getYear());
-        book.updateId();
-
+    public BookDto addNewBook(BookDto bookDto) {
         List<Book> books = MyAppApplication.libraryRepository.getBooks();
+
+        Book book = toEntity(bookDto);
+        book.updateId();
         books.add(book);
-        return book.getId();
+
+        bookDto = toDto(book);
+
+        return bookDto;
     }
 
     public List<Book> getAllBooks() {
@@ -50,5 +51,19 @@ public class BookService {
             }
         }
         books.remove(result);
+    }
+
+    private Book toEntity(BookDto bookDto) {
+        Book book = new Book();
+        book.setTitle(bookDto.getTitle());
+        book.setYear(bookDto.getYear());
+        return book;
+    }
+
+    private BookDto toDto(Book book) {
+        BookDto bookDto = new BookDto();
+        bookDto.setTitle(book.getTitle());
+        bookDto.setYear(book.getYear());
+        return bookDto;
     }
 }

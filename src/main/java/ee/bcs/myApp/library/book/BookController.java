@@ -1,4 +1,4 @@
-package ee.bcs.myApp.library;
+package ee.bcs.myApp.library.book;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ public class BookController {
 
     @PostMapping
     @Operation(summary = "Lisab uue raamatu")
-    private Integer addNewBook(@Valid @RequestBody BookDto bookDto) {
+    private BookDto addNewBook(@Valid @RequestBody BookDto bookDto) {
         return bookService.addNewBook(bookDto);
     }
 
