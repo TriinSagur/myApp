@@ -1,7 +1,6 @@
 package ee.bcs.myApp.bank.account;
 
 import ee.bcs.myApp.MyAppApplication;
-import ee.bcs.myApp.bank.Bank;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,11 +14,12 @@ public class AccountService {
         account.updateId();
         accounts.add(account);
 
-        return getAccountDto(account);
+        accountDto = toDto(account);
+        return accountDto;
     }
 
-    private AccountDto getAccountDto(Account account) {
-        Account accountDto = new AccountDto();
+    private AccountDto toDto(Account account) {
+        AccountDto accountDto = new AccountDto();
         accountDto.setId(account.getId());
         accountDto.setCustomerId(account.getCustomerId());
         accountDto.setAccountNumber(account.getAccountNumber());
