@@ -21,18 +21,25 @@ public class AccountService {
 
     public List<AccountDto> findAllAccounts() {
         List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-        return toDtos(accounts);
+        return toDto(accounts);
     }
 
-    private List<AccountDto> toDtos(List<Account> accounts) {
-        List<AccountDto> accountDtos = new ArrayList<>();
+
+    public AccountDto findAccountById(Integer id) {
+        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
+        Account account = findAccountById(id, accounts);
+        return toDto(account);
+    }
+
+    private Account findAccountById(Integer id, List<Account> accounts) {
+        Account result = new Account();
         for (Account account : accounts) {
-            AccountDto accountDto = toDto(account);
-            accountDtos.add(accountDto);
+            if (account.getId().equals(id)) {
+                result = account;
+            }
         }
-        return accountDtos;
+        return result;
     }
-
 
     private AccountDto toDto(Account account) {
         AccountDto accountDto = new AccountDto();
@@ -43,6 +50,18 @@ public class AccountService {
         accountDto.setLocked(account.getLocked());
         return accountDto;
     }
+
+
+    private List<AccountDto> toDto(List<Account> accounts) {
+        List<AccountDto> accountDtos = new ArrayList<>();
+        for (Account account : accounts) {
+            AccountDto accountDto = toDto(account);
+            accountDtos.add(accountDto);
+        }
+        return accountDtos;
+    }
+
+
 
     private Account toEntity(AccountDto accountDto) {
         Account account = new Account();

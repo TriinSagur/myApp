@@ -19,11 +19,15 @@ public class AccountController {
         return accountService.addNewAccount(accountDto);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<AccountDto> findAllAccounts() {
         return accountService.findAllAccounts();
     }
 
+    @GetMapping("/id")
+    public AccountDto findAccountById(@RequestParam Integer id) {
+        return accountService.findAccountById(id);
+    }
 
 
 }
