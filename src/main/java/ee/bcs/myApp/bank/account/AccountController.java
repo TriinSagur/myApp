@@ -19,9 +19,6 @@ public class AccountController {
     @Operation(summary = "Lisab uue konto")
     public AccountDto addNewAccount(@RequestBody AccountDto accountDto) {
         return accountService.addNewAccount(accountDto);
-
     }
-
-
 
 }

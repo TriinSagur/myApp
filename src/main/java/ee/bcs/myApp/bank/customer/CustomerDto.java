@@ -10,8 +10,6 @@ public class CustomerDto {
 
     private Integer id;
 
-    private static Integer idCounter;
-    private Integer id;
     @NotNull
     private String firstName;
 
@@ -21,6 +19,4 @@ public class CustomerDto {
     @NotNull
     @Size(min = 11, max = 11)
     private String isikukood;
-
-
 }
