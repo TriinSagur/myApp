@@ -2,15 +2,14 @@ package ee.bcs.myApp.library.author;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
+
 @Data
-public class Author {
-    public static Integer idCounter = 1;
+public class AuthorDto {
     private Integer id;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
 
-    public void updateId() {
-        id = idCounter;
-        idCounter++;
-    }
 }

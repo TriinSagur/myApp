@@ -16,7 +16,7 @@ public class BookController {
 
     @PostMapping
     @Operation(summary = "Lisab uue raamatu")
-    private BookDto addNewBook(@Valid @RequestBody BookDto bookDto) {
+    public BookDto addNewBook(@Valid @RequestBody BookDto bookDto) {
         return bookService.addNewBook(bookDto);
     }
 
