@@ -20,11 +20,20 @@ public class CustomerController {
         return customerService.addNewCustomer(customerDto);
     }
 
+
+
+
     @GetMapping("/all")
     @Operation(summary = "tagastab kõik kliendid")
     public List<CustomerDto> getAllCustomers() {
         return customerService.getAllCustomers();
     }
+
+
+
+
+
+
 
     @GetMapping("/id")
     @Operation(summary = "leiame andmebaasi ID järgi kliendi")
