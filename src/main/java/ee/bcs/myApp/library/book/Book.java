@@ -1,6 +1,10 @@
-package ee.bcs.myApp.library;
+package ee.bcs.myApp.library.book;
 
+import ee.bcs.myApp.library.author.Author;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class Book {
@@ -8,6 +12,8 @@ public class Book {
     private Integer id;
     private String title;
     private Integer year;
+    private List<Author> authors = new ArrayList<>();
+
 
     public void updateId() {
         id = idCounter;

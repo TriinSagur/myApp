@@ -1,8 +1,8 @@
-package ee.bcs.myApp.library;
+package ee.bcs.myApp.library.book;
 
 import ee.bcs.myApp.MyAppApplication;
+import ee.bcs.myApp.library.Library;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
