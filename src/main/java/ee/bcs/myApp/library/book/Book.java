@@ -1,6 +1,9 @@
-package ee.bcs.myApp.library;
+package ee.bcs.myApp.library.book;
 
+import ee.bcs.myApp.library.author.Author;
 import lombok.Data;
+
+import java.util.List;
 
 
 @Data
@@ -9,6 +12,7 @@ public class Book {
     private Integer id;
     private String title;
     private Integer year;
+    private List<Author> authors;
 
     public void updateId() {
         id = idCounter;

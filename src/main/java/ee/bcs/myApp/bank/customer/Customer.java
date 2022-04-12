@@ -1,4 +1,4 @@
-package ee.bcs.myApp.bank;
+package ee.bcs.myApp.bank.customer;
 
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.Data;

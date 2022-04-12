@@ -1,9 +1,10 @@
-package ee.bcs.myApp.bank;
+package ee.bcs.myApp.bank.customer;
 
 
 import ee.bcs.myApp.MyAppApplication;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,11 +21,25 @@ public class CustomerService {
     }
 
 
-    public List<Customer> getAllCustomers() {
-        return MyAppApplication.bankRepository.getCustomers();
+    public List<CustomerDto> getAllCustomers() {
+        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
+
+        List<CustomerDto> customerDtos = new ArrayList<>();
+        for (Customer customer : customers) {
+            CustomerDto customerDto= toDto(customer);
+            customerDtos.add(customerDto);
+        }
+
+        return customerDtos;
     }
 
-    public Customer findCustomerById(Integer id) {
+    public CustomerDto findCustomerById(Integer id) {
+        Customer result = findCustomerEntityById(id);
+        CustomerDto customerDto = toDto(result);
+        return customerDto;
+    }
+
+    private Customer findCustomerEntityById(Integer id) {
         List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
         Customer result = new Customer();
         for (Customer customer : customers) {
@@ -32,9 +47,9 @@ public class CustomerService {
                 result = customer;
             }
         }
-
         return result;
     }
+
 
     public void removeCustomerById(Integer id) {
         List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
@@ -51,7 +66,7 @@ public class CustomerService {
 
 
     public void updateCustomerById(Integer id, CustomerDto customerDto) {
-        Customer customer = findCustomerById(id);  //ALT+Enter, siis tuleb see uus objekt
+        Customer customer = findCustomerEntityById(id);  //ALT+Enter, siis tuleb see uus objekt
         customer.setFirstName(customerDto.getFirstName());
         customer.setLastName(customerDto.getLastName());
         customer.setIsikukood(customerDto.getIsikukood());
