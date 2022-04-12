@@ -32,7 +32,7 @@ public class CustomerService {
         return customerDtos;
     }
 
-    public Customer findCustomerDtoById(Integer id) {
+    public CustomerDto findCustomerDtoById(Integer id) {
         Customer result = findCustomerEntityById(id);
 
         return toDto(result);
@@ -65,7 +65,7 @@ public class CustomerService {
     }
 
     public void updateCustomerById(Integer id, CustomerDto customerDto) {
-        Customer customer = findCustomerDtoById(id);
+        CustomerDto customer = findCustomerDtoById(id);
         customer.setFirstName(customerDto.getFirstName());
         customer.setLastName(customerDto.getLastName());
     }
