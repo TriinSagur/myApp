@@ -8,11 +8,9 @@ import java.util.List;
 @Service
 public class AccountService {
 
-
     public AccountDto addNewAccount(AccountDto accountDto) {
         List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
         Account account = toEntity(accountDto);
-
         account.updateId();
         accounts.add(account);
 
@@ -20,13 +18,13 @@ public class AccountService {
     }
 
     private AccountDto toDto(Account account) {
-        AccountDto accountDtoResponse = new AccountDto();
-        accountDtoResponse.setId(account.getId());
-        accountDtoResponse.setCustomerId(account.getCustomerId());
-        accountDtoResponse.setAccountNumber(account.getAccountNumber());
-        accountDtoResponse.setBalance(account.getBalance());
-        accountDtoResponse.setLocked(account.getLocked());
-        return accountDtoResponse;
+        AccountDto accountDto = new AccountDto();
+        accountDto.setId(account.getId());
+        accountDto.setCustomerId(account.getCustomerId());
+        accountDto.setAccountNumber(account.getAccountNumber());
+        accountDto.setBalance(account.getBalance());
+        accountDto.setLocked(account.getLocked());
+        return accountDto;
     }
 
     private Account toEntity(AccountDto accountDto) {
@@ -37,6 +35,5 @@ public class AccountService {
         account.setLocked(false);
         return account;
     }
-
 
 }
