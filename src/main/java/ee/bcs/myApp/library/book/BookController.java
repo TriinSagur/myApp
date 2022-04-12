@@ -1,4 +1,4 @@
-package ee.bcs.myApp.library;
+package ee.bcs.myApp.library.book;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ public class BookController {
 
     @GetMapping("/id")
     @Operation(summary = "Otsib raamatu ID järgi")
-    public Book findBookById(@RequestParam Integer id) {
+    public BookDto findBookById(@RequestParam Integer id) {
         return bookService.findBookById(id);
     }
 

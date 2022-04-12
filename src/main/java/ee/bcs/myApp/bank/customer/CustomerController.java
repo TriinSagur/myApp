@@ -43,6 +43,4 @@ public class CustomerController {
     public void updateCustomerById(@RequestParam Integer id,@Valid @RequestBody CustomerDto customerDto) {
         customerService.updateCustomerById(id, customerDto);
     }
-
-
 }
