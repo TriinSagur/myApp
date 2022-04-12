@@ -1,6 +1,5 @@
-package ee.bcs.myApp.bank;
+package ee.bcs.myApp.bank.customer;
 
-import ee.bcs.myApp.MyAppApplication;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +11,8 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController {
 
-
     @Resource
     private CustomerService customerService;
-
 
     @PostMapping
     @Operation(summary = "Lisab uue kliendi")
@@ -25,13 +22,13 @@ public class CustomerController {
 
     @GetMapping("/all")
     @Operation(summary = "Tagastab kõik kliendid")
-    public List<Customer> getAllCustomers() {
+    public List<CustomerDto> getAllCustomers() {
         return customerService.getAllCustomers();
     }
 
     @GetMapping("/id")
     @Operation(summary = "Kliendi otsimine kliendi ID kaudu")
-    public Customer findCustomerById(@RequestParam Integer id) {
+    public CustomerDto findCustomerById(@RequestParam Integer id) {
         return customerService.findCustomerById(id);
     }
 
