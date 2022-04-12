@@ -30,4 +30,16 @@ public class AccountController {
     public AccountDto findAccountById(@RequestParam Integer id) {
         return accountService.findAccountById(id);
     }
+
+    @DeleteMapping ("/id")
+    @Operation (summary = "Kustutab konto id järgi")
+    public void removeAccountById(@RequestParam Integer id) {
+        accountService.removeAccountById(id);
+    }
+
+    @PutMapping("/id")
+    @Operation(summary = "Uuendab konto id järgi")
+    public void updateAccountById(@RequestParam Integer id,@RequestBody AccountDto accountDto) {
+        accountService.updateAccountById(id, accountDto);
+    }
 }

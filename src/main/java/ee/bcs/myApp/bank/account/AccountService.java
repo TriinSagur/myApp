@@ -29,6 +29,25 @@ public class AccountService {
         return toDto(account);
     }
 
+    public void removeAccountById(Integer id) {
+        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
+        Account account = findAccountById(id, accounts);
+        accounts.remove(account);
+    }
+
+    public void updateAccountById(Integer id, AccountDto accountDto) {
+        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
+        Account account = findAccountById(id, accounts);
+        updateAccountById(accountDto, account);
+    }
+
+    private void updateAccountById(AccountDto accountDto, Account account) {
+        account.setCustomerId(accountDto.getCustomerId());
+        account.setAccountNumber(accountDto.getAccountNumber());
+        account.setLocked(accountDto.getLocked());
+        account.setBalance(accountDto.getBalance());
+    }
+
     private Account findAccountById(Integer id, List<Account> accounts) {
         Account result = new Account();
         for (Account account : accounts) {
