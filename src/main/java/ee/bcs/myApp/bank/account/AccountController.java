@@ -1,12 +1,10 @@
 package ee.bcs.myApp.bank.account;
 
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,10 +16,33 @@ public class AccountController {
 
     @PostMapping
     @Operation(summary = "Lisab uue konto")
-    public AccountDto addNewAccount(@RequestBody AccountDto accountDto) {
+    public AccountDto addNewAccount(@RequestBody @Valid AccountDto accountDto) {
         return accountService.addNewAccount(accountDto);
     }
 
+    @GetMapping("/all")
+    @Operation(summary = "Tagastab kõik kliendid")
+    public List<AccountDto> findAllAccounts() { //get eeldab, et midagi peab tagasi ka tulema
+        return accountService.findAllAccounts();
+    }
+
+    @GetMapping("/id")
+    @Operation(summary = "Leiab konto id järgi")
+    public AccountDto findAccountById(@RequestParam Integer id) {
+        return accountService.findAccountById(id);
+    }
+
+    @DeleteMapping("/id")
+    @Operation(summary = "Kustutab konto id järgi")
+    public void removeAccountById(@RequestParam Integer id) {
+        accountService.removeAccountById(id);
+    }
+
+    @PutMapping("/id")
+    @Operation(summary = "Uuendab kontot id järgi")
+    public void updateAccountById(@RequestParam Integer id, @Valid @RequestBody AccountDto accountDto) {
+        accountService.updateAccountById(id, accountDto);
+    }
 
 
 
