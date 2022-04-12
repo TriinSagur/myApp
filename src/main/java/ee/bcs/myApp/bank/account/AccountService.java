@@ -10,30 +10,31 @@ import java.util.List;
 public class AccountService {
 
     public AccountDto addNewAccount(AccountDto accountDto) {
-        List<Customer> accounts = MyAppApplication.bankRepository.getAccounts();
+        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
         Account account = toEntity(accountDto);
         account.updateId();
-        account.add(account);
+        accounts.add(account);
 
         accountDto = toDto(account);
         return accountDto;
     }
 
-    private void toDto(Account account) {
+    private AccountDto toDto(Account account) {
         AccountDto accountDto = new AccountDto();
         accountDto.setId(account.getId());
         accountDto.setCustomerId(account.getCustomerId());
         accountDto.setAccountNumber(accountDto.getAccountNumber());
         accountDto.setBalance(account.getBalance());
         accountDto.setLocked(account.getLocked());
+        return accountDto;
     }
 
-    private void toEntity(AccountDto accountDto) {
+    private Account toEntity(AccountDto accountDto) {
         Account account = new Account();
         account.setCustomerId(accountDto.getCustomerId());
         account.setAccountNumber(accountDto.getAccountNumber());
         account.setBalance(accountDto.getBalance());
         account.setLocked(false);
-        account.updateId();
+        return account;
     }
 }
