@@ -1,6 +1,7 @@
-package ee.bcs.myApp.library;
+package ee.bcs.myApp.library.book;
 
 import ee.bcs.myApp.MyAppApplication;
+import ee.bcs.myApp.library.Library;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,13 +22,6 @@ public class BookService {
         return toDto(book);
 
 
-    }
-
-    private Book toEntity(BookDto bookDto) {
-        Book book = new Book();
-        book.setTitle(bookDto.getTitle());
-        book.setYear(bookDto.getYear());
-        return book;
     }
 
 
@@ -64,13 +58,6 @@ public class BookService {
 
     }
 
-    private BookDto toDto(Book book) {
-        BookDto bookDto = new BookDto();
-        bookDto.setId(book.getId());
-        bookDto.setTitle(book.getTitle());
-        bookDto.setYear(book.getYear());
-        return bookDto;
-    }
 
     public void updateBookById(Integer id, BookDto bookDto) {
         Book book = findBookById(id);
@@ -87,4 +74,21 @@ public class BookService {
         books.remove(book);
 
     }
+
+
+    private Book toEntity(BookDto bookDto) {
+        Book book = new Book();
+        book.setTitle(bookDto.getTitle());
+        book.setYear(bookDto.getYear());
+        return book;
+    }
+
+    private BookDto toDto(Book book) {
+        BookDto bookDto = new BookDto();
+        bookDto.setId(book.getId());
+        bookDto.setTitle(book.getTitle());
+        bookDto.setYear(book.getYear());
+        return bookDto;
+    }
+
 }
