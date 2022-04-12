@@ -1,11 +1,11 @@
-package ee.bcs.myApp.bank;
+package ee.bcs.myApp.bank.customer;
 
 
 import ee.bcs.myApp.MyAppApplication;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,11 +21,16 @@ public class CustomerService {
     }
 
 
-    public List<Customer> getAllCustomers() {
-        return MyAppApplication.bankRepository.getCustomers();
+    public List<CustomerDto> getAllCustomers() {
+        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
+        List<CustomerDto> customerDtos = new ArrayList<>();
+        for (Customer customer : customers) {
+            customerDtos.add(toDto(customer));
+        }
+        return customerDtos;
     }
 
-    public Customer findCostumerById(@RequestParam Integer id) {
+    public CustomerDto findCostumerById(@RequestParam Integer id) {
         List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
         Customer result = new Customer();
         for (Customer customer : customers) {
@@ -33,7 +38,7 @@ public class CustomerService {
                 result = customer;
             }
         }
-        return result;
+        return toDto(result);
     }
 
     public void removeCustomerById(@RequestParam Integer id) {
@@ -48,7 +53,7 @@ public class CustomerService {
     }
 
     public void updateCustomerById(Integer id, CustomerDto customerDto) {
-        Customer customer = findCostumerById(id);
+        Customer customer = findCostumerEntityById(id);
         customer.setFirstName(customerDto.getFirstName());
         customer.setLastName(customerDto.getLastName());
         customer.setIsikukood(customerDto.getIsikukood());
@@ -70,5 +75,15 @@ public class CustomerService {
         customer.setLastName(customerDto.getLastName());
         customer.setIsikukood(customerDto.getIsikukood());
         return customer;
+    }
+    public Customer findCostumerEntityById(Integer id) {
+        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
+        Customer result = new Customer();
+        for (Customer customer : customers) {
+            if (customer.getId().equals(id)) {
+                result = customer;
+            }
+        }
+        return result;
     }
 }

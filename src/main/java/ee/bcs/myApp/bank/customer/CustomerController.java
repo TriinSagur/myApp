@@ -1,4 +1,4 @@
-package ee.bcs.myApp.bank;
+package ee.bcs.myApp.bank.customer;
 
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,13 +27,13 @@ public class CustomerController {
 
     @GetMapping("/all")
     @Operation(summary = "Tagastab kõik kliendid")
-    public List<Customer> getAllCustomers() {
+    public List<CustomerDto> getAllCustomers() {
         return customerService.getAllCustomers();
     }
 
     @GetMapping("/id")
     @Operation(summary = "Leiab andmebaasi ID järgi kliendi")
-    public Customer findCostumerById(@RequestParam Integer id) {
+    public CustomerDto findCostumerById(@RequestParam Integer id) {
         return customerService.findCostumerById(id);
     }
 
