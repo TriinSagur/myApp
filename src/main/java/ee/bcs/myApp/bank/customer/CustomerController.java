@@ -14,10 +14,23 @@ public class CustomerController {
     @Resource
     private CustomerService customerService;
 
+    @Resource
+    private CustomerEntityRepository repository;
+
+
     @PostMapping
     @Operation(summary = "lisab uue kliendi")
     public CustomerDto addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
-        return customerService.addNewCustomer(customerDto);
+        CustomerEntity customerEntity = new CustomerEntity();
+        customerEntity.setFirstName(customerDto.getFirstName());
+        customerEntity.setLastName(customerDto.getLastName());
+        customerEntity.setIsikukood(customerDto.getIsikukood());
+
+        repository.save(customerEntity);
+
+        customerDto.setId(customerEntity.getId());
+
+        return customerDto;
     }
 
 
