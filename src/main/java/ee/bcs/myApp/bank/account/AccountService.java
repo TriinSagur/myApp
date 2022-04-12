@@ -8,16 +8,13 @@ import java.util.List;
 @Service
 public class AccountService {
 
-
     public AccountDto addNewAccount(AccountDto accountDto) {
         List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-
         Account account = toEntity(accountDto);
         account.updateId();
         accounts.add(account);
 
         accountDto = toDto(account);
-
         return accountDto;
     }
 
@@ -33,7 +30,6 @@ public class AccountService {
 
     private Account toEntity(AccountDto accountDto) {
         Account account = new Account();
-
         account.setCustomerId(accountDto.getCustomerId());
         account.setAccountNumber(accountDto.getAccountNumber());
         account.setBalance(accountDto.getBalance());

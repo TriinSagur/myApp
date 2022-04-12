@@ -1,4 +1,4 @@
-package ee.bcs.myApp.library;
+package ee.bcs.myApp.library.author;
 
 import lombok.Data;
 
@@ -7,4 +7,5 @@ public class Author {
     private Integer id;
     private String firstName;
     private String lastName;
+
 }

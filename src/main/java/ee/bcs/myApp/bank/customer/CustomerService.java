@@ -12,10 +12,8 @@ public class CustomerService {
     public CustomerDto addNewCustomer(CustomerDto customerDto) {
         Customer customer = toEntity(customerDto);
         customer.updateId();
-
         List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
         customers.add(customer);
-
         return toDto(customer);
     }
 
@@ -27,9 +25,7 @@ public class CustomerService {
         for (Customer customer : customers) {                                   //käi kõik objektid customer listis läbi
             CustomerDto customerDto = toDto(customer);
             customerDtos.add(customerDto);
-
         }
-
         return customerDtos;
     }
 

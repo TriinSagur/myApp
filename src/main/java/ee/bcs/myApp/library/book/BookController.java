@@ -22,13 +22,13 @@ public class BookController {
 
     @GetMapping("/all")
     @Operation(summary = "Tagastab kõik raamatud")
-    public List<Book> getAllBooks() {
+    public List<BookDto> getAllBooks() {
         return bookService.getAllBooks();
     }
 
     @GetMapping("/id")
     @Operation(summary = "Leiab andmebaasi ID järgi raamatu")
-    public Book findBookById(@RequestParam Integer id) {
+    public BookDto findBookById(@RequestParam Integer id) {
         return bookService.findBookById(id);
     }
 
