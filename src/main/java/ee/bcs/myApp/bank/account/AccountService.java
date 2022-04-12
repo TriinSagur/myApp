@@ -3,6 +3,7 @@ package ee.bcs.myApp.bank.account;
 import ee.bcs.myApp.MyAppApplication;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,6 +18,21 @@ public class AccountService {
         accountDto = toDto(account);
         return accountDto;
     }
+
+    public List<AccountDto> findAllAccounts() {
+        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
+        return toDtos(accounts);
+    }
+
+    private List<AccountDto> toDtos(List<Account> accounts) {
+        List<AccountDto> accountDtos = new ArrayList<>();
+        for (Account account : accounts) {
+            AccountDto accountDto = toDto(account);
+            accountDtos.add(accountDto);
+        }
+        return accountDtos;
+    }
+
 
     private AccountDto toDto(Account account) {
         AccountDto accountDto = new AccountDto();
