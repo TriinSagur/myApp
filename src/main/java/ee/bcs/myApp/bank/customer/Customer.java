@@ -1,4 +1,4 @@
-package ee.bcs.myApp.bank;
+package ee.bcs.myApp.bank.customer;
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ public class Customer {
     private String lastName;
     private String isikukood;
 
-    public void increaseIdCounter() {
+    public void updateId() {
         id = idCounter;
         idCounter++;
     }
