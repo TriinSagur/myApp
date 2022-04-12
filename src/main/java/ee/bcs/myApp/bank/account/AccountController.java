@@ -16,7 +16,7 @@ public class AccountController {
 
     @PostMapping
     @Operation(summary = "Lisab uue konto")
-    public AccountDto addNewAccount(@RequestBody @Valid AccountDto accountDto) {
+    public AccountDto addNewAccount(@Valid @RequestBody AccountDto accountDto) {
         return accountService.addNewAccount(accountDto);
     }
 
@@ -30,5 +30,15 @@ public class AccountController {
         return accountService.findAccountById(id);
     }
 
+
+    @DeleteMapping("/id")
+    public void removeAccountById(@RequestParam Integer id) {
+        accountService.removeAccountById(id);
+    }
+
+    @PutMapping("/id")
+    public void updateAccountById( @RequestParam Integer id, @RequestBody AccountDto accountDto) {
+        accountService.updateAccountById(id, accountDto);
+    }
 
 }
