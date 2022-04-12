@@ -1,7 +1,6 @@
-package ee.bcs.myApp.bank;
+package ee.bcs.myApp.bank.customer;
 
 import lombok.Data;
-import lombok.NonNull;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -9,7 +8,9 @@ import javax.validation.constraints.Size;
 @Data
 public class CustomerDto {
 
-    @NonNull
+    private Integer id;
+
+    @NotNull
     private String firstName;
 
     @NotNull
@@ -18,5 +19,4 @@ public class CustomerDto {
     @NotNull
     @Size(min = 11, max = 11)
     private String isikukood;
-
 }

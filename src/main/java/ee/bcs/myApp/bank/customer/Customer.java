@@ -1,10 +1,9 @@
-package ee.bcs.myApp.bank;
+package ee.bcs.myApp.bank.customer;
 
 import lombok.Data;
 
 @Data
 public class Customer {
-
     public static Integer idCounter = 1;
     private Integer id;
     private String firstName;
@@ -15,5 +14,6 @@ public class Customer {
         id = idCounter;
         idCounter++;
     }
+
 
 }

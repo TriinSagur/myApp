@@ -1,4 +1,4 @@
-package ee.bcs.myApp.bank;
+package ee.bcs.myApp.bank.customer;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
@@ -14,24 +14,22 @@ public class CustomerController {
     @Resource
     private CustomerService customerService;
 
-    // TODO: refaktoreeri kood ümber, et action käib vaid service klassis
-
-
     @PostMapping
     @Operation(summary = "Lisab uue kliendi.")
-    public Integer addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
+    public CustomerDto addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
         return customerService.addNewCustomer(customerDto);
     }
 
+
     @GetMapping("/all")
     @Operation(summary = "Tagastab kõik kliendid.")
-    public List<Customer> getAllCustomers() {
+    public List<CustomerDto> getAllCustomers() {
         return customerService.getAllCustomers();
     }
 
     @GetMapping("/id")
     @Operation(summary = "Leiab andmebaasi id järgi kliendi.")
-    public Customer findCustomerById(@RequestParam Integer id) {
+    public CustomerDto findCustomerById(@RequestParam Integer id) {
         return customerService.findCustomerById(id);
     }
 
