@@ -1,6 +1,7 @@
-package ee.bcs.myApp.library;
+package ee.bcs.myApp.library.book;
 
 import ee.bcs.myApp.MyAppApplication;
+import ee.bcs.myApp.library.Library;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,7 +23,6 @@ public class BookService {
         return bookDtos;
     }
 
-
     public BookDto addNewBook(BookDto bookDto) {
         Book book = toEntity(bookDto);
         book.updateId();
@@ -30,7 +30,6 @@ public class BookService {
         books.add(book);
         return bookDto;
     }
-
 
     public Book findBookById(@RequestParam Integer id) {
         List<Book> books = MyAppApplication.libraryRepository.getBooks();
