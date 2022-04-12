@@ -1,0 +1,36 @@
+select *
+from customer;
+INSERT INTO public.customer (id, first_name, last_name, isikukood)
+VALUES (DEFAULT, 'Otto', 'Triin', '123');
+insert into customer(first_name, last_name, isikukood)
+values ('Hanno', 'Kedik', '456');
+select isikukood
+from customer;
+insert into customer(first_name, last_name, isikukood)
+values ('Reimo', 'Salo', '222');
+
+select *
+from customer
+order by id;
+
+update customer
+set isikukood = '150'
+where first_name = 'Otto'
+  and last_name = 'Triin';
+
+delete
+from customer
+where id = 3;
+update customer
+set id = 3
+where id = 4;
+
+select account_number, balance
+from customer
+join account a on customer.id = a.customer_id
+where first_name = 'Hanno';
+
+select *
+from customer;
+select *
+from account;

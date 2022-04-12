@@ -14,10 +14,22 @@ public class AccountController {
     @Resource
     private AccountService accountService;
 
+    @Resource
+    private AccountEntityRepository repository;
+
     @PostMapping
     @Operation(summary = "Lisab uue konto")
     public AccountDto addNewAccount(@RequestBody @Valid AccountDto accountDto) {
         return accountService.addNewAccount(accountDto);
+
+//        AccountEntity accountEntity = new AccountEntity();
+//        accountEntity.setCustomer(accountDto.getCustomerId());
+//        accountEntity.setAccountNumber(accountDto.getAccountNumber());
+//        accountEntity.setBalance(accountDto.getBalance());
+//        accountEntity.setLocked(accountDto.getLocked());
+//        repository.save(accountEntity);
+//        accountDto.setId(accountEntity.getId());
+//        return accountDto;
     }
 
     @GetMapping("/all")
@@ -43,7 +55,4 @@ public class AccountController {
     public void updateAccountById(@RequestParam Integer id, @Valid @RequestBody AccountDto accountDto) {
         accountService.updateAccountById(id, accountDto);
     }
-
-
-
 }
