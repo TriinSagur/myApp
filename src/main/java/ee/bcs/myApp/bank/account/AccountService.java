@@ -44,18 +44,6 @@ public class AccountService {
         account.setBalance(accountDto.getBalance());
     }
 
-//    private Account findAccountEntityById(Integer id) {
-//        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-//        Account result = new Account();
-//        for (Account account : accounts) {
-//            if (account.getId().equals(id)) {
-//                result = account;
-//            }
-//
-//        }
-//        return result;
-//    }
-
     private AccountDto toDto(Account account) {
         AccountDto accountDto = new AccountDto();
         accountDto.setId(account.getId());
@@ -93,6 +81,5 @@ public class AccountService {
         }
         return result;
     }
-
 
 }
