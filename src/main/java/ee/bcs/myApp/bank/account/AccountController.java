@@ -20,25 +20,34 @@ public class AccountController {
         return accountService.addNewAccount(accountDto);
     }
 
-    @GetMapping("/all")
-    public List<AccountDto> findAllAccounts() {
-        return accountService.findAllAccounts();
-    }
-
+//    @GetMapping("/all")
+//    public List<AccountDto> findAllAccounts() {
+//        return accountService.findAllAccounts();
+//    }
+//
     @GetMapping("/id")
-    public AccountDto findAccountById(@RequestParam Integer id) {
+    @Operation(summary = "Otsib konto ID järgi (UUS)")
+    public AccountDto1 findAccountById(@RequestParam Integer id) {
         return accountService.findAccountById(id);
     }
 
-
-    @DeleteMapping("/id")
-    public void removeAccountById(@RequestParam Integer id) {
-        accountService.removeAccountById(id);
+    @GetMapping("/id/vana")
+    @Operation(summary = "Otsib konto ID järgi (VANA)")
+    public AccountDto findAccountByIdVANA(@RequestParam Integer id) {
+        return new AccountDto();
     }
 
-    @PutMapping("/id")
-    public void updateAccountById( @RequestParam Integer id, @RequestBody AccountDto accountDto) {
-        accountService.updateAccountById(id, accountDto);
-    }
+
+
+//
+//    @DeleteMapping("/id")
+//    public void removeAccountById(@RequestParam Integer id) {
+//        accountService.removeAccountById(id);
+//    }
+//
+//    @PutMapping("/id")
+//    public void updateAccountById( @RequestParam Integer id, @RequestBody AccountDto accountDto) {
+//        accountService.updateAccountById(id, accountDto);
+//    }
 
 }
