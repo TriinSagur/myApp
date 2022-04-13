@@ -1,11 +1,13 @@
 package ee.bcs.myApp.bank.customer;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-13T11:51:23+0300",
+    date = "2022-04-13T13:39:59+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 16.0.2 (Amazon.com Inc.)"
 )
 @Component
@@ -43,14 +45,25 @@ public class CustomerMapperImpl implements CustomerMapper {
     }
 
     @Override
+    public List<CustomerDto> toDtos(List<Customer> entities) {
+        if ( entities == null ) {
+            return null;
+        }
+
+        List<CustomerDto> list = new ArrayList<CustomerDto>( entities.size() );
+        for ( Customer customer : entities ) {
+            list.add( toDto( customer ) );
+        }
+
+        return list;
+    }
+
+    @Override
     public void updateEntity(CustomerDto dto, Customer entity) {
         if ( dto == null ) {
             return;
         }
 
-        if ( dto.getId() != null ) {
-            entity.setId( dto.getId() );
-        }
         if ( dto.getFirstName() != null ) {
             entity.setFirstName( dto.getFirstName() );
         }

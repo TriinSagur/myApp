@@ -21,27 +21,27 @@ public class CustomerController {
 
     }
 
-//    @GetMapping("/all")
-//    @Operation(summary = "Tagastab kõik kliendid")
-//    public List<CustomerDto> getAllCustomers() {
-//        return customerService.getAllCustomers();
-//    }
-//
-//    @GetMapping("/id")
-//    @Operation(summary = "Leiab andmebaasi ID kliend järgi")
-//    public CustomerDto findCustomerById(@RequestParam Integer id) {
-//        return customerService.findCustomerById(id);
-//    }
-//
-//    @DeleteMapping("/id")
-//    @Operation(summary = "Eemaldab kliendi id järgi")
-//    public void removeCustomerById(@RequestParam Integer id) {
-//        customerService.removeCustomerById(id);
-//    }
-//
-//    @PutMapping("/id")
-//    @Operation(summary = "Uuendab andmebaasi id järgi kliendi")
-//    public void updateCustomerById(@RequestParam Integer id,@Valid @RequestBody CustomerDto customerDto) {
-//        customerService.updateCustomerById(id, customerDto);
-//    }
+    @GetMapping("/all")
+    @Operation(summary = "Tagastab kõik kliendid")
+    public List<CustomerDto> getAllCustomers() {
+        return customerService.getAllCustomers();
+    }
+
+    @GetMapping("/id")
+    @Operation(summary = "Leiab andmebaasi ID kliend järgi")
+    public CustomerDto findCustomerById(@RequestParam Integer id) {
+        return customerService.findCustomerById(id);
+    }
+
+    @DeleteMapping("/id")
+    @Operation(summary = "Eemaldab kliendi id järgi")
+    public void removeCustomerById(@RequestParam Integer id) {
+        customerService.removeCustomerById(id);
+    }
+
+    @PutMapping("/id")
+    @Operation(summary = "Uuendab andmebaasi id järgi kliendi")
+    public void updateCustomerById(@RequestParam Integer id,@Valid @RequestBody CustomerDto customerDto) {
+        customerService.updateCustomerById(id, customerDto);
+    }
 }

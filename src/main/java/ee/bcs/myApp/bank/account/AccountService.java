@@ -1,21 +1,19 @@
-//package ee.bcs.myApp.bank.account;
-//
-//import ee.bcs.myApp.MyAppApplication;
-//import org.springframework.stereotype.Service;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//@Service
-//public class AccountService {
-//
+package ee.bcs.myApp.bank.account;
+
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+
+@Service
+public class AccountService {
+
+    @Resource
+    private AccountRepository accountRepository;
+
+    @Resource
+    private AccountMapper accountMapper;
+
 //    public AccountDto addNewAccount(AccountDto accountDto) {
-//        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-//        Account account = toEntity(accountDto);
-//        account.updateId();
-//        accounts.add(account);
-//
-//        accountDto = toDto(account);
 //        return accountDto;
 //    }
 //
@@ -23,13 +21,12 @@
 //        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
 //        return toDto(accounts);
 //    }
-//
-//    public AccountDto findAccountById(Integer id) {
-//        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-//        Account account = findAccountById(id, accounts);
-//        return toDto(account);
-//    }
-//
+
+    public AccountResponse findAccountInfo(Integer id) {
+        Account account = accountRepository.getById(id);
+        return accountMapper.toResponse(account);
+    }
+
 //    private Account findAccountById(Integer id, List<Account> accounts) {
 //        Account result = new Account();
 //        for (Account account : accounts) {
@@ -83,4 +80,4 @@
 //        account.setLocked(false);
 //        return account;
 //    }
-//}
+}
