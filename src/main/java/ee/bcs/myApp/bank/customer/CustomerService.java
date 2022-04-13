@@ -4,94 +4,52 @@ import ee.bcs.myApp.MyAppApplication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
 
+    @Resource
+    private CustomerMapper customerMapper;
+
+
+    @Resource
+    private CustomerRepository customerRepository;
+
     public CustomerDto addNewCustomer(CustomerDto customerDto) {
-        Customer customer = toEntity(customerDto);
-        customer.updateId();
+        Customer customer = customerMapper.toEntity(customerDto);
+        customerRepository.save(customer);
 
-        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
-        customers.add(customer);
-
-        //customerDto = new CustomerDto();
-        //       customerDto.setId(customer.getId());
-        //       customerDto.setFirstName(customer.getFirstName());
-        //       customerDto.setLastName(customer.getLastName());
-        //       customerDto.setIsikukood(customer.getIsikukood());
-        //       >>
-        //customerDto = toDto(customer); >>
-        return toDto(customer);
+        return customerMapper.toDto(customer);
     }
 
     public List<CustomerDto> getAllCustomers() {
-        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
-
-        List<CustomerDto> customerDtos = new ArrayList<>();
-
-        for (Customer customer : customers) {
-            CustomerDto customerDto = toDto(customer);
-            customerDtos.add(customerDto);
-        }
+        List<Customer> allCustomers = customerRepository.findAll();
+        return customerMapper.toDtos(allCustomers);
 
 
-        return customerDtos;
     }
 
     public CustomerDto findCustomerById(Integer id) {
-        Customer result = findCustomerEntityByIt(id);
-        //CustomerDto custmoerDto = toDto(result);
-        return toDto(result) ;
+        Customer customer = customerRepository.getById(id);
+        return customerMapper.toDto(customer);
     }
 
-    private Customer findCustomerEntityByIt(Integer id) {
-        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
-        Customer result = new Customer();
-        for (Customer customer : customers) {
-            if (customer.getId().equals(id)) {
-                result = customer;
-            }
+
+    public void removeCustomerById(Integer id) {
+//        if (!customerRepository.existsById(id)) {
+            //todo viska error- kontroll, kas customer on olemas. Veateade.
+        customerRepository.deleteById(id);
         }
-        return result;
+
+    public void updateCustomerById(Integer customerId, CustomerDto customerDto) {
+        Customer customer = customerRepository.getById(customerId);
+        customerMapper.updateEntity(customerDto, customer);
+        customerRepository.save(customer);
+
     }
 
-    public void removeCustomerById(@RequestParam Integer id) {
-    List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
-
-    Customer result = new Customer();
-        for (Customer customer : customers) {
-        if (customer.getId().equals(id)) {
-            result = customer;
-        }
-    }
-        customers.remove(result);
-}
-
-    public void updateCustomerById(Integer id, CustomerDto customerDto) {
-        Customer customer = findCustomerEntityByIt(id);
-        customer.setFirstName(customerDto.getFirstName());
-        customer.setLastName(customerDto.getLastName());
-        customer.setIsikukood(customerDto.getIsikukood());
-    }
-
-    private CustomerDto toDto(Customer customer) {
-        CustomerDto customerDto = new CustomerDto();
-        customerDto.setId(customer.getId());
-        customerDto.setFirstName(customer.getFirstName());
-        customerDto.setLastName(customer.getLastName());
-        customerDto.setIsikukood(customer.getIsikukood());
-        return customerDto;
-    }
-
-    private Customer toEntity(CustomerDto customerDto) {
-        Customer customer = new Customer();
-        customer.setFirstName(customerDto.getFirstName());
-        customer.setLastName(customerDto.getLastName());
-        customer.setIsikukood(customerDto.getIsikukood());
-
-        return customer;
-    }
 }

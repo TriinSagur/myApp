@@ -14,25 +14,13 @@ public class CustomerController {
     @Resource
     private CustomerService customerService;
 
-    @Resource
-    private CustomerEntityRepository repository;
-
 
     @PostMapping("/add")
     @Operation(summary = "Lisab uue kliendi")
     public CustomerDto addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
-
-        CustomerEntity customerEntity = new CustomerEntity();
-        customerEntity.setFirstName(customerDto.getFirstName());
-        customerEntity.setLastName(customerDto.getLastName());
-        customerEntity.setIsikukood(customerDto.getIsikukood());
-
-        repository.save(customerEntity);
-
-        customerDto.setId(customerEntity.getId());
-
-        return customerDto;
+        return customerService.addNewCustomer(customerDto);
     }
+
     @GetMapping
     @Operation(summary = "/tagastab kõik kliendid")
     public List<CustomerDto> getAllCustomers() {
@@ -40,24 +28,22 @@ public class CustomerController {
         return customerService.getAllCustomers();
     }
 
-    // tagastab kliendi id järgi, enne, kui kustutad või teed sellega midagi
-    //get eeldab, et seal on vastus, findiga võib juhtuda, et vastus on null
-
     @GetMapping("/id")
     @Operation(summary = "/Leiab andmebaasi ID järgi kliendi")
-    public  CustomerDto findCustomerById(@RequestParam Integer id) {
+    public CustomerDto findCustomerById(@RequestParam Integer id) {
 
         return customerService.findCustomerById(id);
     }
 
     @DeleteMapping("/id")
-    @Operation(summary= "/Kustutab andmebaasi id järgi kliendi")
+    @Operation(summary = "/Kustutab andmebaasi id järgi kliendi")
     public void removeCustomerId(@RequestParam Integer id) { //1.
         customerService.removeCustomerById(id);
     }
+
     @PutMapping
-    @Operation(summary= "/Uuendab andmebaasi id järgi klienti")
-    public void updateCustomerById(@RequestParam Integer id,@Valid @RequestBody CustomerDto customerDto) {
+    @Operation(summary = "/Uuendab andmebaasi id järgi klienti")
+    public void updateCustomerById(@RequestParam Integer id, @Valid @RequestBody CustomerDto customerDto) {
         customerService.updateCustomerById(id, customerDto);
     }
 }

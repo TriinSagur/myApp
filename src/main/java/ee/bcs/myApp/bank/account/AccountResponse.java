@@ -7,11 +7,14 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
-public class AccountDto {
-    private Integer id;
-    private Integer customerId;
-    private String accountNumber;
-    private Integer balance = 0;
-    private Boolean locked = false ;
+public class AccountResponse {
 
+    private Integer customerId;
+    private String firstName;
+    private String lastName;
+    private String isikukood;
+    private String accountNumber;
+    private Integer balance;
+    private Boolean locked;
 }
+
