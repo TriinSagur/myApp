@@ -41,10 +41,9 @@ public class CustomerService {
     }
 
 
-    public void updateCustomerById(Integer id, CustomerDto customerDto) {
-
+    public void updateCustomerById(Integer customerId, CustomerDto customerDto) {
+        Customer customer = customerRepository.getById(customerId);
+        customerMapper.updateEntity(customerDto, customer);
+        customerRepository.save(customer);
     }
-
-
-
 }
