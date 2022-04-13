@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,20 +16,20 @@ public class AccountController {
 
     @PostMapping
     @Operation(summary = "Lisab uue konto")
-    public AccountDto addNewAccount(@RequestBody AccountDto accountDto) {
+    public AccountDto addNewAccount(@Valid @RequestBody AccountDto accountDto) {
         return accountService.addNewAccount(accountDto);
     }
 
     @GetMapping("/all")
     @Operation (summary = "Tagastab Listi kõigist kontodest")
-    public List<AccountDto> findAllAccounts() {
+    public List<AccountResponse> findAllAccounts() {
         return accountService.findAllAccounts();
     }
 
     @GetMapping("/id")
     @Operation (summary = "Tagastab konto id järgi")
-    public AccountDto findAccountById(@RequestParam Integer id) {
-        return accountService.findAccountById(id);
+    public AccountResponse findAccountById(@RequestParam Integer id) {
+        return accountService.findAccountInfoById(id);
     }
 
     @DeleteMapping ("/id")

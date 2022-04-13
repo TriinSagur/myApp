@@ -14,6 +14,8 @@ public class CustomerController {
     @Resource
     private CustomerService customerService;
 
+
+
     @PostMapping
     @Operation(summary = "Lisab uue kliendi")
     public CustomerDto addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
