@@ -15,10 +15,23 @@ public class CustomerController {
     @Resource
     private CustomerService customerService;
 
+    @Resource
+    private CustomerEntiryRepository repository;
+
     @PostMapping
     @Operation(summary = "Lisab uue kliendi.")
     public CustomerDto addNewCustomer(@RequestBody CustomerDto customerDto) {
-        return customerService.addNewCustomer(customerDto);
+        CustomerEntiry customer = new CustomerEntiry();
+        customer.setFirstName(customerDto.getFirstName());
+        customer.setLastName(customerDto.getLastName());
+        customer.setIsikukood(customerDto.getIsikukood());
+
+        repository.save(customer);
+
+        customerDto.setId(customer.getId());
+
+
+        return customerDto;
     }
 
     @GetMapping("/all")
