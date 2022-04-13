@@ -16,7 +16,7 @@ public class AccountController {
 
     @PostMapping
     @Operation(summary = "Lisab uue konto")
-    public AccountDto addNewAccount(@RequestBody @Valid AccountDto accountDto) {
+    public AccountDto addNewAccount(@Valid @RequestBody AccountDto accountDto) {
         return accountService.addNewAccount(accountDto);
     }
 
@@ -28,9 +28,10 @@ public class AccountController {
 
     @GetMapping("/id")
     @Operation(summary = "Otsib konto info ID järgi")
-    public AccountResponse findAccountById(@RequestParam Integer id) {
+    public AccountResponse findAccountInfoById(@RequestParam Integer id) {
         return accountService.findAccountInfoById(id);
     }
+
 
     @DeleteMapping("/id")
     @Operation(summary = "Finds accounts by id")
@@ -38,11 +39,9 @@ public class AccountController {
         accountService.removeAccountById(id);
     }
 
-    @PutMapping()
-    @Operation
-    public void updateAccountById(@RequestParam Integer id, @RequestBody AccountDto accountDto) {
+    @PutMapping("/id")
+    public void updateAccountById( @RequestParam Integer id, @RequestBody AccountDto accountDto) {
         accountService.updateAccountById(id, accountDto);
     }
-
 
 }

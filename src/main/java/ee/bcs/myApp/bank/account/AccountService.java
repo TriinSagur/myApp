@@ -1,5 +1,6 @@
 package ee.bcs.myApp.bank.account;
 
+import ee.bcs.myApp.bank.customer.Customer;
 import ee.bcs.myApp.bank.customer.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,37 +18,33 @@ public class AccountService {
 
     @Resource
     private AccountMapper accountMapper;
-    public AccountDto addNewAccount(AccountDto accountDto) {
 
+    public AccountDto addNewAccount(AccountDto accountDto) {
         return accountDto;
     }
 
     public List<AccountResponse> findAllAccounts() {
         List<Account> accounts = accountRepository.findAll();
-        accountMapper.toResponses(accounts);
         return accountMapper.toResponses(accounts);
-
     }
+
 
     public AccountResponse findAccountInfoById(Integer id) {
         Account account = accountRepository.getById(id);
-        AccountResponse accountResponse = accountMapper.toResponse(account)
+        AccountResponse accountResponse = accountMapper.toResponse(account);
         return accountMapper.toResponse(account);
     }
 
     public void removeAccountById(Integer id) {
         accountRepository.deleteById(id);
     }
-//
+
     public void updateAccountById(Integer id, AccountDto accountDto) {
         Account account = accountRepository.getById(id);
         accountMapper.updateEntity(accountDto, account);
-        customerRepository.getById(accountDto.getCustomerId());
         Customer customer = customerRepository.getById(accountDto.getCustomerId());
         account.setCustomer(customer);
-
     }
-//
 //
 //    private Account findAccountById(Integer id, List<Account> accounts) {
 //        Account result = new Account();
