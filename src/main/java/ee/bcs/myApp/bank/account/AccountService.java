@@ -1,35 +1,31 @@
-//package ee.bcs.myApp.bank.account;
-//
-//import ee.bcs.myApp.MyAppApplication;
-//import org.springframework.stereotype.Service;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//@Service
-//public class AccountService {
-//
-//    public AccountDto addNewAccount(AccountDto accountDto) {
-//        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-//        Account account = toEntity(accountDto);
-//        account.updateId();
-//        accounts.add(account);
-//
-//        accountDto = toDto(account);
-//        return accountDto;
-//    }
-//
+package ee.bcs.myApp.bank.account;
+
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+
+@Service
+public class AccountService {
+
+    @Resource
+    private AccountRepository accountRepository;
+
+    @Resource
+    private AccountMapper accountMapper;
+    public AccountDto addNewAccount(AccountDto accountDto) {
+
+        return accountDto;
+    }
+
 //    public List<AccountDto> findAllAccounts() {
-//        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-//        return toDto(accounts);
-//    }
 //
-//
-//    public AccountDto findAccountById(Integer id) {
-//        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-//        Account account = findAccountById(id, accounts);
-//        return toDto(account);
 //    }
+
+//
+    public AccountResponse findAccountInfoById(Integer id) {
+        Account account = accountRepository.getById(id);
+        return accountMapper.toResponse(account);
+    }
 //
 //    public void removeAccountById(Integer id) {
 //        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
@@ -90,4 +86,4 @@
 //    }
 //
 //
-//}
+}
