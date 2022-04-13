@@ -15,38 +15,43 @@ public class AccountController {
     @Resource
     private AccountService accountService;
 
-    @PostMapping
-    @Operation(summary = "Lisab uue konto")
-    public AccountDto addNewAccount(@RequestBody @Valid AccountDto accountDto) {
-        return accountService.addNewAccount(accountDto);
+//    @PostMapping
+//    @Operation(summary = "Lisab uue konto")
+//    public AccountDto addNewAccount(@RequestBody @Valid AccountDto accountDto) {
+//        return accountService.addNewAccount(accountDto);
+//
+//
+//    }
+//
+//    @GetMapping("/all")
+//    @Operation(summary = "Saame kontod")
+//    public List<AccountDto> findAllAccounts() {
+//        return accountService.findAllAccounts();
+//    }
+//
+@GetMapping("/id")
+@Operation(summary = "Otsib konto ID järgi (UUS)")
+public AccountDto1 findAccountById(@RequestParam Integer id) {
+    return accountService.findAccountById(id);
+}
 
-
+    @GetMapping("/id/vana")
+    @Operation(summary = "Otsib konto ID järgi (VANA)")
+    public AccountDto findAccountByIdVANA(@RequestParam Integer id) {
+        return new AccountDto();
     }
-
-    @GetMapping("/all")
-    @Operation(summary = "Saame kontod")
-    public List<AccountDto> findAllAccounts() {
-        return accountService.findAllAccounts();
-    }
-
-    @GetMapping("/id")
-    @Operation(summary = "Otsime konto ID järgi")
-    public AccountDto findAccountById(@RequestParam Integer id) {
-        return accountService.findAccountById(id);
-
-    }
-
-    @DeleteMapping("/id")
-    @Operation(summary = "kustutame konto ID järgi")
-    public void removeAccountById(@RequestParam Integer id) {
-        accountService.removeAccountById(id);
-    }
-
-    @PutMapping("/id")
-    @Operation(summary = "Uuendame kontot ID järgi")
-    public void updateAccountById(@RequestParam Integer id, @RequestBody AccountDto accountDto) {
-        accountService.updateAccountById(id, accountDto);
-
-    }
+//
+//    @DeleteMapping("/id")
+//    @Operation(summary = "kustutame konto ID järgi")
+//    public void removeAccountById(@RequestParam Integer id) {
+//        accountService.removeAccountById(id);
+//    }
+//
+//    @PutMapping("/id")
+//    @Operation(summary = "Uuendame kontot ID järgi")
+//    public void updateAccountById(@RequestParam Integer id, @RequestBody AccountDto accountDto) {
+//        accountService.updateAccountById(id, accountDto);
+//
+//    }
 
 }
