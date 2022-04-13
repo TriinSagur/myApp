@@ -1,4 +1,4 @@
-package ee.bcs.myApp.bank;
+package ee.bcs.myApp.bank.domain.customer;
 
 import lombok.Data;
 
@@ -7,6 +7,8 @@ import javax.validation.constraints.Size;
 
 @Data
 public class CustomerDto {
+
+    private Integer id;
 
     @NotNull
     private String firstName;

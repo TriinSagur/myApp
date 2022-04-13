@@ -1,4 +1,4 @@
-package ee.bcs.myApp.bank.account;
+package ee.bcs.myApp.bank.domain.account;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
@@ -12,32 +12,39 @@ import java.util.List;
 public class AccountController {
 
     @Resource
-    private  AccountService accountService;
+    private AccountService accountService;
 
     @PostMapping
     @Operation(summary = "Lisab uue konto")
-    public AccountDto addNewAccount(@RequestBody @Valid AccountDto accountDto) {
+    public AccountDto addNewAccount(@Valid @RequestBody AccountDto accountDto) {
         return accountService.addNewAccount(accountDto);
     }
 
     @GetMapping("/all")
-    public List<AccountDto> findAllAccounts() {
+    public List<AccountResponse> findAllAccounts() {
         return accountService.findAllAccounts();
     }
 
     @GetMapping("/id")
-    public AccountDto findAccountById(@RequestParam Integer id) {
-        return accountService.findAccountById(id);
-
+    @Operation(summary = "Otsib konto info ID järgi")
+    public AccountResponse findAccountInfoById(@RequestParam Integer id) {
+        return accountService.findAccountInfoById(id);
     }
+
+
     @DeleteMapping("/id")
     public void removeAccountById(@RequestParam Integer id) {
         accountService.removeAccountById(id);
-
     }
 
     @PutMapping("/id")
-    public void updateAccountById(@RequestParam Integer id, @RequestBody AccountDto accountDto) {
+    public void updateAccountById( @RequestParam Integer id, @RequestBody AccountDto accountDto) {
         accountService.updateAccountById(id, accountDto);
     }
+
+    @GetMapping("/last-name")
+    public List<AccountResponse> findAccountsInfoByLastName(@RequestParam String lastName) {
+        return accountService.findAccountInfoByLastName(lastName);
+    }
+
 }
