@@ -1,5 +1,7 @@
 package ee.bcs.myApp.bank.account;
 
+import ee.bcs.myApp.bank.customer.Customer;
+import ee.bcs.myApp.bank.customer.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -10,6 +12,9 @@ public class AccountService {
 
     @Resource
     private AccountRepository accountRepository;
+
+    @Resource
+    private CustomerRepository customerRepository;
 
     @Resource
     private AccountMapper accountMapper;
@@ -33,16 +38,13 @@ public class AccountService {
     public void removeAccountById(Integer id) {
         accountRepository.deleteById(id);
     }
-//
-//    public void updateAccountById(Integer id, AccountDto accountDto) {
-//        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-//        Account account = findAccountById(id, accounts);
-//        account.setCustomerId(accountDto.getCustomerId());
-//        account.setAccountNumber(accountDto.getAccountNumber());
-//        account.setLocked(accountDto.getLocked());
-//        account.setBalance(accountDto.getBalance());
-//
-//    }
+
+    public void updateAccountById(Integer id, AccountDto accountDto) {
+        Account account = accountRepository.getById(id);
+        accountMapper.updateEntity(accountDto, account);
+        Customer customer = customerRepository.getById(accountDto.getCustomerId());
+        account.setCustomer(customer);
+    }
 //
 //    private Account findAccountById(Integer id, List<Account> accounts) {
 //        Account result = new Account();

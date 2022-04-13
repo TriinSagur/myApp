@@ -37,9 +37,9 @@ public class AccountController {
         accountService.removeAccountById(id);
     }
 
-//    @PutMapping("/id")
-//    public void updateAccountById( @RequestParam Integer id, @RequestBody AccountDto accountDto) {
-//        accountService.updateAccountById(id, accountDto);
-//    }
+    @PutMapping("/id")
+    public void updateAccountById( @RequestParam Integer id, @RequestBody AccountDto accountDto) {
+        accountService.updateAccountById(id, accountDto);
+    }
 
 }
