@@ -1,8 +1,10 @@
 package ee.bcs.myApp.bank.account;
 
+import ee.bcs.myApp.bank.customer.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class AccountService {
@@ -11,37 +13,40 @@ public class AccountService {
     private AccountRepository accountRepository;
 
     @Resource
+    private CustomerRepository customerRepository;
+
+    @Resource
     private AccountMapper accountMapper;
     public AccountDto addNewAccount(AccountDto accountDto) {
 
         return accountDto;
     }
 
-//    public List<AccountDto> findAllAccounts() {
-//
-//    }
+    public List<AccountResponse> findAllAccounts() {
+        List<Account> accounts = accountRepository.findAll();
+        accountMapper.toResponses(accounts);
+        return accountMapper.toResponses(accounts);
 
-//
+    }
+
     public AccountResponse findAccountInfoById(Integer id) {
         Account account = accountRepository.getById(id);
+        AccountResponse accountResponse = accountMapper.toResponse(account)
         return accountMapper.toResponse(account);
     }
+
+    public void removeAccountById(Integer id) {
+        accountRepository.deleteById(id);
+    }
 //
-//    public void removeAccountById(Integer id) {
-//        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-//        Account account = findAccountById(id, accounts);
-//        accounts.remove(account);
-//    }
-//
-//    public void updateAccountById(Integer id, AccountDto accountDto) {
-//        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-//        Account account = findAccountById(id, accounts);
-//        account.setCustomerId(accountDto.getCustomerId());
-//        account.setAccountNumber(accountDto.getAccountNumber());
-//        account.setLocked(accountDto.getLocked());
-//        account.setBalance(accountDto.getBalance());
-//
-//    }
+    public void updateAccountById(Integer id, AccountDto accountDto) {
+        Account account = accountRepository.getById(id);
+        accountMapper.updateEntity(accountDto, account);
+        customerRepository.getById(accountDto.getCustomerId());
+        Customer customer = customerRepository.getById(accountDto.getCustomerId());
+        account.setCustomer(customer);
+
+    }
 //
 //
 //    private Account findAccountById(Integer id, List<Account> accounts) {

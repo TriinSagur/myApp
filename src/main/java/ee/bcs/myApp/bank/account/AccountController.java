@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/account")
@@ -19,29 +20,29 @@ public class AccountController {
         return accountService.addNewAccount(accountDto);
     }
 
-//    @GetMapping("/all")
-//    @Operation(summary = "Finds all accounts")
-//    public List<AccountDto> findAllAccounts() {
-//        return accountService.findAllAccounts();
-//    }
+    @GetMapping("/all")
+    @Operation(summary = "Finds all accounts")
+    public List<AccountResponse> findAllAccounts() {
+        return accountService.findAllAccounts();
+    }
 
     @GetMapping("/id")
-    @Operation(summary = "Otsib konto ID järgi")
+    @Operation(summary = "Otsib konto info ID järgi")
     public AccountResponse findAccountById(@RequestParam Integer id) {
         return accountService.findAccountInfoById(id);
     }
 
-//    @DeleteMapping("/id")
-//    @Operation(summary = "Finds accounts by id")
-//    public void removeAccountById(@RequestParam Integer id) {
-////        accountService.removeAccountById(id);
-//    }
-//
-//    @PutMapping()
-//    @Operation
-//    public void updateAccountById(@RequestParam Integer id, @RequestBody AccountDto accountDto) {
-//        accountService.updateAccountById(id, accountDto);
-//    }
+    @DeleteMapping("/id")
+    @Operation(summary = "Finds accounts by id")
+    public void removeAccountById(@RequestParam Integer id) {
+        accountService.removeAccountById(id);
+    }
+
+    @PutMapping()
+    @Operation
+    public void updateAccountById(@RequestParam Integer id, @RequestBody AccountDto accountDto) {
+        accountService.updateAccountById(id, accountDto);
+    }
 
 
 }
