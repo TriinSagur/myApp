@@ -13,13 +13,6 @@ public class AccountService {
 
     public AccountDto addNewAccount(AccountDto accountDto) {
 
-        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-        Account account = toEntity(accountDto);
-
-        account.updateId();
-        accounts.add(account);
-
-        return toDto(account);
     }
 
     public List<AccountDto> findAllAccounts() {
