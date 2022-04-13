@@ -1,6 +1,8 @@
-package ee.bcs.myApp.library;
+package ee.bcs.myApp.library.book;
 
 import lombok.Data;
+
+import javax.lang.model.element.NestingKind;
 
 @Data
 public class Book {
