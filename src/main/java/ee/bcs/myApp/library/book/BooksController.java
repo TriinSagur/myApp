@@ -27,8 +27,8 @@ public class BooksController {
 
    @GetMapping("/id")
    @Operation(summary = "Tagastab raamatu id järgi")
-   public Book getBookById(@RequestParam Integer id) {
-      return bookService.getBookById(id);
+   public BookDto findBookById(@RequestParam Integer id) {
+      return bookService.findBookById(id);
    }
 
    @DeleteMapping("/id")

@@ -33,18 +33,10 @@ public class BookService {
     }
 
 
-    public static Book getBookById(Integer id) {
-        List<Book> books = MyAppApplication.libraryRepository.getBooks();
+    public BookDto findBookById(Integer id) {
+        Book result = findBookEntityById(id);
+        return toDto(result);
 
-
-        Book result = new Book();
-        for (Book book : books) {
-            if(book.getId().equals(id)) {
-                result = book;
-            }
-
-        }
-        return result;
     }
 
 
@@ -60,7 +52,7 @@ public class BookService {
     }
 
     public void updateBooksById(Integer id, BookDto bookDto) {
-        Book book = getBookById(id);
+        Book book = findBookEntityById(id);
         book.setTitle(bookDto.getTitle());
         book.setYear(bookDto.getYear());
 
@@ -80,6 +72,19 @@ public class BookService {
         book.setYear(bookDto.getYear());
         return book;
     }
+
+    private Book findBookEntityById(Integer id) {
+        List<Book> books = MyAppApplication.libraryRepository.getBooks();
+        Book result = new Book();
+
+        for (Book book : books) {
+            if (book.getId().equals(id)) {
+                result = book;
+            }
+        }
+        return result;
+    }
+
 
 
 
