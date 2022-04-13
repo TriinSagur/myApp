@@ -21,24 +21,24 @@ public class AccountController {
     }
 
     @GetMapping("/all")
-    public List<AccountDto> findAllAccounts() {
+    public List<AccountResponse> findAllAccounts() {
         return accountService.findAllAccounts();
     }
 
     @GetMapping("/id")
-    public AccountDto findAccountById(@RequestParam Integer id) {
+    public AccountResponse findAccountById(@RequestParam Integer id) {
         return accountService.findAccountById(id);
     }
-
-
-    @DeleteMapping("/id")
-    public void removeAccountById(@RequestParam Integer id) {
-        accountService.removeAccountById(id);
-    }
-
-    @PutMapping("/id")
-    public void updateAccountById( @RequestParam Integer id, @RequestBody AccountDto accountDto) {
-        accountService.updateAccountById(id, accountDto);
-    }
+//
+//
+//    @DeleteMapping("/id")
+//    public void removeAccountById(@RequestParam Integer id) {
+//        accountService.removeAccountById(id);
+//    }
+//
+//    @PutMapping("/id")
+//    public void updateAccountById( @RequestParam Integer id, @RequestBody AccountDto accountDto) {
+//        accountService.updateAccountById(id, accountDto);
+//    }
 
 }
