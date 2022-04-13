@@ -1,12 +1,9 @@
 package ee.bcs.myApp.bank.customer;
 
-import ee.bcs.myApp.MyAppApplication;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -40,8 +37,10 @@ public class CustomerService {
         customerRepository.deleteById(id);
     }
 
-    public void updateCustomerById(Integer id, CustomerDto customerDto) {
-
+    public void updateCustomerById(Integer customerId, CustomerDto customerDto) {
+        Customer customer = customerRepository.getById(customerId);
+        customerMapper.updateEntity(customerDto, customer);
+        customerRepository.save(customer);
     }
 
 
