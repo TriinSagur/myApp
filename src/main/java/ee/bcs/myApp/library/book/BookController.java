@@ -1,4 +1,4 @@
-package ee.bcs.myApp.library;
+package ee.bcs.myApp.library.book;
 
 
 import io.swagger.v3.oas.annotations.Operation;

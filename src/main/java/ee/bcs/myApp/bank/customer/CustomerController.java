@@ -15,18 +15,29 @@ public class CustomerController {
 
     @Resource
     private CustomerService customerService;
+    @Resource
+    private CustomerEntityRepository repository;
 
     @PostMapping
     @Operation(summary = "Lisab uue kliendi.")
     public CustomerDto addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
-        return customerService.addNewCustomer(customerDto);
+
+        CustomerEntity customerEntity = new CustomerEntity();
+        customerEntity.setFirstName(customerDto.getFirstName());
+        customerEntity.setLastName(customerDto.getLastName());
+        customerEntity.setIsikukood(customerDto.getIsikukood());
+
+        repository.save(customerEntity);
+
+        customerDto.setId(customerEntity.getId());
+        return customerDto;
     }
 
     @GetMapping("/all")
     @Operation(summary = "Tagastab kõik kliendid")
     public List<CustomerDto> getAllCustomers() {
 
-        return customerService.getAllCustomers();
+        return customerService.findAllCustomers();
     }
 
     @GetMapping("/id")
