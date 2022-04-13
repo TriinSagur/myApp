@@ -1,7 +1,12 @@
 package ee.bcs.myApp.bank.customer;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "customer_entity")
 public class CustomerEntity {
@@ -19,35 +24,5 @@ public class CustomerEntity {
     @Column(name = "isikukood", nullable = false, length = 11)
     private String isikukood;
 
-    public String getIsikukood() {
-        return isikukood;
-    }
-
-    public void setIsikukood(String isikukood) {
-        this.isikukood = isikukood;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    //TODO Reverse Engineering! Migrate other columns to the entity
 }
