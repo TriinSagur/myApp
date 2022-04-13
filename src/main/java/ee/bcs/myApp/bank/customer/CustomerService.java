@@ -1,10 +1,8 @@
 package ee.bcs.myApp.bank.customer;
 
-import ee.bcs.myApp.MyAppApplication;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,56 +20,28 @@ public class CustomerService {
     }
 
 
-//    public List<CustomerDto> getAllCustomers() {
-//        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
-//
-//        List<CustomerDto> customerDtos = new ArrayList<>();
-//        for (Customer customer : customers) {
-//            CustomerDto customerDto = toDto(customer);
-//            customerDtos.add(customerDto);
-//        }
-//
-//        return customerDtos;
-//    }
-//
-//    public CustomerDto findCustomerById(Integer id) {
-//        Customer result = findCustomerEntityById(id);
-//        CustomerDto customerDto = toDto(result);
-//        return customerDto;
-//    }
-//
-//    private Customer findCustomerEntityById(Integer id) {
-//        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
-//        Customer result = new Customer();
-//        for (Customer customer : customers) {
-//            if (customer.getId().equals(id)) {
-//                result = customer;
-//            }
-//        }
-//        return result;
-//    }
-//
-//
-//    public void removeCustomerById(Integer id) {
-//        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
-//
-//        Customer result = new Customer();
-//        for (Customer customer : customers) {
-//            if (customer.getId().equals(id)) {
-//                result = customer;
-//            }
-//        }
-//
-//        customers.remove(result);
-//    }
-//
-//
-//    public void updateCustomerById(Integer id, CustomerDto customerDto) {
-//        Customer customer = findCustomerEntityById(id);  //ALT+Enter, siis tuleb see uus objekt
-//        customer.setFirstName(customerDto.getFirstName());
-//        customer.setLastName(customerDto.getLastName());
-//        customer.setIsikukood(customerDto.getIsikukood());
-//
-//    }
+    public List<CustomerDto> getAllCustomers() {
+        List<Customer> allCustomers = customerRepository.findAll();
+        return customerMapper.toDtos(allCustomers);
+    }
+
+    public CustomerDto findCustomerById(Integer id) {
+        // TODO: kontroll kas customer on olemas. Veateade!
+        Customer customer = customerRepository.getById(id);
+        return customerMapper.toDto(customer);
+    }
+
+
+    public void removeCustomerById(Integer id) {
+        // TODO: kontroll kas customer on olemas. Veateade!
+        customerRepository.deleteById(id);
+    }
+
+    public void updateCustomerById(Integer customerId, CustomerDto customerDto) {
+        Customer customer = customerRepository.getById(customerId);
+
+        customerMapper.updateEntity(customerDto, customer);
+        customerRepository.save(customer);
+    }
 
 }
