@@ -15,25 +15,15 @@ public class CustomerController {
     @Resource
     private CustomerService customerService;
 
-    @Resource
-    private CustomerEntityRepository repository;
 
     @PostMapping
     @Operation(summary = "lisab uue kliendi")
     public CustomerDto addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
 
-        CustomerEntity customerEntity = new CustomerEntity();
-        customerEntity.setFirstName(customerDto.getFirstName());
-        customerEntity.setLastName(customerDto.getLastName());
-        customerEntity.setIsikukood(customerDto.getIsikukood());
-
-        repository.save(customerEntity);
-
-        customerDto.setId(customerEntity.getId());
-
-        return customerDto;
+        return customerService.addNewCustomer(customerDto);
 
     }
+
 
     @GetMapping("/all")
     @Operation(summary = "tagastab koik kliendid")
@@ -45,7 +35,6 @@ public class CustomerController {
     @GetMapping("/id")
     @Operation(summary = "leiab andmebaasi ID jargi kliendi")
     public CustomerDto findCustomerById(@RequestParam Integer id) {
-
 
         return customerService.findCustomerById(id);
     }

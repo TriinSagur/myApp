@@ -23,14 +23,14 @@ public class AccountController {
 
     @GetMapping ("/all")
     @Operation(summary = "naitab koik kontod")
-    public List<AccountDto> findAllAccounts() {
+    public List<AccountResponse> findAllAccounts() {
         return accountService.findAllAccounts();
     }
 
     @GetMapping("/id")
     @Operation(summary = "otsib konto ID jargi")
-    public AccountDto findAccountById(@RequestParam Integer id) {
-        return accountService.findAccountById(id);
+    public AccountResponse findAccountInfoById(@RequestParam Integer id) {
+        return accountService.findAccountInfoById(id);
     }
 
     @DeleteMapping("/id")
@@ -42,7 +42,6 @@ public class AccountController {
     @PutMapping("/id")
     @Operation(summary = "muudab konto andmed id jargi")
     public void updateAccountById(@RequestParam Integer id, @ Valid @RequestBody AccountDto accountDto) {
-        accountService.updateAccountById(id, accountDto);
 
     }
 

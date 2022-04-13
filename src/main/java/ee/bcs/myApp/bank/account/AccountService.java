@@ -1,113 +1,59 @@
 package ee.bcs.myApp.bank.account;
 
-import ee.bcs.myApp.MyAppApplication;
+import ee.bcs.myApp.bank.customer.Customer;
+import ee.bcs.myApp.bank.customer.CustomerRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 
 public class AccountService {
 
+    @Resource
+    private AccountRepository accountRepository;
+
+    @Resource
+    private CustomerRepository customerRepository;
+
+    @Resource
+    private AccountMapper accountMapper;
 
     public AccountDto addNewAccount(AccountDto accountDto) {
 
-        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-        Account account = toEntity(accountDto);
-
-        account.updateId();
-        accounts.add(account);
-
-        accountDto = toDto(account);
-
-        return accountDto;
+        return null;
     }
 
 
-    public List<AccountDto> findAllAccounts() {
-        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
+    public List<AccountResponse> findAllAccounts() {
+        List<Account> accounts = accountRepository.findAll();
 
-        return toDto(accounts);
+        return accountMapper.toResponses(accounts);
+
     }
+    public AccountResponse findAccountInfoById(Integer id) {
 
-    public AccountDto findAccountById(Integer id) {
+        Account account = accountRepository.getById(id);
 
-        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
+        return accountMapper.toResponse(account);
 
-        Account account = findAccountById(id, accounts);
-
-        return toDto(account);
-    }
-
-
-    private Account findAccountById(Integer id, List<Account> accounts) {
-        Account result = new Account();
-
-        for (Account account : accounts) {
-            if (account.getId().equals(id)) {
-                result = account;
-            }
-        }
-        return result;
     }
 
     public void removeAccountById(Integer id) {
-        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
 
-        Account account = findAccountById(id, accounts);
-
-        accounts.remove(account);
+        accountRepository.deleteById(id);
 
     }
 
     public void updateAccountById(Integer id, AccountDto accountDto) {
 
-        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
+        Account account = accountRepository.getById(id);
 
-        Account account = findAccountById(id, accounts);
+        accountMapper.updateEntity(accountDto,account);
+        Customer customer = customerRepository.getById(accountDto.getCustomerId());
 
-//       TODO Ei saa kasutada toEntity meetodi, kuna seal luuakse uue objekti
-
-
-        account.setCustomerId(accountDto.getCustomerId());
-        account.setAccountNumber(accountDto.getAccountNumber());
-        account.setBalance(accountDto.getBalance());
-        account.setLocked(accountDto.getLocked());
-
+        account.setCustomer(customer);
     }
-
-
-    private AccountDto toDto(Account account) {
-        AccountDto accountDto = new AccountDto();
-        accountDto.setId(account.getId());
-        accountDto.setCustomerId(account.getCustomerId());
-        accountDto.setAccountNumber(account.getAccountNumber());
-        accountDto.setBalance(account.getBalance());
-        accountDto.setLocked(account.getLocked());
-        return accountDto;
-    }
-
-    private List<AccountDto> toDto(List<Account> accounts) {
-        List<AccountDto> accountDtos = new ArrayList<>();
-
-        for (Account account : accounts) {
-            AccountDto accountDto = toDto(account);
-            accountDtos.add(accountDto);
-        }
-        return accountDtos;
-    }
-
-    private Account toEntity(AccountDto accountDto) {
-        Account account = new Account();
-
-        account.setId(accountDto.getId());
-        account.setCustomerId(accountDto.getCustomerId());
-        account.setAccountNumber(accountDto.getAccountNumber());
-        account.setBalance(accountDto.getBalance());
-        account.setLocked(accountDto.getLocked());
-        return account;
-    }
-
 
 }
