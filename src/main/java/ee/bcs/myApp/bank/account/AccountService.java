@@ -1,10 +1,8 @@
 package ee.bcs.myApp.bank.account;
 
-import ee.bcs.myApp.MyAppApplication;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,24 +18,21 @@ public class AccountService {
         return accountDto;
     }
 
-//    public List<AccountDto> findAllAccounts() {
-//        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-//        return toDto(accounts);
-//    }
-
-
-    public AccountDto1 findAccountById(Integer id) {
-        Account account = accountRepository.getById(id);
-        AccountDto1 accountDto1 = accountMapper.toDto(account);
-
-        return accountDto1;
+    public List<AccountResponse> findAllAccounts() {
+        List<Account> accounts = accountRepository.findAll();
+        return accountMapper.toResponses(accounts);
     }
-//
-//    public void removeAccountById(Integer id) {
-//        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-//        Account account = findAccountById(id, accounts);
-//        accounts.remove(account);
-//    }
+
+
+    public AccountResponse findAccountInfoById(Integer id) {
+        Account account = accountRepository.getById(id);
+        AccountResponse accountResponse = accountMapper.toResponse(account);
+        return accountMapper.toResponse(account);
+    }
+
+    public void removeAccountById(Integer id) {
+        accountRepository.deleteById(id);
+    }
 //
 //    public void updateAccountById(Integer id, AccountDto accountDto) {
 //        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();

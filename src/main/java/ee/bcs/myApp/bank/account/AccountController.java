@@ -31,12 +31,12 @@ public class AccountController {
         return accountService.findAccountInfoById(id);
     }
 
-//
-//    @DeleteMapping("/id")
-//    public void removeAccountById(@RequestParam Integer id) {
-//        accountService.removeAccountById(id);
-//    }
-//
+
+    @DeleteMapping("/id")
+    public void removeAccountById(@RequestParam Integer id) {
+        accountService.removeAccountById(id);
+    }
+
 //    @PutMapping("/id")
 //    public void updateAccountById( @RequestParam Integer id, @RequestBody AccountDto accountDto) {
 //        accountService.updateAccountById(id, accountDto);
