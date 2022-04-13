@@ -1,55 +1,54 @@
-//package ee.bcs.myApp.bank.account;
-//
-//import ee.bcs.myApp.MyAppApplication;
-//import org.springframework.stereotype.Service;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//@Service
-//public class AccountService {
-//
-//    public AccountDto addNewAccount(AccountDto accountDto) {
-//        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-//        Account account = toEntity(accountDto);
-//        account.updateId();
-//        accounts.add(account);
-//
-//        accountDto = toDto(account);
-//
-//        return null;
-//    }
-//
-//    public List<AccountDto> findAllAccounts() {
-//        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-//        return toDto(accounts);
-//    }
-//
-//    public AccountDto findAccountById(Integer id) {
-//        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-//        Account account = findAccountById(id, accounts);
-//
-//        return toDto(account);
-//    }
-//
-//
-//    public void removeAccountById(Integer id) {
-//        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-//        Account account = findAccountById(id, accounts);
-//        accounts.remove(account);
-//    }
-//
-//
-//    public void updateAccountById(Integer id, AccountDto accountDto) {
-//        List<Account> accounts = MyAppApplication.bankRepository.getAccounts();
-//        Account account = findAccountById(id, accounts);
-//        account.setCustomerId(accountDto.getCustomerId());
-//        account.setAccountNumber(accountDto.getAccountNumber());
-//        account.setLocked(accountDto.getLocked());
-//        account.setBalance(accountDto.getBalance());
-//
-//    }
-//
+package ee.bcs.myApp.bank.account;
+
+import ee.bcs.myApp.bank.customer.Customer;
+import ee.bcs.myApp.bank.customer.CustomerRepository;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+@Service
+public class AccountService {
+
+    @Resource
+    private AccountRepository accountRepository;
+
+    @Resource
+    private CustomerRepository customerRepository;
+
+    @Resource
+    private AccountMapper accountMapper;
+
+    public AccountDto addNewAccount(AccountDto accountDto) {
+
+        return accountDto;
+    }
+
+    public List<AccountResponse> findAllAccounts() {
+        List<Account> accounts = accountRepository.findAll();
+
+        return accountMapper.toResponses(accounts);
+    }
+
+    public AccountResponse findAccountInfoById(Integer id) {
+        Account account = accountRepository.getById(id);
+        return accountMapper.toResponse(account);
+    }
+
+
+    public void removeAccountById(Integer id) {
+        accountRepository.deleteById(id);
+    }
+
+
+    public void updateAccountById(Integer id, AccountDto accountDto) {
+
+        Account account = accountRepository.getById(id);
+        accountMapper.updateEntity(accountDto, account);
+        Customer customer = customerRepository.getById(accountDto.getCustomerId());
+        account.setCustomer(customer);
+    }
+
 //    private Account findAccountById(Integer id, List<Account> accounts) {
 //        Account result = new Account();
 //        for (Account account : accounts) {
@@ -90,5 +89,5 @@
 //        account.updateId();
 //        return account;
 //    }
-//
-//}
+
+}
