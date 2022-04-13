@@ -20,24 +20,16 @@ public class AccountController {
         return accountService.addNewAccount(accountDto);
     }
 
-//    @GetMapping("/all")
-//    public List<AccountDto> findAllAccounts() {
-//        return accountService.findAllAccounts();
-//    }
-//
+    @GetMapping("/all")
+    public List<AccountResponse> findAllAccounts() {
+        return accountService.findAllAccounts();
+    }
+
     @GetMapping("/id")
-    @Operation(summary = "Otsib konto ID järgi (UUS)")
-    public AccountDto1 findAccountById(@RequestParam Integer id) {
-        return accountService.findAccountById(id);
+    @Operation(summary = "Otsib konto info ID järgi")
+    public AccountResponse findAccountInfoById(@RequestParam Integer id) {
+        return accountService.findAccountInfoById(id);
     }
-
-    @GetMapping("/id/vana")
-    @Operation(summary = "Otsib konto ID järgi (VANA)")
-    public AccountDto findAccountByIdVANA(@RequestParam Integer id) {
-        return new AccountDto();
-    }
-
-
 
 //
 //    @DeleteMapping("/id")
