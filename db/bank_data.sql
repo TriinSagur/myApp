@@ -2,6 +2,8 @@ INSERT INTO public.customer (first_name, last_name, isikukood) VALUES ('Otto', '
 INSERT INTO public.customer (first_name, last_name, isikukood) VALUES ('Martin', 'Reimo', '30000000002');
 INSERT INTO public.customer (first_name, last_name, isikukood) VALUES ('Nipi', 'Tiri', '30000000003');
 INSERT INTO public.customer (first_name, last_name, isikukood) VALUES ('Edit', 'Nupp', '40000000004');
+INSERT INTO public.customer (first_name, last_name, isikukood) VALUES ('Hanno', 'Kedik', '30000000005');
+INSERT INTO public.customer (first_name, last_name, isikukood) VALUES ('Ergo', 'Tammel', '30000000006');
 
 INSERT INTO public.account (account_number, customer_id, balance, locked) VALUES ('EE123', 1, 50, false);
 INSERT INTO public.account (account_number, customer_id, balance, locked) VALUES ('EE456', 3, 20, false);
