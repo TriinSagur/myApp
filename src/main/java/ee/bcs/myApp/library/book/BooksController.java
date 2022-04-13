@@ -1,4 +1,4 @@
-package ee.bcs.myApp.library;
+package ee.bcs.myApp.library.book;
 
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,14 +15,14 @@ public class BooksController {
 
    @PostMapping
    @Operation(summary = "Lisab uue raamatu")
-   public Integer addNewBook(@RequestBody BookDto bookDto) {
+   public BookDto addNewBook(@RequestBody BookDto bookDto) {
       return bookService.addNewBook(bookDto);
    }
 
    @GetMapping("/all")
    @Operation(summary = "Tagastab kõik raamatud")
-   public List<Book> getAllBooks() {
-      return bookService.getAllBooks();
+   public List<BookDto> getAllBooks() {
+      return bookService.findAllBooks();
    }
 
    @GetMapping("/id")

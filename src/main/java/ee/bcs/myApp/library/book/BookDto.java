@@ -1,4 +1,4 @@
-package ee.bcs.myApp.library;
+package ee.bcs.myApp.library.book;
 
 import lombok.Data;
 
@@ -7,5 +7,6 @@ public class BookDto {
 
     private String title;
     private Integer year;
+    private Integer id;
 
 }
