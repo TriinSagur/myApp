@@ -21,15 +21,6 @@ public class AccountController {
     @Operation(summary = "Lisab uue konto")
     public AccountDto addNewAccount(@RequestBody @Valid AccountDto accountDto) {
         return accountService.addNewAccount(accountDto);
-
-//        AccountEntity accountEntity = new AccountEntity();
-//        accountEntity.setCustomer(accountDto.getCustomerId());
-//        accountEntity.setAccountNumber(accountDto.getAccountNumber());
-//        accountEntity.setBalance(accountDto.getBalance());
-//        accountEntity.setLocked(accountDto.getLocked());
-//        repository.save(accountEntity);
-//        accountDto.setId(accountEntity.getId());
-//        return accountDto;
     }
 
     @GetMapping("/all")
