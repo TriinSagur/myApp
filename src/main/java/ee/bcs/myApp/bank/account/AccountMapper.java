@@ -31,5 +31,6 @@ public interface AccountMapper {
 
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void upadeteEntity(AccountDto accountDto1, @MappingTarget Account account);
+    @Mapping(target = "id", ignore = true)
+    void upadateEntity(AccountDto accountDto, @MappingTarget Account account);
 }

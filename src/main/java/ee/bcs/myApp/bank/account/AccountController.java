@@ -29,16 +29,16 @@ public class AccountController {
     public AccountResponse findAccountById(@RequestParam Integer id) {
         return accountService.findAccountById(id);
     }
-//
-//
-//    @DeleteMapping("/id")
-//    public void removeAccountById(@RequestParam Integer id) {
-//        accountService.removeAccountById(id);
-//    }
-//
-//    @PutMapping("/id")
-//    public void updateAccountById( @RequestParam Integer id, @RequestBody AccountDto accountDto) {
-//        accountService.updateAccountById(id, accountDto);
-//    }
+
+
+    @DeleteMapping("/id")
+    public void removeAccountById(@RequestParam Integer id) {
+        accountService.removeAccountById(id);
+    }
+
+    @PutMapping("/id")
+    public void updateAccountById( @RequestParam Integer id, @RequestBody AccountDto accountDto) {
+        accountService.updateAccountById(id, accountDto);
+    }
 
 }
