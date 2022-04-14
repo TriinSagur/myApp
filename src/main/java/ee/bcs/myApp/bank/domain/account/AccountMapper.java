@@ -6,15 +6,7 @@ import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface AccountMapper {
-    Account toEntity(AccountDto accountDto);
 
-//    private Integer customerId;
-//    private String firstName;
-//    private String lastName;
-//    private String isikukood;
-//    private String accountNumber;
-//    private Integer balance;
-//    private Boolean locked;
 
     @Mapping(target = "customerId", source = "customer.id")
     @Mapping(target = "firstName", source = "customer.firstName")
@@ -32,5 +24,5 @@ public interface AccountMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)
-    void upadateEntity(AccountDto accountDto, @MappingTarget Account account);
+    void updateEntity(AccountDto accountDto, @MappingTarget Account account);
 }

@@ -13,5 +13,12 @@ import java.time.Instant;
 @Service
 public class BankService {
 
+    @Resource
+    private TransactionService transactionService;
+
+    public void deposit(DepositRequest request) {
+        transactionService.addDepositTransaction(request);
+    }
+
 
 }

@@ -20,10 +20,11 @@ private TransactionRepository transactionRepository;
     @Resource
     private AccountService accountService;
 
-    public void deposit(DepositRequest request) {
+
+    public void addDepositTransaction(DepositRequest request) {
         Transaction transaction = transactionMapper.toDepositEntity(request);
         Account account = accountService.findAccountById(request.getAccountId());
-        transaction.setReceiverAccountNumber((account.getAccountNumber()));
+        transaction.setReceiverAccountNumber(account.getAccountNumber());
         transaction.setBalance(account.getBalance() + request.getAmount());
         transaction.setTransactionDateTime(Instant.now());
         transaction.setAccount(account);

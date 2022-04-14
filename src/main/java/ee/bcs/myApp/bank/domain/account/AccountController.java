@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,8 +17,8 @@ public class AccountController {
 
     @PostMapping
     @Operation(summary = "Uue konto loomine")
-    public AccountDto addNewAccount(@RequestBody AccountDto accountDto) {
-        return  accountService.addNewAccount(accountDto);
+    public AccountDto addNewAccount(@Valid @RequestBody AccountDto accountDto) {
+        return accountService.addNewAccount(accountDto);
     }
 
     @GetMapping("/all")
@@ -26,10 +27,9 @@ public class AccountController {
     }
 
     @GetMapping("/id")
-    public Account findAccountById(@RequestParam Integer id) {
-        return accountService.findAccountById(id);
+    public AccountResponse findAccountInfoById(@RequestParam Integer id) {
+        return accountService.findAccountInfoById(id);
     }
-
 
 
     @DeleteMapping("/id")
@@ -38,13 +38,13 @@ public class AccountController {
     }
 
     @PutMapping("/id")
-    public void updateAccountById( @RequestParam Integer id, @RequestBody AccountDto accountDto) {
+    public void updateAccountById(@RequestParam Integer id, @RequestBody AccountDto accountDto) {
         accountService.updateAccountById(id, accountDto);
     }
 
     @GetMapping("/last-name")
     public List<AccountResponse> findAccountsInfoByLastName(@RequestParam String lastName) {
-        return accountService.findAccountsByLastName(lastName);
+        return accountService.findAccountsInfoByLastName(lastName);
     }
 
 }

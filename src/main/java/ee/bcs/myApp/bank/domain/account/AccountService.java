@@ -28,8 +28,10 @@ public class AccountService {
         return accountMapper.toResponses(accounts);
     }
 
-    public Account findAccountById(Integer id) {
+
+    public AccountResponse findAccountInfoById(Integer id) {
         Account account = accountRepository.getById(id);
+        AccountResponse accountResponse = accountMapper.toResponse(account);
         return accountMapper.toResponse(account);
     }
 
@@ -44,13 +46,17 @@ public class AccountService {
 
     public void updateAccountById(Integer id, AccountDto accountDto) {
         Account account = accountRepository.getById(id);
-        accountMapper.upadateEntity(accountDto, account);
+        accountMapper.updateEntity(accountDto, account);
         Customer customer = customerRepository.getById(accountDto.getCustomerId());
         account.setCustomer(customer);
     }
 
-    public List<AccountResponse> findAccountsByLastName(String lastName) {
+    public List<AccountResponse> findAccountsInfoByLastName(String lastName) {
         List<Account> accounts = accountRepository.findByLastName(lastName);
         return accountMapper.toResponses(accounts);
+    }
+
+    public Account findAccountById(Integer accountId) {
+        return accountRepository.getById(accountId);
     }
 }
