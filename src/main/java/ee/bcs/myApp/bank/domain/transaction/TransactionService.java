@@ -17,6 +17,9 @@ public class TransactionService {
     @Resource
     private TransactionMapper transactionMapper;
 
+    @Resource
+    private TransactionRepository transactionRepository;
+
 
     public void addDepositTransaction(DepositRequest request) {
         Transaction transaction = transactionMapper.toDepositEntity(request);

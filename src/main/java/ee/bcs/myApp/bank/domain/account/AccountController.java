@@ -45,7 +45,7 @@ public class AccountController {
     }
 
     @GetMapping("/last-name")
-    public List<AccountResponse> findAccountsInfoByLastName(String lastName) {
+    public List<AccountResponse> findAccountsInfoByLastName(@RequestParam String lastName) {
         return accountService.findAccountsInfoByLastName(lastName);
     }
 

@@ -44,6 +44,4 @@ public class CustomerController {
         customerService.updateCustomerById(id, customerDto);
     }
 
-
-
 }
