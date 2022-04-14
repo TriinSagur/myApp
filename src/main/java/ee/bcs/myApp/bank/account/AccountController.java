@@ -23,16 +23,17 @@ public class AccountController {
 
     @GetMapping("/all")
     @Operation(summary = "Otsi kõik")
-    public List<AccountDto> findAllAccounts() {
-
+    public List<AccountResponse> findAllAccounts() {
         return accountService.findAllAccounts();
     }
 
     @GetMapping("/id")
     @Operation(summary = "Otsi ")
-    public AccountDto findAccountById(@RequestParam Integer id) {
-        return accountService.findAccountById(id);
+    public AccountResponse findAccountById(@RequestParam Integer id) {
+        return accountService.findAccountInfoById(id);
     }
+
+
 
     @DeleteMapping("/id")
     @Operation(summary = "Otsi ")

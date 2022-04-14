@@ -15,22 +15,12 @@ public class CustomerController {
 
     @Resource
     private CustomerService customerService;
-    @Resource
-    private CustomerEntityRepository repository;
+
 
     @PostMapping
-    @Operation(summary = "Lisab uue kliendi.")
+
     public CustomerDto addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
-
-        CustomerEntity customerEntity = new CustomerEntity();
-        customerEntity.setFirstName(customerDto.getFirstName());
-        customerEntity.setLastName(customerDto.getLastName());
-        customerEntity.setIsikukood(customerDto.getIsikukood());
-
-        repository.save(customerEntity);
-
-        customerDto.setId(customerEntity.getId());
-        return customerDto;
+        return customerService.addNewCustomer(customerDto);
     }
 
     @GetMapping("/all")
@@ -38,6 +28,7 @@ public class CustomerController {
     public List<CustomerDto> getAllCustomers() {
 
         return customerService.findAllCustomers();
+
     }
 
     @GetMapping("/id")

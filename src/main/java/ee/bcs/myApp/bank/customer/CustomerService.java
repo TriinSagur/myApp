@@ -5,90 +5,70 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
+
+    @Resource
+    private CustomerMapper customerMapper;
+
+    @Resource
+    private CustomerRepository customerRepository;
+
     public CustomerDto addNewCustomer(CustomerDto customerDto) {
-        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
-        Customer customer = toEntity(customerDto);
 
-        customer.updateId();
-        customers.add(customer);
+        Customer customer = customerMapper.toEntity(customerDto);
+        customerRepository.save(customer);
 
-        return toDto(customer);
+        return customerMapper.toDto(customer);
     }
 
 
     public List<CustomerDto> findAllCustomers() {
-
-        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
-        return toDto(customers);
+        List<Customer> allCustomers = customerRepository.findAll();
+        return customerMapper.toDtos(allCustomers);
     }
 
     public CustomerDto findCustomerById(Integer id) {
-        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
-        Customer customer = findCustomerById(id, customers);
-        return toDto(customer);
+        Customer customer = customerRepository.getById(id);
+        return customerMapper.toDto(customer);
     }
 
 
-    public CustomerDto removeCustomerById(@RequestParam Integer id) {
-        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
-        Customer customer = findCustomerById(id, customers);
-        customers.remove(id);
-
-        return toDto(customer);
+    public void removeCustomerById(@RequestParam Integer id) {
+        customerRepository.deleteById(id);
     }
 
     public void updateCustomerById(Integer id, CustomerDto customerDto) {
-
-        List<Customer> customers = MyAppApplication.bankRepository.getCustomers();
-        Customer customer = findCustomerById(id, customers);
-
-        customer.setFirstName(customerDto.getFirstName());
-        customer.setLastName(customerDto.getLastName());
-        customer.setIsikukood(customerDto.getIsikukood());
+        Customer customer = customerRepository.getById(id);
+        customerMapper.updateEntity(customerDto, customer);
+        customerRepository.save(customer);
     }
-
-    private List<CustomerDto> toDto(List<Customer> customers) {
-        List<CustomerDto> customerDtos = new ArrayList<>();
-
-        for (Customer customer : customers) {
-            CustomerDto customerDto = toDto(customer);
-            customerDtos.add(customerDto);
-        }
-        return customerDtos;
-    }
-
-    private CustomerDto toDto(Customer customer) {
-        CustomerDto customerDto;
-        customerDto = new CustomerDto();
-        customerDto.setId(customer.getId());
-        customerDto.setFirstName(customer.getFirstName());
-        customerDto.setLastName(customer.getLastName());
-        customerDto.setIsikukood(customer.getIsikukood());
-        return customerDto;
-    }
-
-    private Customer toEntity(CustomerDto customerDto) {
-        Customer customer = new Customer();
-        customer.setFirstName(customerDto.getFirstName());
-        customer.setLastName(customerDto.getLastName());
-        customer.setIsikukood(customerDto.getIsikukood());
-        return customer;
-    }
-
-    private Customer findCustomerById(Integer id, List<Customer> customers) {
-
-        Customer result = new Customer();
-
-        for (Customer customer : customers) {
-            if (customer.getId().equals(id)) {
-                result = customer;
-            }
-        }
-        return result;
-    }
+//
+//    private List<CustomerDto> toDto(List<Customer> customers) {
+//        List<CustomerDto> customerDtos = new ArrayList<>();
+//
+//        for (Customer customer : customers) {
+//            CustomerDto customerDto = toDto(customer);
+//            customerDtos.add(customerDto);
+//        }
+//        return customerDtos;
+//    }
+//
+//
+//    private Customer findCustomerById(Integer id, List<Customer> customers) {
+//
+//        Customer result = new Customer();
+//
+//        for (Customer customer : customers) {
+//            if (customer.getId().equals(id)) {
+//                result = customer;
+//            }
+//        }
+//        return result;
+//    }
 }
