@@ -3,11 +3,15 @@ package ee.bcs.myApp.bank.customer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
+
+import ee.bcs.myApp.bank.domain.customer.Customer;
+import ee.bcs.myApp.bank.domain.customer.CustomerDto;
+import ee.bcs.myApp.bank.domain.customer.CustomerMapper;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-13T13:44:54+0300",
+    date = "2022-04-14T09:17:19+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
