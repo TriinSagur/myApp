@@ -9,7 +9,6 @@ import javax.validation.Valid;
 @RequestMapping("/bank")
 public class BankController {
 
-
     @Resource
     private BankService bankService;
 
