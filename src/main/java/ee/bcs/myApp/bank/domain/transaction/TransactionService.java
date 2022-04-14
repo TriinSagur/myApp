@@ -12,10 +12,10 @@ import java.time.Instant;
 public class TransactionService {
 
     @Resource
-    private TransactionMapper transactionMapper;
+    private AccountService accountService;
 
     @Resource
-    private AccountService accountService;
+    private TransactionMapper transactionMapper;
 
     @Resource
     private TransactionRepository transactionRepository;

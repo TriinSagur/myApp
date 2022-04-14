@@ -17,14 +17,12 @@ public class CustomerService {
     public CustomerDto addNewCustomer(CustomerDto customerDto) {
         Customer customer = customerMapper.toEntity(customerDto);
         customerRepository.save(customer);
-
         return customerMapper.toDto(customer);
     }
 
     public List<CustomerDto> getAllCustomers() {
         List<Customer> allCustomers = customerRepository.findAll();
         return customerMapper.toDtos(allCustomers);
-
     }
 
     public CustomerDto findCustomerById(Integer id) {
@@ -38,7 +36,6 @@ public class CustomerService {
 
     public void updateCustomerById(Integer customerId, CustomerDto customerDto) {
         Customer customer = customerRepository.getById(customerId);
-
         customerMapper.updateEntity(customerDto, customer);
         customerRepository.save(customer);
     }

@@ -21,7 +21,6 @@ public class AccountService {
     private AccountMapper accountMapper;
 
     public AccountDto addNewAccount(AccountDto accountDto) {
-
         return accountDto;
     }
 

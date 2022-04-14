@@ -6,7 +6,6 @@ import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface AccountMapper {
-    Account toEntity(AccountDto1 accountDto1);
 
     //    private Integer customerId;
 //    private String firstName;

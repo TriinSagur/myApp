@@ -46,6 +46,4 @@ public class AccountController {
         return accountService.findAccountsInfoByLastName(lastName);
     }
 
-
-
 }
