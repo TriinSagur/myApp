@@ -1,6 +1,5 @@
-package ee.bcs.myApp.library;
+package ee.bcs.myApp.library.book;
 
-import ee.bcs.myApp.MyAppApplication;
 import org.springframework.stereotype.Service;
 
 @Service

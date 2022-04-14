@@ -1,19 +1,19 @@
-package ee.bcs.myApp.bank.customer;
+package ee.bcs.myApp.library.book;
 
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.Data;
 
 @Data
-public class Customer {
+public class Book {
+
     public static Integer idCounter = 1;
     private Integer id;
-    private String firstName;
-    private String lastName;
-    private String isikukood;
+    private String title;
+    private Integer year;
 
     public void updateId() {
         id = idCounter;
         idCounter++;
-
     }
 
 
