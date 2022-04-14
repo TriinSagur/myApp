@@ -2,9 +2,11 @@ package ee.bcs.myApp.bank.account;
 
 import org.mapstruct.*;
 
+import java.util.List;
+
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface AccountMapper {
-    Account toEntity(AccountDto1 accountDto1);
+    Account toEntity(AccountDto accountDto1);
 
 //    private Integer customerId;
 //    private String firstName;
@@ -20,6 +22,9 @@ public interface AccountMapper {
     @Mapping(target = "isikukood", source = "customer.isikukood")
     AccountResponse toResponse(Account account);
 
+    List<AccountResponse> toResponses(List<Account> account);
+
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateEntity(AccountDto1 accountDto1, @MappingTarget Account account);
+    @Mapping(target = "id", ignore = true)
+    void updateEntity(AccountDto accountDto1, @MappingTarget Account account);
 }
