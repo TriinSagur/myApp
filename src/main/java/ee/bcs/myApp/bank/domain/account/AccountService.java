@@ -1,7 +1,7 @@
-package ee.bcs.myApp.bank.account;
+package ee.bcs.myApp.bank.domain.account;
 
-import ee.bcs.myApp.bank.customer.Customer;
-import ee.bcs.myApp.bank.customer.CustomerRepository;
+import ee.bcs.myApp.bank.domain.customer.Customer;
+import ee.bcs.myApp.bank.domain.customer.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,10 +28,15 @@ public class AccountService {
         return accountMapper.toResponses(accounts);
     }
 
-    public AccountResponse findAccountById(Integer id) {
+    public Account findAccountById(Integer id) {
         Account account = accountRepository.getById(id);
         return accountMapper.toResponse(account);
     }
+
+//    public Account findAccountById(Integer id) {
+//        Account account = accountRepository.getById(id);
+//        return account;
+//    }
 
     public void removeAccountById(Integer id) {
         accountRepository.deleteById(id);

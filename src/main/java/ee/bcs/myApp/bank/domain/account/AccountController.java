@@ -1,4 +1,4 @@
-package ee.bcs.myApp.bank.account;
+package ee.bcs.myApp.bank.domain.account;
 
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,7 +26,7 @@ public class AccountController {
     }
 
     @GetMapping("/id")
-    public AccountResponse findAccountById(@RequestParam Integer id) {
+    public Account findAccountById(@RequestParam Integer id) {
         return accountService.findAccountById(id);
     }
 
