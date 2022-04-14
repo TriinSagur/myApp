@@ -31,6 +31,7 @@ public class AccountController {
     }
 
 
+
     @DeleteMapping("/id")
     public void removeAccountById(@RequestParam Integer id) {
         accountService.removeAccountById(id);
@@ -39,6 +40,11 @@ public class AccountController {
     @PutMapping("/id")
     public void updateAccountById( @RequestParam Integer id, @RequestBody AccountDto accountDto) {
         accountService.updateAccountById(id, accountDto);
+    }
+
+    @GetMapping("/last-name")
+    public List<AccountResponse> findAccountsInfoByLastName(@RequestParam String lastName) {
+        return accountService.findAccountsByLastName(lastName);
     }
 
 }
