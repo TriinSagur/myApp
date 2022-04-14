@@ -1,6 +1,9 @@
 package ee.bcs.myApp.bank.account;
 
-import ee.bcs.myApp.bank.customer.Customer;
+import ee.bcs.myApp.bank.domain.account.Account;
+import ee.bcs.myApp.bank.domain.account.AccountMapper;
+import ee.bcs.myApp.bank.domain.account.AccountResponse;
+import ee.bcs.myApp.bank.domain.customer.Customer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;

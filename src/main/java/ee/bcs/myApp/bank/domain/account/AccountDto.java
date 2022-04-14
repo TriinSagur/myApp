@@ -1,6 +1,6 @@
-package ee.bcs.myApp.bank.account;
+package ee.bcs.myApp.bank.domain.account;
 
-import ee.bcs.myApp.bank.customer.CustomerDto;
+import ee.bcs.myApp.bank.domain.customer.CustomerDto;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;

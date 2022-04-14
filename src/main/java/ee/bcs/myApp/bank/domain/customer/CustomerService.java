@@ -1,14 +1,11 @@
-package ee.bcs.myApp.bank.customer;
+package ee.bcs.myApp.bank.domain.customer;
 
-import ee.bcs.myApp.MyAppApplication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CustomerService {

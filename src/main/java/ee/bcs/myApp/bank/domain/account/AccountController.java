@@ -1,6 +1,5 @@
-package ee.bcs.myApp.bank.account;
+package ee.bcs.myApp.bank.domain.account;
 
-import ee.bcs.myApp.library.author.Author;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 

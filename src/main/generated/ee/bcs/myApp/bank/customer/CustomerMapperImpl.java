@@ -3,6 +3,10 @@ package ee.bcs.myApp.bank.customer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
+
+import ee.bcs.myApp.bank.domain.customer.Customer;
+import ee.bcs.myApp.bank.domain.customer.CustomerDto;
+import ee.bcs.myApp.bank.domain.customer.CustomerMapper;
 import org.springframework.stereotype.Component;
 
 @Generated(
