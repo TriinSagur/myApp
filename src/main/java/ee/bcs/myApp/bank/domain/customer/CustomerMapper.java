@@ -12,7 +12,7 @@ public interface CustomerMapper {
 
     CustomerDto toDto(Customer entity);
 
-    List<CustomerDto> doDtos(List<Customer> entities);
+    List<CustomerDto> toDtos(List<Customer> entities);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntity(CustomerDto dto, @MappingTarget Customer entity);

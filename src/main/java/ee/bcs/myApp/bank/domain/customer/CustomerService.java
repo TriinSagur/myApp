@@ -22,7 +22,7 @@ public class CustomerService {
 
     public List<CustomerDto> getAllCustomers() {
         List<Customer> allCustomers = customerRepository.findAll();
-        return customerMapper.doDtos(allCustomers);
+        return customerMapper.toDtos(allCustomers);
     }
 
     public CustomerDto findCustomerById(Integer id) {

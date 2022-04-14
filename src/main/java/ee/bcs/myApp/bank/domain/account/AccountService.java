@@ -14,10 +14,10 @@ public class AccountService {
     private AccountRepository accountRepository;
 
     @Resource
-    private AccountMapper accountMapper;
+    private CustomerRepository customerRepository;
 
     @Resource
-    private CustomerRepository customerRepository;
+    private AccountMapper accountMapper;
 
     public AccountDto addNewAccount(AccountDto accountDto) {
         return accountDto;
@@ -34,11 +34,6 @@ public class AccountService {
         AccountResponse accountResponse = accountMapper.toResponse(account);
         return accountMapper.toResponse(account);
     }
-
-//    public Account findAccountById(Integer id) {
-//        Account account = accountRepository.getById(id);
-//        return account;
-//    }
 
     public void removeAccountById(Integer id) {
         accountRepository.deleteById(id);
