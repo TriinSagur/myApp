@@ -1,4 +1,4 @@
-package ee.bcs.myApp.bank.customer;
+package ee.bcs.myApp.bank.domain.customer;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
@@ -14,24 +14,12 @@ public class CustomerController {
     @Resource
     private CustomerService customerService;
 
-    @Resource
-    private CustomerEntityRepository repository;
-
     @PostMapping
     @Operation(summary = "Lisab uue kliendi.")
-    public CustomerDto addNewCustomer(@RequestBody CustomerDto customerDto) {
-
-        CustomerEntity customerEntity = new CustomerEntity();
-        customerEntity.setFirstName(customerDto.getFirstName());
-        customerEntity.setLastName(customerDto.getLastName());
-        customerEntity.setIsikukood(customerDto.getIsikukood());
-
-        repository.save(customerEntity);
-
-        customerDto.setId(customerEntity.getId());
-
-        return customerDto;
+    public CustomerDto addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
+        return customerService.addNewCustomer(customerDto);
     }
+
 
     @GetMapping("/all")
     @Operation(summary = "Tagastab kõik kliendid.")
@@ -42,7 +30,7 @@ public class CustomerController {
     @GetMapping("/id")
     @Operation(summary = "Leiab andmebaasi id järgi kliendi.")
     public CustomerDto findCustomerById(@RequestParam Integer id) {
-        return customerService.findCustomerDtoById(id);
+        return customerService.findCustomerById(id);
     }
 
     @DeleteMapping("/id")
