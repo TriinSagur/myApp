@@ -21,6 +21,7 @@ public class AccountController {
     }
 
     @GetMapping("/all")
+    @Operation(summary = "Leiab kõik kontod")
     public List<AccountResponse> findAllAccounts() {
         return accountService.findAllAccounts();
     }
@@ -33,13 +34,22 @@ public class AccountController {
 
 
     @DeleteMapping("/id")
+    @Operation(summary = "Kustutab konto id järgi")
     public void removeAccountById(@RequestParam Integer id) {
         accountService.removeAccountById(id);
     }
 
     @PutMapping("/id")
-    public void updateAccountById( @RequestParam Integer id, @RequestBody AccountDto accountDto) {
+    @Operation(summary = "Muuda konto id järgi")
+    public void updateAccountById(@RequestParam Integer id, @RequestBody AccountDto accountDto) {
         accountService.updateAccountById(id, accountDto);
     }
+
+    @GetMapping("/last-name")
+    public List<AccountResponse> findAccountsInfoByLastName(@RequestParam String lastName) {
+        return accountService.findAccountsInfoByLastName(lastName);
+
+    }
+
 
 }

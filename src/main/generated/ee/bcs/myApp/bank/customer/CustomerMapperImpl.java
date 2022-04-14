@@ -3,11 +3,12 @@ package ee.bcs.myApp.bank.customer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
+
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-13T14:00:59+0300",
+    date = "2022-04-14T09:13:24+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
 )
 @Component
@@ -45,13 +46,13 @@ public class CustomerMapperImpl implements CustomerMapper {
     }
 
     @Override
-    public List<CustomerDto> toDtos(List<Customer> entitys) {
-        if ( entitys == null ) {
+    public List<CustomerDto> toDtos(List<Customer> entities) {
+        if ( entities == null ) {
             return null;
         }
 
-        List<CustomerDto> list = new ArrayList<CustomerDto>( entitys.size() );
-        for ( Customer customer : entitys ) {
+        List<CustomerDto> list = new ArrayList<CustomerDto>( entities.size() );
+        for ( Customer customer : entities ) {
             list.add( toDto( customer ) );
         }
 
