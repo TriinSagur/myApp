@@ -38,8 +38,13 @@ public class AccountController {
     }
 
     @PutMapping("/id")
-    public void updateAccountById( @RequestParam Integer id, @RequestBody AccountDto accountDto) {
+    public void updateAccountById(@RequestParam Integer id, @RequestBody AccountDto accountDto) {
         accountService.updateAccountById(id, accountDto);
+    }
+
+    @GetMapping("/last-name")
+    public List<AccountResponse> findAccountsInfoByLastName(@RequestParam String lastName) {
+        return accountService.findAccountsInfoByLastName(lastName);
     }
 
 }
