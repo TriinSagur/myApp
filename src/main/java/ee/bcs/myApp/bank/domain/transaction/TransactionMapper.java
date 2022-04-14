@@ -15,9 +15,8 @@ public interface TransactionMapper {
 //    @Mapping(source = "accountLocked", target = "account.locked")
 //    Transaction transactionDtoToTransaction(TransactionDto transactionDto);
 
-    @Mapping(target = "senderAccountNumber", constant = "ATM")
-    @Mapping(target = "type", constant = "d")
-    static Transaction toDepositEntity(DepositRequest request);
+
+    Transaction toDepositEntity(DepositRequest request);
 
 
 }

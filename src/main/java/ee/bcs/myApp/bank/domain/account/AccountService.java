@@ -58,7 +58,7 @@ public class AccountService {
     public Account findAccountById(Integer accountId) {
 
 
-        return accountRepository.findById(accountId).getById(accountId);
+        return accountRepository.getById(accountId);
     }
 
 }
