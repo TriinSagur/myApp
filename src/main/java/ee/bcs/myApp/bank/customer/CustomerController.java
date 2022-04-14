@@ -14,36 +14,36 @@ public class CustomerController {
     @Resource
     private CustomerService customerService;
 
-
-    @PostMapping("/add")
-    @Operation(summary = "Lisab uue kliendi")
+    @PostMapping
+    @Operation(summary = "Lisab uue kliendi.")
     public CustomerDto addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
         return customerService.addNewCustomer(customerDto);
     }
 
-    @GetMapping
-    @Operation(summary = "/tagastab kõik kliendid")
-    public List<CustomerDto> getAllCustomers() {
 
+    @GetMapping("/all")
+    @Operation(summary = "Tagastab kõik kliendid.")
+    public List<CustomerDto> getAllCustomers() {
         return customerService.getAllCustomers();
     }
 
     @GetMapping("/id")
-    @Operation(summary = "/Leiab andmebaasi ID järgi kliendi")
+    @Operation(summary = "Leiab andmebaasi id järgi kliendi.")
     public CustomerDto findCustomerById(@RequestParam Integer id) {
-
         return customerService.findCustomerById(id);
     }
 
+
     @DeleteMapping("/id")
-    @Operation(summary = "/Kustutab andmebaasi id järgi kliendi")
-    public void removeCustomerId(@RequestParam Integer id) { //1.
+    @Operation(summary = "Kustutab andmebaasi id järgi kliendi.")
+    public void removeCustomerById(@RequestParam Integer id) {
         customerService.removeCustomerById(id);
     }
 
-    @PutMapping
-    @Operation(summary = "/Uuendab andmebaasi id järgi klienti")
+    @PutMapping("/id")
+    @Operation(summary = "Uuendab andmebaasi id järgi klienti.")
     public void updateCustomerById(@RequestParam Integer id, @Valid @RequestBody CustomerDto customerDto) {
         customerService.updateCustomerById(id, customerDto);
     }
+
 }

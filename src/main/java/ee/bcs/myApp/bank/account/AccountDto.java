@@ -1,6 +1,6 @@
 package ee.bcs.myApp.bank.account;
 
-import ee.bcs.myApp.bank.customer.CustomerDto;
+
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -12,6 +12,6 @@ public class AccountDto {
     private Integer customerId;
     private String accountNumber;
     private Integer balance = 0;
-    private Boolean locked = false ;
+    private Boolean locked = false;
 
 }

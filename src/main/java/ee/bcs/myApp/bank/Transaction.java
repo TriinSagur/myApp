@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 
 @Data
 public class Transaction {
-
     private Integer id;
     private Integer accountId;
     private String senderAccountNumber;

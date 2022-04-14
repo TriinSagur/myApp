@@ -1,10 +1,6 @@
 package ee.bcs.myApp.bank.account;
 
-import ee.bcs.myApp.bank.customer.CustomerDto;
 import lombok.Data;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Data
 public class AccountResponse {
@@ -17,4 +13,3 @@ public class AccountResponse {
     private Integer balance;
     private Boolean locked;
 }
-
