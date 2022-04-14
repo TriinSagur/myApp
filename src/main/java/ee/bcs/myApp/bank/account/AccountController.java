@@ -34,7 +34,6 @@ public class AccountController {
     }
 
 
-
     @DeleteMapping("/id")
     @Operation(summary = "Otsi ")
     public void removeAccountById(@RequestParam Integer id) {
@@ -44,6 +43,13 @@ public class AccountController {
     @PutMapping("/id")
     public void updateAccountById(@RequestParam Integer id, @RequestBody @Valid AccountDto accountDto) {
         accountService.updateAccountById(id, accountDto);
+
+    }
+
+    @GetMapping("/last-name")
+    public List<AccountResponse> findAccountInfoByLastName(@RequestParam String lastName) {
+        return accountService.findAccountInfoByLastName(lastName);
+
 
     }
 }

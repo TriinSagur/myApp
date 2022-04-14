@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 
@@ -51,43 +52,10 @@ public class AccountService {
         account.setCustomer(customer);
 
     }
-//
-//    private Account findAccountById(Integer id, List<Account> accounts) {
-//        Account result = new Account();
-//        for (Account account : accounts) {
-//            if (account.getId().equals(id)) {
-//                result = account;
-//            }
-//        }
-//        return result;
-//    }
-//
-//    private List<AccountDto> toDto(List<Account> accounts) {
-//        List<AccountDto> accountDtos = new ArrayList<>();
-//        for (Account account : accounts) {
-//            AccountDto accountDto = toDto(account);
-//            accountDtos.add(accountDto);
-//        }
-//        return accountDtos;
-//    }
-//
-//    private AccountDto toDto(Account account) {
-//        AccountDto accountDto = new AccountDto();
-//        accountDto.setId(account.getId());
-//        accountDto.setCustomerId(account.getCustomerId());
-//        accountDto.setAccountNumber(account.getAccountNumber());
-//        accountDto.setBalance(account.getBalance());
-//        accountDto.setLocked(account.getLocked());
-//        return accountDto;
-//    }
-//
-//    private Account toEntity(AccountDto accountDto) {
-//        Account account = new Account();
-//        account.setCustomerId(accountDto.getCustomerId());
-//        account.setAccountNumber(accountDto.getAccountNumber());
-//        account.setBalance(accountDto.getBalance());
-//        account.setLocked(false);
-//        return account;
-//    }
 
+    public List<AccountResponse> findAccountInfoByLastName(String lastName) {
+        List<Account> accounts = accountRepository.findByLastName(lastName);
+
+        return accountMapper.toResponses(accounts);
+    }
 }
