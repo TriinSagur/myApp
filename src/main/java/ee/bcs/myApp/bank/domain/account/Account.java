@@ -1,6 +1,6 @@
-package ee.bcs.myApp.bank.account;
+package ee.bcs.myApp.bank.domain.account;
 
-import ee.bcs.myApp.bank.customer.Customer;
+import ee.bcs.myApp.bank.domain.customer.Customer;
 import lombok.Getter;
 import lombok.Setter;
 

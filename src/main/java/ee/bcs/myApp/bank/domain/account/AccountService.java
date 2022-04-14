@@ -1,7 +1,7 @@
-package ee.bcs.myApp.bank.account;
+package ee.bcs.myApp.bank.domain.account;
 
-import ee.bcs.myApp.bank.customer.Customer;
-import ee.bcs.myApp.bank.customer.CustomerRepository;
+import ee.bcs.myApp.bank.domain.customer.Customer;
+import ee.bcs.myApp.bank.domain.customer.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -54,4 +54,11 @@ public class AccountService {
         List<Account> accounts = accountRepository.findByLastName(lastName);
         return accountMapper.toResponses(accounts);
     }
+
+    public Account findAccountById(Integer accountId) {
+
+
+        return accountRepository.findById(accountId).getById(accountId);
+    }
+
 }
