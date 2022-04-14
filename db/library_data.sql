@@ -1,0 +1,13 @@
+INSERT INTO library.keyword (id, name) VALUES (DEFAULT, 'zombi');
+INSERT INTO library.keyword (id, name) VALUES (DEFAULT, 'erotica');
+INSERT INTO library.keyword (id, name) VALUES (DEFAULT, 'sci-fi');
+INSERT INTO library.keyword (id, name) VALUES (DEFAULT, 'travel');
+INSERT INTO library.author (id, first_name, last_name) VALUES (DEFAULT, 'Antoni Horatio', 'Banderas');
+INSERT INTO library.author (id, first_name, last_name) VALUES (DEFAULT, 'Maizi', 'Pulk');
+INSERT INTO library.book (id, title, year) VALUES (DEFAULT, 'Code Smell', 2008);
+INSERT INTO library.book (id, title, year) VALUES (DEFAULT, 'Harry Potter', 2005);
+INSERT INTO library.book_author (id, book_id, author_id) VALUES (DEFAULT, 1, 2);
+INSERT INTO library.book_author (id, book_id, author_id) VALUES (DEFAULT, 1, 1);
+INSERT INTO library.book_author (id, book_id, author_id) VALUES (DEFAULT, 2, 2);
+INSERT INTO library.book_keyword (id, book_id, keyword_id) VALUES (DEFAULT, 2, 1);
+INSERT INTO library.book_keyword (id, book_id, keyword_id) VALUES (DEFAULT, 2, 2);

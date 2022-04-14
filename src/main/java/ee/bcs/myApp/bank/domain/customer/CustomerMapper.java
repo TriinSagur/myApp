@@ -1,7 +1,6 @@
-package ee.bcs.myApp.bank.customer;
+package ee.bcs.myApp.bank.domain.customer;
 
 import org.mapstruct.*;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

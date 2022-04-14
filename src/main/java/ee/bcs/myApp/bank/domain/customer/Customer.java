@@ -1,4 +1,4 @@
-package ee.bcs.myApp.bank.customer;
+package ee.bcs.myApp.bank.domain.customer;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "customer")
+@Table(name = "customer", schema = "bank")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
