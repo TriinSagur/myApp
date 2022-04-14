@@ -21,7 +21,6 @@ public class AccountController {
     }
 
     @GetMapping("/all")
-    @Operation(summary = "Finds all accounts")
     public List<AccountResponse> findAllAccounts() {
         return accountService.findAllAccounts();
     }
@@ -34,7 +33,6 @@ public class AccountController {
 
 
     @DeleteMapping("/id")
-    @Operation(summary = "Finds accounts by id")
     public void removeAccountById(@RequestParam Integer id) {
         accountService.removeAccountById(id);
     }
