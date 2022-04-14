@@ -34,8 +34,8 @@ public class CustomerService {
         customerRepository.deleteById(id);
     }
 
-    public void updateCustomerById(Integer customerId, CustomerDto customerDto) {
-        Customer customer = customerRepository.getById(customerId);
+    public void updateCustomerById(Integer id, CustomerDto customerDto) {
+        Customer customer = customerRepository.getById(id);
         customerMapper.updateEntity(customerDto, customer);
         customerRepository.save(customer);
     }
