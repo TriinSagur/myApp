@@ -1,6 +1,6 @@
-package ee.bcs.myApp.bank.account;
+package ee.bcs.myApp.bank.domain.account;
 
-import ee.bcs.myApp.bank.customer.Customer;
+import ee.bcs.myApp.bank.domain.customer.Customer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-14T07:37:22+0300",
+    date = "2022-04-14T11:56:33+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 16.0.2 (Amazon.com Inc.)"
 )
 @Component

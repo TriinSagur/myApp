@@ -1,4 +1,4 @@
-package ee.bcs.myApp.bank.account;
+package ee.bcs.myApp.bank.domain.account;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +14,11 @@ public class AccountController {
     @Resource
     private AccountService accountService;
 
-//    @PostMapping
-//    @Operation(summary = "Lisab uue konto")
-//    public AccountDto addNewAccount(@RequestBody @Valid AccountDto accountDto) {
-//        return accountService.addNewAccount(accountDto);
-//    }
+    @PostMapping
+    @Operation(summary = "Lisab uue konto")
+    public AccountDto addNewAccount(@RequestBody @Valid AccountDto accountDto) {
+        return accountService.addNewAccount(accountDto);
+    }
 
     @GetMapping("/all")
     @Operation(summary = "Tagastab kõik kliendid")
@@ -42,5 +42,11 @@ public class AccountController {
     @Operation(summary = "Uuendab kontot id järgi")
     public void updateAccountById(@RequestParam Integer id, @Valid @RequestBody AccountDto accountDto) {
         accountService.updateAccountById(id, accountDto);
+    }
+
+    @GetMapping("/last-name")
+    @Operation(summary = "Leiab konto kasutaja perekonna nime järgi")
+    public List<AccountResponse> findAccountsInfoByLastName(@RequestParam String lastName) {
+        return accountService.findAccountInfoByLastName(lastName);
     }
 }
