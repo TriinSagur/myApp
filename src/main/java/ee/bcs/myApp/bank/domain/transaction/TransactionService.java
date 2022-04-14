@@ -28,6 +28,7 @@ public class TransactionService {
         transaction.setBalance(account.getBalance() + request.getAmount());
         transaction.setTransactionDateTime(Instant.now());
         transaction.setAccount(account);
+        transactionRepository.save(transaction);
     }
-    
+
 }
