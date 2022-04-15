@@ -12,10 +12,10 @@ import java.time.Instant;
 public class DepositRequest implements Serializable {
 
     @NotNull
-    private final Integer accountId;
+    private Integer accountId;
 
     @NotNull
     @Min(1)
     @Max(5000)
-    private final Integer amount;
+    private Integer amount;
     }
