@@ -12,9 +12,11 @@ import java.time.Instant;
 public class TransactionService {
 
     @Resource
-    TransactionMapper transactionMapper;
+    private AccountService accountService;
+
     @Resource
-    AccountService accountService;
+    private TransactionMapper transactionMapper;
+
     @Resource
     private TransactionRepository transactionRepository;
 
@@ -22,13 +24,11 @@ public class TransactionService {
         Transaction transaction = transactionMapper.toDepositEntity(request);
         Account account = accountService.findAccountById(request.getAccountId());
         transaction.setReceiverAccountNumber(account.getAccountNumber());
-        transaction.setBalance(account.getBalance()+ request.getAmount());
+        transaction.setBalance(account.getBalance() + request.getAmount());
         transaction.setTransactionDateTime(Instant.now());
         transaction.setAccount(account);
         transactionRepository.save(transaction);
+
     }
-
-
-
 
 }
