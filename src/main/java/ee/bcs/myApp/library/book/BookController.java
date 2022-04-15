@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/book")
@@ -19,7 +20,12 @@ public class BookController {
     @Operation(summary = "Uue raamatu lisamine")
     public BookDto addNewBook(@Valid @RequestBody BookDto bookDto) {
         return bookService.addNewBook(bookDto);
+    }
 
+    @GetMapping
+    @Operation (summary = "Näita kõik raamatuid")
+    public List<BookDto> findAllBooks(){
+        return bookService.findAllBooks();
     }
 
 //    @GetMapping

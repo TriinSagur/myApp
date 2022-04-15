@@ -12,12 +12,22 @@ public class BookService {
     @Resource
     private BookRepository bookRepository;
 
+    @Resource
+    private BookMapper bookMapper;
+
     public BookDto addNewBook(BookDto bookDto) {
+        Book book = bookMapper.bookToEntity(bookDto);
+        bookRepository.save(book);
 
-
-
-        return book.getId();
+        return bookMapper.bookToDto(book);
     }
+
+    public List<BookDto> findAllBooks() {
+        List<Book> allBooks = bookRepository.findAll();
+        return bookMapper.toDtos(allBooks);
+    }
+
+
 
 //    public Book findBookById(Integer id) {
 //
