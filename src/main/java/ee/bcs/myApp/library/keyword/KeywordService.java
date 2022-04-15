@@ -20,5 +20,18 @@ public class KeywordService {
         List<KeywordDto> keywordDtos = keywordMapper.toDtos(keywords);
         return keywordDtos;
     }
+
+    public KeywordDto findById(Integer id) {
+        Keyword keyword = keywordRepository.getById(id);
+        KeywordDto keywordDto = keywordMapper.toDto(keyword);
+        return keywordDto;
+
+    }
+
+    public KeywordDto addNewKeyword(KeywordDto keywordDto) {
+        Keyword keyword = keywordMapper.toEntity(keywordDto);
+        keywordRepository.save(keyword);
+        return keywordMapper.toDto(keyword);
+    }
 }
 
