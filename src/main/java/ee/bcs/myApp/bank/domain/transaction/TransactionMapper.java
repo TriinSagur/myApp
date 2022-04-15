@@ -4,7 +4,7 @@ import ee.bcs.myApp.bank.service.DepositRequest;
 import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
-public interface TransactionMapper {
+public interface  TransactionMapper {
 //    @Mapping(source = "accountId",                  target = "account.id")
 //    @Mapping(source = "accountCustomerId",          target = "customer.id")
 //    @Mapping(source = "accountCustomerFirstName",   target = "customer.firstName")
