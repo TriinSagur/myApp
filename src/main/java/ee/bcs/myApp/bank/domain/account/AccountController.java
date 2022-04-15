@@ -1,4 +1,4 @@
-package ee.bcs.myApp.bank.account;
+package ee.bcs.myApp.bank.domain.account;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +21,6 @@ public class AccountController {
     }
 
     @GetMapping("/all")
-    @Operation(summary = "Leiab kõik kontod")
     public List<AccountResponse> findAllAccounts() {
         return accountService.findAllAccounts();
     }
@@ -34,13 +33,11 @@ public class AccountController {
 
 
     @DeleteMapping("/id")
-    @Operation(summary = "Kustutab konto id järgi")
     public void removeAccountById(@RequestParam Integer id) {
         accountService.removeAccountById(id);
     }
 
     @PutMapping("/id")
-    @Operation(summary = "Muuda konto id järgi")
     public void updateAccountById(@RequestParam Integer id, @RequestBody AccountDto accountDto) {
         accountService.updateAccountById(id, accountDto);
     }
@@ -48,8 +45,6 @@ public class AccountController {
     @GetMapping("/last-name")
     public List<AccountResponse> findAccountsInfoByLastName(@RequestParam String lastName) {
         return accountService.findAccountsInfoByLastName(lastName);
-
     }
-
 
 }

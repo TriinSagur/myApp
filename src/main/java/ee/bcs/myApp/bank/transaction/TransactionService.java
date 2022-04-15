@@ -1,7 +1,0 @@
-package ee.bcs.myApp.bank.transaction;
-
-import org.springframework.stereotype.Service;
-
-@Service
-public class TransactionService {
-}
