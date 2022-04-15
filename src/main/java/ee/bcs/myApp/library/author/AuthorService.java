@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
