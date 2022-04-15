@@ -1,12 +1,7 @@
 package ee.bcs.myApp.library.bookauthor;
 
-import ee.bcs.myApp.library.author.Author;
-import ee.bcs.myApp.library.author.AuthorRepository;
-import ee.bcs.myApp.library.book.Book;
-import ee.bcs.myApp.library.book.BookDto;
-import ee.bcs.myApp.library.book.BookRepository;
+import ee.bcs.myApp.library.author.AuthorDto;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -34,8 +29,26 @@ public class BookAuthorController {
     }
 
     @GetMapping("/id")
-    @Operation(summary = "Find book and author by Id")
+    @Operation(summary = "Find Book and Author by ID")
     public BookAuthorDto findBookAuthorById(@RequestParam Integer id) {
         return bookAuthorService.findBookAuthorById(id);
+    }
+
+    @DeleteMapping("/id")
+    @Operation(summary = "Delete Book and Author by ID")
+    public void removeBookAuthorById(Integer id) {
+        bookAuthorService.removeBookAuthorById(id);
+    }
+
+    @PutMapping("/id")
+    @Operation(summary = "Update Book and Author by ID")
+    public void updateBookAuthorById(@RequestParam Integer id,@RequestParam String title,@RequestParam String lastName) {
+        bookAuthorService.updateBookAuthor(id, title, lastName);
+    }
+
+    @GetMapping("/last-name")
+    @Operation(summary = "find all books by author's last name")
+    public List<BookAuthorDto> getAllBooksByAuthor(@RequestParam String lastName) {
+        return bookAuthorService.getAllBooksByAuthor(lastName);
     }
 }
