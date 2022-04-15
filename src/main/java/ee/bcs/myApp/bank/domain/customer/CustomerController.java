@@ -18,7 +18,6 @@ public class CustomerController {
     @Operation(summary = "Lisab uue kliendi")
     public CustomerDto addNewCustomer (@Valid @RequestBody CustomerDto customerDto) {
         return customerService.addNewCustomer(customerDto);
-
     }
 
     @GetMapping("/all")
