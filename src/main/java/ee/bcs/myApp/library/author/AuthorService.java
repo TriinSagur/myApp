@@ -30,13 +30,13 @@ public class AuthorService {
 
     }
 
-    private Author toEntity(AuthorDto authorDto) {
-        Author author = new Author();
-        author.setId(authorDto.getId());
-        author.setFirstName(authorDto.getFirstName());
-        author.setLastName(authorDto.getLastName());
-        return author;
-    }
+//    private Author toEntity(AuthorDto authorDto) {
+//        Author author = new Author();
+//        author.setId(authorDto.getId());
+//        author.setFirstName(authorDto.getFirstName());
+//        author.setLastName(authorDto.getLastName());
+//        return author;
+//    }
 
     public AuthorDto findAuthorById(Integer id) {
         Author author = authorRepository.getById(id);
