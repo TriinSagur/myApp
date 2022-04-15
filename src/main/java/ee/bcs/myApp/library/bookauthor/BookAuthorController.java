@@ -47,8 +47,15 @@ public class BookAuthorController {
     }
 
     @GetMapping("/last-name")
-    @Operation(summary = "find all books by author's last name")
+    @Operation(summary = "find all books by author last name")
     public List<BookAuthorDto> getAllBooksByAuthor(@RequestParam String lastName) {
         return bookAuthorService.getAllBooksByAuthor(lastName);
     }
+    @GetMapping("/title")
+    @Operation(summary = "find all authors by book title")
+    public List<BookAuthorDto> getAllAuthorsByTitle(@RequestParam String title) {
+        return bookAuthorService.getAllAuthorsByTitle(title);
+    }
+
+
 }

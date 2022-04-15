@@ -59,4 +59,9 @@ public class BookAuthorService {
         List<BookAuthor> bookAuthors = bookAuthorRepository.findByAuthorLastName(lastName);
         return bookAuthorMapper.toDtos(bookAuthors);
     }
+
+    public List<BookAuthorDto> getAllAuthorsByTitle(String title) {
+        List<BookAuthor> bookAuthors = bookAuthorRepository.findByBookTitle(title);
+        return bookAuthorMapper.toDtos(bookAuthors);
+    }
 }
