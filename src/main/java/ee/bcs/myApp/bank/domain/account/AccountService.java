@@ -31,14 +31,15 @@ public class AccountService {
         return accountMapper.toResponses(accounts);
     }
 
+
     public AccountResponse findAccountInfoById(Integer id) {
         Account account = accountRepository.getById(id);
+        AccountResponse accountResponse = accountMapper.toResponse(account);
         return accountMapper.toResponse(account);
     }
 
     public void removeAccountById(Integer id) {
         accountRepository.deleteById(id);
-
     }
 
     public void updateAccountById(Integer id, AccountDto accountDto) {
@@ -53,7 +54,7 @@ public class AccountService {
         return accountMapper.toResponses(accounts);
     }
 
-    public Account finAccountById(Integer accountId) {
+    public Account findAccountById(Integer accountId) {
         return accountRepository.getById(accountId);
     }
 //

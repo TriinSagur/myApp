@@ -11,22 +11,20 @@ import java.time.Instant;
 @Service
 public class TransactionService {
 
+    @Resource
+    private AccountService accountService;
 
     @Resource
     private TransactionMapper transactionMapper;
 
     @Resource
-    private AccountService accountService;
-
-    @Resource
     private TransactionRepository transactionRepository;
 
     public void addDepositTransaction(DepositRequest request) {
-
         Transaction transaction = transactionMapper.toDepositEntity(request);
-        Account account = accountService.finAccountById(request.getAccountId());
+        Account account = accountService.findAccountById(request.getAccountId());
         transaction.setReceiverAccountNumber(account.getAccountNumber());
-        transaction.setBalance(account.getBalance()+request.getAmount());
+        transaction.setBalance(account.getBalance() + request.getAmount());
         transaction.setTransactionDateTime(Instant.now());
         transaction.setAccount(account);
         transactionRepository.save(transaction);

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-14T11:56:25+0300",
+    date = "2022-04-14T13:15:24+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 16.0.2 (Amazon.com Inc.)"
 )
 @Component
@@ -40,33 +40,33 @@ public class AccountMapperImpl implements AccountMapper {
     }
 
     @Override
-    public List<AccountResponse> toResponses(List<Account> accounts) {
-        if ( accounts == null ) {
+    public List<AccountResponse> toResponses(List<Account> account) {
+        if ( account == null ) {
             return null;
         }
 
-        List<AccountResponse> list = new ArrayList<AccountResponse>( accounts.size() );
-        for ( Account account : accounts ) {
-            list.add( toResponse( account ) );
+        List<AccountResponse> list = new ArrayList<AccountResponse>( account.size() );
+        for ( Account account1 : account ) {
+            list.add( toResponse( account1 ) );
         }
 
         return list;
     }
 
     @Override
-    public void updateEntity(AccountDto accountDto1, Account account) {
-        if ( accountDto1 == null ) {
+    public void updateEntity(AccountDto accountDto, Account account) {
+        if ( accountDto == null ) {
             return;
         }
 
-        if ( accountDto1.getAccountNumber() != null ) {
-            account.setAccountNumber( accountDto1.getAccountNumber() );
+        if ( accountDto.getAccountNumber() != null ) {
+            account.setAccountNumber( accountDto.getAccountNumber() );
         }
-        if ( accountDto1.getBalance() != null ) {
-            account.setBalance( accountDto1.getBalance() );
+        if ( accountDto.getBalance() != null ) {
+            account.setBalance( accountDto.getBalance() );
         }
-        if ( accountDto1.getLocked() != null ) {
-            account.setLocked( accountDto1.getLocked() );
+        if ( accountDto.getLocked() != null ) {
+            account.setLocked( accountDto.getLocked() );
         }
     }
 
