@@ -45,27 +45,5 @@ public class CustomerService {
         customerMapper.updateEntity(customerDto, customer);
         customerRepository.save(customer);
     }
-//
-//    private List<CustomerDto> toDto(List<Customer> customers) {
-//        List<CustomerDto> customerDtos = new ArrayList<>();
-//
-//        for (Customer customer : customers) {
-//            CustomerDto customerDto = toDto(customer);
-//            customerDtos.add(customerDto);
-//        }
-//        return customerDtos;
-//    }
-//
-//
-//    private Customer findCustomerById(Integer id, List<Customer> customers) {
-//
-//        Customer result = new Customer();
-//
-//        for (Customer customer : customers) {
-//            if (customer.getId().equals(id)) {
-//                result = customer;
-//            }
-//        }
-//        return result;
-//    }
+
 }
