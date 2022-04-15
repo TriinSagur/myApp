@@ -3,7 +3,7 @@
 
 -- tables
 -- Table: account
-CREATE TABLE account (
+CREATE TABLE bank.account (
     id serial  NOT NULL,
     customer_id int  NOT NULL,
     account_number varchar(5)  NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE account (
 );
 
 -- Table: customer
-CREATE TABLE customer (
+CREATE TABLE bank.customer (
     id serial  NOT NULL,
     first_name varchar(50)  NOT NULL,
     last_name varchar(50)  NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE customer (
 );
 
 -- Table: transaction
-CREATE TABLE transaction (
+CREATE TABLE bank.transaction (
     id serial  NOT NULL,
     sender_account_number varchar(11)  NULL,
     receiver_account_number varchar(11)  NULL,
@@ -36,7 +36,7 @@ CREATE TABLE transaction (
 
 -- foreign keys
 -- Reference: account_customer (table: account)
-ALTER TABLE account ADD CONSTRAINT account_customer
+ALTER TABLE bank.account ADD CONSTRAINT account_customer
     FOREIGN KEY (customer_id)
     REFERENCES customer (id)  
     NOT DEFERRABLE 

@@ -20,7 +20,7 @@ public class AccountService {
     @Resource
     private AccountMapper accountMapper;
 
-    public Account.AccountDto addNewAccount(Account.AccountDto accountDto) {
+    public AccountDto addNewAccount(AccountDto accountDto) {
         return accountDto;
     }
 
@@ -40,10 +40,10 @@ public class AccountService {
         accountRepository.deleteById(id);
     }
 
-        public void updateAccountById (Integer id, Account.AccountDto accountDto) {
+        public void updateAccountById (Integer id, AccountDto accountDto) {
             Account account = accountRepository.getById(id);
             accountMapper.updateEntity(accountDto, account);
-            Customer customer = customerRepository.getById(accountDto.getCustomerID());
+            Customer customer = customerRepository.getById(accountDto.getCustomerId());
             account.setCustomer(customer);
         }
 

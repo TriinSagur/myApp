@@ -14,5 +14,4 @@ public class BankService {
     public void deposit(DepositRequest request) {
         transactionService.addDepositTransaction(request);
     }
-
 }
