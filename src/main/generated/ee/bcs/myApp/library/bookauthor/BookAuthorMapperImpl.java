@@ -2,19 +2,21 @@ package ee.bcs.myApp.library.bookauthor;
 
 import ee.bcs.myApp.library.author.Author;
 import ee.bcs.myApp.library.book.Book;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-15T20:25:06+0300",
+    date = "2022-04-16T15:17:04+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.13 (Oracle Corporation)"
 )
 @Component
 public class BookAuthorMapperImpl implements BookAuthorMapper {
 
     @Override
-    public BookAuthor bookAuthorDtoToBookAuthor(BookAuthorDto bookAuthorDto) {
+    public BookAuthor toEntity(BookAuthorDto bookAuthorDto) {
         if ( bookAuthorDto == null ) {
             return null;
         }
@@ -29,7 +31,7 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
     }
 
     @Override
-    public BookAuthorDto bookAuthorToBookAuthorDto(BookAuthor bookAuthor) {
+    public BookAuthorDto toDto(BookAuthor bookAuthor) {
         if ( bookAuthor == null ) {
             return null;
         }
@@ -53,6 +55,20 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
         BookAuthorDto bookAuthorDto = new BookAuthorDto( id, bookId, bookTitle, bookYear, authorId, authorFirstName, authorLastName );
 
         return bookAuthorDto;
+    }
+
+    @Override
+    public List<BookAuthorDto> toDtos(List<BookAuthor> entities) {
+        if ( entities == null ) {
+            return null;
+        }
+
+        List<BookAuthorDto> list = new ArrayList<BookAuthorDto>( entities.size() );
+        for ( BookAuthor bookAuthor : entities ) {
+            list.add( toDto( bookAuthor ) );
+        }
+
+        return list;
     }
 
     @Override

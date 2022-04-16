@@ -1,6 +1,5 @@
 package ee.bcs.myApp.bank.account;
 
-import ee.bcs.myApp.bank.domain.account.Account;
 import ee.bcs.myApp.bank.domain.account.AccountMapper;
 import ee.bcs.myApp.bank.domain.account.AccountResponse;
 import ee.bcs.myApp.bank.domain.customer.Customer;
