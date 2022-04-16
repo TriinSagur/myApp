@@ -14,7 +14,7 @@ CREATE TABLE author (
 CREATE TABLE book (
     id serial  NOT NULL,
     title varchar(255)  NOT NULL,
-    year int  NOT NULL,
+    year int,
     CONSTRAINT book_pk PRIMARY KEY (id)
 );
 

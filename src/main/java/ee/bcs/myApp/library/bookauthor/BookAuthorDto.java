@@ -7,11 +7,11 @@ import java.io.Serializable;
 
 @Data
 public class BookAuthorDto implements Serializable {
-    private final Integer id;
+    private Integer id;
     @Valid
-    private final String bookTitle;
+    private String bookTitle;
     @Valid
-    private final String authorFirstName;
+    private String authorFirstName;
     @Valid
-    private final String authorLastName;
+    private String authorLastName;
 }

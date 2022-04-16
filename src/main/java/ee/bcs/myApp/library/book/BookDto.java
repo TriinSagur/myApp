@@ -9,8 +9,8 @@ import java.io.Serializable;
 public class BookDto implements Serializable {
 
     private Integer id;
-    @NotNull
+
     private String title;
-    @NotNull
+
     private Integer year;
 }
