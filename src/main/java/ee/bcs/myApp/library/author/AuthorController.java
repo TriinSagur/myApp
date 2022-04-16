@@ -1,5 +1,6 @@
 package ee.bcs.myApp.library.author;
 
+import ee.bcs.myApp.library.book.Book;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,6 +44,8 @@ public class AuthorController {
     public void updateAuthorById(@RequestParam Integer id, @Valid @RequestBody AuthorDto authorDto) {
         authorService.updateAuthorById(id, authorDto);
     }
+
+
 //
 //
 //

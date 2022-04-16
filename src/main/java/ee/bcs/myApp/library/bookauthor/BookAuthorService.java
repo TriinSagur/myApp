@@ -7,6 +7,7 @@ import ee.bcs.myApp.library.book.BookRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -56,4 +57,21 @@ public class BookAuthorService {
         List<BookAuthor> bookAuthors = bookAuthorRepository.findAll();
         return bookAuthorMapper.toDtos(bookAuthors);
     }
+
+    public void removeBookAuthorById(Integer id) {
+        bookAuthorRepository.deleteById(id);
+    }
+
+    public BookAuthorDto updateBookAuthorById(Integer id, BookAuthorDto bookAuthorDto) {
+        BookAuthor bookAuthor = bookAuthorRepository.getById(id);
+        bookAuthorDto.setId(id);
+        bookAuthorMapper.updateEntity(bookAuthorDto, bookAuthor);
+        bookAuthorRepository.save(bookAuthor);
+        return bookAuthorMapper.toDto(bookAuthor);
+    }
+
+//    public List<Book> getAllAuthorBooks(Integer id) {
+//        List<Book> books = new ArrayList<>();
+//        books.add(bookAuthorRepository.findBy(id));
+//    }
 }

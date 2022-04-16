@@ -1,6 +1,10 @@
 package ee.bcs.myApp.library.author;
 
 
+import ee.bcs.myApp.library.book.Book;
+import ee.bcs.myApp.library.book.BookRepository;
+import ee.bcs.myApp.library.bookauthor.BookAuthor;
+import ee.bcs.myApp.library.bookauthor.BookAuthorRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -16,6 +20,12 @@ public class AuthorService {
 
     @Resource
     private AuthorRepository authorRepository;
+
+    @Resource
+    private BookRepository bookRepository;
+
+    @Resource
+    private BookAuthorRepository bookAuthorRepository;
 
 
     public AuthorDto addNewAuthor(@RequestBody AuthorDto authorDto) {
