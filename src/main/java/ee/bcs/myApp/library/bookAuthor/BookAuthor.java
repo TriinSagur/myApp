@@ -1,4 +1,4 @@
-package ee.bcs.myApp.library.bookauthor;
+package ee.bcs.myApp.library.bookAuthor;
 
 import ee.bcs.myApp.library.author.Author;
 import ee.bcs.myApp.library.book.Book;

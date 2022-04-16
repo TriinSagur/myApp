@@ -1,4 +1,4 @@
-package ee.bcs.myApp.library.bookauthor;
+package ee.bcs.myApp.library.bookAuthor;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
