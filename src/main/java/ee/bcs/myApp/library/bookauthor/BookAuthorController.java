@@ -27,7 +27,7 @@ public class BookAuthorController {
     @Resource
     private BookAuthorService bookAuthorService;
 
-    @GetMapping
+    @GetMapping("/demo")
     public void demo1() {
         bookAuthorService.demo1();
     }
