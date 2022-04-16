@@ -42,6 +42,7 @@ public class AccountService {
 
     public void updateAccountById(Integer id, AccountDto accountDto) {
         Account account = accountRepository.getById(id);
+        accountDto.setId(id);
         accountMapper.updateEntity(accountDto, account);
         Customer customer = customerRepository.getById(accountDto.getCustomerId());
         account.setCustomer(customer);

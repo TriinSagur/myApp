@@ -36,6 +36,7 @@ public class BookService {
 
     public void updateBookById(Integer id, BookDto bookDto) {
         Book book = bookRepository.getById(id);
+        bookDto.setId(id);
         bookMapper.updateEntity(bookDto, book);
         bookRepository.save(book);
     }

@@ -36,6 +36,7 @@ public class CustomerService {
 
     public void updateCustomerById(Integer id, CustomerDto customerDto) {
         Customer customer = customerRepository.getById(id);
+        customerDto.setId(id);
         customerMapper.updateEntity(customerDto, customer);
         customerRepository.save(customer);
     }
