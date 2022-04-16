@@ -1,73 +1,73 @@
-//package ee.bcs.myApp.library.book;
+package ee.bcs.myApp.library.book;
+
+import ee.bcs.myApp.library.author.Author;
+import ee.bcs.myApp.library.author.AuthorRepository;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class BookService {
+
+    @Resource
+    private BookMapper bookMapper;
+    @Resource
+    private BookRepository bookRepository;
+    @Resource BookOut bookOut;
+    @Resource
+    private AuthorRepository authorRepository;
+
+    public BookDto addNewBook(BookDto bookDto) {
+        Book book = bookMapper.toEntity(bookDto);
+        bookRepository.save(book);
+        return bookMapper.toDto(book);
+    }
+
+
+    public List<BookDto> returnAllBooks() {
+        List<Book> books = bookRepository.findAll();
+        return bookMapper.toDtos(books);
+    }
+
+    public BookDto findBookById(Integer id) {
+        Book book = bookRepository.getById(id);
+        return bookMapper.toDto(book);
+    }
+
+    public void removeBookById(Integer id) {
+        bookRepository.deleteById(id);
+    }
+
+
+    public void updateBookById(Integer id, BookDto bookDto) {
+        Book book = bookRepository.getById(id);
+        bookMapper.updateEntity(bookDto, book);
+        bookRepository.save(book);
+    }
+
+//    public void bookRentByName(String name) {
+//        Book book = bookRepository.findByTitle(name);
+//        bookOut.
 //
-//import ee.bcs.myApp.MyAppApplication;
-//import ee.bcs.myApp.library.Library;
-//import org.springframework.stereotype.Service;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//@Service
-//public class BookService {
-//
-//
-//    public List<BookDto> findAllBooks() {
-//        Library libraryRepository = MyAppApplication.libraryRepository;
-//        List<Book> books = libraryRepository.getBooks();
-//
-//        List<BookDto> bookDtos = new ArrayList<>();
-//        for (Book book : books) {
-//            BookDto bookDto = toDto(book);
-//            bookDtos.add(bookDto);
-//        }
-//        return bookDtos;
 //    }
-//
-//
-//    public BookDto addNewBook(BookDto bookDto) {
-//        Book book = toEntity(bookDto);
-//        List<Book> books = MyAppApplication.libraryRepository.getBooks();
-//        books.add(book);
-////        book.updateId();
-//        return toDto(book);
-//
-//    }
-//
-//    private Book toEntity(BookDto bookDto) {
-//        Book book = new Book();
-//        book.setId(bookDto.getId());
-//        book.setTitle(bookDto.getTitle());
-//        book.setYear(bookDto.getYear());
-//        return book;
-//    }
-//
-//    private BookDto toDto(Book book) {
-//        BookDto bookDto = new BookDto();
-//        bookDto.setId(book.getId());
-//        bookDto.setTitle(book.getTitle());
-//        bookDto.setYear(book.getYear());
-//        return bookDto;
-//    }
-//
-//    public Book findBookEntityById(Integer id) {
-//        List<Book> books = MyAppApplication.libraryRepository.getBooks();
-//        Book result = new Book();
-//        for (Book book : books) {
-//            if (book.getId().equals(id)) {
-//                result = book;
-//            }
-//        }
-//        return result;
-//    }
-//
-//
-//    public List<BookDto> returnAllBooks() {
-//        return null;
-//    }
-//
-//    public void removeBookById(Integer id) {
-//    }
-//
-//    public void removeBookByName(String title) {
-//    }
-//}
+
+    public List<BookDto> returnBooksByAuthor(String firstName, String lastName) {
+        List<Book> books = bookRepository.findAll();
+        List<Book> booksToReturn = new ArrayList<>();
+        List<Author> librarybooks = authorRepository.findAll();
+
+        for (Author author: librarybooks) {
+            if (author.getFirstName().e
+            }
+              {
+
+        }
+
+        }
+
+        return null;
+    }
+}

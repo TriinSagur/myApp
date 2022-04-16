@@ -1,21 +1,18 @@
 package ee.bcs.myApp.library.book;
 
-import ee.bcs.myApp.library.author.Author;
 import lombok.Data;
-import lombok.NonNull;
+
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Data
-public class BookDto {
+public class BookDto implements Serializable {
 
     private Integer id;
 
-    @NonNull
+    @NotNull
     private String title;
 
-    @NonNull
+    @NotNull
     private Integer year;
-
-    public BookDto() {
-
-    }
 }
