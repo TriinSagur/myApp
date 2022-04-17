@@ -17,7 +17,7 @@ public class LibraryController {
     private LibraryService libraryService;
 
     @GetMapping("/all")
-    @Operation (summary = "Tagastab kõik raamatud autoritega")
+    @Operation (summary = "Tagastab kõik raamatud autoritega.")
     public List <BookAuthorResponse> getAllBookAuthors() {
         return libraryService.getAllBookAuthors();
     }
