@@ -1,6 +1,7 @@
 package ee.bcs.myApp.library.bookkeyword;
 
 import ee.bcs.myApp.library.book.Book;
+import ee.bcs.myApp.library.keyword.Keyword;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,5 +20,9 @@ public class BookKeyword {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "keyword_id", nullable = false)
+    private Keyword keyword;
 
 }

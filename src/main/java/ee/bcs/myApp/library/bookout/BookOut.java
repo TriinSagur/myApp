@@ -22,5 +22,4 @@ public class BookOut {
 
     @Column(name = "is_returned", nullable = false)
     private Boolean isReturned = false;
-
 }
