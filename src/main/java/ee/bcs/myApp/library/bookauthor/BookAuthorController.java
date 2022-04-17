@@ -4,22 +4,22 @@ import ee.bcs.myApp.library.author.Author;
 import ee.bcs.myApp.library.author.AuthorRepository;
 import ee.bcs.myApp.library.book.Book;
 import ee.bcs.myApp.library.book.BookRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import ee.bcs.myApp.library.keyword.KeywordDto;
+import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("/book-author")
 public class BookAuthorController {
 
-    @Resource
-    private AuthorRepository authorRepository;
-
-    @Resource
-    private BookRepository bookRepository;
+//    @Resource
+//    private AuthorRepository authorRepository;
+//
+//    @Resource
+//    private BookRepository bookRepository;
 
     @Resource
     private BookAuthorRepository bookAuthorRepository;
@@ -28,10 +28,30 @@ public class BookAuthorController {
     private BookAuthorService bookAuthorService;
 
 
-
-    @GetMapping
-    public void demo1() {
-        bookAuthorService.demo1();
+    @GetMapping("/all")
+    @Operation(summary = "Kuvab kõik bookAuthorid")
+    public List<BookAuthorDto> findAllBookAuthors() {
+        return bookAuthorService.findAllBookAuthors();
     }
+
+    @GetMapping("/id")
+    @Operation(summary = "Leiab bookauthori id järgi")
+    public BookAuthorDto findById(Integer id) {
+        return bookAuthorService.findById(id);
+    }
+
+    @PostMapping("/new")
+    @Operation(summary = "Lisab uue bookAuthori lastName ja titel järgi")
+    public void addNew(String title, String lastName) {
+        bookAuthorService.addNew(title,lastName);
+    }
+
+
+
+
+//    @GetMapping
+//    public void demo1() {
+//        bookAuthorService.demo1();
+//    }
 
 }

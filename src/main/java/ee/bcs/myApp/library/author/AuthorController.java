@@ -43,7 +43,5 @@ public class AuthorController {
     public void updateAuthorById(@RequestParam Integer id, @Valid @RequestBody AuthorDto authorDto) {
         authorService.updateAuthorById(id, authorDto);
     }
-//
-//
-//
+
 }

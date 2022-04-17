@@ -12,12 +12,14 @@ public interface BookAuthorMapper {
     @Mapping(source = "authorId", target = "author.id")
     @Mapping(source = "authorFirstName", target = "author.firstName")
     @Mapping(source = "authorLastName", target = "author.lastName")
-    BookAuthor bookAuthorDtoToBookAuthor(BookAuthorDto bookAuthorDto);
+    BookAuthor toEntity(BookAuthorDto bookAuthorDto);
 
-    @InheritInverseConfiguration(name = "bookAuthorDtoToBookAuthor")
-    BookAuthorDto bookAuthorToBookAuthorDto(BookAuthor bookAuthor);
+    @InheritInverseConfiguration(name = "toEntity") //siin roheliselt peab olema sama meetodu nimi mis ülemis real, kuna seal ma isem uutsin ära
+    BookAuthorDto toDto(BookAuthor bookAuthor);
 
-    @InheritConfiguration(name = "bookAuthorDtoToBookAuthor")
+    List<BookAuthorDto> toDtos(List<BookAuthor> bookAuthors);
+
+    @InheritConfiguration(name = "toEntity") //siin roheliselt peab olema sama meetodu nimi mis ülemis real, kuna seal ma isem uutsin ära
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateBookAuthorFromBookAuthorDto(BookAuthorDto bookAuthorDto, @MappingTarget BookAuthor bookAuthor);
 }
