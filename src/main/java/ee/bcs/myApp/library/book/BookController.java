@@ -47,10 +47,10 @@ public class BookController {
         bookService.updateBookById(id, bookDto);
     }
 
-    @PutMapping("/rental")
-    @Operation(summary = "laenutan raamatu")
-    public void bookRent(@RequestParam String firstName, @RequestParam String lastName ) {
-        bookService.bookRentByName(firstName, lastName);
-    }
+//    @PutMapping("/rental")
+//    @Operation(summary = "laenutan raamatu")
+//    public void bookRent(@RequestParam String firstName, @RequestParam String lastName ) {
+//        bookService.bookRentByName(firstName, lastName);
+//    }
 
 }

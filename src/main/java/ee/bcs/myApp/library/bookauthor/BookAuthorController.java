@@ -1,38 +1,56 @@
-//package ee.bcs.myApp.library.bookauthor;
-//
-//
-//import ee.bcs.myApp.library.author.Author;
-//import ee.bcs.myApp.library.author.AuthorRepository;
-//import ee.bcs.myApp.library.book.BookRepository;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RestController;
-//
-//import javax.annotation.Resource;
-//
-//@RestController
-//@RequestMapping("/book-author")
-//public class BookAuthorController {
-//
-//    @Resource
-//    private AuthorRepository authorRepository;
-//
-//    @Resource
-//    private BookRepository bookRepository;
-//
-//    @Resource BookAuthorRepository bookAuthorRepository;
-//
-//    @GetMapping
-//    public void demo() {
-//
-//        Author author = authorRepository.getByLastName("banderas");
-//        Book book = bookRepository.findByTitle("Harry Potter");
-//
-//        BookAuthor bookAuthor = new BookAuthor();
-//        bookAuthor.setAuthor(author);
-//        bookAuthor.setBook(book);
-//        bookAuthorRepository.save(bookAuthor);
-//
-//
+package ee.bcs.myApp.library.book;
+import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.web.bind.annotation.*;
+
+
+import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.List;
+
+@RestController
+@RequestMapping("/book")
+public class BookAuthorController {
+
+    @Resource
+    private BookService bookService;
+
+
+    @PostMapping("/all")
+    @Operation(summary = "Lisab uue raamatu")
+    public BookDto addNewBook(@RequestBody BookDto bookDto) {
+        return bookService.addNewBook(bookDto);
+    }
+
+    @GetMapping("/all")
+    @Operation(summary = "Tagastab raamatute nimekirja.")
+    public List<BookDto> getAllBooks() {
+
+        return bookService.returnAllBooks();
+    }
+
+    @GetMapping(("/id"))
+    @Operation(summary = "Leiab raamatu id alusel.")
+    public BookDto findBookById(@RequestParam Integer id) {
+        return bookService.findBookById(id);
+    }
+
+    @DeleteMapping("/id")
+    @Operation(summary = "Kustutab ID järgi kliendi")
+    public void removeBookById(@RequestParam Integer id) {
+
+        bookService.removeBookById(id);
+    }
+
+    @PutMapping("/id")
+    @Operation(summary = "Uuendab klienti ID järgi")
+    public void updateBookById(@RequestParam Integer id, @Valid @RequestBody BookDto bookDto) {
+        bookService.updateBookById(id, bookDto);
+    }
+
+//    @PutMapping("/rental")
+//    @Operation(summary = "laenutan raamatu")
+//    public void bookRent(@RequestParam String firstName, @RequestParam String lastName ) {
+//        bookService.bookRentByName(firstName, lastName);
 //    }
-//}
+
+}

@@ -16,7 +16,6 @@ public class BookService {
     private BookMapper bookMapper;
     @Resource
     private BookRepository bookRepository;
-    @Resource BookOut bookOut;
     @Resource
     private AuthorRepository authorRepository;
 
@@ -48,26 +47,5 @@ public class BookService {
         bookRepository.save(book);
     }
 
-//    public void bookRentByName(String name) {
-//        Book book = bookRepository.findByTitle(name);
-//        bookOut.
-//
-//    }
 
-    public List<BookDto> returnBooksByAuthor(String firstName, String lastName) {
-        List<Book> books = bookRepository.findAll();
-        List<Book> booksToReturn = new ArrayList<>();
-        List<Author> librarybooks = authorRepository.findAll();
-
-        for (Author author: librarybooks) {
-            if (author.getFirstName().e
-            }
-              {
-
-        }
-
-        }
-
-        return null;
-    }
 }

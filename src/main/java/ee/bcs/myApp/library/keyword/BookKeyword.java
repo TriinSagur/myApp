@@ -1,5 +1,7 @@
-package ee.bcs.myApp.library.book;
+package ee.bcs.myApp.library.keyword;
 
+import ee.bcs.myApp.library.book.Book;
+import ee.bcs.myApp.library.book.Keyword;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,8 +10,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "book_out")
-public class BookOut {
+@Table(name = "book_keyword")
+public class BookKeyword {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -19,7 +21,8 @@ public class BookOut {
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
 
-    @Column(name = "is_returned", nullable = false)
-    private Boolean isReturned = false;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "keyword_id", nullable = false)
+    private Keyword keyword;
 
 }
