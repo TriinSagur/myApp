@@ -1,6 +1,7 @@
 package ee.bcs.myApp.library.keyword;
 
-
+import ee.bcs.myApp.library.keyword.Keyword;
+import ee.bcs.myApp.library.keyword.KeywordDto;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
