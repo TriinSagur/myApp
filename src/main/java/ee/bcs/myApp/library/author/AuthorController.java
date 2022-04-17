@@ -33,5 +33,10 @@ public class AuthorController {
         return authorService.findAllAuthors();
     }
 
+    @DeleteMapping
+    @Operation(summary = "Delete by ID")
+    public void removeByID(@RequestParam Integer id) {
+        authorService.removeByID(id);
+    }
 
 }

@@ -22,9 +22,9 @@ public class BookController {
         return bookService.addNewBook(bookDto);
     }
 
-    @GetMapping
-    @Operation (summary = "Näita kõik raamatuid")
-    public List<BookDto> findAllBooks(){
+    @GetMapping("/all")
+    @Operation(summary = "Näita kõik raamatuid")
+    public List<BookDto> findAllBooks() {
         return bookService.findAllBooks();
     }
 
@@ -34,11 +34,15 @@ public class BookController {
         bookService.removeBookById(id);
     }
 
-    @GetMapping
+    @GetMapping("/id")
     @Operation(summary = "Leiab andmebaasi ID jargi raamatu")
     public BookDto findBookById(@RequestParam Integer id) {
         return bookService.findBookById(id);
     }
 
-
+    @PutMapping
+    @Operation(summary = "Update book by ID")
+    public void updateById(@RequestParam Integer id, @RequestBody BookDto bookDto) {
+        bookService.updateById(id, bookDto);
+    }
 }

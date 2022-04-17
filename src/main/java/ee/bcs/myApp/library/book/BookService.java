@@ -38,6 +38,12 @@ public class BookService {
 
     }
 
+    public void updateById(Integer id, BookDto bookDto) {
+        Book book = bookRepository.getById(id);
+        bookMapper.updateBookFromBookDto(bookDto, book);
+
+        bookRepository.save(book);
+    }
 
 
 //    public Book findBookById(Integer id) {

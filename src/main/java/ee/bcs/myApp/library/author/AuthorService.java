@@ -34,5 +34,7 @@ public class AuthorService {
     }
 
 
-
+    public void removeByID(Integer id) {
+        authorRepository.deleteById(id);
+    }
 }

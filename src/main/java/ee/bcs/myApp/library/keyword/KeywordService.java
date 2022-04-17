@@ -19,4 +19,14 @@ public class KeywordService {
 
         return keywordMapper.toDto(keyword);
     }
+
+    public void updateById(Integer id, KeywordDto keywordDto) {
+        Keyword keyword = keywordRepository.getById(id);
+        keywordMapper.updateKeywordFromKeywordDto(keywordDto, keyword);
+        keywordRepository.save(keyword);
+    }
+
+    public void removeById(Integer id) {
+        keywordRepository.deleteById(id);
+    }
 }
