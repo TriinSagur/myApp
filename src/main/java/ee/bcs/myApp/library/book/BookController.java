@@ -16,7 +16,7 @@
 //
 //    @PostMapping("/id")
 //    @Operation(summary = "Lisab raamatu")
-//    public Integer addNewBook(@RequestBody BookDto bookDto) {
+//    public Integer addNewBook(@RequestBody BookDto1 bookDto) {
 //        return bookService.addNewBook(bookDto);
 //    }
 //
@@ -40,7 +40,7 @@
 //
 //    @PutMapping("/id")
 //    @Operation(summary = "Muudab raamatu sissekannet ID kaudu")
-//    public void updateBookById(@RequestParam Integer id, @RequestBody BookDto bookDto) {
+//    public void updateBookById(@RequestParam Integer id, @RequestBody BookDto1 bookDto) {
 //        bookService.updateBookById(id, bookDto);
 //    }
 //}

@@ -7,7 +7,7 @@
 //
 //@Service
 //public class AuthorService {
-//    public Integer addNewAuthor(AuthorDto authorDto) {
+//    public Integer addNewAuthor(AuthorDto1 authorDto) {
 //        Author author = new Author();
 //        author.setFirstName(authorDto.getFirstName());
 //        author.setLastName(author.getLastName());

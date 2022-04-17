@@ -17,7 +17,7 @@
 //
 //    @PostMapping("/id")
 //    @Operation(summary = "Lisab autori")
-//    public Integer addNewAuthor(@RequestBody AuthorDto authorDto) {
+//    public Integer addNewAuthor(@RequestBody AuthorDto1 authorDto) {
 //        return authorService.addNewAuthor(authorDto);
 //    }
 //}

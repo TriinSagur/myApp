@@ -7,7 +7,7 @@
 //
 //@Service
 //public class BookService {
-//    public Integer addNewBook(BookDto bookDto) {
+//    public Integer addNewBook(BookDto1 bookDto) {
 //        Book book = new Book();
 //        book.setTitle(bookDto.getTitle());
 //        book.setYear(bookDto.getYear());
@@ -43,7 +43,7 @@
 //        books.remove(result);
 //    }
 //
-//    public void updateBookById(Integer id, BookDto bookDto) {
+//    public void updateBookById(Integer id, BookDto1 bookDto) {
 //        Book book = findBookById(id);
 //        book.setTitle(bookDto.getTitle());
 //        book.setYear(bookDto.getYear());
