@@ -17,15 +17,6 @@ import java.util.List;
 public class BookAuthorController {
 
     @Resource
-    private AuthorRepository authorRepository;
-
-    @Resource
-    private BookRepository bookRepository;
-
-    @Resource
-    private BookAuthorRepository bookAuthorRepository;
-
-    @Resource
     private BookAuthorService bookAuthorService;
 
     @GetMapping("/demo")
@@ -41,8 +32,8 @@ public class BookAuthorController {
 
     @PutMapping("/add")
     @Operation(summary = "Lisab uue raamat-autor komplekti.")
-    public BookAuthorDto addNewBookAuthor1(@RequestBody BookAuthorDto bookAuthorDto) {
-        return bookAuthorService.addNewBookAuthor1(bookAuthorDto);
+    public BookAuthorDto addNewBookAuthor(@RequestBody BookAuthorDto bookAuthorDto) {
+        return bookAuthorService.addNewBookAuthor(bookAuthorDto);
     }
 
     @GetMapping

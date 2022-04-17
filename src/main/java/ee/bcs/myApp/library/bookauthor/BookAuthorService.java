@@ -45,7 +45,7 @@ public class BookAuthorService {
         return bookAuthorMapper.toDto(bookAuthor);
     }
 
-    public BookAuthorDto addNewBookAuthor1(BookAuthorDto bookAuthorDto) {
+    public BookAuthorDto addNewBookAuthor(BookAuthorDto bookAuthorDto) {
         BookAuthor bookAuthor = bookAuthorMapper.toEntity(bookAuthorDto);
         bookRepository.save(bookAuthor.getBook());
         authorRepository.save(bookAuthor.getAuthor());
