@@ -6,9 +6,9 @@ import java.io.Serializable;
 
 @Data
 public class BookOutDto implements Serializable {
-    private final Integer id;
-    private final Integer bookId;
-    private final String bookTitle;
-    private final Integer bookYear;
-    private final Boolean isReturned;
+    private Integer id;
+    private Integer bookId;
+    private String bookTitle;
+    private Integer bookYear;
+    private Boolean isReturned;
 }
