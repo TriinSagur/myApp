@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Data
 public class AuthorDto implements Serializable {
-    private final Integer id;
-    private final String firstName;
-    private final String lastName;
+    private Integer id;
+    private String firstName;
+    private String lastName;
 }
