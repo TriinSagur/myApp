@@ -1,35 +1,57 @@
 package ee.bcs.myApp.library.bookauthor;
 
-import ee.bcs.myApp.library.author.Author;
-import ee.bcs.myApp.library.author.AuthorRepository;
-import ee.bcs.myApp.library.book.Book;
-import ee.bcs.myApp.library.book.BookRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("/book-author")
 public class BookAuthorController {
 
     @Resource
-    private AuthorRepository authorRepository;
+    private BookAuthorService bookAuthorService;
 
-    @Resource
-    private BookRepository bookRepository;
+    @PostMapping
+    @Operation(summary = "Add author to a book by last name and book title")
+    public void addNewBookAuthor(String title, String lastName) {
+        bookAuthorService.addNewBookAuthor(title, lastName);
+    }
 
-    @Resource
-    private BookAuthorRepository bookAuthorRepository;
+    @GetMapping("/all")
+    @Operation(summary = "Get all books with authors")
+    public List<BookAuthorDto> getAllBookAuthors() {
+        return bookAuthorService.getAllBookAuthors();
+    }
 
-    @GetMapping
-    public void demo1() {
-        Author author = authorRepository.getByLastName("Banderas");
-        Book book = bookRepository.findByTitle("Harry Potter");
-        BookAuthor bookAuthor = new BookAuthor();
-        bookAuthor.setAuthor(author);
-        bookAuthor.setBook(book);
-        bookAuthorRepository.save(bookAuthor);
+    @GetMapping("/id")
+    @Operation(summary = "Find Book and Author by ID")
+    public BookAuthorDto findBookAuthorById(@RequestParam Integer id) {
+        return bookAuthorService.findBookAuthorById(id);
+    }
+
+    @DeleteMapping("/id")
+    @Operation(summary = "Delete Book and Author by ID")
+    public void removeBookAuthorById(Integer id) {
+        bookAuthorService.removeBookAuthorById(id);
+    }
+
+    @PutMapping("/id")
+    @Operation(summary = "Update Book and Author by ID")
+    public void updateBookAuthorById(@RequestParam Integer id, @RequestParam String title, @RequestParam String lastName) {
+        bookAuthorService.updateBookAuthor(id, title, lastName);
+    }
+
+    @GetMapping("/last-name")
+    @Operation(summary = "find all books by author last name")
+    public List<BookAuthorDto> getAllBooksByAuthor(@RequestParam String lastName) {
+        return bookAuthorService.getAllBooksByAuthor(lastName);
+    }
+
+    @GetMapping("/title")
+    @Operation(summary = "find all authors by book title")
+    public List<BookAuthorDto> getAllAuthorsByTitle(@RequestParam String title) {
+        return bookAuthorService.getAllAuthorsByTitle(title);
     }
 }
