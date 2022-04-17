@@ -4,9 +4,9 @@ import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface KeywordMapper {
-    Keyword keywordDtoToKeyword(KeywordDto keywordDto);
+    Keyword toEntity(KeywordDto keywordDto);
 
-    KeywordDto keywordToKeywordDto(Keyword keyword);
+    KeywordDto toDto(Keyword keyword);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateKeywordFromKeywordDto(KeywordDto keywordDto, @MappingTarget Keyword keyword);

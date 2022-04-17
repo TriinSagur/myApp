@@ -7,7 +7,7 @@ public interface BookKeywordMapper {
     @Mapping(source = "bookId", target = "book.id")
     @Mapping(source = "bookTitle", target = "book.title")
     @Mapping(source = "bookYear", target = "book.year")
-    BookKeyword toEntity(BookKeywordDto bookKeywordDto);
+    BookKeyword bookKeywordDtoToBookKeyword(BookKeywordDto bookKeywordDto);
 
     @InheritInverseConfiguration(name = "bookKeywordDtoToBookKeyword")
     BookKeywordDto toDto(BookKeyword bookKeyword);

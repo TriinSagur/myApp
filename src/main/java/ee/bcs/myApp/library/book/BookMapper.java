@@ -6,6 +6,7 @@ import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface BookMapper {
+
     Book bookToEntity(BookDto bookDto);
 
     BookDto bookToDto(Book book);

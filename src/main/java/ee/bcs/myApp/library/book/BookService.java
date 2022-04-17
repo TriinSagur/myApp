@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
@@ -28,9 +29,20 @@ public class BookService {
         return bookMapper.toDtos(allBooks);
     }
 
+    public void removeBookById(Integer id) {
+        bookRepository.deleteById(id);
+    }
+
+//    public BookDto findBookById(Integer id) {
+//        Book book = bookRepository.getById(id);
+//        return bookMapper.bookToDto(book);
+//
+//    }
+
 
 
 //    public Book findBookById(Integer id) {
+
 //
 //    }
 //

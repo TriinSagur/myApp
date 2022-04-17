@@ -28,15 +28,17 @@ public class BookController {
         return bookService.findAllBooks();
     }
 
+    @DeleteMapping
+    @Operation(summary = "Delete the book from the list")
+    public void removeBookById(@RequestParam Integer id) {
+        bookService.removeBookById(id);
+    }
+
 //    @GetMapping
 //    @Operation(summary = "Leiab andmebaasi ID jargi raamatu")
-//    public Book findBookById(@RequestParam Integer id) {
+//    public BookDto findBookById(@RequestParam Integer id) {
 //        return bookService.findBookById(id);
 //    }
-//
-//    @DeleteMapping
-//    @Operation(summary = "Kustutab raamatu nimekirjast")
-//    public void removeBookById (@RequestParam Integer id) {
-//        bookService.removeBookById(id);
-//    }
+
+
 }
