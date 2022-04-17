@@ -36,14 +36,20 @@ public class BookAuthorController {
 
     @GetMapping("/id")
     @Operation(summary = "Leiab bookauthori id järgi")
-    public BookAuthorDto findById(Integer id) {
+    public BookAuthorDto findById(@RequestParam Integer id) {
         return bookAuthorService.findById(id);
     }
 
     @PostMapping("/new")
     @Operation(summary = "Lisab uue bookAuthori lastName ja titel järgi")
-    public void addNew(String title, String lastName) {
+    public void addNew(@RequestParam String title, @RequestParam String lastName) {
         bookAuthorService.addNew(title,lastName);
+    }
+
+    @PutMapping()
+    @Operation(summary = "uuendab bookAuthorit")
+    public void updateBookauthord () {
+
     }
 
 
