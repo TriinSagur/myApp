@@ -62,9 +62,9 @@ public class BookAuthorController {
     public BookAuthorDto updateBookAuthorById(@RequestParam Integer id, @RequestBody BookAuthorDto bookAuthorDto) {
         return bookAuthorService.updateBookAuthorById(id, bookAuthorDto);
     }
-//    @GetMapping("/author")
-//    @Operation(summary = "Tagastab autori kõik raamatud.")
-//    public List<Book> getAllAuthorBooks(@RequestParam Integer id) {
-//        return authorService.getAllAuthorBooks(id);
-//    }
+    @GetMapping("/author")
+    @Operation(summary = "Tagastab autori kõik raamatud.")
+    public List<BookAuthorDto> getAllAuthorBooks(@RequestParam Integer authorId) {
+        return bookAuthorService.getAllAuthorBooks(authorId);
+    }
 }

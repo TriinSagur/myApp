@@ -70,8 +70,9 @@ public class BookAuthorService {
         return bookAuthorMapper.toDto(bookAuthor);
     }
 
-//    public List<Book> getAllAuthorBooks(Integer id) {
-//        List<Book> books = new ArrayList<>();
-//        books.add(bookAuthorRepository.findBy(id));
-//    }
+    public List<BookAuthorDto> getAllAuthorBooks(Integer authorId) {
+        List<BookAuthor> books = new ArrayList<>();
+        books = bookAuthorRepository.getByAuthorId(authorId);
+        return bookAuthorMapper.toDtos(books);
+    }
 }
