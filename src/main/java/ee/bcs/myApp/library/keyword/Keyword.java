@@ -1,4 +1,4 @@
-package ee.bcs.myApp.library.book;
+package ee.bcs.myApp.library.keyword;
 
 import lombok.Getter;
 import lombok.Setter;
