@@ -39,4 +39,10 @@ public class AuthorController {
         authorService.removeByID(id);
     }
 
+    @PutMapping("/update")
+    @Operation(summary = "Update by ID")
+    public void updateById (@RequestParam Integer id, @RequestBody AuthorDto authorDto ) {
+        authorService.updateById(id,authorDto);
+    }
+
 }

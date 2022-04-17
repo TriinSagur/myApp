@@ -37,4 +37,10 @@ public class AuthorService {
     public void removeByID(Integer id) {
         authorRepository.deleteById(id);
     }
+
+    public void updateById(Integer id, AuthorDto authorDto) {
+        Author author = authorRepository.getById(id);
+        authorMapper.updateAuthorFromAuthorDto(authorDto, author);
+        authorRepository.save(author);
+    }
 }
