@@ -28,12 +28,14 @@ public class CustomerService {
         return customerMapper.toDtos(allCustomers);
     }
 
-    public CustomerDto findCustomerDtoById(Integer id) {
+    public CustomerDto findCustomerById(Integer id) {
+        // TODO: kontroll kas customer on olemas. Veateade!
         Customer customer = customerRepository.getById(id);
         return  customerMapper.toDto(customer);
     }
 
     public void removeCustomerById(Integer id) {
+        // TODO: kontroll kas customer on olemas. Veateade!
         customerRepository.deleteById(id);
     }
 

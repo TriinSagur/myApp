@@ -29,7 +29,7 @@ public class CustomerController {
     @GetMapping("/id")
     @Operation(summary = "leiame andmebaasi ID järgi kliendi")
     public CustomerDto findCustomerById(@RequestParam Integer id) {
-        return customerService.findCustomerDtoById(id);
+        return customerService.findCustomerById(id);
     }
 
     @DeleteMapping("/id")
