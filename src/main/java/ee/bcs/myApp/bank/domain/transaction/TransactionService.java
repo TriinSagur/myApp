@@ -1,6 +1,7 @@
 package ee.bcs.myApp.bank.domain.transaction;
 
 import ee.bcs.myApp.bank.domain.account.Account;
+import ee.bcs.myApp.bank.domain.account.AccountRepository;
 import ee.bcs.myApp.bank.domain.account.AccountService;
 import ee.bcs.myApp.bank.service.DepositRequest;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ public class TransactionService {
     private AccountService accountService;
 
     @Resource
+    private AccountRepository accountRepository;
+
+    @Resource
     private TransactionMapper transactionMapper;
 
     @Resource
@@ -29,6 +33,9 @@ public class TransactionService {
         transaction.setTransactionDateTime(Instant.now());
         transaction.setAccount(account);
         transactionRepository.save(transaction);
+        account.setBalance(account.getBalance() + request.getAmount());
+        accountRepository.save(account);
+
     }
 
 }

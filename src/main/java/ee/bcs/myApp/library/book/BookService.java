@@ -1,94 +1,106 @@
-//package ee.bcs.myApp.library.book;
+package ee.bcs.myApp.library.book;
+
+
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Optional;
+
+
+@Service
+public class BookService {
+
+
+    @Resource
+    private BookRepository bookRepository;
+
+    @Resource
+    private BookMapper bookMapper;
+
+
+    public BookDto addNewBook(BookDto bookDto) {
+
+        Book book = bookMapper.toEntity(bookDto);
+
+        bookRepository.save(book);
+
+        return bookMapper.toDto(book);
+
+
+    }
+
+
+    public BookDto findBookById(Integer id) {
+
+        Optional<Book> book = bookRepository.findById(id);
+        Book book1 = new Book();
+
+        if (book.isPresent()) {
+            book1 = book.get();
+        }
+        else {
+//TODO: kuidas saada veasonumi???
+            book1 = null;
+
+        }
+
+        return bookMapper.toDto(book1);
+
+//        Book book = bookRepository.getById(id);
 //
-//import ee.bcs.myApp.MyAppApplication;
-//import ee.bcs.myApp.library.Library;
-//import org.springframework.stereotype.Service;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//@Service
-//public class BookService {
-//
-//
-//    public BookDto addNewBook(BookDto bookDto) {
-//
-//        Book book = toEntity(bookDto);
-//        book.updateId();
-//
-//        List<Book> books = MyAppApplication.libraryRepository.getBooks();
-//        books.add(book);
-//
-//        return toDto(book);
-//
-//
-//    }
-//
-//
-//    public Book findBookById(Integer id) {
-//
-//        List<Book> books = MyAppApplication.libraryRepository.getBooks();
-//
-//        Book result = new Book();
-//
-//
-//        for (Book book : books) {
-//            if (book.getId().equals(id)) {
-//                result = book;
-//            }
-//        }
-//
-//        return result;
-//
-//    }
-//
-//    public List<BookDto> findAllBooks() {
-//
-//        Library libraryRepository = MyAppApplication.libraryRepository;
-//
-//        List<Book> books = libraryRepository.getBooks();
-//
-//        List<BookDto> bookDtos = new ArrayList<>();
-//
-//        for (Book book : books) {
-//            BookDto bookDto = toDto(book);
-//            bookDtos.add(bookDto);
-//        }
-//        return bookDtos;
-//
-//    }
-//
-//
-//    public void updateBookById(Integer id, BookDto bookDto) {
-//        Book book = findBookById(id);
-//        book.setYear(bookDto.getYear());
-//        book.setTitle(bookDto.getTitle());
-//
-//    }
-//
-//    public void removeBookById(Integer id) {
-//        List<Book> books = MyAppApplication.libraryRepository.getBooks();
-//
-//        Book book = findBookById(id);
-//
-//        books.remove(book);
-//
-//    }
-//
-//
-//    private Book toEntity(BookDto bookDto) {
-//        Book book = new Book();
-//        book.setTitle(bookDto.getTitle());
-//        book.setYear(bookDto.getYear());
-//        return book;
-//    }
-//
-//    private BookDto toDto(Book book) {
-//        BookDto bookDto = new BookDto();
-//        bookDto.setId(book.getId());
-//        bookDto.setTitle(book.getTitle());
-//        bookDto.setYear(book.getYear());
-//        return bookDto;
-//    }
-//
-//}
+//        return bookMapper.toDto(book);
+
+    }
+
+    public List<BookDto> findAllBooks() {
+
+        List<Book> books = bookRepository.findAll();
+
+        return bookMapper.toDtos(books);
+
+    }
+
+
+    public void updateBookById(Integer id, BookDto bookDto) {
+
+
+
+        Book book = bookRepository.getById(id);
+        bookMapper.updateBookFromBookDto(bookDto, book);
+        bookRepository.save(book);
+
+    }
+
+    public String removeBookById(Integer id) {
+
+        Optional<Book> book  = bookRepository.findById(id);
+        String response = null;
+        if (book.isPresent()) {
+            bookRepository.deleteById(id);
+            response = "Book is removed";
+        } else {
+            response = "Book is not found";
+        }
+        return response;
+
+//        bookRepository.deleteById(id);
+
+    }
+
+    public String removeBookByTitle(String title) {
+        List<Book> books = bookRepository.findAll();
+
+        String response = null;
+        for (Book book : books) {
+            if (book.getTitle().equals(title)){
+                bookRepository.delete(book);
+                response = title + " book is removed.";
+            }
+             else {
+                response = title + " book is not found";
+            }
+        }
+      return response;
+    }
+}
