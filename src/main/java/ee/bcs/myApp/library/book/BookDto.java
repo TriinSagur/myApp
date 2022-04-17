@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Data
 public class BookDto implements Serializable {
-    private final Integer id;
-    private final String title;
-    private final Integer year;
+    private Integer id;
+    private String title;
+    private Integer year;
 }

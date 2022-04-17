@@ -21,7 +21,6 @@ public class AccountService {
 
     public AccountDto addNewAccount(AccountDto accountDto) {
 
-
         return accountDto;
     }
 

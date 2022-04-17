@@ -1,7 +1,6 @@
 package ee.bcs.myApp.library.author;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -15,6 +14,12 @@ public class AuthorService {
     @Resource
     private AuthorMapper authorMapper;
 
+    public AuthorDto addNewAuthor(AuthorDto authorDto) {
+        Author author = authorMapper.authorToEntity(authorDto);
+        authorRepository.save(author);
+
+        return authorMapper.authorToDto(author);
+    }
 
     public List<AuthorDto> findAllAuthors() {
         List<Author> allAuthors = authorRepository.findAll();
@@ -28,10 +33,6 @@ public class AuthorService {
         return authorMapper.authorToDto(author);
     }
 
-    public AuthorDto addNewAuthor(AuthorDto authorDto) {
 
-
-        return authorDto;
-    }
 
 }

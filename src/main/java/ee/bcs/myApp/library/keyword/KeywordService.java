@@ -1,7 +1,6 @@
 package ee.bcs.myApp.library.keyword;
 
-import ee.bcs.myApp.library.keyword.Keyword;
-import ee.bcs.myApp.library.keyword.KeywordDto;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -13,7 +12,6 @@ public class KeywordService {
     private KeywordMapper keywordMapper;
     @Resource
     private KeywordRepository keywordRepository;
-
 
     public KeywordDto addNewKeyword(KeywordDto keywordDto) {
         Keyword keyword = keywordMapper.toEntity(keywordDto);

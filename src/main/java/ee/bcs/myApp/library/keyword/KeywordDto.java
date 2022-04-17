@@ -6,6 +6,6 @@ import java.io.Serializable;
 
 @Data
 public class KeywordDto implements Serializable {
-    private final Integer id;
-    private final String name;
+    private Integer id;
+    private String name;
 }

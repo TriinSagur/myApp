@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-17T17:48:34+0300",
+    date = "2022-04-17T21:20:00+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.13 (Oracle Corporation)"
 )
 @Component
@@ -21,7 +21,6 @@ public class AuthorMapperImpl implements AuthorMapper {
 
         Author author = new Author();
 
-        author.setId( authorDto.getId() );
         author.setFirstName( authorDto.getFirstName() );
         author.setLastName( authorDto.getLastName() );
 
@@ -34,15 +33,11 @@ public class AuthorMapperImpl implements AuthorMapper {
             return null;
         }
 
-        Integer id = null;
-        String firstName = null;
-        String lastName = null;
+        AuthorDto authorDto = new AuthorDto();
 
-        id = author.getId();
-        firstName = author.getFirstName();
-        lastName = author.getLastName();
-
-        AuthorDto authorDto = new AuthorDto( id, firstName, lastName );
+        authorDto.setId( author.getId() );
+        authorDto.setFirstName( author.getFirstName() );
+        authorDto.setLastName( author.getLastName() );
 
         return authorDto;
     }
@@ -67,9 +62,6 @@ public class AuthorMapperImpl implements AuthorMapper {
             return;
         }
 
-        if ( authorDto.getId() != null ) {
-            author.setId( authorDto.getId() );
-        }
         if ( authorDto.getFirstName() != null ) {
             author.setFirstName( authorDto.getFirstName() );
         }

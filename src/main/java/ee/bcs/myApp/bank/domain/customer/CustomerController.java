@@ -12,13 +12,12 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController {
 
-
     @Resource
     private CustomerService customerService;
 
 
     @PostMapping
-
+    @Operation(summary = "Lisab uue kliendi")
     public CustomerDto addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
         return customerService.addNewCustomer(customerDto);
     }
@@ -45,7 +44,7 @@ public class CustomerController {
 
     @PutMapping("/id")
     @Operation(summary = "Uuendab andmebaasi id jargi kliendi")
-    public void updateCustomerById(@RequestParam Integer id,@Valid @RequestBody CustomerDto customerDto) {
+    public void updateCustomerById(@RequestParam Integer id, @Valid @RequestBody CustomerDto customerDto) {
         customerService.updateCustomerById(id, customerDto);
     }
 

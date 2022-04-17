@@ -34,11 +34,11 @@ public class BookController {
         bookService.removeBookById(id);
     }
 
-//    @GetMapping
-//    @Operation(summary = "Leiab andmebaasi ID jargi raamatu")
-//    public BookDto findBookById(@RequestParam Integer id) {
-//        return bookService.findBookById(id);
-//    }
+    @GetMapping
+    @Operation(summary = "Leiab andmebaasi ID jargi raamatu")
+    public BookDto findBookById(@RequestParam Integer id) {
+        return bookService.findBookById(id);
+    }
 
 
 }

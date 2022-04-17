@@ -18,7 +18,6 @@ public class AuthorController {
     @Operation(summary = "Lisab uue autori")
     public AuthorDto addNewAuthor(@RequestBody @Valid AuthorDto authorDto) {
         return authorService.addNewAuthor(authorDto);
-
     }
 
     @GetMapping("/id")

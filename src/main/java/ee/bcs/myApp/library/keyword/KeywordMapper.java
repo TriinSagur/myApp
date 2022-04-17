@@ -14,5 +14,6 @@ public interface KeywordMapper {
     List<KeywordDto> toDtos(List<Keyword> keywords);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "id", ignore = true)
     void updateKeywordFromKeywordDto(KeywordDto keywordDto, @MappingTarget Keyword keyword);
 }

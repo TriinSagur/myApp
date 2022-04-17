@@ -1,6 +1,6 @@
 package ee.bcs.myApp.library.keyword;
 
-import ee.bcs.myApp.library.keyword.KeywordDto;
+
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
