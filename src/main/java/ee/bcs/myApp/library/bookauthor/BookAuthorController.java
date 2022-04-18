@@ -29,19 +29,19 @@ public class BookAuthorController {
     }
 
     @GetMapping("/id")
-    @Operation(summary = "Find Book and Author by ID")
+    @Operation(summary = "Find bookauthor by ID")
     public BookAuthorDto findBookAuthorById(@RequestParam Integer id) {
         return bookAuthorService.findBookAuthorById(id);
     }
 
     @DeleteMapping("/id")
-    @Operation(summary = "Delete Book and Author by ID")
+    @Operation(summary = "Delete bookauthor by ID")
     public void removeBookAuthorById(Integer id) {
         bookAuthorService.removeBookAuthorById(id);
     }
 
     @PutMapping("/id")
-    @Operation(summary = "Update Book and Author by ID")
+    @Operation(summary = "Update bookauthor by ID")
     public void updateBookAuthorById(@RequestParam Integer id,@RequestParam String title,@RequestParam String lastName) {
         bookAuthorService.updateBookAuthor(id, title, lastName);
     }
@@ -57,5 +57,10 @@ public class BookAuthorController {
         return bookAuthorService.getAllAuthorsByTitle(title);
     }
 
+    @PostMapping("/book-and-author")
+    @Operation (summary = "Create new book and new author")
+    public void addBookAndAuthor(@RequestBody BookAuthorDto bookAuthorDto) {
+        bookAuthorService.addBookAndAuthor(bookAuthorDto);
+    }
 
 }

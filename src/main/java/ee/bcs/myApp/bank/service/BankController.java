@@ -1,9 +1,7 @@
 package ee.bcs.myApp.bank.service;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -15,10 +13,16 @@ public class BankController {
     @Resource
     private BankService bankService;
 
-    @PostMapping
-    public void deposit(@Valid @RequestBody  DepositRequest request) {
+    @PostMapping("/money/in")
+    @Operation(summary = "Raha juurde lisamine kontole")
+    public void deposit(@RequestBody @Valid DepositRequest request) {
         bankService.deposit(request);
+    }
 
+    @PostMapping("/money/out")
+    @Operation (summary = "Raha väljavõtmine kontolt")
+    public void withdraw(@RequestBody @Valid WithdrawRequest request) {
+        bankService.withdraw(request);
     }
 
 }

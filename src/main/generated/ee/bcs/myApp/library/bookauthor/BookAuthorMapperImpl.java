@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-15T17:42:52+0300",
+    date = "2022-04-18T13:00:42+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
@@ -25,7 +25,6 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
 
         bookAuthor.setBook( bookAuthorDtoToBook( bookAuthorDto ) );
         bookAuthor.setAuthor( bookAuthorDtoToAuthor( bookAuthorDto ) );
-        bookAuthor.setId( bookAuthorDto.getId() );
 
         return bookAuthor;
     }
@@ -38,13 +37,10 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
 
         BookAuthorDto bookAuthorDto = new BookAuthorDto();
 
-        bookAuthorDto.setBookId( bookAuthorBookId( bookAuthor ) );
         bookAuthorDto.setBookTitle( bookAuthorBookTitle( bookAuthor ) );
         bookAuthorDto.setBookYear( bookAuthorBookYear( bookAuthor ) );
-        bookAuthorDto.setAuthorId( bookAuthorAuthorId( bookAuthor ) );
         bookAuthorDto.setAuthorFirstName( bookAuthorAuthorFirstName( bookAuthor ) );
         bookAuthorDto.setAuthorLastName( bookAuthorAuthorLastName( bookAuthor ) );
-        bookAuthorDto.setId( bookAuthor.getId() );
 
         return bookAuthorDto;
     }
@@ -77,9 +73,6 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
             bookAuthor.setAuthor( new Author() );
         }
         bookAuthorDtoToAuthor1( bookAuthorDto, bookAuthor.getAuthor() );
-        if ( bookAuthorDto.getId() != null ) {
-            bookAuthor.setId( bookAuthorDto.getId() );
-        }
     }
 
     protected Book bookAuthorDtoToBook(BookAuthorDto bookAuthorDto) {
@@ -89,7 +82,6 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
 
         Book book = new Book();
 
-        book.setId( bookAuthorDto.getBookId() );
         book.setTitle( bookAuthorDto.getBookTitle() );
         book.setYear( bookAuthorDto.getBookYear() );
 
@@ -103,26 +95,10 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
 
         Author author = new Author();
 
-        author.setId( bookAuthorDto.getAuthorId() );
         author.setFirstName( bookAuthorDto.getAuthorFirstName() );
         author.setLastName( bookAuthorDto.getAuthorLastName() );
 
         return author;
-    }
-
-    private Integer bookAuthorBookId(BookAuthor bookAuthor) {
-        if ( bookAuthor == null ) {
-            return null;
-        }
-        Book book = bookAuthor.getBook();
-        if ( book == null ) {
-            return null;
-        }
-        Integer id = book.getId();
-        if ( id == null ) {
-            return null;
-        }
-        return id;
     }
 
     private String bookAuthorBookTitle(BookAuthor bookAuthor) {
@@ -153,21 +129,6 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
             return null;
         }
         return year;
-    }
-
-    private Integer bookAuthorAuthorId(BookAuthor bookAuthor) {
-        if ( bookAuthor == null ) {
-            return null;
-        }
-        Author author = bookAuthor.getAuthor();
-        if ( author == null ) {
-            return null;
-        }
-        Integer id = author.getId();
-        if ( id == null ) {
-            return null;
-        }
-        return id;
     }
 
     private String bookAuthorAuthorFirstName(BookAuthor bookAuthor) {
@@ -205,9 +166,6 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
             return;
         }
 
-        if ( bookAuthorDto.getBookId() != null ) {
-            mappingTarget.setId( bookAuthorDto.getBookId() );
-        }
         if ( bookAuthorDto.getBookTitle() != null ) {
             mappingTarget.setTitle( bookAuthorDto.getBookTitle() );
         }
@@ -221,9 +179,6 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
             return;
         }
 
-        if ( bookAuthorDto.getAuthorId() != null ) {
-            mappingTarget.setId( bookAuthorDto.getAuthorId() );
-        }
         if ( bookAuthorDto.getAuthorFirstName() != null ) {
             mappingTarget.setFirstName( bookAuthorDto.getAuthorFirstName() );
         }
