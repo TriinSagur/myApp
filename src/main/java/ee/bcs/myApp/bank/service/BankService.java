@@ -18,12 +18,10 @@ public class BankService {
     public void deposit(DepositRequest request) {
         transactionService.addDepositTransaction(request);
         accountService.updateCreditPaymentBalance(request.getAccountId(), request.getAmount());
-
     }
 
     public void withdraw(WithdrawRequest request) {
         transactionService.addWithdrawTransaction(request);
         accountService.updateDebitPaymentBalance(request.getAccountId(), request.getAmount());
-
     }
 }
