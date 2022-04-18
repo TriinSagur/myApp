@@ -28,26 +28,24 @@ public class BookAuthorService {
     @Resource
     private BookAuthorMapper bookAuthorMapper;
 
-//    public void demo1() {
-//        Author author = authorRepository.getByLastName("Banderas");
-//        Book book = bookRepository.findByTitle("Harry Potter");
-//        BookAuthor bookAuthor = new BookAuthor();
-//        bookAuthor.setAuthor(author);
-//        bookAuthor.setBook(book);
-//        bookAuthorRepository.save(bookAuthor);
-//
-//
-//    }
+    public void connectBookWithAuthor(String lastName, String bookName) {
+        Author author = authorRepository.getByLastName(lastName);
+        Book book = bookRepository.findByTitle(bookName);
+        BookAuthor bookAuthor = new BookAuthor();
+        bookAuthor.setAuthor(author);
+        bookAuthor.setBook(book);
+        bookAuthorRepository.save(bookAuthor);
+    }
 
     public void addBookWithAuthor(BookAuthorDto bookAuthorDto) {
         Author author = new Author();
         Book book = new Book();
         author.setFirstName(bookAuthorDto.getAuthorFirstName());
-
-
         author.setLastName(bookAuthorDto.getAuthorLastName());
+        authorRepository.save(author);
         book.setTitle(bookAuthorDto.getBookTitle());
         book.setYear(bookAuthorDto.getBookYear());
+        bookRepository.save(book);
 
         BookAuthor bookAuthor = new BookAuthor();
         bookAuthor.setAuthor(author);
