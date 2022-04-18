@@ -21,12 +21,12 @@ public class BookAuthorController {
 
     @PostMapping
     @Operation(summary = "Lisab uue raamatu koos autoriga")
-    public BookAuthorDto addBookWithAuthor(@Valid @RequestBody BookAuthorDto bookAuthorDto) {
-        return bookAuthorService.addBookWithAuthor(bookAuthorDto);
+    public void addBookWithAuthor(@Valid @RequestBody BookAuthorDto bookAuthorDto) {
+        bookAuthorService.addBookWithAuthor(bookAuthorDto);
     }
 
 
-    //    public void demo1() {
+//        public void demo1() {
 //        Author author = authorRepository.getByLastName("Banderas");
 //        Book book = bookRepository.findByTitle("Harry Potter");
 //        BookAuthor bookAuthor = new BookAuthor();
@@ -34,7 +34,7 @@ public class BookAuthorController {
 //        bookAuthor.setBook(book);
 //        bookAuthorRepository.save(bookAuthor);
 //
-//
+
 //    }
 
 }

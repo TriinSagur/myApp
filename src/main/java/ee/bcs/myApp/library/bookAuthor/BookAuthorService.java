@@ -39,10 +39,12 @@ public class BookAuthorService {
 //
 //    }
 
-    public BookAuthorDto addBookWithAuthor(BookAuthorDto bookAuthorDto) {
+    public void addBookWithAuthor(BookAuthorDto bookAuthorDto) {
         Author author = new Author();
         Book book = new Book();
         author.setFirstName(bookAuthorDto.getAuthorFirstName());
+
+
         author.setLastName(bookAuthorDto.getAuthorLastName());
         book.setTitle(bookAuthorDto.getBookTitle());
         book.setYear(bookAuthorDto.getBookYear());
@@ -52,7 +54,7 @@ public class BookAuthorService {
         bookAuthor.setBook(book);
 
         bookAuthorRepository.save(bookAuthor);
-        return bookAuthorMapper.toDto(bookAuthor);
+
     }
 
 //
