@@ -6,11 +6,11 @@ import java.io.Serializable;
 
 @Data
 public class BookAuthorDto implements Serializable {
-    private final Integer id;
-    private final Integer bookId;
-    private final String bookTitle;
-    private final Integer bookYear;
-    private final Integer authorId;
-    private final String authorFirstName;
-    private final String authorLastName;
+    private Integer id;
+    private Integer bookId;
+    private String bookTitle;
+    private Integer bookYear;
+    private Integer authorId;
+    private String authorFirstName;
+    private String authorLastName;
 }

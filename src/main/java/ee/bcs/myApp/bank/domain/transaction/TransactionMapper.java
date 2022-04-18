@@ -1,6 +1,7 @@
 package ee.bcs.myApp.bank.domain.transaction;
 
 import ee.bcs.myApp.bank.service.DepositRequest;
+import ee.bcs.myApp.bank.service.WithdrawRequest;
 import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
@@ -20,5 +21,8 @@ public interface  TransactionMapper {
     Transaction toDepositEntity(DepositRequest request);
 
 
+    @Mapping(target = "recieverAccountNumber", constant = "ATM")
+    @Mapping(target = "type", constant = "w")
+    Transaction toWithdrawEntity(WithdrawRequest request);
 
 }

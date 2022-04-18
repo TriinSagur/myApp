@@ -64,5 +64,13 @@ BookAuthorService {
         List<BookAuthor> bookAuthors = bookAuthorRepository.findByBookTitle(title);
         return bookAuthorMapper.toDtos(bookAuthors);
     }
+
+    public void addBookAndAuthor(BookAuthorDto bookAuthorDto) {
+        BookAuthor bookAuthor = bookAuthorMapper.toEntity(bookAuthorDto);
+        authorRepository.save(bookAuthor.getAuthor());
+        bookRepository.save(bookAuthor.getBook());
+        bookAuthorRepository.save(bookAuthor);
+
+    }
 }
 
