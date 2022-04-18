@@ -6,10 +6,14 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccountService {
 
+    public boolean acccountExistsByAccountNumber(String accountNumber) {
+
+    }
     @Resource
     private AccountRepository accountRepository;
 
@@ -54,4 +58,26 @@ public class AccountService {
     public Account findAccountById(Integer accountId) {
         return accountRepository.getById(accountId);
     }
+
+    public void updateCreditPaymentBalance(Account account, Integer amount) {
+        Integer currentBalance = account.getBalance();
+        Integer newBalance = currentBalance + amount;
+        account.setBalance(newBalance);
+        accountRepository.save(account);
+    }
+
+    private void updateDebitPaymentBalance(Account account, Integer amount) {
+        Integer currentBalance = account.getBalance();
+        Integer newBalance = currentBalance - amount;
+        account.setBalance(newBalance);
+        accountRepository.save(account);
+
+    }
+
+    public findAccountByAccountNumber(String accountNumber) {
+        Optional<Account> accountOptional = accountRepository.findByAccountNumber(accountNumber);
+        return accountOptional.get();
+    }
+
+//    public boolean accountExistsByAccountNumber(String ac)
 }
