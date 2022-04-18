@@ -3,7 +3,6 @@ package ee.bcs.myApp.library.bookAuthor;
 import ee.bcs.myApp.library.author.AuthorDto;
 import ee.bcs.myApp.library.book.BookDto;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -15,12 +14,12 @@ import java.util.List;
 public class BookAuthorController {
 
     @Resource
-    private BookAuthorService bookAuthorService;
+    private ee.bcs.myApp.library.bookAuthor.BookAuthorService bookAuthorService;
 
-    @PostMapping
-    @Operation(summary = "Lisab uue raamatu koos autoriga")
-    public void addBookWithAuthor(@Valid @RequestBody BookAuthorDto bookAuthorDto) {
-        bookAuthorService.addBookWithAuthor(bookAuthorDto);
+    @PostMapping("/book-and-author")
+    @Operation(summary = "Lisab samaaegselt uue raamatu ja uue autori")
+    public void addBookAndAuthor(@RequestBody BookAuthorDto bookAuthorDto) {
+        bookAuthorService.addBookAndAuthor(bookAuthorDto);
     }
 
     @PutMapping("/connect")

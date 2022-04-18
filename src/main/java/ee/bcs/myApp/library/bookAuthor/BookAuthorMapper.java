@@ -14,6 +14,7 @@ public interface BookAuthorMapper {
     @Mapping(source = "authorId", target = "author.id")
     @Mapping(source = "authorFirstName", target = "author.firstName")
     @Mapping(source = "authorLastName", target = "author.lastName")
+
     BookAuthor toEntity(BookAuthorDto bookAuthorDto);
 
     @InheritInverseConfiguration(name = "toEntity")

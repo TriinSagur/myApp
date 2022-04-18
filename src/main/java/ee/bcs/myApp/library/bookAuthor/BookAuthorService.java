@@ -23,7 +23,7 @@ public class BookAuthorService {
 
 
     @Resource
-    private BookAuthorRepository bookAuthorRepository;
+    private ee.bcs.myApp.library.bookAuthor.BookAuthorRepository bookAuthorRepository;
 
     @Resource
     private BookAuthorMapper bookAuthorMapper;
@@ -37,23 +37,34 @@ public class BookAuthorService {
         bookAuthorRepository.save(bookAuthor);
     }
 
-    public void addBookWithAuthor(BookAuthorDto bookAuthorDto) {
-        Author author = new Author();
-        Book book = new Book();
-        author.setFirstName(bookAuthorDto.getAuthorFirstName());
-        author.setLastName(bookAuthorDto.getAuthorLastName());
-        authorRepository.save(author);
-        book.setTitle(bookAuthorDto.getBookTitle());
-        book.setYear(bookAuthorDto.getBookYear());
-        bookRepository.save(book);
-
-        BookAuthor bookAuthor = new BookAuthor();
-        bookAuthor.setAuthor(author);
-        bookAuthor.setBook(book);
-
-        bookAuthorRepository.save(bookAuthor);
+    public void addBookAndAuthor(BookAuthorDto bookAuthorDto) {
+    BookAuthor bookAuthor = bookAuthorMapper.toEntity(bookAuthorDto);
+    authorRepository.save(bookAuthor.getAuthor());
+    bookRepository.save(bookAuthor.getBook());
+    bookAuthorRepository.save(bookAuthor);
 
     }
+
+
+
+
+
+//        Author author = new Author();
+//        Book book = new Book();
+//        author.setFirstName(bookAuthorDto.getAuthorFirstName());
+//        author.setLastName(bookAuthorDto.getAuthorLastName());
+//        authorRepository.save(author);
+//        book.setTitle(bookAuthorDto.getBookTitle());
+//        book.setYear(bookAuthorDto.getBookYear());
+//        bookRepository.save(book);
+//
+//        BookAuthor bookAuthor = new BookAuthor();
+//        bookAuthor.setAuthor(author);
+//        bookAuthor.setBook(book);
+//
+//        bookAuthorRepository.save(bookAuthor);
+
+
 
 //
 
