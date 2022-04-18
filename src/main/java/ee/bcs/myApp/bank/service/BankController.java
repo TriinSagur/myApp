@@ -33,13 +33,13 @@ public class BankController {
 
     @PostMapping("/in")
     @Operation(summary = "Raha juurde teiselt kontolt")
-    public TransactionResponse receiveMoney(@Valid @RequestBody ReceiveMoneyRequest request) {
+    public TransactionResponse receiveMoney(@Valid @RequestBody MoneyRequest request) {
         return bankService.receiveMoney(request);
     }
 
     @PostMapping("/out")
     @Operation(summary = "Raha saatmine teisele kontole")
-    public TransactionResponse sendMoney(@Valid @RequestBody SendMoneyRequest request) {
+    public TransactionResponse sendMoney(@Valid @RequestBody MoneyRequest request) {
         return bankService.sendMoney(request);
     }
 }
