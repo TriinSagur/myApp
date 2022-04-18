@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-17T23:55:52+0300",
+    date = "2022-04-18T09:11:41+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.1 (Oracle Corporation)"
 )
 @Component
@@ -44,13 +44,13 @@ public class AuthorMapperImpl implements AuthorMapper {
     }
 
     @Override
-    public List<AuthorDto> authorToAuthorDtos(List<Author> entities) {
-        if ( entities == null ) {
+    public List<AuthorDto> authorToAuthorDtos(List<Author> authors) {
+        if ( authors == null ) {
             return null;
         }
 
-        List<AuthorDto> list = new ArrayList<AuthorDto>( entities.size() );
-        for ( Author author : entities ) {
+        List<AuthorDto> list = new ArrayList<AuthorDto>( authors.size() );
+        for ( Author author : authors ) {
             list.add( authorToAuthorDto( author ) );
         }
 
