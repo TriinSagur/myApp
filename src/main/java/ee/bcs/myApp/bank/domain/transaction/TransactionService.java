@@ -33,8 +33,9 @@ public class TransactionService {
         transaction.setTransactionDateTime(Instant.now());
         transaction.setAccount(account);
         transactionRepository.save(transaction);
-        account.setBalance(account.getBalance() + request.getAmount());
-        accountRepository.save(account);
+//        TODO: pigem teha eraldi meetod
+//        account.setBalance(account.getBalance() + request.getAmount());
+//        accountRepository.save(account);
 
     }
 

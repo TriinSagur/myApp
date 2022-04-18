@@ -1,13 +1,14 @@
 package ee.bcs.myApp.library.book;
 
+import ee.bcs.myApp.library.bookauthor.BookAuthorDto;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
 @Data
-public class BookDto {
+public class NewBookRequest {
 
-    private Integer id;
+    private BookAuthorDto bookAuthorDto;
 
     @NotNull
     private String title;

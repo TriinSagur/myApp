@@ -19,17 +19,16 @@ public class BookAuthorService {
     private BookRepository bookRepository;
     @Resource
     private AuthorRepository authorRepository;
-    @Resource
-    private BookMapper bookMapper;
-    @Resource
-    private AuthorMapper authorMapper;
-    @Resource
-    private AuthorService authorService;
-    @Resource
-    private BookService bookService;
 
-
-
+//
+////        public void demo1() {
+////            Author author = authorRepository.getByLastName("Banderas");
+////            Book book = bookRepository.findByTitle("Harry Potter");
+////            BookAuthor bookAuthor = new BookAuthor();
+////            bookAuthor.setAuthor(author);
+////            bookAuthor.setBook(book);
+////            bookAuthorRepository.save(bookAuthor);
+////        }
 
     public BookAuthorDto addNewBookAuthor(Integer bookId, Integer authorId) {
 
@@ -44,37 +43,37 @@ public class BookAuthorService {
     }
 
 
-
-
-//    @Mapping(target = "bookId", source = "book.id")
-//    @Mapping(target = "bookTitle", source = "book.title")
-//    @Mapping(target = "bookYear", source = "book.year")
-//    @Mapping(target = "authorId", source = "author.id")
-//    @Mapping(target = "authorFirstName", source = "author.firstName")
-//    @Mapping(target = "authorLastName", source = "author.lastName")
-//    public BookAuthorDto addNewBookAndAuthor(AuthorDto authorDto,BookDto bookDto) {
 //
-//        Author author = authorRepository.save(authorMapper.toEntity(authorDto));
-//        Book book = bookRepository.save(bookMapper.toEntity(bookDto));
-//        BookAuthor bookAuthor = new BookAuthor();
-//        Author newAuthor = authorMapper.toEntity(authorService.addNewAuthor(authorDto));
-//        Book newBook = bookMapper.toEntity(bookService.addNewBook(bookDto));
-//        bookAuthor.setAuthor(newAuthor);
-//        bookAuthor.setBook(newBook);
+//
+////    @Mapping(target = "bookId", source = "book.id")
+////    @Mapping(target = "bookTitle", source = "book.title")
+////    @Mapping(target = "bookYear", source = "book.year")
+////    @Mapping(target = "authorId", source = "author.id")
+////    @Mapping(target = "authorFirstName", source = "author.firstName")
+////    @Mapping(target = "authorLastName", source = "author.lastName")
+////    public BookAuthorDto addNewBookAndAuthor(BookDto bookDto) {
+////
+////        Author author = authorRepository.save(authorMapper.toEntity(authorDto));
+////        Book book = bookRepository.save(bookMapper.toEntity(bookDto));
+////        BookAuthor bookAuthor = new BookAuthor();
+////        Author newAuthor = authorMapper.toEntity(authorService.addNewAuthor(authorDto));
+////        Book newBook = bookMapper.toEntity(bookService.addNewBook(bookDto));
+////        bookAuthor.setAuthor(newAuthor);
+////        bookAuthor.setBook(newBook);
+////
+////
+////        BookAuthorDto bookAuthorDto = new BookAuthorDto();
+////        bookAuthorDto.setAuthorId(author.getId());
+////        bookAuthorDto.setAuthorFirstName(authorDto.getFirstName());
+////        bookAuthorDto.setAuthorLastName(authorDto.getLastName());
+////        bookAuthorDto.setBookId(book.getId());
+////        bookAuthorDto.setBookTitle(bookDto.getTitle());
+////        bookAuthorDto.setBookYear(bookDto.getYear());
+////
+////        bookAuthorRepository.save(bookAuthorMapper.bookAuthorDtoToBookAuthor(bookAuthorDto));
+////       return bookAuthorDto;
+////    }
 
-//
-//        BookAuthorDto bookAuthorDto = new BookAuthorDto();
-//        bookAuthorDto.setAuthorId(author.getId());
-//        bookAuthorDto.setAuthorFirstName(authorDto.getFirstName());
-//        bookAuthorDto.setAuthorLastName(authorDto.getLastName());
-//        bookAuthorDto.setBookId(book.getId());
-//        bookAuthorDto.setBookTitle(bookDto.getTitle());
-//        bookAuthorDto.setBookYear(bookDto.getYear());
-//
-//        bookAuthorRepository.save(bookAuthorMapper.bookAuthorDtoToBookAuthor(bookAuthorDto));
-//       return bookAuthorDto;
-//    }
-    
     public List<BookAuthorDto> findAllBookAuthors() {
         List<BookAuthor> all = bookAuthorRepository.findAll();
         return bookAuthorMapper.toDtos(all);
@@ -102,9 +101,27 @@ public class BookAuthorService {
 //    @Mapping(target = "authorId", ignore = true)
     public BookAuthorDto updateById(BookAuthorDto bookAuthorDto, Integer id) {
         BookAuthor bookAuthor = bookAuthorRepository.getById(id);
-        bookAuthorDto.setId(id);
+
         bookAuthorMapper.updateBookAuthorFromBookAuthorDto(bookAuthorDto, bookAuthor);
         bookAuthorRepository.save(bookAuthor);
         return bookAuthorMapper.toDto(bookAuthor);
+    }
+
+
+    public void addBookAndAuthor(BookAuthorDto bookAuthorDto) {
+        BookAuthor bookAuthor = bookAuthorMapper.bookAuthorDtoToBookAuthor(bookAuthorDto);
+        authorRepository.save(bookAuthor.getAuthor());
+//        Author author = new Author();
+//        author.setFirstName(bookAuthor.getAuthor().getFirstName());
+//        author.setLastName(bookAuthor.getAuthor().getLastName());
+//        authorRepository.save(author);
+        bookRepository.save(bookAuthor.getBook());
+//        Book book = new Book();
+//        book.setTitle(bookAuthor.getBook().getTitle());
+//        book.setYear(bookAuthor.getBook().getYear());
+//        bookRepository.save(book);
+//        bookAuthor.setAuthor(author);
+//        bookAuthor.setBook(book);
+        bookAuthorRepository.save(bookAuthor);
     }
 }

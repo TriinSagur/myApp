@@ -19,9 +19,9 @@ public class BookService {
     private BookMapper bookMapper;
 
 
-    public BookDto addNewBook(BookDto bookDto) {
+    public NewBookRequest addNewBook(NewBookRequest newBookRequest) {
 
-        Book book = bookMapper.toEntity(bookDto);
+        Book book = bookMapper.toEntity(newBookRequest);
 
         bookRepository.save(book);
 
@@ -31,7 +31,7 @@ public class BookService {
     }
 
 
-    public BookDto findBookById(Integer id) {
+    public NewBookRequest findBookById(Integer id) {
 
         Optional<Book> book = bookRepository.findById(id);
         Book book1 = new Book();
@@ -53,7 +53,7 @@ public class BookService {
 
     }
 
-    public List<BookDto> findAllBooks() {
+    public List<NewBookRequest> findAllBooks() {
 
         List<Book> books = bookRepository.findAll();
 
@@ -62,12 +62,12 @@ public class BookService {
     }
 
 
-    public void updateBookById(Integer id, BookDto bookDto) {
+    public void updateBookById(Integer id, NewBookRequest newBookRequest) {
 
 
 
         Book book = bookRepository.getById(id);
-        bookMapper.updateBookFromBookDto(bookDto, book);
+        bookMapper.updateBookFromBookDto(newBookRequest, book);
         bookRepository.save(book);
 
     }

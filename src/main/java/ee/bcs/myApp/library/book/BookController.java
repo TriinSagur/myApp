@@ -20,26 +20,26 @@ public class BookController {
 
     @PostMapping("/new")
     @Operation(summary = "Lisab uue raamatu")
-    public BookDto addNewBook(@Valid @RequestBody BookDto bookDto) {
-        return bookService.addNewBook(bookDto);
+    public NewBookRequest addNewBook(@Valid @RequestBody NewBookRequest newBookRequest) {
+        return bookService.addNewBook(newBookRequest);
     }
 
     @GetMapping("/id")
     @Operation(summary = "otsib raamatu Id jargi")
-    public BookDto findBookById(@RequestParam Integer id) {
+    public NewBookRequest findBookById(@RequestParam Integer id) {
         return bookService.findBookById(id);
     }
 
     @GetMapping("/all")
     @Operation(summary = "otsib koik raamatud")
-    public List<BookDto> findAllBooks() {
+    public List<NewBookRequest> findAllBooks() {
         return bookService.findAllBooks();
     }
 
     @PutMapping("/id")
     @Operation(summary = "uuendab raamatu andmeid")
-    public void updateBookById(@RequestParam Integer id, @Valid @RequestBody BookDto bookDto) {
-        bookService.updateBookById(id, bookDto);
+    public void updateBookById(@RequestParam Integer id, @Valid @RequestBody NewBookRequest newBookRequest) {
+        bookService.updateBookById(id, newBookRequest);
     }
 
 

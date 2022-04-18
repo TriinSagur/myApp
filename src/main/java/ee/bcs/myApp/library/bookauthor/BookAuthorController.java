@@ -1,8 +1,6 @@
 package ee.bcs.myApp.library.bookauthor;
 
-import ee.bcs.myApp.library.author.AuthorDto;
-import ee.bcs.myApp.library.book.Book;
-import ee.bcs.myApp.library.book.BookDto;
+import ee.bcs.myApp.library.book.NewBookRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +14,10 @@ public class BookAuthorController {
     @Resource
     private BookAuthorService bookAuthorService;
 
+////    @GetMapping("/demo")
+////    public void demo1() {
+////        bookAuthorService.demo1();
+////    }
 
     @PostMapping("/addnew")
     @Operation(summary = "lisab uue book-autori")
@@ -25,10 +27,10 @@ public class BookAuthorController {
 
 
 //    @PostMapping("/addnewbook")
-//    @Operation(summary = "lisab uue book-autori")
-//    public void addNewBookAndAuthor(@RequestBody AuthorDto authorDto, @RequestBody BookDto bookDto) {
-//        bookAuthorService.addNewBookAndAuthor(authorDto, bookDto);
-//    TODO: kas korraga ei saa kasutada kaks Dto klassi?
+//    @Operation(summary = "lisab uue raamatu ja autori *m]lemad korraga, autor on ka uus")
+//    public void addNewBookAndAuthor(@RequestBody NewBookRequest newBookRequest) {
+////        bookAuthorService.addNewBookAndAuthor(bookDto);
+////    TODO: kas korraga ei saa kasutada kaks Dto klassi?
 //    }
 
     @GetMapping("/all")
@@ -59,5 +61,11 @@ public class BookAuthorController {
     @Operation(summary = "uuendab book-autori id jargi")
     public BookAuthorDto updateById(@RequestBody BookAuthorDto bookAuthorDto, @RequestParam Integer id) {
         return bookAuthorService.updateById(bookAuthorDto, id);
+    }
+
+    @PostMapping("/book-and-author")
+    @Operation(summary = "lisab uue raamatu ja autori korraga")
+    public void addBookAndAuthor(@RequestBody BookAuthorDto bookAuthorDto) {
+        bookAuthorService.addBookAndAuthor(bookAuthorDto);
     }
 }

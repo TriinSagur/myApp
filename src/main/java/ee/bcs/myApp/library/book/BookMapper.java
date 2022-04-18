@@ -7,13 +7,13 @@ import java.util.List;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface BookMapper {
 
-    Book toEntity(BookDto bookDto);
+    Book toEntity(NewBookRequest newBookRequest);
 
-    BookDto toDto(Book book);
+    NewBookRequest toDto(Book book);
 
-    List <BookDto> toDtos(List <Book> books);
+    List <NewBookRequest> toDtos(List <Book> books);
 
     @Mapping(target = "id", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateBookFromBookDto(BookDto bookDto, @MappingTarget Book book);
+    void updateBookFromBookDto(NewBookRequest newBookRequest, @MappingTarget Book book);
 }
