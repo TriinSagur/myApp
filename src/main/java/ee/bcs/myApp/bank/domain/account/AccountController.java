@@ -16,7 +16,7 @@ public class AccountController {
 
     @PostMapping
     @Operation(summary = "Lisab uue konto")
-    public AccountDto addNewAccount(@Valid @RequestBody AccountDto accountDto) {
+    public AccountResponse addNewAccount(@Valid @RequestBody AccountDto accountDto) {
         return accountService.addNewAccount(accountDto);
     }
 
