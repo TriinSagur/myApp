@@ -1,13 +1,10 @@
 package ee.bcs.myApp.bank.domain.transaction;
 
 import ee.bcs.myApp.bank.domain.account.Account;
-import ee.bcs.myApp.bank.domain.account.AccountRepository;
 import ee.bcs.myApp.bank.domain.account.AccountService;
 import ee.bcs.myApp.bank.service.DepositRequest;
-import ee.bcs.myApp.bank.service.ReceiveMoneyRequest;
-import ee.bcs.myApp.bank.service.SendMoneyRequest;
+import ee.bcs.myApp.bank.service.MoneyRequest;
 import ee.bcs.myApp.bank.service.WithdrawRequest;
-import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,46 +26,56 @@ public class TransactionService {
     public Transaction addDepositTransaction(DepositRequest request) {
         Transaction transaction = transactionMapper.toDepositEntity(request);
         Account account = accountService.findAccountById(request.getAccountId());
+        Integer newBalance = calculateCreditBalance(account.getBalance(), request.getAmount());
         transaction.setReceiverAccountNumber(account.getAccountNumber());
-        transaction.setBalance(account.getBalance() + request.getAmount());
-        transaction.setTransactionDateTime(Instant.now());
-        transaction.setAccount(account);
-        transactionRepository.save(transaction);
+        saveBankTransaction(transaction, account, newBalance);
         return transaction;
     }
+
+
 
     public Transaction addWithdrawTransaction(WithdrawRequest request) {
         Transaction transaction = transactionMapper.toWithdrawEntity(request);
         Account account = accountService.findAccountById(request.getAccountId());
+        Integer newBalance = calculateDebitBalance(account.getBalance(), request.getAmount());
         transaction.setSenderAccountNumber(account.getAccountNumber());
-        transaction.setBalance(account.getBalance() - request.getAmount());
-        transaction.setTransactionDateTime(Instant.now());
-        transaction.setAccount(account);
-        transactionRepository.save(transaction);
+        saveBankTransaction(transaction, account, newBalance);
         return transaction;
     }
 
-    public Transaction addReceiveMoneyTransaction(ReceiveMoneyRequest request) {
+    public Transaction addReceiveMoneyTransaction(MoneyRequest request) {
         Transaction transaction = transactionMapper.toReceiveMoneyEntity(request);
         Account account = accountService.findAccountByAccountNumber(request.getReceiverAccountNumber());
-        transaction.setBalance(account.getBalance() + request.getAmount());
-        transaction.setTransactionDateTime(Instant.now());
-        transaction.setAccount(account);
-        transactionRepository.save(transaction);
+        Integer newBalance = calculateCreditBalance(account.getBalance(), request.getAmount());
+        saveBankTransaction(transaction, account, newBalance);
         return transaction;
     }
 
-    public Transaction addSendMoneyTransaction(SendMoneyRequest request) {
-        Transaction transaction = transactionMapper.toSendMoneyEntity(request);
-        Account senderAccount = accountService.findAccountById(request.getSenderAccountId());
+    public Transaction addSendMoneyTransaction(MoneyRequest request) {
+        Transaction senderTransaction = transactionMapper.toSendMoneyEntity(request);
+        Account senderAccount = accountService.findAccountByAccountNumber(request.getSenderAccountNumber());
+        Integer senderNewBalance = calculateDebitBalance(senderTransaction.getBalance(), request.getAmount());
+        saveBankTransaction(senderTransaction, senderAccount, senderNewBalance);
+        accountService.updateDebitPaymentBalance(senderAccount, request.getAmount());
         if (accountService.accountExistsByAccountNumber(request.getReceiverAccountNumber())) {
-            Account receiverAccount = accountService.findAccountByAccountNumber(request.getReceiverAccountNumber());
-        } else {
-
-            accountService.findAccountById(request.getSenderAccountId());
-
+            Transaction receiverTransaction = addReceiveMoneyTransaction(request);
+            accountService.updateCreditPaymentBalance(receiverTransaction.getAccount(), request.getAmount());
         }
+        return senderTransaction;
+    }
 
-        return null;
+    private Integer calculateCreditBalance(Integer balance, Integer amount) {
+        return balance + amount;
+    }
+
+    private Integer calculateDebitBalance(Integer balance, Integer amount) {
+        return balance - amount;
+    }
+
+    private void saveBankTransaction(Transaction transaction, Account account, Integer newBalance) {
+        transaction.setBalance(newBalance);
+        transaction.setTransactionDateTime(Instant.now());
+        transaction.setAccount(account);
+        transactionRepository.save(transaction);
     }
 }
