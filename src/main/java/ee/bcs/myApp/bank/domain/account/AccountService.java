@@ -31,7 +31,7 @@ public class AccountService {
 
     public AccountResponse findAccountInfoById(Integer id) {
         Account account = accountRepository.getById(id);
-        AccountResponse accountResponse = accountMapper.toResponse(account);
+//        AccountResponse accountResponse = accountMapper.toResponse(account);
         return accountMapper.toResponse(account);
     }
 
@@ -53,5 +53,21 @@ public class AccountService {
 
     public Account findAccountById(Integer accountId) {
         return accountRepository.getById(accountId);
+    }
+
+    public void updateCreditPaymentBalance(Integer accountId, Integer amount) {
+        Account account = accountRepository.getById(accountId);
+        Integer currentBalance = account.getBalance();
+        Integer newBalance = currentBalance + amount;
+        account.setBalance(newBalance);
+        accountRepository.save(account);
+    }
+
+    public void updateDebitPaymentBalance(Integer accountId, Integer amount) {
+        Account account = accountRepository.getById(accountId);
+        Integer currentBalance = account.getBalance();
+        Integer newBalance = currentBalance - amount;
+        account.setBalance(newBalance);
+        accountRepository.save(account);
     }
 }

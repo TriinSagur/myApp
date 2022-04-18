@@ -3,6 +3,7 @@ package ee.bcs.myApp.bank.domain.transaction;
 import ee.bcs.myApp.bank.domain.account.Account;
 import ee.bcs.myApp.bank.domain.account.AccountService;
 import ee.bcs.myApp.bank.service.DepositRequest;
+import ee.bcs.myApp.bank.service.WithdrawRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -12,7 +13,7 @@ import java.time.Instant;
 public class TransactionService {
 
     @Resource
-private TransactionRepository transactionRepository;
+    private TransactionRepository transactionRepository;
 
     @Resource
     private TransactionMapper transactionMapper;
@@ -30,5 +31,15 @@ private TransactionRepository transactionRepository;
         transaction.setAccount(account);
         transactionRepository.save(transaction);
 
+    }
+
+    public void addWithdrawTransaction(WithdrawRequest request) {
+        Transaction transaction = transactionMapper.toWithdrawEntity(request);
+        Account account = accountService.findAccountById(request.getAccountId());
+        transaction.setSenderAccountNumber(account.getAccountNumber());
+        transaction.setBalance(account.getBalance() - request.getAmount());
+        transaction.setTransactionDateTime(Instant.now());
+        transaction.setAccount(account);
+        transactionRepository.save(transaction);
     }
 }
