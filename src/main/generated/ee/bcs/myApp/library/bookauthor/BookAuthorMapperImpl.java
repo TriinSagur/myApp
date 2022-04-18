@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-17T21:51:09+0300",
+    date = "2022-04-18T11:31:17+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
@@ -110,6 +110,20 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
         }
 
         return list;
+    }
+
+    @Override
+    public BookAuthor toAddBookAuthorEntity(AddBookAuthorDto bookAuthorDto) {
+        if ( bookAuthorDto == null ) {
+            return null;
+        }
+
+        BookAuthor bookAuthor = new BookAuthor();
+
+        bookAuthor.setBook( addBookAuthorDtoToBook( bookAuthorDto ) );
+        bookAuthor.setAuthor( addBookAuthorDtoToAuthor( bookAuthorDto ) );
+
+        return bookAuthor;
     }
 
     protected Book bookAuthorDtoToBook(BookAuthorDto bookAuthorDto) {
@@ -260,5 +274,31 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
         if ( bookAuthorDto.getAuthorLastName() != null ) {
             mappingTarget.setLastName( bookAuthorDto.getAuthorLastName() );
         }
+    }
+
+    protected Book addBookAuthorDtoToBook(AddBookAuthorDto addBookAuthorDto) {
+        if ( addBookAuthorDto == null ) {
+            return null;
+        }
+
+        Book book = new Book();
+
+        book.setTitle( addBookAuthorDto.getBookTitle() );
+        book.setYear( addBookAuthorDto.getBookYear() );
+
+        return book;
+    }
+
+    protected Author addBookAuthorDtoToAuthor(AddBookAuthorDto addBookAuthorDto) {
+        if ( addBookAuthorDto == null ) {
+            return null;
+        }
+
+        Author author = new Author();
+
+        author.setFirstName( addBookAuthorDto.getAuthorFirstName() );
+        author.setLastName( addBookAuthorDto.getAuthorLastName() );
+
+        return author;
     }
 }

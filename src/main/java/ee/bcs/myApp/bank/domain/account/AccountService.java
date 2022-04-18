@@ -53,5 +53,24 @@ public class AccountService {
     public Account findAccountById(Integer accountId) {
         return accountRepository.getById(accountId);
     }
+
+    public void updateCreditPaymentBalance(Account account, Integer amount) {
+        account.setBalance(account.getBalance() + amount);
+        accountRepository.save(account);
+    }
+
+    public void updateDebitPaymentBalance(Account account, Integer amount) {
+        account.setBalance(account.getBalance() - amount);
+        accountRepository.save(account);
+
+    }
+
+    public Account findAccountByAccountNumber(String accountNumber) {
+        return accountRepository.findByAccountNumber(accountNumber).get();
+    }
+
+    public boolean accountExistsByAccountNumber(String accountNumber) {
+        return accountRepository.existsByAccountNumber(accountNumber);
+    }
 }
 
