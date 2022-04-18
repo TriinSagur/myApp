@@ -3,6 +3,7 @@ package ee.bcs.myApp.library.service;
 import ee.bcs.myApp.library.author.AuthorDto;
 import ee.bcs.myApp.library.book.Book;
 import ee.bcs.myApp.library.book.BookDto;
+import ee.bcs.myApp.library.bookauthor.AddBookAuthorDto;
 import ee.bcs.myApp.library.bookauthor.BookAuthorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;

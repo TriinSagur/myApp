@@ -5,6 +5,7 @@ import ee.bcs.myApp.library.author.AuthorDto;
 import ee.bcs.myApp.library.author.AuthorRepository;
 import ee.bcs.myApp.library.book.Book;
 import ee.bcs.myApp.library.book.BookDto;
+import ee.bcs.myApp.library.book.BookMapper;
 import ee.bcs.myApp.library.book.BookRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,9 @@ public class BookAuthorService {
     private BookRepository bookRepository;
 
     @Resource
+    private BookMapper bookMapper;
+
+    @Resource
     private BookAuthorRepository bookAuthorRepository;
 
     @Resource
@@ -33,19 +37,19 @@ public class BookAuthorService {
         return bookAuthorMapper.toBookAuthorResponses(bookAuthors);
     }
 
+    public List<BookDto> getAllBooksForAuthor(String lastName) {
+        List<BookAuthor> bookAuthors = bookAuthorRepository.findByAuthorIs(lastName);
+        List<Book> books = new ArrayList<>();
+        for (BookAuthor bookAuthor : bookAuthors) {
+            books.add(bookAuthor.getBook());
+        }
+        return bookMapper.toDtos(books);
+    }
+
     public void addBookAndAuthor(AddBookAuthorDto bookAuthorDto) {
         BookAuthor bookAuthor = bookAuthorMapper.toAddBookAuthorEntity(bookAuthorDto);
         authorRepository.save(bookAuthor.getAuthor());
         bookRepository.save(bookAuthor.getBook());
         bookAuthorRepository.save(bookAuthor);
-    }
-
-    public List<BookDto> getAllBooksForAuthor(String lastName) {
-        List<BookAuthor> bookAuthors = bookAuthorRepository.findByAuthorIsB(lastName);
-        List<Book> books = new ArrayList<>();
-        for (BookAuthor bookAuthor : bookAuthors) {
-            books.add(bookAuthor.getBook());
-        }
-        return null;
     }
 }

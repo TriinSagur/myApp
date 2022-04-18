@@ -9,7 +9,7 @@ import java.util.List;
 public interface BookAuthorRepository extends JpaRepository<BookAuthor, Integer> {
 
     @Query("select b from BookAuthor b where upper(b.author.lastName) = upper(?1)")
-    List<BookAuthor> findByAuthorIsB(String lastName);
+    List<BookAuthor> findByAuthorIs(String lastName);
 
 
 

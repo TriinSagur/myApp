@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-18T11:31:17+0300",
+    date = "2022-04-18T17:23:52+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
@@ -113,15 +113,15 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
     }
 
     @Override
-    public BookAuthor toAddBookAuthorEntity(AddBookAuthorDto bookAuthorDto) {
-        if ( bookAuthorDto == null ) {
+    public BookAuthor toAddBookAuthorEntity(AddBookAuthorDto addBookAuthorDto) {
+        if ( addBookAuthorDto == null ) {
             return null;
         }
 
         BookAuthor bookAuthor = new BookAuthor();
 
-        bookAuthor.setBook( addBookAuthorDtoToBook( bookAuthorDto ) );
-        bookAuthor.setAuthor( addBookAuthorDtoToAuthor( bookAuthorDto ) );
+        bookAuthor.setBook( addBookAuthorDtoToBook( addBookAuthorDto ) );
+        bookAuthor.setAuthor( addBookAuthorDtoToAuthor( addBookAuthorDto ) );
 
         return bookAuthor;
     }
