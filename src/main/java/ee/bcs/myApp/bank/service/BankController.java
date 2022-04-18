@@ -26,8 +26,20 @@ public class BankController {
     }
 
     @PostMapping("/withdraw")
+    @Operation(summary = "Raha kontolt valjavotmine")
     public void withdraw(@Valid @RequestBody WithdrawRequest request) {
-//        bankService.withdraw(request);
+        bankService.withdraw(request);
+    }
 
+    @PostMapping("/in")
+    @Operation(summary = "Raha juurde teiselt kontolt")
+    public TransactionResponse receiveMoney(@Valid @RequestBody ReceiveMoneyRequest request) {
+        return bankService.receiveMoney(request);
+    }
+
+    @PostMapping("/out")
+    @Operation(summary = "Raha saatmine teisele kontole")
+    public TransactionResponse sendMoney(@Valid @RequestBody SendMoneyRequest request) {
+        return bankService.sendMoney(request);
     }
 }
