@@ -2,12 +2,18 @@ package ee.bcs.myApp.library.keyword;
 
 import org.mapstruct.*;
 
+import java.util.List;
+
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface KeywordMapper {
-    Keyword keywordDtoToKeyword(KeywordDto keywordDto);
+    @Mapping(target = "id", ignore = true)
+    Keyword toEntity(KeywordDto keywordDto);
 
-    KeywordDto keywordToKeywordDto(Keyword keyword);
+    KeywordDto toDto(Keyword keyword);
+
+    List<KeywordDto> toDtos(List<Keyword> keywords);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateKeywordFromKeywordDto(KeywordDto keywordDto, @MappingTarget Keyword keyword);
+    @Mapping(target = "id", ignore = true)
+    void updateEntity (KeywordDto keywordDto, @MappingTarget Keyword keyword);
 }

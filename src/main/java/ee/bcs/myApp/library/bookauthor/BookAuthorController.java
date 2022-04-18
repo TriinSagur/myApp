@@ -1,56 +1,69 @@
-package ee.bcs.myApp.library.book;
+package ee.bcs.myApp.library.bookauthor;
+
+import ee.bcs.myApp.library.author.Author;
+import ee.bcs.myApp.library.author.AuthorRepository;
+import ee.bcs.myApp.library.book.Book;
+import ee.bcs.myApp.library.book.BookDto;
+import ee.bcs.myApp.library.book.BookRepository;
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
-
 import javax.annotation.Resource;
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/book")
+@RequestMapping("/book-author")
 public class BookAuthorController {
 
     @Resource
-    private BookService bookService;
+    private BookAuthorService bookAuthorService;
 
-
-    @PostMapping("/all")
-    @Operation(summary = "Lisab uue raamatu")
-    public BookDto addNewBook(@RequestBody BookDto bookDto) {
-        return bookService.addNewBook(bookDto);
+    @PutMapping
+    @Operation(summary = "Lisab uue seose raamatu ja autori vahel.")
+    public BookAuthorDto addNewBookAuthorConnection(@RequestParam Integer bookId, @RequestParam Integer authorId) {
+        return bookAuthorService.addNewBookAuthorConnection(bookId, authorId);
     }
 
-    @GetMapping("/all")
-    @Operation(summary = "Tagastab raamatute nimekirja.")
-    public List<BookDto> getAllBooks() {
-
-        return bookService.returnAllBooks();
+    @PutMapping("/add")
+    @Operation(summary = "Lisab uue raamat-autor komplekti.")
+    public BookAuthorDto addNewBookAuthor(@RequestBody BookAuthorDto bookAuthorDto) {
+        return bookAuthorService.addNewBookAuthor(bookAuthorDto);
     }
 
-    @GetMapping(("/id"))
-    @Operation(summary = "Leiab raamatu id alusel.")
-    public BookDto findBookById(@RequestParam Integer id) {
-        return bookService.findBookById(id);
+    @GetMapping
+    @Operation(summary = "Tagastab kõik raamat-autor komplektid.")
+    public List<BookAuthorDto> getAllBookAuthors() {
+        return bookAuthorService.getAllBookAuthors();
     }
 
-    @DeleteMapping("/id")
-    @Operation(summary = "Kustutab ID järgi kliendi")
-    public void removeBookById(@RequestParam Integer id) {
-
-        bookService.removeBookById(id);
+    @DeleteMapping
+    @Operation(summary = "Kustutab andmebaasi id järgi raamat-autor seose.")
+    public void removeBookAuthorById(@RequestParam Integer id) {
+        bookAuthorService.removeBookAuthorById(id);
     }
 
-    @PutMapping("/id")
-    @Operation(summary = "Uuendab klienti ID järgi")
-    public void updateBookById(@RequestParam Integer id, @Valid @RequestBody BookDto bookDto) {
-        bookService.updateBookById(id, bookDto);
+    @PutMapping("/update")
+    @Operation(summary = "Uuendab raamat-autor seost.")
+    public BookAuthorDto updateBookAuthorById(@RequestParam Integer id, @RequestBody BookAuthorDto bookAuthorDto) {
+        return bookAuthorService.updateBookAuthorById(id, bookAuthorDto);
     }
-
-//    @PutMapping("/rental")
-//    @Operation(summary = "laenutan raamatu")
-//    public void bookRent(@RequestParam String firstName, @RequestParam String lastName ) {
-//        bookService.bookRentByName(firstName, lastName);
+    @GetMapping("/author")
+    @Operation(summary = "Tagastab autori kõik raamatud.")
+    public List<BookAuthorDto> getAllAuthorBooks(@RequestParam Integer authorId) {
+        return bookAuthorService.getAllAuthorBooks(authorId);
+    }
+//
+//    @GetMapping
+//    public void demo1() {
+//        Author author = authorRepository.getByLastName("Banderas");
+//        Book book = bookRepository.findByTitle("Harry Potter");
+//        BookAuthor bookAuthor = new BookAuthor();
+//        bookAuthor.setAuthor(author);
+//        bookAuthor.setBook(book);
+//        bookAuthorRepository.save(bookAuthor);
+//
+//
+//
 //    }
-
 }

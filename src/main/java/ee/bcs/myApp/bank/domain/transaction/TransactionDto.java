@@ -1,4 +1,4 @@
-package ee.bcs.myApp.bank.domain.account.transaction;
+package ee.bcs.myApp.bank.domain.transaction;
 
 import lombok.Data;
 

@@ -2,12 +2,21 @@ package ee.bcs.myApp.library.bookout;
 
 import org.mapstruct.*;
 
+import java.util.List;
+
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface BookOutMapper {
-    BookOut bookOutDtoToBookOut(BookOutDto bookOutDto);
+    @Mapping(source = "bookId", target = "book.id")
+    @Mapping(source = "bookTitle", target = "book.title")
+    @Mapping(source = "bookYear", target = "book.year")
+    BookOut toEntity(BookOutDto bookOutDto);
 
-    BookOutDto bookOutToBookOutDto(BookOut bookOut);
+    @InheritInverseConfiguration(name = "toEntity")
+    BookOutDto toDto(BookOut bookOut);
 
+    List<BookOutDto> toDtos(List<BookOut> bookOut);
+
+    @InheritConfiguration(name = "toEntity")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateBookOutFromBookOutDto(BookOutDto bookOutDto, @MappingTarget BookOut bookOut);
+    void updateEntity(BookOutDto bookOutDto, @MappingTarget BookOut bookOut);
 }

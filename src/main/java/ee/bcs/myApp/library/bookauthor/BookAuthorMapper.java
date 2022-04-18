@@ -2,12 +2,21 @@ package ee.bcs.myApp.library.bookauthor;
 
 import org.mapstruct.*;
 
+import java.util.List;
+
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface BookAuthorMapper {
-    BookAuthor bookAuthorDtoToBookAuthor(BookAuthorDto bookAuthorDto);
+    @Mapping(source = "bookTitle", target = "book.title")
+    @Mapping(source = "authorFirstName", target = "author.firstName")
+    @Mapping(source = "authorLastName", target = "author.lastName")
+    BookAuthor toEntity(BookAuthorDto bookAuthorDto);
 
-    BookAuthorDto bookAuthorToBookAuthorDto(BookAuthor bookAuthor);
+    @InheritInverseConfiguration(name = "toEntity")
+    BookAuthorDto toDto(BookAuthor bookAuthor);
 
+    List<BookAuthorDto> toDtos(List<BookAuthor> entities);
+
+    @InheritConfiguration(name = "toEntity")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateBookAuthorFromBookAuthorDto(BookAuthorDto bookAuthorDto, @MappingTarget BookAuthor bookAuthor);
+    void updateEntity(BookAuthorDto bookAuthorDto, @MappingTarget BookAuthor bookAuthor);
 }

@@ -14,43 +14,33 @@ public class BookController {
     @Resource
     private BookService bookService;
 
-
-    @PostMapping("/all")
+    @PostMapping
     @Operation(summary = "Lisab uue raamatu")
-    public BookDto addNewBook(@RequestBody BookDto bookDto) {
+    public BookDto addNewBook(@Valid @RequestBody BookDto bookDto) {
         return bookService.addNewBook(bookDto);
     }
 
     @GetMapping("/all")
-    @Operation(summary = "Tagastab raamatute nimekirja.")
+    @Operation(summary = "Tagastab kõik raamatud")
     public List<BookDto> getAllBooks() {
-
-        return bookService.returnAllBooks();
+        return bookService.getAllBooks();
     }
 
-    @GetMapping(("/id"))
-    @Operation(summary = "Leiab raamatu id alusel.")
+    @GetMapping
+    @Operation(summary = "Leiab id järgi raamatu nime")
     public BookDto findBookById(@RequestParam Integer id) {
         return bookService.findBookById(id);
     }
-
-    @DeleteMapping("/id")
-    @Operation(summary = "Kustutab ID järgi kliendi")
+    @DeleteMapping
+    @Operation(summary = "Kustutab id järgi raamatu")
     public void removeBookById(@RequestParam Integer id) {
-
         bookService.removeBookById(id);
     }
 
     @PutMapping("/id")
-    @Operation(summary = "Uuendab klienti ID järgi")
-    public void updateBookById(@RequestParam Integer id, @Valid @RequestBody BookDto bookDto) {
+    @Operation(summary = "Uuendab id järgi raamatu andmed")
+    public void updateBookById(@RequestParam Integer id,@Valid @RequestBody BookDto bookDto) {
         bookService.updateBookById(id, bookDto);
     }
-
-//    @PutMapping("/rental")
-//    @Operation(summary = "laenutan raamatu")
-//    public void bookRent(@RequestParam String firstName, @RequestParam String lastName ) {
-//        bookService.bookRentByName(firstName, lastName);
-//    }
 
 }

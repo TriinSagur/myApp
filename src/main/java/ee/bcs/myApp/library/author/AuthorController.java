@@ -1,12 +1,8 @@
-package ee.bcs.myApp.library.book;
-import ee.bcs.myApp.bank.domain.customer.Customer;
-import ee.bcs.myApp.library.author.Author;
-import ee.bcs.myApp.library.author.AuthorDto;
-import ee.bcs.myApp.library.author.AuthorRepository;
-import ee.bcs.myApp.library.author.AuthorService;
+package ee.bcs.myApp.library.author;
+
+import ee.bcs.myApp.library.book.Book;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
-
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -18,40 +14,34 @@ public class AuthorController {
 
     @Resource
     private AuthorService authorService;
-    @Resource
-    AuthorRepository authorRepository;
-
 
     @PostMapping
-    @Operation(summary = "Lisab uue autori")
+    @Operation(summary = "Lisab uue autori.")
     public AuthorDto addNewAuthor(@RequestBody AuthorDto authorDto) {
         return authorService.addNewAuthor(authorDto);
     }
 
     @GetMapping("/all")
-    @Operation(summary = "Tagastab autorite nimekirja")
-    public List<AuthorDto> getAllBooks() {
-
-        return authorService.returnAllAuthors();
+    @Operation(summary = "Tagastab kõik autorid")
+    public List<AuthorDto> findAllAuthors() {
+        return authorService.findAllAuthors();
     }
 
-    @GetMapping(("/id"))
-    @Operation(summary = "Leiab autori id alusel.")
-
-    public AuthorDto findBookById(@RequestParam Integer id) {
+    @GetMapping("/id")
+    @Operation(summary = "Leiab andmebaasi id järgi autori.")
+    public AuthorDto findAuthorById(@RequestParam Integer id) {
         return authorService.findAuthorById(id);
     }
 
     @DeleteMapping("/id")
-    @Operation(summary = "Kustutab ID järgi autori")
+    @Operation(summary = "Kustutab andmebaasi id järgi autori.")
     public void removeAuthorById(@RequestParam Integer id) {
-
         authorService.removeAuthorById(id);
     }
 
     @PutMapping("/id")
-    @Operation(summary = "Uuendab klienti ID järgi")
-    public void updateBookById(@RequestParam Integer id, @Valid @RequestBody AuthorDto authorDto) {
+    @Operation(summary = "Uuendab andmebaasi id järgi autorit.")
+    public void updateAuthorById(@RequestParam Integer id, @Valid @RequestBody AuthorDto authorDto) {
         authorService.updateAuthorById(id, authorDto);
     }
 

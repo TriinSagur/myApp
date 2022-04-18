@@ -1,4 +1,4 @@
-package ee.bcs.myApp.bank.domain.account.transaction;
+package ee.bcs.myApp.bank.domain.transaction;
 
 import ee.bcs.myApp.bank.service.DepositRequest;
 import javax.annotation.processing.Generated;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-17T09:56:56+0300",
+    date = "2022-04-17T11:48:41+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14 (Amazon.com Inc.)"
 )
 @Component

@@ -14,10 +14,9 @@ public class BookService {
 
     @Resource
     private BookMapper bookMapper;
+
     @Resource
     private BookRepository bookRepository;
-    @Resource
-    private AuthorRepository authorRepository;
 
     public BookDto addNewBook(BookDto bookDto) {
         Book book = bookMapper.toEntity(bookDto);
@@ -25,8 +24,7 @@ public class BookService {
         return bookMapper.toDto(book);
     }
 
-
-    public List<BookDto> returnAllBooks() {
+    public List<BookDto> getAllBooks() {
         List<Book> books = bookRepository.findAll();
         return bookMapper.toDtos(books);
     }
@@ -38,14 +36,12 @@ public class BookService {
 
     public void removeBookById(Integer id) {
         bookRepository.deleteById(id);
-    }
-
+            }
 
     public void updateBookById(Integer id, BookDto bookDto) {
         Book book = bookRepository.getById(id);
+        bookDto.setId(id);
         bookMapper.updateEntity(bookDto, book);
         bookRepository.save(book);
     }
-
-
 }

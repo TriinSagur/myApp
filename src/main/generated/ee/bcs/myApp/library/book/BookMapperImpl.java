@@ -7,22 +7,22 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-17T09:56:56+0300",
+    date = "2022-04-17T11:48:41+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14 (Amazon.com Inc.)"
 )
 @Component
 public class BookMapperImpl implements BookMapper {
 
     @Override
-    public Book toEntity(BookDto dto) {
-        if ( dto == null ) {
+    public Book toEntity(BookDto bookDto) {
+        if ( bookDto == null ) {
             return null;
         }
 
         Book book = new Book();
 
-        book.setTitle( dto.getTitle() );
-        book.setYear( dto.getYear() );
+        book.setTitle( bookDto.getTitle() );
+        book.setYear( bookDto.getYear() );
 
         return book;
     }
@@ -43,13 +43,13 @@ public class BookMapperImpl implements BookMapper {
     }
 
     @Override
-    public List<BookDto> toDtos(List<Book> books) {
-        if ( books == null ) {
+    public List<BookDto> toDtos(List<Book> entities) {
+        if ( entities == null ) {
             return null;
         }
 
-        List<BookDto> list = new ArrayList<BookDto>( books.size() );
-        for ( Book book : books ) {
+        List<BookDto> list = new ArrayList<BookDto>( entities.size() );
+        for ( Book book : entities ) {
             list.add( toDto( book ) );
         }
 
@@ -62,6 +62,9 @@ public class BookMapperImpl implements BookMapper {
             return;
         }
 
+        if ( bookDto.getId() != null ) {
+            book.setId( bookDto.getId() );
+        }
         if ( bookDto.getTitle() != null ) {
             book.setTitle( bookDto.getTitle() );
         }

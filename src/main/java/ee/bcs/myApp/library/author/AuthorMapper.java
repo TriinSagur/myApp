@@ -12,10 +12,8 @@ public interface AuthorMapper {
 
     AuthorDto toDto(Author author);
 
-    List<AuthorDto> toDtos(List<Author> authors);
+    List<AuthorDto> toDtos(List<Author> entities);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-
-    @Mapping(target = "id", ignore = true)
-    void updateAuthorFromAuthorDto(AuthorDto authorDto, @MappingTarget Author author);
+    void updateEntity(AuthorDto authorDto, @MappingTarget Author author);
 }

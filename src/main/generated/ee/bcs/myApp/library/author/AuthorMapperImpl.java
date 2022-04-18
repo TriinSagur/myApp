@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-17T09:56:55+0300",
+    date = "2022-04-17T11:48:41+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14 (Amazon.com Inc.)"
 )
 @Component
@@ -43,13 +43,13 @@ public class AuthorMapperImpl implements AuthorMapper {
     }
 
     @Override
-    public List<AuthorDto> toDtos(List<Author> authors) {
-        if ( authors == null ) {
+    public List<AuthorDto> toDtos(List<Author> entities) {
+        if ( entities == null ) {
             return null;
         }
 
-        List<AuthorDto> list = new ArrayList<AuthorDto>( authors.size() );
-        for ( Author author : authors ) {
+        List<AuthorDto> list = new ArrayList<AuthorDto>( entities.size() );
+        for ( Author author : entities ) {
             list.add( toDto( author ) );
         }
 
@@ -57,11 +57,14 @@ public class AuthorMapperImpl implements AuthorMapper {
     }
 
     @Override
-    public void updateAuthorFromAuthorDto(AuthorDto authorDto, Author author) {
+    public void updateEntity(AuthorDto authorDto, Author author) {
         if ( authorDto == null ) {
             return;
         }
 
+        if ( authorDto.getId() != null ) {
+            author.setId( authorDto.getId() );
+        }
         if ( authorDto.getFirstName() != null ) {
             author.setFirstName( authorDto.getFirstName() );
         }
