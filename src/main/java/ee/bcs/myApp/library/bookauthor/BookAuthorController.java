@@ -17,13 +17,13 @@ public class BookAuthorController {
     @Resource
     private BookAuthorService bookAuthorService;
 
-    @Resource         // peaks tegema service kalssi
+    @Resource
     private AuthorRepository authorRepository;
 
-    @Resource         // peaks tegema service kalssi
+    @Resource
     private BookRepository bookRepository;
 
-    @Resource         // peaks tegema service kalssi
+    @Resource
     private BookAuthorRepository bookAuthorRepository;
 
 
@@ -38,7 +38,7 @@ public class BookAuthorController {
     }
 
     @PostMapping("/book-and-author")
-    @Operation
+    @Operation(summary = "lisab raamatu ja autori")
     public void addBookAndAuthor(@RequestBody BookAuthorDto bookAuthorDto) {
         bookAuthorService.addBookAndAuthor(bookAuthorDto);
     }
