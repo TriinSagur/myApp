@@ -11,9 +11,6 @@ import java.util.Optional;
 @Service
 public class AccountService {
 
-    public boolean acccountExistsByAccountNumber(String accountNumber) {
-
-    }
     @Resource
     private AccountRepository accountRepository;
 
@@ -66,18 +63,19 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    private void updateDebitPaymentBalance(Account account, Integer amount) {
+    public void updateDebitPaymentBalance(Account account, Integer amount) {
         Integer currentBalance = account.getBalance();
         Integer newBalance = currentBalance - amount;
         account.setBalance(newBalance);
         accountRepository.save(account);
-
     }
 
-    public findAccountByAccountNumber(String accountNumber) {
+    public Account findAccountByAccountNumber(String accountNumber) {
         Optional<Account> accountOptional = accountRepository.findByAccountNumber(accountNumber);
         return accountOptional.get();
     }
 
-//    public boolean accountExistsByAccountNumber(String ac)
+    public boolean accountExistsByAccountNumber(String accountNumber) {
+        return accountRepository.existsByAccountNumber(accountNumber);
+    }
 }

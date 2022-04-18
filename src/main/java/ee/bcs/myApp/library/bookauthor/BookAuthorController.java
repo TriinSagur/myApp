@@ -1,6 +1,8 @@
 package ee.bcs.myApp.library.bookauthor;
 
+import ee.bcs.myApp.library.author.Author;
 import ee.bcs.myApp.library.author.AuthorRepository;
+import ee.bcs.myApp.library.book.Book;
 import ee.bcs.myApp.library.book.BookRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.stereotype.Repository;

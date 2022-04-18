@@ -1,9 +1,10 @@
 package ee.bcs.myApp.bank.service;
 
-import javax.validation.constraints.Max;
+import lombok.Data;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
+@Data
 public class WithdrawRequest {
 
     @NotNull
