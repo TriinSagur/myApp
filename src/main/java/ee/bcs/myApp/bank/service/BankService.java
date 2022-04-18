@@ -36,7 +36,6 @@ public class BankService {
 
     public TransactionResponse sendMoney(MoneyRequest request) {
         Transaction transaction = transactionService.addSendMoneyTransaction(request);
-
         return new TransactionResponse(transaction.getId());
     }
 }
