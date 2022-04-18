@@ -20,7 +20,7 @@ public class BankController {
     }
 
     @PutMapping("withdraw")
-    @Operation(summary = "kontolt raha väljamõtmine")
+    @Operation(summary = "kontolt raha väljavõtmine")
     public void withdraw(@RequestBody @Valid WithdrawRequest request) {
         bankService.withdraw(request);
     }

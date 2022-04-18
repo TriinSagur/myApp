@@ -22,6 +22,7 @@ public class BankService {
 
 
     public void withdraw(WithdrawRequest request) {
-
+        transactionService.addWithdrawTransaction(request);
+        accountService.updateDebitPaymanetBalance(request.getAccountId(), request.getAmount());
     }
 }
