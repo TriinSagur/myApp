@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-17T15:44:50+0300",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 16.0.2 (Amazon.com Inc.)"
+    date = "2022-04-15T17:42:52+0300",
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
 public class KeywordMapperImpl implements KeywordMapper {
@@ -21,7 +21,6 @@ public class KeywordMapperImpl implements KeywordMapper {
 
         Keyword keyword = new Keyword();
 
-        keyword.setId( keywordDto.getId() );
         keyword.setName( keywordDto.getName() );
 
         return keyword;
@@ -33,26 +32,23 @@ public class KeywordMapperImpl implements KeywordMapper {
             return null;
         }
 
-        Integer id = null;
-        String name = null;
+        KeywordDto keywordDto = new KeywordDto();
 
-        id = keyword.getId();
-        name = keyword.getName();
-
-        KeywordDto keywordDto = new KeywordDto( id, name );
+        keywordDto.setId( keyword.getId() );
+        keywordDto.setName( keyword.getName() );
 
         return keywordDto;
     }
 
     @Override
-    public List<KeywordDto> toDtos(List<Keyword> keyword) {
-        if ( keyword == null ) {
+    public List<KeywordDto> toDtos(List<Keyword> keywords) {
+        if ( keywords == null ) {
             return null;
         }
 
-        List<KeywordDto> list = new ArrayList<KeywordDto>( keyword.size() );
-        for ( Keyword keyword1 : keyword ) {
-            list.add( toDto( keyword1 ) );
+        List<KeywordDto> list = new ArrayList<KeywordDto>( keywords.size() );
+        for ( Keyword keyword : keywords ) {
+            list.add( toDto( keyword ) );
         }
 
         return list;
@@ -64,9 +60,6 @@ public class KeywordMapperImpl implements KeywordMapper {
             return;
         }
 
-        if ( keywordDto.getId() != null ) {
-            keyword.setId( keywordDto.getId() );
-        }
         if ( keywordDto.getName() != null ) {
             keyword.setName( keywordDto.getName() );
         }

@@ -55,7 +55,6 @@ public class BookAuthorService {
         bookAuthorRepository.save(bookAuthor);
     }
 
-
     public List<BookAuthorDto> getAllBooksByAuthor(String lastName) {
         List<BookAuthor> bookAuthors = bookAuthorRepository.findByAuthorLastName(lastName);
         return bookAuthorMapper.toDtos(bookAuthors);
@@ -64,5 +63,12 @@ public class BookAuthorService {
     public List<BookAuthorDto> getAllAuthorsByTitle(String title) {
         List<BookAuthor> bookAuthors = bookAuthorRepository.findByBookTitle(title);
         return bookAuthorMapper.toDtos(bookAuthors);
+    }
+
+    public void addBookAndAuthor(BookAuthorDto bookAuthorDto) {
+        BookAuthor bookAuthor = bookAuthorMapper.toEntity(bookAuthorDto);
+        authorRepository.save(bookAuthor.getAuthor());
+        bookRepository.save(bookAuthor.getBook());
+        bookAuthorRepository.save(bookAuthor);
     }
 }

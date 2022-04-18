@@ -1,7 +1,6 @@
 package ee.bcs.myApp.library.bookauthor;
 
 import org.mapstruct.*;
-
 import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")

@@ -54,4 +54,11 @@ public class BookAuthorController {
     public List<BookAuthorDto> getAllAuthorsByTitle(@RequestParam String title) {
         return bookAuthorService.getAllAuthorsByTitle(title);
     }
+
+    @PostMapping("/book-and-author")
+    @Operation(summary = "Lisab uue raamatu ja uue autori samaaegselt")
+    public void addBookAndAuthor(@RequestBody BookAuthorDto bookAuthorDto) {
+        bookAuthorService.addBookAndAuthor(bookAuthorDto);
+
+    }
 }

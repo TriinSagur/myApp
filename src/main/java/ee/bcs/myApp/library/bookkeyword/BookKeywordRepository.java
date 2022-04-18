@@ -12,6 +12,4 @@ public interface BookKeywordRepository extends JpaRepository<BookKeyword, Intege
 
     @Query("select b from BookKeyword b where upper(b.keyword.name) = upper(?1)")
     List<BookKeyword> findByKeyword(String name);
-
-
 }
