@@ -1,5 +1,6 @@
 package ee.bcs.myApp.library.book;
 
+import ee.bcs.myApp.library.bookauthor.BookAuthor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
