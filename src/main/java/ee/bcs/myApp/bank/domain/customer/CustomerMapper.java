@@ -12,7 +12,7 @@ public interface CustomerMapper {
 
     CustomerDto toDto(Customer entity);
 
-    List<CustomerDto> toDtos(List<Customer> entities);
+    List<CustomerDto> toDtos(List<Customer> entities);    // miks seda vaja on?
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)

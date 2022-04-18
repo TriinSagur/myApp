@@ -4,9 +4,9 @@ import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface BookMapper {
-    Book bookDtoToBook(BookDto bookDto);
+    Book toBookEntity(BookDto bookDto);
 
-    BookDto bookToBookDto(Book book);
+    BookDto toBookDto(Book book);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateBookFromBookDto(BookDto bookDto, @MappingTarget Book book);

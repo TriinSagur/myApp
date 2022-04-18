@@ -7,14 +7,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-18T22:35:52+0300",
+    date = "2022-04-19T00:51:59+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
 public class BookAuthorMapperImpl implements BookAuthorMapper {
 
     @Override
-    public BookAuthor bookAuthorDtoToBookAuthor(BookAuthorDto bookAuthorDto) {
+    public BookAuthor toEntity(BookAuthorDto bookAuthorDto) {
         if ( bookAuthorDto == null ) {
             return null;
         }
@@ -29,7 +29,7 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
     }
 
     @Override
-    public BookAuthorDto bookAuthorToBookAuthorDto(BookAuthor bookAuthor) {
+    public BookAuthorDto toDto(BookAuthor bookAuthor) {
         if ( bookAuthor == null ) {
             return null;
         }
