@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccountService {
@@ -55,19 +56,26 @@ public class AccountService {
         return accountRepository.getById(accountId);
     }
 
-    public void updateCreditPaymentBalance(Integer accountId, Integer amount) {
-        Account account = accountRepository.getById(accountId);
+    public void updateCreditPaymentBalance(Account account, Integer amount) {
         Integer currentBalance = account.getBalance();
         Integer newBalance = currentBalance + amount;
         account.setBalance(newBalance);
         accountRepository.save(account);
     }
 
-    public void updateDebitPaymentBalance(Integer accountId, Integer amount) {
-        Account account = accountRepository.getById(accountId);
+    public void updateDebitPaymentBalance(Account account, Integer amount) {
         Integer currentBalance = account.getBalance();
         Integer newBalance = currentBalance - amount;
         account.setBalance(newBalance);
         accountRepository.save(account);
+    }
+
+    public Account findAccountByAccountNumber(String accountNumber) {
+        Optional<Account> accountOptional = accountRepository.findByAccountNumber(accountNumber);
+        return accountOptional.get();
+    }
+
+    public boolean accountExistsByAccountNumber(String accountNumber) {
+        return accountRepository.existsByAccountNumber(accountNumber);
     }
 }
