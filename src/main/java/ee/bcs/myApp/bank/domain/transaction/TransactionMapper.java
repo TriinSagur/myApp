@@ -1,6 +1,7 @@
 package ee.bcs.myApp.bank.domain.transaction;
 
 import ee.bcs.myApp.bank.service.DepositRequest;
+import ee.bcs.myApp.bank.service.MoneyRequest;
 import ee.bcs.myApp.bank.service.WithdrawRequest;
 import org.mapstruct.*;
 
@@ -24,4 +25,12 @@ public interface TransactionMapper {
     @Mapping(target = "type", constant = "w")
 //    @Mapping(target = )
     Transaction toWithdrawEntity(WithdrawRequest request);
+
+    @Mapping(target = "type", constant = "r")
+    Transaction toReceiveMoneyEntity(MoneyRequest request);
+
+    @Mapping(target = "type", constant = "s")
+    Transaction toSendMoneyEntity(MoneyRequest request);
+
+
 }
