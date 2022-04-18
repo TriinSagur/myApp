@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-16T12:00:04+0300",
+    date = "2022-04-18T11:26:41+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
 )
 @Component
@@ -39,6 +39,7 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
         BookAuthorDto bookAuthorDto = new BookAuthorDto();
 
         bookAuthorDto.setBookTitle( bookAuthorBookTitle( bookAuthor ) );
+        bookAuthorDto.setYear( bookAuthorBookYear( bookAuthor ) );
         bookAuthorDto.setAuthorFirstName( bookAuthorAuthorFirstName( bookAuthor ) );
         bookAuthorDto.setAuthorLastName( bookAuthorAuthorLastName( bookAuthor ) );
         bookAuthorDto.setId( bookAuthor.getId() );
@@ -87,6 +88,7 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
         Book book = new Book();
 
         book.setTitle( bookAuthorDto.getBookTitle() );
+        book.setYear( bookAuthorDto.getYear() );
 
         return book;
     }
@@ -117,6 +119,21 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
             return null;
         }
         return title;
+    }
+
+    private Integer bookAuthorBookYear(BookAuthor bookAuthor) {
+        if ( bookAuthor == null ) {
+            return null;
+        }
+        Book book = bookAuthor.getBook();
+        if ( book == null ) {
+            return null;
+        }
+        Integer year = book.getYear();
+        if ( year == null ) {
+            return null;
+        }
+        return year;
     }
 
     private String bookAuthorAuthorFirstName(BookAuthor bookAuthor) {
@@ -156,6 +173,9 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
 
         if ( bookAuthorDto.getBookTitle() != null ) {
             mappingTarget.setTitle( bookAuthorDto.getBookTitle() );
+        }
+        if ( bookAuthorDto.getYear() != null ) {
+            mappingTarget.setYear( bookAuthorDto.getYear() );
         }
     }
 

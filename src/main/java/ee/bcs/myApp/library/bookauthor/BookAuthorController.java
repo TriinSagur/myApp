@@ -26,14 +26,14 @@ public class BookAuthorController {
 
     @PutMapping
     @Operation(summary = "Lisab uue seose raamatu ja autori vahel.")
-    public BookAuthorDto addNewBookAuthorConnection(@RequestParam Integer bookId, @RequestParam Integer authorId) {
-        return bookAuthorService.addNewBookAuthorConnection(bookId, authorId);
+    public BookAuthorDto addBookAuthorConnection(@RequestParam Integer bookId, @RequestParam Integer authorId) {
+        return bookAuthorService.addBookAuthorConnection(bookId, authorId);
     }
 
     @PutMapping("/add")
     @Operation(summary = "Lisab uue raamat-autor komplekti.")
-    public BookAuthorDto addNewBookAuthor(@RequestBody BookAuthorDto bookAuthorDto) {
-        return bookAuthorService.addNewBookAuthor(bookAuthorDto);
+    public BookAuthorDto addBookAuthor(@RequestBody BookAuthorDto bookAuthorDto) {
+        return bookAuthorService.addBookAuthor(bookAuthorDto);
     }
 
     @GetMapping

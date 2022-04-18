@@ -27,8 +27,8 @@ public class AccountService {
     public List<AccountResponse> findAllAccounts() {
         List<Account> accounts = accountRepository.findAll();
         return accountMapper.toResponses(accounts);
-
     }
+
 
     public AccountResponse findAccountInfoById(Integer id) {
         Account account = accountRepository.getById(id);
@@ -55,6 +55,30 @@ public class AccountService {
 
     public Account findAccountById(Integer accountId) {
         return accountRepository.getById(accountId);
+    }
+
+    public void updateCreditPaymentBalance(Account account, Integer amount) {
+        Integer currentBalance = account.getBalance();
+        Integer newBalance = currentBalance + amount;
+        account.setBalance(newBalance);
+        accountRepository.save(account);
+    }
+
+    public void updateDebitPaymentBalance(Account account, Integer amount) {
+        Integer currentBalance = account.getBalance();
+        Integer newBalance = currentBalance - amount;
+        account.setBalance(newBalance);
+        accountRepository.save(account);
+    }
+
+    public Account findAccountByAccountNumber(String accountNumber) {
+        Optional<Account> accountOptional = accountRepository.findByAccountNumber(accountNumber);
+        Account account = accountOptional.get();
+        return account;
+    }
+
+    public boolean accountExistsByAccountNumber(String accountNumber) {
+        return accountRepository.existsByAccountNumber(accountNumber);
     }
 //
 //    private Account findAccountById(Integer id, List<Account> accounts) {

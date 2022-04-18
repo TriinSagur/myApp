@@ -10,6 +10,8 @@ public class BookAuthorDto implements Serializable {
     private Integer id;
     @Valid
     private String bookTitle;
+
+    private Integer year;
     @Valid
     private String authorFirstName;
     @Valid

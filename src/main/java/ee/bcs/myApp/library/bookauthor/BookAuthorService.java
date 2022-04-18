@@ -35,7 +35,7 @@ public class BookAuthorService {
         }
 
 
-    public BookAuthorDto addNewBookAuthorConnection(Integer bookId, Integer authorId) {
+    public BookAuthorDto addBookAuthorConnection(Integer bookId, Integer authorId) {
         Author author = authorRepository.getById(authorId);
         Book book = bookRepository.getById(bookId);
         BookAuthor bookAuthor = new BookAuthor();
@@ -45,7 +45,7 @@ public class BookAuthorService {
         return bookAuthorMapper.toDto(bookAuthor);
     }
 
-    public BookAuthorDto addNewBookAuthor(BookAuthorDto bookAuthorDto) {
+    public BookAuthorDto addBookAuthor(BookAuthorDto bookAuthorDto) {
         BookAuthor bookAuthor = bookAuthorMapper.toEntity(bookAuthorDto);
         bookRepository.save(bookAuthor.getBook());
         authorRepository.save(bookAuthor.getAuthor());

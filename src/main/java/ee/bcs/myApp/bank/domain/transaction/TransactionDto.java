@@ -7,19 +7,19 @@ import java.time.Instant;
 
 @Data
 public class TransactionDto implements Serializable {
-    private final Integer id;
-    private final String senderAccountNumber;
-    private final String receiverAccountNumber;
-    private final Integer amount;
-    private final Integer balance;
-    private final String type;
-    private final Instant transactionDateTime;
-    private final Integer accountId;
-    private final Integer accountCustomerId;
-    private final String accountCustomerFirstName;
-    private final String accountCustomerLastName;
-    private final String accountCustomerIsikukood;
-    private final String accountAccountNumber;
-    private final Integer accountBalance;
-    private final Boolean accountLocked;
+    private Integer id;
+    private String senderAccountNumber;
+    private String receiverAccountNumber;
+    private Integer amount;
+    private Integer balance;
+    private String type;
+    private Instant transactionDateTime;
+    private Integer accountId;
+    private Integer accountCustomerId;
+    private String accountCustomerFirstName;
+    private String accountCustomerLastName;
+    private String accountCustomerIsikukood;
+    private String accountAccountNumber;
+    private Integer accountBalance;
+    private Boolean accountLocked;
 }

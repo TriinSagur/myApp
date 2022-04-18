@@ -10,10 +10,10 @@ public interface BookKeywordMapper {
     @Mapping(source = "keywordId", target = "keyword.id")
     BookKeyword toEntity(BookKeywordDto bookKeywordDto);
 
-    @InheritInverseConfiguration(name = "bookKeywordDtoToBookKeyword")
+    @InheritInverseConfiguration(name = "toEntity")
     BookKeywordDto toDto(BookKeyword bookKeyword);
 
-    @InheritConfiguration(name = "bookKeywordDtoToBookKeyword")
+    @InheritConfiguration(name = "toEntity")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateBookKeywordFromBookKeywordDto(BookKeywordDto bookKeywordDto, @MappingTarget BookKeyword bookKeyword);
 }
