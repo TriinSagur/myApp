@@ -56,10 +56,12 @@ public class TransactionService {
         Account senderAccount = accountService.findAccountByAccountNumber(request.getSenderAccountNumber());
         Integer senderNewBalance = calculateDebitBalance(senderAccount.getBalance(), request.getAmount());
         saveBankTransaction(senderTransaction, senderNewBalance, senderAccount);
+        accountService.updateDebitPaymentBalance(senderAccount, request.getAmount());
 
         if (accountService.accountExistsByAccountNumber(request.getReceiverAccountNumber())) {
             // TODO:  RECEIVER TRANSACTION
-            addReceiveMoneyTransaction(request);
+            Transaction receiverTransaction = addReceiveMoneyTransaction(request);
+            accountService.updateCreditPaymentBalance(receiverTransaction.getAccount(), request.getAmount());
         }
 
         return senderTransaction;
