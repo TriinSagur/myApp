@@ -11,26 +11,26 @@ import java.util.List;
 public class BookService {
 
 
-    public List<BookDto> findAllBooks() {
-        Library libraryRepository = MyAppApplication.libraryRepository;
-        List<Book> books = libraryRepository.getBooks();
-
-        List<BookDto> bookDtos = new ArrayList<>();
-        for (Book book : books) {
-            BookDto bookDto = toDto(book);
-            bookDtos.add(bookDto);
-        }
-        return bookDtos;
-    }
-
-    public BookDto addNewBook(BookDto bookDto) {
-        Book book = toEntity(bookDto);
-        book.updateId();
-        List<Book> books = MyAppApplication.libraryRepository.getBooks();
-        books.add(book);
-        return toDto(book);
-
-    }
+//    public List<BookDto> findAllBooks() {
+//        Library libraryRepository = MyAppApplication.libraryRepository;
+//        List<Book> books = libraryRepository.getBooks();
+//
+//        List<BookDto> bookDtos = new ArrayList<>();
+//        for (Book book : books) {
+//            BookDto bookDto = toDto(book);
+//            bookDtos.add(bookDto);
+//        }
+//        return bookDtos;
+//    }
+//
+//    public BookDto addNewBook(BookDto bookDto) {
+//        Book book = toEntity(bookDto);
+//        book.updateId();
+//        List<Book> books = MyAppApplication.libraryRepository.getBooks();
+//        books.add(book);
+////        return toDto(book);
+//
+//    }
 
     private Book toEntity(BookDto bookDto) {
         Book book = new Book();

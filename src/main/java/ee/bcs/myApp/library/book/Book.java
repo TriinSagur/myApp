@@ -1,21 +1,24 @@
 package ee.bcs.myApp.library.book;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.lang.model.element.NestingKind;
+import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
+@Entity
+@Table(name = "book")
 public class Book {
-    public static Integer idCounter = 1;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Integer id;
+
+    @Column(name = "title", nullable = false)
     private String title;
+
+    @Column(name = "year", nullable = false)
     private Integer year;
-
-    public void updateId() {
-        id = idCounter;
-        idCounter++;
-    }
-
-
 
 }
