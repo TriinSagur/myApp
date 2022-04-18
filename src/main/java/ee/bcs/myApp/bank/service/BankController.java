@@ -13,17 +13,31 @@ public class BankController {
     @Resource
     private BankService bankService;
 
-    @PostMapping("/money-in")
+    @PostMapping("/deposit")
     @Operation(summary = "Raha juurde lisamine kontole")
     public void deposit(@RequestBody @Valid DepositRequest request) {
         bankService.deposit(request);
     }
 
 
-    @PostMapping("/money-out")
+    @PostMapping("/withdraw")
     @Operation(summary = "Raha väljavõtmine kontolt")
     public void withdraw(@RequestBody @Valid WithdrawRequest request) {
     bankService.withdraw(request);
     }
+
+    @PostMapping("/in")
+    @Operation(summary = "raha saamine")
+    public TransactionResponse receiveMoney(@Valid @RequestBody MoneyRequest request) {
+        return bankService.receiveMoney(request);
+    }
+
+
+    @PostMapping("/out")
+    @Operation(summary = "reha saatmine")
+    public TransactionResponse sendMoney(@Valid @RequestBody MoneyRequest request) {
+        return bankService.sendMoney(request);
+    }
+
 
 }
