@@ -62,4 +62,12 @@ public class AccountService {
         account.setBalance(newBalance);
         accountRepository.save(account);
     }
+
+    public void updateDebitPaymentBalance(Integer accountId, Integer amount) {
+        Account account = accountRepository.getById(accountId);
+        Integer currentBalance = account.getBalance();
+        Integer newBalance = currentBalance - amount;
+        account.setBalance(newBalance);
+        accountRepository.save(account);
+    }
 }

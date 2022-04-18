@@ -20,5 +20,8 @@ public class BankService {
         accountService.updateCreditPaymentBalance(request.getAccountId(), request.getAmount());
     }
 
-
+    public void withdraw(WithdrawRequest request) {
+        transactionService.addWithdrawTransaction(request);
+        accountService.updateDebitPaymentBalance(request.getAccountId(), request.getAmount());
+    }
 }
