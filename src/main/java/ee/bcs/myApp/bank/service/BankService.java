@@ -26,14 +26,14 @@ public class BankService {
         accountService.updateDebitPaymentBalance(transaction.getAccount(), request.getAmount());
     }
 
-    public TransactionResponse receiveMoney(ReceiveMoneyRequest request) {
+    public TransactionResponse receiveMoney(MoneyRequest request) {
         Transaction transaction = transactionService.addReceiveMoneyTransaction(request);
         accountService.updateCreditPaymentBalance(transaction.getAccount(), request.getAmount());
         return new TransactionResponse(transaction.getId());
     }
 
-    public TransactionResponse sendMoney(SendMoneyRequest request) {
-        transactionService.addSendMoneyTransaction(request);
-        return null;
+    public TransactionResponse sendMoney(MoneyRequest request) {
+        Transaction transaction = transactionService.addSendMoneyTransaction(request);
+        return new TransactionResponse(transaction.getId());
     }
 }

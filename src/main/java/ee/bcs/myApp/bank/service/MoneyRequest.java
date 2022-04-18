@@ -3,7 +3,7 @@ package ee.bcs.myApp.bank.service;
 import lombok.Data;
 
 @Data
-public class ReceiveMoneyRequest {
+public class MoneyRequest {
 private String senderAccountNumber;
 private String receiverAccountNumber;
 private Integer amount;

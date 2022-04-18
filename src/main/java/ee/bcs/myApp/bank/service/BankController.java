@@ -28,13 +28,13 @@ public class BankController {
 
     @PostMapping("/in")
     @Operation(summary = "Raha laekumine")
-    public TransactionResponse receiveMoney (@Valid @RequestBody ReceiveMoneyRequest request) {
+    public TransactionResponse receiveMoney (@Valid @RequestBody MoneyRequest request) {
         return bankService.receiveMoney(request);
     }
 
     @PostMapping("/out")
     @Operation(summary = "Raha saatmine")
-    public TransactionResponse sendMoney(@Valid @RequestBody SendMoneyRequest request) {
+    public TransactionResponse sendMoney(@Valid @RequestBody MoneyRequest request) {
         return bankService.sendMoney(request);
     }
 }
