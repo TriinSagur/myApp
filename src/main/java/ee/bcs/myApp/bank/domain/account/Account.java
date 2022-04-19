@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "account", schema = "bank")
+@Table(name = "account", schema = "bank") //millise tabeli vastu see klass läheb
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
