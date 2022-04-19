@@ -1,6 +1,7 @@
 package ee.bcs.myApp.bank.domain.transaction;
 
 import ee.bcs.myApp.bank.domain.account.Account;
+import ee.bcs.myApp.bank.domain.account.AccountRepository;
 import ee.bcs.myApp.bank.domain.account.AccountService;
 import ee.bcs.myApp.bank.service.DepositRequest;
 import ee.bcs.myApp.bank.service.MoneyRequest;
@@ -25,7 +26,7 @@ public class TransactionService {
 
     public Transaction addDepositTransaction(DepositRequest request) {
         Transaction transaction = transactionMapper.toDepositEntity(request);
-        Account account = accountService.findAccountById(request.getAccountId());
+        Account account = accountService.getValidAccountById(request.getAccountId());
         Integer newBalance = calculateCreditBalance(account.getBalance(), request.getAmount());
         transaction.setReceiverAccountNumber(account.getAccountNumber());
         saveBankTransaction(transaction, newBalance, account);
@@ -34,7 +35,7 @@ public class TransactionService {
 
     public Transaction addWithdrawTransaction(WithdrawRequest request) {
         Transaction transaction = transactionMapper.toWithdrawEntity(request);
-        Account account = accountService.findAccountById(request.getAccountId());
+        Account account = accountService.getValidAccountById(request.getAccountId());
         Integer newBalance = calculateDebitBalance(account.getBalance(), request.getAmount());
         transaction.setSenderAccountNumber(account.getAccountNumber());
         saveBankTransaction(transaction, newBalance, account);
