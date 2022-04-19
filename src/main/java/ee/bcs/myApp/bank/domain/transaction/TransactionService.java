@@ -18,13 +18,14 @@ public class TransactionService {
     private AccountService accountService;
 
     @Resource
+    private ValidationService validationService;
+
+    @Resource
     private TransactionMapper transactionMapper;
 
     @Resource
     private TransactionRepository transactionRepository;
 
-    @Resource
-    private ValidationService validationService;
 
     public Transaction addDepositTransaction(DepositRequest request) {
         Transaction transaction = transactionMapper.toDepositEntity(request);
@@ -52,7 +53,6 @@ public class TransactionService {
         Integer newBalance = calculateCreditBalance(account.getBalance(), request.getAmount());
         saveBankTransaction(transaction, newBalance, account);
         return transaction;
-
     }
 
     public Transaction addSendMoneyTransaction(MoneyRequest request) {
@@ -60,15 +60,17 @@ public class TransactionService {
 
         // todo: SENDER TRANSACTION
         Account senderAccount = accountService.getValidAccountByAccountNumber(request.getSenderAccountNumber());
-        Integer senderNewBalance = calculateDebitBalance(senderAccount.getBalance(), request.getAmount());
+        Integer senderBalance = senderAccount.getBalance();
+        Integer amount = request.getAmount();
+        validationService.isWithinBalance(senderBalance, amount);
+        Integer senderNewBalance = calculateDebitBalance(senderBalance, amount);
         saveBankTransaction(senderTransaction, senderNewBalance, senderAccount);
-        accountService.updateDebitPaymentBalance(senderAccount, request.getAmount());
-
+        accountService.updateDebitPaymentBalance(senderAccount, amount);
 
         // todo: RECEIVER TRANSACTION
         if (accountService.accountExistsByAccountNumber(request.getReceiverAccountNumber())) {
             Transaction receiverTransaction = addReceiveMoneyTransaction(request);
-            accountService.updateCreditPaymentBalance(receiverTransaction.getAccount(), request.getAmount());
+            accountService.updateCreditPaymentBalance(receiverTransaction.getAccount(), amount);
         }
 
         return senderTransaction;
