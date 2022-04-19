@@ -1,12 +1,13 @@
 package ee.bcs.myApp.infrastructure;
 
 import ee.bcs.myApp.infrastructure.error.ApiError;
-import ee.bcs.myApp.infrastructure.error.MyAppError;
-import ee.bcs.myApp.infrastructure.exception.SomeBusinessException;
+import ee.bcs.myApp.infrastructure.exception.BusinessException;
 import ee.bcs.myApp.infrastructure.exception.DataNotFoundException;
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -22,31 +23,56 @@ import java.util.List;
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<MyAppError> handleDataNotFoundException(DataNotFoundException exception) {
-        MyAppError myAppError = new MyAppError();
-        myAppError.setMessage(exception.getMessage());
-        myAppError.setErrorCode(exception.getErrorCode());
-        return new ResponseEntity<>(myAppError, HttpStatus.NOT_FOUND);
+    public ResponseEntity<ApiError> handleDataNotFoundException(DataNotFoundException exception) {
+        ApiError apiError = new ApiError();
+        apiError.setTitle(exception.getTitle());
+        apiError.setStatusCode(HttpStatus.NOT_FOUND.value());
+        apiError.setDetail(exception.getDetail());
+        return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler
-    public ResponseEntity<MyAppError> handleBankServiceException(SomeBusinessException exception) {
-        MyAppError myAppError = new MyAppError();
-        myAppError.setMessage(exception.getMessage());
-        myAppError.setErrorCode(exception.getErrorCode());
-        return new ResponseEntity<>(myAppError, HttpStatus.FORBIDDEN);
+    public ResponseEntity<ApiError> handleBusinessException(BusinessException exception) {
+        ApiError apiError = new ApiError();
+        apiError.setTitle(exception.getTitle());
+        apiError.setStatusCode(HttpStatus.FORBIDDEN.value());
+        apiError.setDetail(exception.getDetail());
+        return new ResponseEntity<>(apiError, HttpStatus.FORBIDDEN);
+    }
+
+
+    @Override
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException exception, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        ApiError apiError = new ApiError();
+        apiError.setTitle("Invalid request body content.");
+        apiError.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        apiError.setDetail(exception.getMessage());
+        return handleExceptionInternal(exception, apiError, headers, HttpStatus.BAD_REQUEST, request);
     }
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException ex, final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
+    protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException exception, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        ApiError apiError = new ApiError();
+        apiError.setTitle("Invalid parameter type.");
+        apiError.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        apiError.setDetail(exception.getMessage());
+        return handleExceptionInternal(exception, apiError, headers, HttpStatus.BAD_REQUEST, request);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException exception, final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
+        ApiError apiError = new ApiError();
+        apiError.setTitle("Invalid request body content.");
+        apiError.setStatusCode(HttpStatus.BAD_REQUEST.value());
         final List<String> errors = new ArrayList<>();
-        for (final FieldError error : ex.getBindingResult().getFieldErrors()) {
+        for (final FieldError error : exception.getBindingResult().getFieldErrors()) {
             errors.add(error.getField() + ": " + error.getDefaultMessage());
         }
-        for (final ObjectError error : ex.getBindingResult().getGlobalErrors()) {
+        for (final ObjectError error : exception.getBindingResult().getGlobalErrors()) {
             errors.add(error.getObjectName() + ": " + error.getDefaultMessage());
         }
-        final ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, "Not valid request body", errors);
-        return handleExceptionInternal(ex, apiError, headers, apiError.getStatus(), request);
+        apiError.setDetail(errors.toString());
+        return handleExceptionInternal(exception, apiError, headers, HttpStatus.BAD_REQUEST, request);
     }
+
 }
