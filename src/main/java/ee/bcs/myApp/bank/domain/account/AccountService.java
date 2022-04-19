@@ -78,11 +78,10 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    public Account findAccountByAccountNumber(String accountNumber) {
-        Optional<Account> accountOptional = accountRepository.findByAccountNumber(accountNumber);
-        return accountOptional.get();
-
-
+    public Account getValidAccountByAccountNumber(String accountNumber) {
+        Optional<Account> account = accountRepository.findByAccountNumber(accountNumber);
+        validationService.accountExists(accountNumber, account);
+        return account.get();
     }
 
     public boolean accountExistsByAccountNumber(String accountNumber) {
