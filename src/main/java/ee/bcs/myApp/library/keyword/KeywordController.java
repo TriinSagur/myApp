@@ -16,7 +16,7 @@ public class KeywordController {
 
     @PostMapping
     @Operation(summary = "Add new keyword")
-    public KeywordDto addNewKeyword(@Valid @RequestBody KeywordDto keywordDto) {
+    public KeywordDto addNewKeyword(@RequestBody KeywordDto keywordDto) {
         return keywordService.addNewKeyword(keywordDto);
     }
 

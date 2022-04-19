@@ -9,10 +9,12 @@ import java.io.Serializable;
 
 @Data
 public class DepositRequest implements Serializable {
-    @Min(1)
-    @Max(5000)
+
     @NotNull
+    @Min(1)
+
     private Integer amount;
+
     @NotNull
     private Integer accountId;
 }
