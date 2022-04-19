@@ -5,18 +5,15 @@ import lombok.Data;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 
 @Data
-public class DepositRequest implements Serializable {
+public class WithdrawRequest {
 
     @NotNull
     private Integer accountId;
 
     @Min(1)
-    @Max(5000)
     @NotNull
     private Integer amount;
-
 
 }

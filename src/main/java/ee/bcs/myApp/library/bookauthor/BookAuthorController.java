@@ -4,10 +4,9 @@ import ee.bcs.myApp.library.author.Author;
 import ee.bcs.myApp.library.author.AuthorRepository;
 import ee.bcs.myApp.library.book.Book;
 import ee.bcs.myApp.library.book.BookRepository;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -26,6 +25,9 @@ public class BookAuthorController {
     @Resource
     private BookAuthorRepository bookAuthorRepository;
 
+    @Resource
+    private BookAuthorService bookAuthorService;
+
 
 
     @GetMapping
@@ -37,5 +39,11 @@ public class BookAuthorController {
         bookAuthor.setBook(book);
         bookAuthorRepository.save(bookAuthor);
 
+    }
+
+    @PostMapping("/book-and-author")
+    @Operation  (summary = "Lisab uue raamatu ja uue autori samaaegselt.")
+    public void addBookAndAuthor(@RequestBody BookAuthorDto bookAuthorDto) {
+        bookAuthorService.addBookAndAuthor(bookAuthorDto);
     }
 }
