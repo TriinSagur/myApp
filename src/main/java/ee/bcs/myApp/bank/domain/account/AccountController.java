@@ -17,34 +17,28 @@ public class AccountController {
 
     @PostMapping
     @Operation(summary = "Lisab uue konto")
-    public AccountDto addNewAccount(@RequestBody @Valid AccountDto accountDto) {
+    public AccountDto addNewAccount(@Valid @RequestBody AccountDto accountDto) {
         return accountService.addNewAccount(accountDto);
-
-
     }
 
     @GetMapping("/all")
-    @Operation(summary = "Saame kontod")
     public List<AccountResponse> findAllAccounts() {
         return accountService.findAllAccounts();
     }
 
-
     @GetMapping("/id")
-    @Operation(summary = "Otsib konto ID järgi (UUS)")
-    public AccountResponse findAccountById(@RequestParam Integer id) {
+    @Operation(summary = "Otsib konto info ID järgi")
+    public AccountResponse findAccountInfoById(@RequestParam Integer id) {
         return accountService.findAccountInfoById(id);
     }
 
 
     @DeleteMapping("/id")
-    @Operation(summary = "kustutame konto ID järgi")
     public void removeAccountById(@RequestParam Integer id) {
         accountService.removeAccountById(id);
     }
 
     @PutMapping("/id")
-    @Operation(summary = "Uuendame kontot ID järgi")
     public void updateAccountById(@RequestParam Integer id, @RequestBody AccountDto accountDto) {
         accountService.updateAccountById(id, accountDto);
     }
@@ -53,4 +47,5 @@ public class AccountController {
     public List<AccountResponse> findAccountsInfoByLastName(@RequestParam String lastName) {
         return accountService.findAccountsInfoByLastName(lastName);
     }
+
 }

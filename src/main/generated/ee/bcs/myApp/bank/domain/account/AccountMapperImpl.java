@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-17T11:48:41+0300",
+    date = "2022-04-19T10:59:30+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14 (Amazon.com Inc.)"
 )
 @Component
@@ -20,23 +20,15 @@ public class AccountMapperImpl implements AccountMapper {
             return null;
         }
 
-        Integer customerId = null;
-        String firstName = null;
-        String lastName = null;
-        String isikukood = null;
-        String accountNumber = null;
-        Integer balance = null;
-        Boolean locked = null;
+        AccountResponse accountResponse = new AccountResponse();
 
-        customerId = accountCustomerId( account );
-        firstName = accountCustomerFirstName( account );
-        lastName = accountCustomerLastName( account );
-        isikukood = accountCustomerIsikukood( account );
-        accountNumber = account.getAccountNumber();
-        balance = account.getBalance();
-        locked = account.getLocked();
-
-        AccountResponse accountResponse = new AccountResponse( customerId, firstName, lastName, isikukood, accountNumber, balance, locked );
+        accountResponse.setCustomerId( accountCustomerId( account ) );
+        accountResponse.setFirstName( accountCustomerFirstName( account ) );
+        accountResponse.setLastName( accountCustomerLastName( account ) );
+        accountResponse.setIsikukood( accountCustomerIsikukood( account ) );
+        accountResponse.setAccountNumber( account.getAccountNumber() );
+        accountResponse.setBalance( account.getBalance() );
+        accountResponse.setLocked( account.getLocked() );
 
         return accountResponse;
     }
@@ -62,7 +54,7 @@ public class AccountMapperImpl implements AccountMapper {
         }
 
         if ( accountDto.getAccountNumber() != null ) {
-            account.setAccountNumber( String.valueOf( accountDto.getAccountNumber() ) );
+            account.setAccountNumber( accountDto.getAccountNumber() );
         }
         if ( accountDto.getBalance() != null ) {
             account.setBalance( accountDto.getBalance() );

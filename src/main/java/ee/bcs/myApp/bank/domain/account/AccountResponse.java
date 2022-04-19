@@ -5,13 +5,11 @@ import lombok.Data;
 @Data
 public class AccountResponse {
 
-    private final Integer customerId;
-    private final String firstName;
-    private final String lastName;
-    private final String isikukood;
-    private final String accountNumber;
-    private final Integer balance;
-    private final Boolean locked;
-
-
+    private Integer customerId;
+    private String firstName;
+    private String lastName;
+    private String isikukood;
+    private String accountNumber;
+    private Integer balance;
+    private Boolean locked;
 }

@@ -17,28 +17,26 @@ public class CustomerController {
 
     @PostMapping
     @Operation(summary = "Lisab uue kliendi.")
-    public CustomerDto addNewCustomer(@RequestBody CustomerDto customerDto) {
-
+    public CustomerDto addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
         return customerService.addNewCustomer(customerDto);
     }
 
-    @GetMapping("/all")
-    @Operation(summary = "Tagastab kliendilisti.")
-    public List<CustomerDto> getAllCustomers() {
 
+    @GetMapping("/all")
+    @Operation(summary = "Tagastab kõik kliendid.")
+    public List<CustomerDto> getAllCustomers() {
         return customerService.getAllCustomers();
     }
 
     @GetMapping("/id")
-    @Operation(summary = "Leiab ID järgi kliendi")
+    @Operation(summary = "Leiab andmebaasi id järgi kliendi.")
     public CustomerDto findCustomerById(@RequestParam Integer id) {
-
         return customerService.findCustomerById(id);
-
     }
 
+
     @DeleteMapping("/id")
-    @Operation(summary = "Kustutab ID järgi kliendi")
+    @Operation(summary = "Kustutab andmebaasi id järgi kliendi.")
     public void removeCustomerById(@RequestParam Integer id) {
         customerService.removeCustomerById(id);
     }
@@ -47,8 +45,6 @@ public class CustomerController {
     @Operation(summary = "Uuendab andmebaasi id järgi klienti.")
     public void updateCustomerById(@RequestParam Integer id, @Valid @RequestBody CustomerDto customerDto) {
         customerService.updateCustomerById(id, customerDto);
-
     }
+
 }
-
-

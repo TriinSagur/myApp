@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-17T11:48:41+0300",
+    date = "2022-04-19T10:59:30+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14 (Amazon.com Inc.)"
 )
 @Component
@@ -45,13 +45,13 @@ public class CustomerMapperImpl implements CustomerMapper {
     }
 
     @Override
-    public List<CustomerDto> toDtos(List<Customer> customers) {
-        if ( customers == null ) {
+    public List<CustomerDto> toDtos(List<Customer> entities) {
+        if ( entities == null ) {
             return null;
         }
 
-        List<CustomerDto> list = new ArrayList<CustomerDto>( customers.size() );
-        for ( Customer customer : customers ) {
+        List<CustomerDto> list = new ArrayList<CustomerDto>( entities.size() );
+        for ( Customer customer : entities ) {
             list.add( toDto( customer ) );
         }
 

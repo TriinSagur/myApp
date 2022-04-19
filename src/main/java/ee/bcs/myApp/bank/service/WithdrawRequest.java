@@ -13,6 +13,6 @@ public class WithdrawRequest {
 
     @NotNull
     @Min(1)
-    private Integer amount;
+    private  Integer amount;
 
 }

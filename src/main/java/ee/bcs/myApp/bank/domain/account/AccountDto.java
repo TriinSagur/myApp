@@ -1,30 +1,17 @@
 package ee.bcs.myApp.bank.domain.account;
 
-import lombok.Data;
-import lombok.NonNull;
 
+import lombok.Data;
+
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
 public class AccountDto {
-
     private Integer id;
-
-    @NonNull
     private Integer customerId;
-
-
-    @NonNull
-    @Size(min = 5, max = 5)
-    private Integer accountNumber;
-
-    @NonNull
+    private String accountNumber;
     private Integer balance = 0;
-
-    @NonNull
     private Boolean locked = false;
 
-    public AccountDto() {
-
-    }
 }

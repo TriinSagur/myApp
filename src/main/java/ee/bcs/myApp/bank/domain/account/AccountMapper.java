@@ -18,6 +18,6 @@ public interface AccountMapper {
 
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(target = "id" , ignore = true)
+    @Mapping(target = "id", ignore = true)
     void updateEntity(AccountDto accountDto, @MappingTarget Account account);
 }

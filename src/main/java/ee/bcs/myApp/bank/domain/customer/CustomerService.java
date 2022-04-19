@@ -10,6 +10,7 @@ public class CustomerService {
 
     @Resource
     private CustomerMapper customerMapper;
+
     @Resource
     private CustomerRepository customerRepository;
 
@@ -20,26 +21,27 @@ public class CustomerService {
     }
 
     public List<CustomerDto> getAllCustomers() {
-        List<Customer> customers = customerRepository.findAll();
-        return  customerMapper.toDtos(customers);
+        List<Customer> allCustomers = customerRepository.findAll();
+        return customerMapper.toDtos(allCustomers);
     }
 
     public CustomerDto findCustomerById(Integer id) {
+        // TODO: kontroll kas customer on olemas. Veateade!
         Customer customer = customerRepository.getById(id);
         return customerMapper.toDto(customer);
     }
 
 
-
     public void removeCustomerById(Integer id) {
+        // TODO: kontroll kas customer on olemas. Veateade!
         customerRepository.deleteById(id);
     }
 
-
-    public void updateCustomerById(Integer id, CustomerDto customerDto) {
-        Customer byId = customerRepository.getById(id);
-        customerMapper.updateEntity(customerDto, byId);
-        customerRepository.save(byId);
-
+    public void updateCustomerById(Integer customerId, CustomerDto customerDto) {
+        Customer customer = customerRepository.getById(customerId);
+        customerMapper.updateEntity(customerDto, customer);
+        customerRepository.save(customer);
     }
+
+
 }
