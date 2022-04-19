@@ -40,6 +40,9 @@ public class TransactionService {
     public Transaction addWithdrawTransaction(WithdrawRequest request) {
         Transaction transaction = transactionMapper.toWithdrawEntity(request);
         Account account = accountService.getValidAccountById(request.getAccountId());
+
+        validationService.isWithinBalance(account.getBalance(), request.getAmount());
+
         Integer newBalance = calculateDebitBalance(account.getBalance(), request.getAmount());
         transaction.setSenderAccountNumber(account.getAccountNumber());
         saveBankTransaction(transaction, newBalance, account);
@@ -59,6 +62,7 @@ public class TransactionService {
         Transaction senderTransaction = transactionMapper.toSendMoneyEntity(request);
 
         Account senderAccount = accountService.findAccountByAccountNumber(request.getSenderaccountNumber());
+        validationService.isWithinBalance(senderAccount.getBalance(), request.getAmount());
         Integer senderNewBalance = calculateDebitBalance(senderAccount.getBalance(), request.getAmount());
         saveBankTransaction(senderTransaction, senderNewBalance, senderAccount );
         accountService.updateDebitPaymentBalance(senderAccount, request.getAmount());

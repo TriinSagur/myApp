@@ -81,8 +81,11 @@ public class AccountService {
     }
 
     public Account findAccountByAccountNumber(String accountNumber) {
-        Optional<Account> accountOptional = accountRepository.findByAccountNumber(accountNumber);
-        return accountOptional.get();
+        Optional<Account> account = accountRepository.findByAccountNumber(accountNumber);
+
+        validationService.accountExists(accountNumber, account);
+
+        return account.get();
 
     }
 
@@ -91,3 +94,4 @@ public class AccountService {
 
     }
 }
+
