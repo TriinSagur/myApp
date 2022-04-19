@@ -27,6 +27,7 @@ public class CustomerController {
         return customerService.getAllCustomers();
     }
 }
+
 //
 //    @GetMapping("/id")
 //    @Operation (summary = "leiab andmebaasi ID järgi kliendikoodi")

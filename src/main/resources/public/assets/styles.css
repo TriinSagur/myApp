@@ -1,0 +1,21 @@
+h1{background-color: ivory;
+    color: darksalmon;
+}
+
+h1#someExampleId1 {
+    color: cadetblue;
+    font-style: italic;
+
+}
+
+table {
+    background-color: burlywood;
+    border-color: darksalmon;
+    border-width: 2px;
+
+}
+
+body {
+    accent-color: floralwhite
+
+}
