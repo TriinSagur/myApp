@@ -27,6 +27,7 @@ public class BankService {
     }
 
     public void withdraw(WithdrawRequest request) {
+        validationService.isValidWithdrawAmount(request.getAmount());
         Transaction transaction = transactionService.addWithdrawTransaction(request);
         accountService.updateDebitPaymentBalance(transaction.getAccount(), request.getAmount());
     }

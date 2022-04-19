@@ -6,6 +6,7 @@ import ee.bcs.myApp.bank.domain.account.AccountService;
 import ee.bcs.myApp.bank.service.DepositRequest;
 import ee.bcs.myApp.bank.service.MoneyRequest;
 import ee.bcs.myApp.bank.service.WithdrawRequest;
+import ee.bcs.myApp.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,6 +24,8 @@ public class TransactionService {
     @Resource
     private TransactionRepository transactionRepository;
 
+    @Resource
+    private ValidationService validationService;
 
     public Transaction addDepositTransaction(DepositRequest request) {
         Transaction transaction = transactionMapper.toDepositEntity(request);
@@ -36,6 +39,7 @@ public class TransactionService {
     public Transaction addWithdrawTransaction(WithdrawRequest request) {
         Transaction transaction = transactionMapper.toWithdrawEntity(request);
         Account account = accountService.getValidAccountById(request.getAccountId());
+        validationService.isWithinBalance(account.getBalance(), request.getAmount());
         Integer newBalance = calculateDebitBalance(account.getBalance(), request.getAmount());
         transaction.setSenderAccountNumber(account.getAccountNumber());
         saveBankTransaction(transaction, newBalance, account);
