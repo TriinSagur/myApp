@@ -3,7 +3,6 @@ package ee.bcs.myApp.bank.domain.account;
 
 import ee.bcs.myApp.bank.domain.customer.Customer;
 import ee.bcs.myApp.bank.domain.customer.CustomerRepository;
-import ee.bcs.myApp.infrastructure.exception.DataNotFoundException;
 import ee.bcs.myApp.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
@@ -82,9 +81,11 @@ public class AccountService {
 
     }
 
-    public Account findAccountByAccountNumber(String accountNumber) {
-        Optional<Account> accountOptional = accountRepository.findByAccountNumber(accountNumber);
-        return accountOptional.get();
+    public Account getValidAccountByAccountNumber(String accountNumber) {
+        Optional<Account> account = accountRepository.findByAccountNumber(accountNumber);
+        validationService.accountExists(accountNumber, account);
+
+        return account.get();
     }
 
     public boolean accountExistsByAccountNumber(String accountNumber) {
