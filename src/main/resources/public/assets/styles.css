@@ -1,0 +1,11 @@
+body {background: cornflowerblue}
+
+h1 { background-color: coral}
+p.kujundus {color: blueviolet;
+    box-sizing: border-box;
+    opacity: inherit }
+p.kujundusA {color: chartreuse; }
+
+body {
+    background-color: darkcyan;
+}
