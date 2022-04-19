@@ -21,6 +21,7 @@ public interface TransactionMapper {
     @Mapping(target = "type", constant = "d")
     Transaction toDepositEntity(DepositRequest request);
 
+
     @Mapping(target = "receiverAccountNumber", constant = "ATM")
     @Mapping(target = "type", constant = "w")
     Transaction toWithdrawEntity(WithdrawRequest request);

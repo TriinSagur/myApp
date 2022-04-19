@@ -31,7 +31,6 @@ public class AccountController {
         return accountService.findAccountInfoById(id);
     }
 
-
     @DeleteMapping("/id")
     public void removeAccountById(@RequestParam Integer id) {
         accountService.removeAccountById(id);

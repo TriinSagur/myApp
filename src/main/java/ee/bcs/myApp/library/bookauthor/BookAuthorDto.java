@@ -1,16 +1,19 @@
-package ee.bcs.myApp.library.bookAuthor;
+package ee.bcs.myApp.library.bookauthor;
 
 import lombok.Data;
 
+import javax.validation.Valid;
 import java.io.Serializable;
 
 @Data
 public class BookAuthorDto implements Serializable {
     private Integer id;
-    private Integer bookId;
-    private Integer authorId;
+    @Valid
     private String bookTitle;
+
     private Integer bookYear;
+    @Valid
     private String authorFirstName;
+    @Valid
     private String authorLastName;
 }

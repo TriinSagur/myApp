@@ -20,6 +20,7 @@ public class CustomerController {
         return customerService.addNewCustomer(customerDto);
     }
 
+
     @GetMapping("/all")
     @Operation(summary = "Tagastab kõik kliendid.")
     public List<CustomerDto> getAllCustomers() {
@@ -31,6 +32,7 @@ public class CustomerController {
     public CustomerDto findCustomerById(@RequestParam Integer id) {
         return customerService.findCustomerById(id);
     }
+
 
     @DeleteMapping("/id")
     @Operation(summary = "Kustutab andmebaasi id järgi kliendi.")

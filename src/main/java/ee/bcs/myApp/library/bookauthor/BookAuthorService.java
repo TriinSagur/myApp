@@ -1,10 +1,8 @@
-package ee.bcs.myApp.library.bookAuthor;
+package ee.bcs.myApp.library.bookauthor;
 
 import ee.bcs.myApp.library.author.Author;
-import ee.bcs.myApp.library.author.AuthorDto;
 import ee.bcs.myApp.library.author.AuthorRepository;
 import ee.bcs.myApp.library.book.Book;
-import ee.bcs.myApp.library.book.BookDto;
 import ee.bcs.myApp.library.book.BookRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +21,7 @@ public class BookAuthorService {
 
 
     @Resource
-    private ee.bcs.myApp.library.bookAuthor.BookAuthorRepository bookAuthorRepository;
+    private ee.bcs.myApp.library.bookauthor.BookAuthorRepository bookAuthorRepository;
 
     @Resource
     private BookAuthorMapper bookAuthorMapper;
@@ -45,6 +43,20 @@ public class BookAuthorService {
 
     }
 
+    public List<BookAuthorDto> getAllBooksAndAuthors() {
+        List<BookAuthor> bookAuthors = bookAuthorRepository.findAll();
+        return bookAuthorMapper.toDtos(bookAuthors);
+    }
+
+    public BookAuthorDto findBookAuthorById(Integer id) {
+        BookAuthor bookAuthor = bookAuthorRepository.getById(id);
+        return bookAuthorMapper.toDto(bookAuthor);
+
+    }
+
+    public void deleteBookAndAuthor(Integer id) {
+       bookAuthorRepository.deleteById(id);
+    }
 
 
 

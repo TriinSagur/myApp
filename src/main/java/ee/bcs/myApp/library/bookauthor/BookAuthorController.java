@@ -1,12 +1,9 @@
-package ee.bcs.myApp.library.bookAuthor;
+package ee.bcs.myApp.library.bookauthor;
 
-import ee.bcs.myApp.library.author.AuthorDto;
-import ee.bcs.myApp.library.book.BookDto;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -14,7 +11,7 @@ import java.util.List;
 public class BookAuthorController {
 
     @Resource
-    private ee.bcs.myApp.library.bookAuthor.BookAuthorService bookAuthorService;
+    private ee.bcs.myApp.library.bookauthor.BookAuthorService bookAuthorService;
 
     @PostMapping("/book-and-author")
     @Operation(summary = "Lisab samaaegselt uue raamatu ja uue autori")
@@ -28,16 +25,25 @@ public class BookAuthorController {
         bookAuthorService.connectBookWithAuthor(lastName, bookName);
     }
 
+    @GetMapping("/all")
+    @Operation(summary = "Tagastab kõik raamatud koos autoriga")
+    public List<BookAuthorDto> getAllBooksAndAuthors() {
+        return bookAuthorService.getAllBooksAndAuthors();
+    }
 
-//        public void demo1() {
-//        Author author = authorRepository.getByLastName("Banderas");
-//        Book book = bookRepository.findByTitle("Harry Potter");
-//        BookAuthor bookAuthor = new BookAuthor();
-//        bookAuthor.setAuthor(author);
-//        bookAuthor.setBook(book);
-//        bookAuthorRepository.save(bookAuthor);
-//
+    @GetMapping("/id")
+    @Operation(summary = "Tagastab autori ja raamatu andmebaasi id järgi")
+    public BookAuthorDto findBookAuthorById(Integer id) {
+        return bookAuthorService.findBookAuthorById(id);
+    }
 
-//    }
+    @DeleteMapping("/id")
+    @Operation(summary = "Kustutab autori ja raamatu andmebaasi id järgi")
+    public void deleteBookAndAuthor(@RequestParam Integer id) {
+         bookAuthorService.deleteBookAndAuthor(id);
+    }
+
+
+
 
 }
