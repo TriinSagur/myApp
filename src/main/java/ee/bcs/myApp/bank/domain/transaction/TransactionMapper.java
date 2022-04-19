@@ -25,5 +25,8 @@ public interface TransactionMapper {
   @Mapping(target = "type", constant = "W")
   Transaction toWithdrawEntity(WithdrawRequest request);
 
+  @Mapping(terget = )
+  @Mapping(target = "type", constant = "R")
+
 
 }

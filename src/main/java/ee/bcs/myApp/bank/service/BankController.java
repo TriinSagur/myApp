@@ -1,5 +1,6 @@
 package ee.bcs.myApp.bank.service;
 
+import ee.bcs.myApp.bank.domain.account.Account;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +29,6 @@ public class BankController {
 
     @PostMapping("/")
     public ReceiveMoneyResponse receiveMoney(@Valid @RequestBody ReceiveMoneyRequest request){
-        return;
 
 
     }
