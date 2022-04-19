@@ -59,7 +59,6 @@ public class AccountService {
     public Account getValidAccountById(Integer accountId) {
         Optional<Account> account = accountRepository.findById(accountId);
         validationService.accountExists(accountId, account);
-
         return account.get();
     }
 
@@ -77,9 +76,10 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    public Account findAccountByAccountNumber(String accountNumber) {
-        Optional<Account> accountOptional = accountRepository.findByAccountNumber(accountNumber);
-        return accountOptional.get();
+    public Account getValidAccountByAccountNumber(String accountNumber) {
+        Optional<Account> account = accountRepository.findByAccountNumber(accountNumber);
+        validationService.accountExists(accountNumber, account);
+        return account.get();
     }
 
     public boolean accountExistsByAccountNumber(String accountNumber) {

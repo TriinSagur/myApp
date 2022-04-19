@@ -36,6 +36,7 @@ public class BankController {
     }
 
     @PostMapping("/out")
+    @Operation(summary ="Raha saatmine")
     public TransactionResponse sendMoney(@Valid @RequestBody MoneyRequest request) {
         return bankService.sendMoney(request);
     }

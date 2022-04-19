@@ -18,13 +18,15 @@ public class TransactionService {
     private AccountService accountService;
 
     @Resource
+    private ValidationService validationService;
+
+    @Resource
     private TransactionMapper transactionMapper;
 
     @Resource
     private TransactionRepository transactionRepository;
 
-    @Resource
-    private ValidationService validationService;
+
 
 
     public Transaction addDepositTransaction(DepositRequest request) {
@@ -48,7 +50,7 @@ public class TransactionService {
 
     public Transaction addReceiveMoneyTransaction(MoneyRequest request) {
         Transaction transaction = transactionMapper.toReceiveMoneyEntity(request);
-        Account account = accountService.findAccountByAccountNumber(request.getReceiverAccountNumber());
+        Account account = accountService.getValidAccountByAccountNumber(request.getReceiverAccountNumber());
         Integer newBalance = calculateCreditBalance(account.getBalance(), request.getAmount());
         saveBankTransaction(transaction, newBalance, account);
         return transaction;
@@ -56,13 +58,18 @@ public class TransactionService {
 
     public Transaction addSendMoneyTransaction(MoneyRequest request) {
         Transaction senderTransaction = transactionMapper.toSendMoneyEntity(request);
-        Account senderAccount = accountService.findAccountByAccountNumber(request.getSenderAccountNumber());
-        Integer senderNewBalance = calculateDebitBalance(senderAccount.getBalance(), request.getAmount());
+
+        // todo: SENDER TRANSACTION
+        Account senderAccount = accountService.getValidAccountByAccountNumber(request.getSenderAccountNumber());
+        Integer senderBalance = senderAccount.getBalance();
+        Integer amount = request.getAmount();
+        validationService.isWithinBalance(senderBalance, amount);
+        Integer senderNewBalance = calculateDebitBalance(senderBalance, amount);
         saveBankTransaction(senderTransaction, senderNewBalance, senderAccount);
-        accountService.updateDebitPaymentBalance(senderAccount, request.getAmount());
+        accountService.updateDebitPaymentBalance(senderAccount, amount);
         if (accountService.accountExistsByAccountNumber(request.getReceiverAccountNumber())) {
             Transaction receiverTransaction = addReceiveMoneyTransaction(request);
-            accountService.updateCreditPaymentBalance(receiverTransaction.getAccount(), request.getAmount());
+            accountService.updateCreditPaymentBalance(receiverTransaction.getAccount(), amount);
         }
         return senderTransaction;
     }
