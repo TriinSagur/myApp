@@ -23,7 +23,7 @@ public interface TransactionMapper {
 
 
     @Mapping(target = "receiverAccountNumber", constant = "ATM")
-    @Mapping(target = "type", constant = "d")
+    @Mapping(target = "type", constant = "w")
     Transaction toWithdrawEntity(WithdrawRequest request);
 
     @Mapping(target = "type", constant = "r")

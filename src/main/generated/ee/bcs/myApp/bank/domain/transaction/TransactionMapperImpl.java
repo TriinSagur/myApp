@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-18T16:16:48+0300",
+    date = "2022-04-19T11:50:42+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
 )
 @Component
@@ -41,7 +41,7 @@ public class TransactionMapperImpl implements TransactionMapper {
         transaction.setAmount( request.getAmount() );
 
         transaction.setReceiverAccountNumber( "ATM" );
-        transaction.setType( "d" );
+        transaction.setType( "w" );
 
         return transaction;
     }

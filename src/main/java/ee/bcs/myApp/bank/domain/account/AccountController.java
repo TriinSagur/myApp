@@ -26,8 +26,8 @@ public class AccountController {
     }
 
     @GetMapping("/id")
-    @Operation(summary = "Otsib konto id järgi")
-    public AccountResponse findAccountById(@RequestParam Integer id) {
+    @Operation(summary = "Otsib konto info id järgi")
+    public AccountResponse findAccountInfoById(@RequestParam Integer id) {
         return accountService.findAccountInfoById(id);
     }
 
