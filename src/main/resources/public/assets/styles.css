@@ -1,0 +1,13 @@
+h1.myHeader1Def {
+    background-color: blue;
+    color: white;
+}
+h1#Example1{
+    font-style: italic;
+    color: orange;
+}
+table{
+    background-color: yellow;
+    border-color: darkred;
+    border-width: 5px;
+}
