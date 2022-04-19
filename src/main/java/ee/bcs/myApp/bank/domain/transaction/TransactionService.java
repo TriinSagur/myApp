@@ -1,7 +1,6 @@
 package ee.bcs.myApp.bank.domain.transaction;
 
 import ee.bcs.myApp.bank.domain.account.Account;
-import ee.bcs.myApp.bank.domain.account.AccountRepository;
 import ee.bcs.myApp.bank.domain.account.AccountService;
 import ee.bcs.myApp.bank.service.DepositRequest;
 import ee.bcs.myApp.bank.service.MoneyRequest;
@@ -49,7 +48,7 @@ public class TransactionService {
 
     public Transaction addReceiveMoneyTransaction(MoneyRequest request) {
         Transaction transaction = transactionMapper.toReceiveMoneyEntity(request);
-        Account account = accountService.findAccountByAccountNumber(request.getReceiverAccountNumber());
+        Account account = accountService.getValidAccountByAccountNumber(request.getReceiverAccountNumber());
         Integer newBalance = calculateCreditBalance(account.getBalance(), request.getAmount());
         saveBankTransaction(transaction, newBalance, account);
         return transaction;
@@ -60,7 +59,7 @@ public class TransactionService {
         Transaction senderTransaction = transactionMapper.toSendMoneyEntity(request);
 
         // todo: SENDER TRANSACTION
-        Account senderAccount = accountService.findAccountByAccountNumber(request.getSenderAccountNumber());
+        Account senderAccount = accountService.getValidAccountByAccountNumber(request.getSenderAccountNumber());
         Integer senderNewBalance = calculateDebitBalance(senderAccount.getBalance(), request.getAmount());
         saveBankTransaction(senderTransaction, senderNewBalance, senderAccount);
         accountService.updateDebitPaymentBalance(senderAccount, request.getAmount());

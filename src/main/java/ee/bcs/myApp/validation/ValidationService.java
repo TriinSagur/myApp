@@ -22,6 +22,12 @@ public class ValidationService {
         }
     }
 
+    public void accountExists(String accountNumber, Optional<Account> account) {
+        if (account.isEmpty()) {
+            throw new DataNotFoundException(ACCOUNT_NOT_EXISTS, "Kontot kontonumbriga " + accountNumber + " ei leitud");
+        }
+    }
+
     public void isValidDepositAmount(Integer amount) {
         // productionsis tuleks see väärtus andmebaasist
         Integer limit = 5000;
