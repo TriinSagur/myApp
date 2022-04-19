@@ -2,6 +2,7 @@ package ee.bcs.myApp.infrastructure;
 
 
 import ee.bcs.myApp.infrastructure.error.ApiError;
+import ee.bcs.myApp.infrastructure.exception.BusinessException;
 import ee.bcs.myApp.infrastructure.exception.DataNotFoundException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpHeaders;
@@ -29,6 +30,15 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         apiError.setStatusCode(HttpStatus.NOT_FOUND.value());
         apiError.setDetail(exception.getDetail());
         return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ApiError> handleBusinessException(BusinessException exception) {
+        ApiError apiError = new ApiError();
+        apiError.setTitle(exception.getTitle());
+        apiError.setStatusCode(HttpStatus.FORBIDDEN.value());
+        apiError.setDetail(exception.getDetail());
+        return new ResponseEntity<>(apiError, HttpStatus.FORBIDDEN);
     }
 
 

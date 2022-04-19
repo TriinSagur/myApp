@@ -3,6 +3,8 @@ package ee.bcs.myApp.bank.domain.account;
 
 import ee.bcs.myApp.bank.domain.customer.Customer;
 import ee.bcs.myApp.bank.domain.customer.CustomerRepository;
+import ee.bcs.myApp.infrastructure.exception.DataNotFoundException;
+import ee.bcs.myApp.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,6 +21,8 @@ public class AccountService {
     private CustomerRepository customerRepository;
     @Resource
     private AccountMapper accountMapper;
+    @Resource
+    private ValidationService validationService;
 
     public AccountDto addNewAccount(AccountDto accountDto) {
 
@@ -57,7 +61,9 @@ public class AccountService {
     }
 
     public Account findAccountById(Integer accountId) {
-        return accountRepository.getById(accountId);
+        Optional<Account> account = accountRepository.findById(accountId);
+        validationService.accountExists(accountId, account);
+        return account.get();
 
     }
 

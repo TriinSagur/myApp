@@ -12,12 +12,12 @@ import java.time.Instant;
 @Data
 public class DepositRequest implements Serializable {
 
-@NotNull
-    private  Integer accountId;
+    @NotNull
+    private Integer accountId;
 
-@NotNull
-@Min(1)
-@Max(500)
+    @NotNull
+    @Min(1)
+    @Max(500)
     private Integer amount;
 
 }
