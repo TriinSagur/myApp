@@ -4,12 +4,12 @@ import lombok.Data;
 
 @Data
 public class DataNotFoundException extends RuntimeException {
-    private String message;
-    private Integer errorCode;
+    private final String title;
+    private final  String detail;
 
-    public DataNotFoundException(String message, Integer errorCode) {
-        super(message);
-        this.message = message;
-        this.errorCode = errorCode;
+    public DataNotFoundException(String title, String detail) {
+        super(title);
+        this.title = title;
+        this.detail = detail;
     }
 }
