@@ -2,6 +2,7 @@ package ee.bcs.myApp.bank.domain.account;
 
 import ee.bcs.myApp.bank.domain.customer.Customer;
 import ee.bcs.myApp.bank.domain.customer.CustomerRepository;
+import ee.bcs.myApp.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,6 +20,9 @@ public class AccountService {
 
     @Resource
     private AccountMapper accountMapper;
+
+    @Resource
+    private ValidationService validationService;
 
     public AccountDto addNewAccount(AccountDto accountDto) {
         return accountDto;
@@ -50,8 +54,10 @@ public class AccountService {
         return accountMapper.toResponses(accounts);
     }
 
-    public Account findAccountById(Integer accountId) {
-        return accountRepository.getById(accountId);
+    public Account getValidAccountById(Integer accountId) {
+        Optional<Account> account = accountRepository.findById(accountId);
+        validationService.accountExists(accountId, account);
+        return account.get();
     }
 
     public void updateCreditPaymentBalance(Account account, Integer amount) {
@@ -62,11 +68,12 @@ public class AccountService {
     public void updateDebitPaymentBalance(Account account, Integer amount) {
         account.setBalance(account.getBalance() - amount);
         accountRepository.save(account);
-
     }
 
-    public Account findAccountByAccountNumber(String accountNumber) {
-        return accountRepository.findByAccountNumber(accountNumber).get();
+    public Account getValidAccountByAccountNumber(String accountNumber) {
+        Optional<Account> account = accountRepository.findByAccountNumber(accountNumber);
+        validationService.accountExists(accountNumber, account);
+        return account.get();
     }
 
     public boolean accountExistsByAccountNumber(String accountNumber) {
