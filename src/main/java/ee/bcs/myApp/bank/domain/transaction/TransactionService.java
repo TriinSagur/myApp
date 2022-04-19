@@ -30,14 +30,11 @@ public class TransactionService {
     public Transaction addDepositTransaction(DepositRequest request) {
         Transaction transaction = transactionMapper.toDepositEntity(request);
         Account account = accountService.getValidAccountById(request.getAccountId());
-
         validationService.isWithinBalance(account.getBalance(), request.getAmount());
         Integer newBalance = calculateCreditBalance(account.getBalance(), request.getAmount());
         transaction.setReceiverAccountNumber(account.getAccountNumber());
         saveBankTransaction(transaction, newBalance, account);
         return transaction;
-
-
 //        TODO: pigem teha eraldi meetod
 //        account.setBalance(account.getBalance() + request.getAmount());
 //        accountRepository.save(account);
@@ -79,7 +76,6 @@ public class TransactionService {
         }
         return senderTransaction;
     }
-
 
     private Integer calculateCreditBalance(Integer balance, Integer amount) {
         return balance + amount;
