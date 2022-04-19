@@ -29,16 +29,13 @@ public class TransactionService {
         Integer newBalance = calculateCreditBalance(account.getBalance(), request.getAmount());
         transaction.setReceiverAccountNumber(account.getAccountNumber());
         saveBankTransaction(transaction, newBalance, account);
-
         return transaction;
     }
 
     public Transaction addWithdrawTransaction(WithdrawRequest request) {
         Transaction transaction = transactionMapper.toWithdrawEntity(request);
         Account account = accountService.findAccountById(request.getAccountId());
-
         Integer newBalance = calculateDebitBalance(account.getBalance(), request.getAmount());
-
         transaction.setSenderAccountNumber(account.getAccountNumber());
         saveBankTransaction(transaction, newBalance, account);
         return transaction;
@@ -49,26 +46,27 @@ public class TransactionService {
         Transaction transaction = transactionMapper.toReceiveMoneyEntity(request);
         Account account = accountService.findAccountByAccountNumber(request.getReceiverAccountNumber());
         Integer newBalance = calculateCreditBalance(account.getBalance(), request.getAmount());
-
         saveBankTransaction(transaction, newBalance, account);
         return transaction;
+
     }
 
     public Transaction addSendMoneyTransaction(MoneyRequest request) {
         Transaction senderTransaction = transactionMapper.toSendMoneyEntity(request);
+
+        // todo: SENDER TRANSACTION
         Account senderAccount = accountService.findAccountByAccountNumber(request.getSenderAccountNumber());
-
-
-        //todo: Sender transaction
         Integer senderNewBalance = calculateDebitBalance(senderAccount.getBalance(), request.getAmount());
         saveBankTransaction(senderTransaction, senderNewBalance, senderAccount);
+        accountService.updateDebitPaymentBalance(senderAccount, request.getAmount());
 
+
+        // todo: RECEIVER TRANSACTION
         if (accountService.accountExistsByAccountNumber(request.getReceiverAccountNumber())) {
-            addReceiveMoneyTransaction(request);
-
-            //todo: Receiver transaction
-
+            Transaction receiverTransaction = addReceiveMoneyTransaction(request);
+            accountService.updateCreditPaymentBalance(receiverTransaction.getAccount(), request.getAmount());
         }
+
         return senderTransaction;
     }
 
@@ -81,11 +79,11 @@ public class TransactionService {
         return balance - amount;
     }
 
+
     private void saveBankTransaction(Transaction transaction, Integer newBalance, Account account) {
         transaction.setBalance(newBalance);
         transaction.setTransactionDateTime(Instant.now());
         transaction.setAccount(account);
         transactionRepository.save(transaction);
     }
-
 }
