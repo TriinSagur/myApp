@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/keyword")
@@ -19,6 +20,13 @@ public class KeywordController {
     public KeywordDto addNewKeyword (@RequestBody @Valid KeywordDto keywordDto) {
        return keywordService.addNewKeyword(keywordDto);
     }
+
+    @GetMapping("/all")
+    @Operation(summary = "Show all keywords")
+    public List<KeywordDto> findAllKeywords() {
+        return keywordService.findAllKeywords();
+    }
+
 
     @PutMapping
     @Operation(summary = "Update by ID")

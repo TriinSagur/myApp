@@ -10,8 +10,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class
-BookAuthorService {
+public class BookAuthorService {
     @Resource
     private BookAuthorMapper bookAuthorMapper;
     @Resource

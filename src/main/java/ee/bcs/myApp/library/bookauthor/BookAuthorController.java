@@ -1,7 +1,5 @@
 package ee.bcs.myApp.library.bookauthor;
 
-import ee.bcs.myApp.bank.service.BankService;
-import ee.bcs.myApp.library.author.AuthorDto;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +20,7 @@ public class BookAuthorController {
 
     @PostMapping
     @Operation(summary = "Lisa raamatu autori")
-    public void addNewBookAuthor(String title, String lastName) {
+    public void addNewBookAuthor(@RequestParam String title, @RequestParam String lastName) {
         bookAuthorService.addNewBookAuthor(title, lastName);
     }
 

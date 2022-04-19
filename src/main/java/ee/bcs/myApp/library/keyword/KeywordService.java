@@ -4,6 +4,7 @@ package ee.bcs.myApp.library.keyword;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class KeywordService {
@@ -28,5 +29,10 @@ public class KeywordService {
 
     public void removeById(Integer id) {
         keywordRepository.deleteById(id);
+    }
+
+    public List<KeywordDto> findAllKeywords() {
+        List<Keyword> all = keywordRepository.findAll();
+        return keywordMapper.toDtos(all);
     }
 }
