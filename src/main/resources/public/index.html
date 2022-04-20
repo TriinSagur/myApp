@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <link rel="stylesheet" href="assets/styles.css">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+
+<textarea id="myTextArea" cols="100" rows="10">Esialgne tekst</textarea>
+<br>
+<button type="submit" id="lisa" onclick="addText()">Lisa mingi tekst</button>
+<br>
+<button type="submit" id="vota" onclick="getSomeText()">Võta mingi tekst</button>
+<br>
+<h1 class="myheader1Definition"> This is heading </h1>
+<h1 class="myheader1Definition" id="someExampleId">This is heading</h1>
+<h1>This is heading</h1>
+<h1 class="myheader1Definition">This is heading</h1>
+<p class="test">This is paragraph</p>
+<h2 style="color: red" align="center">Tere :) </h2>
+<input type="date" name="Sisestus" id="Kuupäev">
+<input type="submit">
+<br>
+<br>
+<br>
+<input type="text" name="Sisestus" id="Sisestus" placeholder="Sisesta siia" >
+<input type="submit">
+<br>
+<br>
+<br>
+<select name="test123" id="" >
+    <option value="a">a</option>
+    <option value="b">b</option>
+    <option value="c">c</option>
+</select>
+
+<input type="submit" >
+<br>
+<br>
+<br>
+<br>
+
+<table class="table table-hover">
+    <tr bgcolor="#dc143c">
+        <th bgcolor="aqua">
+            Eesnimi
+        </th>
+        <th>
+            Perekonnanimi
+        </th>
+    </tr>
+    <tr bgcolor="#d2691e">
+        <td>
+            Otto
+        </td>
+        <td bgcolor="#8b008b">
+            Triin
+        </td>
+    </tr>
+</table>
+<br>
+<a href="https://www.google.com/">Siit saab googlisse</a>
+
+<ul>
+    <li>Banaan</li>
+    <dd>Õun</dd>
+    <li>Apelsin</li>
+</ul>
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="" width="400" height="300">
+<img src="images/img.png" alt="parim pilt" width="500" height="400" border="50">
+<ul>baan</ul>
+
+<script>
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+    };
+
+    fetch("http://localhost:8080/customer/all", requestOptions)
+        .then(response => response.text())
+        .then(result => document.getElementById("myTextArea").value = result)
+            console.log(result)
+        .catch(error => console.log('error', error));
+    function addText() {
+
+    }
+    function getSomeText() {
+        let text1 = document.getElementById("myTextArea");
+        alert(text1.value);
+    }
+
+
+</script>
+<!--<script>-->
+<!--    let a = 10;-->
+<!--    let b = "10";-->
+
+<!--    alert(a == b);-->
+<!--    alert(a === b);-->
+<!--</script>-->
+
+</body>
+</html>

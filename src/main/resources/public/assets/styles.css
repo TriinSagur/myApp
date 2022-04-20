@@ -1,0 +1,27 @@
+h1 {
+    background-color: brown;
+    font-style: oblique;
+}
+
+h1.myheader1Definition {background-color: darkblue;
+    color: yellow;
+}
+
+h1#someExampleId {
+    background-color: chartreuse;
+}
+p {background-color: darkmagenta}
+
+table {
+    background-color: aqua;
+    border-color: red;
+    border-width: 5px;
+    border-radius: 10px;
+    cursor: wait;
+    opacity:50% ;
+}
+
+body {
+    background-color: aliceblue;
+}
+
