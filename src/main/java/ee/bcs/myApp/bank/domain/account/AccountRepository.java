@@ -11,7 +11,7 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
     // Tähtis on meeles pidada, et JPA tehnoloogia teeb meile ise taustal ära vajaliku SQL lause,
     // siis kas @Query annotatsiooni või siis meetodi nime nime põhjal.
     // Seega, see meetodi nimi peab olema täpselt õiges formaadis, või siis peab SQL koostamiseks lisama Query annotatsiooni
-    // koos vastava päringu lausega. Muidu ei see JPA tehnoloogia ei toimi.
+    // koos vastava päringu lausega. Muidu see JPA tehnoloogia ei toimi ja õiget SQL lauset kokku ei osata panna.
     @Query("select a from Account a where upper(a.customer.lastName) = upper(?1) order by a.accountNumber")
     List<Account> findByLastName(String lastName);
     

@@ -197,6 +197,15 @@ public class AccountService {
         // Ning tulemuse pannakse siin vasakul pool olevasse objekti.
         List<Account> accounts = accountRepository.findByLastName(lastName);
 
+
+        // Siin vaatleme kõigepealt "return'i" paremat poolt. Kutsume välja ühe mäpperi meetodi ja anname talle kaasa ka mingi objekti,
+        // mille sees on siis mingid andmed.
+        // Luuakse uut tüüpi objekt (mingist teisest klassist)
+        // ja siis mäpitakse (kaardistatakse ja väärtustatakse) andmed uuele objektile ümber.
+        // Kui mäpperite teema on veel endiselt segane, siis palun vaata uuesti "MapStruct mappimine":
+        // https://youtu.be/BrSMvqcGMio
+        // Tagastame RETURN statement'iga 'toResponses()' tulemuse
+        // Peale return'i minnakse sellest defineeritud getTransactionsByAccountId() meetodist välja
         return accountMapper.toResponses(accounts);
     }
 
