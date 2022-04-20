@@ -1,0 +1,1 @@
+INSERT INTO public.keyword (id, name) VALUES (DEFAULT, 'travel')

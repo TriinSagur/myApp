@@ -1,19 +1,19 @@
-//package ee.bcs.myApp.library.book;
-//
-//import ee.bcs.myApp.MyAppApplication;
-//import ee.bcs.myApp.library.Library;
-//import org.springframework.stereotype.Service;
-//import org.springframework.web.bind.annotation.RequestParam;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//@Service
-//public class BookService {
-//
+package ee.bcs.myApp.library.book;
+
+import ee.bcs.myApp.MyAppApplication;
+import ee.bcs.myApp.library.Library;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class BookService {
+
+
 //    public List<BookDto> findAllBooks() {
-//        Library libraryRepository = MyAppApplication.libraryRepository;
-//        List<Book> books = libraryRepository.getBooks();
+////      Library libraryRepository = MyAppApplication.libraryRepository;
+////      List<Book> books = libraryRepository.getBooks();
 //
 //        List<BookDto> bookDtos = new ArrayList<>();
 //        for (Book book : books) {
@@ -25,14 +25,14 @@
 //
 //    public BookDto addNewBook(BookDto bookDto) {
 //        Book book = toEntity(bookDto);
-//        book.updateId();
-//        List<Book> books = MyAppApplication.libraryRepository.getBooks();
+////        book.updateId();
+////        List<Book> books = MyAppApplication.libraryRepository.getBooks();
 //        books.add(book);
 //        return bookDto;
 //    }
 //
 //    public Book findBookById(@RequestParam Integer id) {
-//        List<Book> books = MyAppApplication.libraryRepository.getBooks();
+////      List<Book> books = MyAppApplication.libraryRepository.getBooks();
 //        Book result = new Book();
 //        for (Book book : books) {
 //            if (book.getId().equals(id)) {
@@ -42,7 +42,7 @@
 //        return result;
 //    }
 //
-//    List<Book> books = MyAppApplication.libraryRepository.getBooks();
+////    List<Book> books = MyAppApplication.libraryRepository.getBooks();
 //
 //    public void removeBookById(@RequestParam Integer id) {
 //        Book result = new Book();
@@ -76,6 +76,6 @@
 //        bookDto.setYear(book.getYear());
 //        return bookDto;
 //    }
-//
-//
-//}
+
+
+}

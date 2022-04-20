@@ -2,11 +2,13 @@ package ee.bcs.myApp.library.book;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class BookDto {
 
     private Integer id;
@@ -15,6 +17,5 @@ public class BookDto {
     private String title;
 
     @NotNull
-    @Size(max = 4)
     private Integer year;
 }

@@ -12,7 +12,8 @@ public interface CustomerMapper {
 
     CustomerDto toDto(Customer entity);
 
-    List<CustomerDto> toDto(List<Customer> entities);
+    List<CustomerDto> toDtos(List<Customer> entities);
+
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)

@@ -1,17 +1,24 @@
 package ee.bcs.myApp.library.author;
 
+import lombok.Getter;
+import lombok.Setter;
 
-import lombok.Data;
+import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
+@Entity
+@Table(name = "author", schema = "library")
 public class Author {
-    public  static Integer idCounter = 1;
-    public Integer id;
-    public String firstName;
-    public String lastName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
-    public  void updateId() {
-        id = idCounter;
-        idCounter++;
-    }
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
 }

@@ -16,7 +16,8 @@ public interface AccountMapper {
 
     List<AccountResponse> toResponses(List<Account> account);
 
-    @Mapping()
+
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateEntity(AccountDto1 accountDto1, @MappingTarget Account account);
+    @Mapping(target = "id", ignore = true)
+    void updateEntity(AccountDto accountDto, @MappingTarget Account account);
 }

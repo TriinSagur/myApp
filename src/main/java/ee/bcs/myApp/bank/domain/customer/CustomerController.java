@@ -1,7 +1,6 @@
 package ee.bcs.myApp.bank.domain.customer;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -10,14 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/customer")
-
 public class CustomerController {
-
-    @Resource
-    private CustomerMapper customerMapper;
-
-    @Resource
-    private CustomerRepository customerRepository;
 
     @Resource
     private CustomerService customerService;
@@ -28,6 +20,7 @@ public class CustomerController {
         return customerService.addNewCustomer(customerDto);
     }
 
+
     @GetMapping("/all")
     @Operation(summary = "Tagastab kõik kliendid.")
     public List<CustomerDto> getAllCustomers() {
@@ -35,19 +28,20 @@ public class CustomerController {
     }
 
     @GetMapping("/id")
-    @Operation(summary = "Leiab kliendi andmebaasi ID järgi")
+    @Operation(summary = "Leiab andmebaasi id järgi kliendi.")
     public CustomerDto findCustomerById(@RequestParam Integer id) {
         return customerService.findCustomerById(id);
     }
 
+
     @DeleteMapping("/id")
-   @Operation(summary =  "Kustutab kliendi andmebaasi ID järgi.")
+    @Operation(summary = "Kustutab andmebaasi id järgi kliendi.")
     public void removeCustomerById(@RequestParam Integer id) {
         customerService.removeCustomerById(id);
     }
 
     @PutMapping("/id")
-    @Operation(summary =  "Uuendab kliendi andmebaasi ID järgi.")
+    @Operation(summary = "Uuendab andmebaasi id järgi klienti.")
     public void updateCustomerById(@RequestParam Integer id, @Valid @RequestBody CustomerDto customerDto) {
         customerService.updateCustomerById(id, customerDto);
     }

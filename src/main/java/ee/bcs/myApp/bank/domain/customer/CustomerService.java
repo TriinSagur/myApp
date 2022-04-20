@@ -14,9 +14,6 @@ public class CustomerService {
     @Resource
     private CustomerRepository customerRepository;
 
-    @Resource
-    private CustomerService customerService;
-
     public CustomerDto addNewCustomer(CustomerDto customerDto) {
         Customer customer = customerMapper.toEntity(customerDto);
         customerRepository.save(customer);
@@ -25,7 +22,7 @@ public class CustomerService {
 
     public List<CustomerDto> getAllCustomers() {
         List<Customer> allCustomers = customerRepository.findAll();
-        return customerMapper.toDto(allCustomers);
+        return customerMapper.toDtos(allCustomers);
     }
 
     public CustomerDto findCustomerById(Integer id) {
