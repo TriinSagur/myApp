@@ -20,10 +20,17 @@ public class AuthorController {
         return authorService.addNewAuthor(authorDto);
     }
 
-    @GetMapping()
+    @GetMapping("/all")
     @Operation(summary = "Näitab kõiki autoreid")
     public List<AuthorDto> getAllAuthors() {
         return authorService.getAllAuthors();
+    }
+
+    @GetMapping("/id")
+    @Operation(summary = "Leiab autori ID järgi")
+    public AuthorDto findAuthorById(@RequestParam Integer id) {
+        return authorService.findAuthorById(id);
+
     }
 
 

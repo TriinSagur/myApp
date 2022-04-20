@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthorService {
@@ -24,5 +25,10 @@ public class AuthorService {
     public List<AuthorDto> getAllAuthors() {
         List<Author> authors = authorRepository.findAll();
         return authorMapper.toDtos(authors);
+    }
+
+    public AuthorDto findAuthorById(Integer id) {
+        Author author = authorRepository.getById(id);
+        return authorMapper.toDto(author);
     }
 }
