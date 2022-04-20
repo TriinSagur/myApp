@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <link rel="stylesheet" href="assets/styles.css">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body bgcolor="#8a2be2">
+
+<textarea id="myTextArea" cols="30" rows="10"></textarea>
+<br>
+
+<button type="submit" onclick="addAnotherText()">Võta mingi tekst</button>
+
+<button type="submit" onclick="addText()">Võta mingi tekst</button>
+
+
+
+<a href="www.google.com">siit saab guuglisse </a>
+
+<h1>Tere tulemast minu kodulehele :)</h1>
+<h2 align="center">Vali oma kõige lemmikum puuvili</h2>
+
+<ol>
+    <li>õun</li>
+    <li>banaan</li>
+    <li>apelsin</li>
+
+</ol>
+
+<img src="data:image/jpeg;base64,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"
+     alt="">
+<img src="images/7024947t1h261d.jpeg" alt="this is banana" width="200">
+
+<h3>Kirjuta siia:</h3>
+<input id="">
+<input type="text">
+<input type="checkbox">
+<input type="checkbox'">
+
+<h2>Vali aeg</h2>
+<input type="date">
+<input type="datetime-local">
+
+<input type="text" name="2khkh" placeholder="siin">
+<button>Vajuta siia</button>
+
+
+
+
+<button type="button" class="btn btn-outline-secondary">Vajuta siia kah</button>
+
+<div>
+   <h1>This is just another heading</h1>
+
+</div>
+
+<table>
+    <tr>
+        <th>Eesnimi</th>
+        <th>Perekonnanimi</th>
+        <th>Vanus</th>
+    </tr>
+    <tr>
+        <td>Otto</td>
+        <td>Triin</td>
+        <td>25</td>
+    </tr>
+    <br>
+</table>
+<br>
+
+
+</body>
+
+
+<script>
+
+
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    fetch("http://localhost:8080/book/all", requestOptions)
+        .then(response => response.text())
+        .then(result =>document.getElementById("myTextArea").value=result)
+        .catch(error => console.log('error', error));
+
+    function addText(){
+
+        let text = document.getElementById("myTextArea")
+        text.innerText="sa vajutasid teisele nupule"
+
+    }
+
+    function addAnotherText(){
+
+        let text = document.getElementById("myTextArea")
+        text.innerText="nüüd sa vajutasid ühele nupule"
+
+    }
+
+
+
+</script>
+</html>

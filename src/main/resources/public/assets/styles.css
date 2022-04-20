@@ -1,0 +1,23 @@
+
+h1 {
+    background-color: darkslateblue;
+}
+
+h1.myHeader1Definition {
+    background-color: red;
+    color: lawngreen;
+}
+h1#someExampleId1 {
+    background-color: cornflowerblue;
+    font-style: italic;
+}
+
+table {
+    background-color: yellow;
+    border-color: aliceblue;
+    border-width: 2px;
+}
+
+body {
+    background-color: burlywood;
+}
