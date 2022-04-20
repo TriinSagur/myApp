@@ -96,6 +96,23 @@
     </tr>
 
     </tbody>
+
+
+    <textarea id="myTextArea" cols="30" rows="10">hdmdfm</textarea>
+
+    <br>
+
+    <button id="mingi" type="submit">Mingi nupp</button>
+    <br>
+
+    <button id="lisa" type="submit" onclick="addText()">Lisa mingi tekst</button>
+    <br>
+    <br>
+
+    <button id="votta" type="submit" onclick="getText()">Votta mingi tekst</button>
+    <br>
+    <br>
+    <br>
 </table>
 
 <a href="https://www.google.com/">Siit saab googlisse</a>
@@ -115,11 +132,30 @@
 
 <script>
 
-    let a = 10
-    let b = "10"
+
+    var myHeaders = new Headers();
+    myHeaders.append("accept", "*/*");
+
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    fetch("http://localhost:8080/customer/all", requestOptions)
+        .then(response => response.text())
+        .then(result => document.getElementById("myTextArea").value = result)
+        .catch(error => console.log('error', error));
+    function addText() {
 
 
-    alert(a ==b)
-    alert(a === Number(b) )
+    }
+    function getText() {
+        let text = document.getElementById("myTextArea");
+        alert(text.value)
+    }
+
+
+
 </script>
 </html>
