@@ -21,15 +21,14 @@ public interface TransactionMapper {
     @Mapping(target = "type", constant = "d")
     Transaction toDepositEntity(DepositRequest request);
 
+
     @Mapping(target = "receiverAccountNumber", constant = "ATM")
     @Mapping(target = "type", constant = "w")
     Transaction toWithdrawEntity(WithdrawRequest request);
 
-
     @Mapping(target = "type", constant = "r")
-    Transaction toReceiveMoneyEntity(MoneyRequest result);
+    Transaction toReceiveMoneyEntity(MoneyRequest request);
 
     @Mapping(target = "type", constant = "s")
-    Transaction toSendMoneyEntity(MoneyRequest result);
-
+    Transaction toSendMoneyEntity(MoneyRequest request);
 }

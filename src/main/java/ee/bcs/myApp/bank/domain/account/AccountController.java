@@ -1,6 +1,5 @@
 package ee.bcs.myApp.bank.domain.account;
 
-
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +30,6 @@ public class AccountController {
     public AccountResponse findAccountInfoById(@RequestParam Integer id) {
         return accountService.findAccountInfoById(id);
     }
-
 
     @DeleteMapping("/id")
     public void removeAccountById(@RequestParam Integer id) {

@@ -21,15 +21,12 @@ public class BankService {
     private ValidationService validationService;
 
     public void deposit(DepositRequest request) {
-
         validationService.isValidDepositAmount(request.getAmount());
         Transaction transaction = transactionService.addDepositTransaction(request);
         accountService.updateCreditPaymentBalance(transaction.getAccount(), request.getAmount());
-
     }
 
     public void withdraw(WithdrawRequest request) {
-
         validationService.isValidWithdrawAmount(request.getAmount());
         Transaction transaction = transactionService.addWithdrawTransaction(request);
         accountService.updateDebitPaymentBalance(transaction.getAccount(), request.getAmount());

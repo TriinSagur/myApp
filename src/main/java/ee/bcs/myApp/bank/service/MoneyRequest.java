@@ -8,16 +8,17 @@ import javax.validation.constraints.Size;
 
 @Data
 public class MoneyRequest {
-    @NotNull
-    @Size(max = 11)
-    private String senderaccountNumber;
 
     @NotNull
     @Size(max = 11)
-    private String receiveraccountNumber;
+    private String senderAccountNumber;
+
+    @NotNull
+    @Size(max = 11)
+    private String receiverAccountNumber;
+
     @NotNull
     @Min(1)
     private Integer amount;
-
 
 }

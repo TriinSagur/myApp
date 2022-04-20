@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-19T10:59:30+0300",
+    date = "2022-04-20T10:52:00+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14 (Amazon.com Inc.)"
 )
 @Component
@@ -47,14 +47,16 @@ public class TransactionMapperImpl implements TransactionMapper {
     }
 
     @Override
-    public Transaction toReceiveMoneyEntity(MoneyRequest result) {
-        if ( result == null ) {
+    public Transaction toReceiveMoneyEntity(MoneyRequest request) {
+        if ( request == null ) {
             return null;
         }
 
         Transaction transaction = new Transaction();
 
-        transaction.setAmount( result.getAmount() );
+        transaction.setSenderAccountNumber( request.getSenderAccountNumber() );
+        transaction.setReceiverAccountNumber( request.getReceiverAccountNumber() );
+        transaction.setAmount( request.getAmount() );
 
         transaction.setType( "r" );
 
@@ -62,14 +64,16 @@ public class TransactionMapperImpl implements TransactionMapper {
     }
 
     @Override
-    public Transaction toSendMoneyEntity(MoneyRequest result) {
-        if ( result == null ) {
+    public Transaction toSendMoneyEntity(MoneyRequest request) {
+        if ( request == null ) {
             return null;
         }
 
         Transaction transaction = new Transaction();
 
-        transaction.setAmount( result.getAmount() );
+        transaction.setSenderAccountNumber( request.getSenderAccountNumber() );
+        transaction.setReceiverAccountNumber( request.getReceiverAccountNumber() );
+        transaction.setAmount( request.getAmount() );
 
         transaction.setType( "s" );
 
