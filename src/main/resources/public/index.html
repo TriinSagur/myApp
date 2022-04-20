@@ -21,7 +21,7 @@
 </head>
 <body>
 
-mingi text area <br>
+All cutomers <br>
 <textarea name="myTextArea" id="" cols="30" rows="10"></textarea>
 <br>
 <button id="lisa" type="submit" onclick="addText()"> Send</button>
@@ -32,12 +32,27 @@ mingi text area <br>
 </body>
 
 <script>
+
+    var myHeaders = new Headers();
+    myHeaders.append("accept", "*/*");
+
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    fetch("http://localhost:8080/customer/all", requestOptions)
+        .then(response => response.text())
+        .then(result => document.getElementById("myTextArea").value = result)
+        .catch(error => console.log('error', error));
+
     function addText() {
     let text = document.getElementById("myTextArea");
     text.value = "see on mingi tekst";
     }
 
-    function addText() {
+    function getSomeText() {
         let text = document.getElementById("myTextArea");
         alert(text.value);
     }
