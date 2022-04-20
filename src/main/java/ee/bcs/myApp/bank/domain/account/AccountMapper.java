@@ -17,30 +17,38 @@ public interface AccountMapper {
     // Mäpper (Entity -> Dto)
     // Luuakse uut tüüpi objekt (mingist teisest klassist)
     // ja siis mäpitakse (kaardistatakse ja väärtustatakse) andmed uuele objektile ümber.
+    // Kui mäpperite teema on veel endiselt segane, siis palun vaata uuesti "MapStruct mappimine":
+    // https://youtu.be/BrSMvqcGMio
     @Mapping(target = "customerId", source = "customer.id")
     @Mapping(target = "firstName", source = "customer.firstName")
     @Mapping(target = "lastName", source = "customer.lastName")
     @Mapping(target = "isikukood", source = "customer.isikukood")
-    AccountResponse toResponse(Account account);
+    AccountResponse toResponse(Account entity);
 
     // Siin on ka mäpper, aga siin mäpitakse ühe klass objektide list, teise klassi objektideks.
     // Kui juba üksik objekti mäppimine on eelnevalt ära defineeritud (eelpool olev meetod 'toResponse)',
     // siis põhimõtteliselt tehakse for tsükkel ja taaskasutatakse seda sama meetodit uuesti.
     // Tänu sellele ei pea Listi mäppimisel enam siia meetodi peale mingeid mäpingu annotatsioone uuesti lisama.
     // Piisab sellest kui teeme copy paste üksik-objekti mäpperist copy-paste ja paneme nad 'List<>' sisse
-    List<AccountResponse> toResponses(List<Account> account);
+    // Kui mäpperite teema on veel endiselt segane, siis palun vaata uuesti "MapStruct mappimine":
+    // https://youtu.be/BrSMvqcGMio
+    List<AccountResponse> toResponses(List<Account> entities);
 
     // Mäpper (Dto -> Entity)
     // Luuakse uut tüüpi objekt (mingist teisest klassist)
     // ja siis mäpitakse (kaardistatakse ja väärtustatakse) andmed uuele objektile ümber.
-    @Mapping(target = "id", ignore = true)
+    // Kui mäpperite teema on veel endiselt segane, siis palun vaata uuesti "MapStruct mappimine":
+    // https://youtu.be/BrSMvqcGMio    @Mapping(target = "id", ignore = true)
     Account toEntity(AccountDto dto);
 
 
     // Siin on ka mäpper, aga siin ei looda mäppimisel uut objekti vaid
     // uuendatakse andmeid Dto objekti pealt -> Entity objektile
     // Seda on siis hea kasutada, kui tahame mingi rea andmeid andmebaasis uuendada.
+    // Kui mäpperite teema on veel endiselt segane, siis palun vaata uuesti "MapStruct mappimine":
+    // https://youtu.be/BrSMvqcGMio
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    // @Mapping(target = "id", ignore = true) - sellega defineerime mäpperi nii, et target klassi 'id' välja me ei väärtusta
     @Mapping(target = "id", ignore = true)
     void updateEntity(AccountDto accountDto, @MappingTarget Account account);
 
