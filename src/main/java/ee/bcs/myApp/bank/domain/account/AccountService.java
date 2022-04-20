@@ -57,11 +57,8 @@ public class AccountService {
     }
 
     public Account getValidAccountById(Integer accountId) {
-        //todo: lisa vea haldus
         Optional<Account> account = accountRepository.findById(accountId);
-
         validationService.accountExists(accountId, account);
-
         return account.get();
     }
 
@@ -70,7 +67,6 @@ public class AccountService {
         Integer newBalance = currentBalance + amount;
         account.setBalance(newBalance);
         accountRepository.save(account);
-
     }
 
     public void updateDebitPaymentBalance(Account account, Integer amount) {
@@ -80,14 +76,13 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    public Account findAccountByAccountNumber(String accountNumber) {
-        Optional<Account> accountOptional = accountRepository.findByAccountNumber(accountNumber);
-        return accountOptional.get();
-
+    public Account getValidAccountByAccountNumber(String accountNumber) {
+        Optional<Account> account = accountRepository.findByAccountNumber(accountNumber);
+        validationService.accountExists(accountNumber, account);
+        return account.get();
     }
 
     public boolean accountExistsByAccountNumber(String accountNumber) {
         return accountRepository.existsByAccountNumber(accountNumber);
-
     }
 }

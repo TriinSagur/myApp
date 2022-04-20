@@ -17,6 +17,5 @@ public class DepositRequest implements Serializable {
 
     @NotNull
     @Min(1)
-    @Max(5000)
     private  Integer amount;
 }
