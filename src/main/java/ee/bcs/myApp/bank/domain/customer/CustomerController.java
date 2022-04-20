@@ -1,6 +1,7 @@
 package ee.bcs.myApp.bank.domain.customer;
 
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,7 +20,6 @@ public class CustomerController {
     public CustomerDto addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
         return customerService.addNewCustomer(customerDto);
     }
-
 
     @GetMapping("/all")
     @Operation(summary = "Tagastab kõik kliendid.")
