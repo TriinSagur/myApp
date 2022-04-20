@@ -3,11 +3,11 @@ package ee.bcs.myApp.infrastructure.exception;
 import lombok.Data;
 
 @Data
-public class DataNotFoundException extends RuntimeException {
+public class BusinessException extends RuntimeException {
     private final String title;
     private final  String detail;
 
-    public DataNotFoundException(String title, String detail) {
+    public BusinessException(String title, String detail) {
         super(title);
         this.title = title;
         this.detail = detail;
