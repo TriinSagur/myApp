@@ -32,6 +32,11 @@ public class AccountController {
     public AccountResponse findAccountInfoById(@RequestParam Integer id) {
         return accountService.findAccountInfoById(id);
     }
+    @GetMapping("/customer-id")
+    @Operation(summary = "otsib konto customer ID jargi")
+    public List<AccountResponse> findAccountsInfoByCustomerId (@RequestParam Integer id) {
+        return accountService.findAccountsInfoByCustomerId(id);
+    }
 
     @DeleteMapping("/id")
     @Operation(summary = "kustutab konto ID jargi")
