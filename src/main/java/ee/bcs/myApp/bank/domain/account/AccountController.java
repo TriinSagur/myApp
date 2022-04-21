@@ -31,6 +31,12 @@ public class AccountController {
         return accountService.findAccountInfoById(id);
     }
 
+    @GetMapping("/customer-id")
+    @Operation(summary = "Otsib konto info kliendi ID järgi")
+    public List<AccountResponse> findAccountsInfoByCustomerId(@RequestParam Integer id) {
+        return accountService.findAccountsInfoByCustomerId(id);
+    }
+
     @DeleteMapping("/id")
     public void removeAccountById(@RequestParam Integer id) {
         accountService.removeAccountById(id);
