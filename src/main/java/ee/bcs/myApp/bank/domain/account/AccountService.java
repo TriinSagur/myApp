@@ -36,16 +36,17 @@ public class AccountService {
 
 
     public AccountResponse findAccountInfoById(Integer id) {
-        Account account = accountRepository.getById(id);
+        Account account = getValidAccountById(id);
         return accountMapper.toResponse(account);
     }
 
     public void removeAccountById(Integer id) {
-        accountRepository.deleteById(id);
+        Account account = getValidAccountById(id);
+        accountRepository.deleteById(account.getId());
     }
 
     public void updateAccountById(Integer id, AccountDto accountDto) {
-        Account account = accountRepository.getById(id);
+        Account account = getValidAccountById(id);
         accountMapper.updateEntity(accountDto, account);
         Customer customer = customerRepository.getById(accountDto.getCustomerId());
         account.setCustomer(customer);
@@ -86,5 +87,11 @@ public class AccountService {
 
     public boolean accountExistsByAccountNumber(String accountNumber) {
         return accountRepository.existsByAccountNumber((accountNumber));
+    }
+
+    public List<AccountResponse> findAccountsInfoByCustomerId(Integer id) {
+        List<Account> accounts = accountRepository.findByCustomerId(id);
+        return accountMapper.toResponses(accounts);
+
     }
 }
