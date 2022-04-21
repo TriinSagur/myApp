@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AccountRepository extends JpaRepository<Account, Integer> {
+
+    @Query("select a from Account a where a.customer.id = ?1 order by a.accountNumber")
+    List<Account> findByCustomerId(Integer id)
+            ;
     @Query("select a from Account a where upper(a.customer.lastName) = upper(?1) order by a.accountNumber")
     List<Account> findByLastName(String lastName);
 

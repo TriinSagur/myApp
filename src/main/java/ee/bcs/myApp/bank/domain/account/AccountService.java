@@ -85,6 +85,11 @@ public class AccountService {
     public boolean accountExistsByAccountNumber(String accountNumber) {
         return accountRepository.existsByAccountNumber(accountNumber);
     }
+
+    public List<AccountResponse> findAccountInfoByCustomerId(Integer id) {
+        List<Account> accounts = accountRepository.findByCustomerId(id);
+        return accountMapper.toResponses(accounts);
+    }
 //
 //    private Account findAccountById(Integer id, List<Account> accounts) {
 //        Account result = new Account();
