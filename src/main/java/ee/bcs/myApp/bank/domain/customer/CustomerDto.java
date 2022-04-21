@@ -14,6 +14,6 @@ public class CustomerDto {// ainult klientide liigutamiseks tehtud klass
     @NotNull
     private String lastName;
     @NotNull
-    @Size(min = 11, max = 11)
+    @Size(max = 11)
     private String isikukood;
 }
