@@ -86,4 +86,9 @@ public class AccountService {
         validationService.accountExists(accountId, account);
         return account.get();
     }
+
+    public List<AccountResponse> findAccountsInfoByCustomerId(Integer id) {
+        List<Account> accounts = accountRepository.findByCustomerId(id);
+        return accountMapper.toResponses(accounts);
+    }
 }
