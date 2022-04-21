@@ -21,6 +21,9 @@ public class CustomerService {
 
     public CustomerDto addNewCustomer(CustomerDto customerDto) {
         Customer customer = customerMapper.toEntity(customerDto);
+        boolean customerExists = customerRepository.existsByIsikukood(customerDto.getIsikukood());
+
+
         customerRepository.save(customer);
         return customerMapper.toDto(customer);
     }
