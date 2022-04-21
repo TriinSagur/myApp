@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "customer", schema = "bank")
-public class Customer {
+public class Customer { //peab vastama täpselt taberli struktuurile(samad nimed ja klassid)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

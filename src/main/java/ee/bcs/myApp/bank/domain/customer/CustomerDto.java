@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
-public class CustomerDto {// ainult klientide liigutamiseks tehtud klass
+public class CustomerDto { // ainult klientide liigutamiseks tehtud klass
 
     private  Integer id;
     @NotNull
