@@ -1,9 +1,11 @@
 package ee.bcs.myApp.bank.domain.customer;
 
+import ee.bcs.myApp.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -13,6 +15,9 @@ public class CustomerService {
 
     @Resource
     private CustomerRepository customerRepository;
+
+    @Resource
+    private ValidationService validationService;
 
     public CustomerDto addNewCustomer(CustomerDto customerDto) {
         Customer customer = customerMapper.toEntity(customerDto);
@@ -26,15 +31,13 @@ public class CustomerService {
     }
 
     public CustomerDto findCustomerById(Integer id) {
-        // TODO: kontroll kas customer on olemas. Veateade!
-        Customer customer = customerRepository.getById(id);
+        Customer customer = getValidCustomerById(id);
         return customerMapper.toDto(customer);
     }
 
-
-    public void removeCustomerById(Integer id) {
-        // TODO: kontroll kas customer on olemas. Veateade!
-        customerRepository.deleteById(id);
+    public void removeCustomerById(Integer customerId) {
+        Customer customer = getValidCustomerById(customerId);
+        customerRepository.deleteById(customer.getId());
     }
 
     public void updateCustomerById(Integer customerId, CustomerDto customerDto) {
@@ -43,5 +46,10 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
+    private Customer getValidCustomerById(Integer customerId) {
+        Optional<Customer> customer = customerRepository.findById(customerId);
+        validationService.customerExists(customerId, customer);
+        return customer.get();
+    }
 
 }
