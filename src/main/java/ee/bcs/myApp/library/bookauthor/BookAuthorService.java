@@ -1,7 +1,6 @@
 package ee.bcs.myApp.library.bookauthor;
 
 import ee.bcs.myApp.library.author.Author;
-import ee.bcs.myApp.library.author.AuthorDto;
 import ee.bcs.myApp.library.author.AuthorRepository;
 import ee.bcs.myApp.library.book.Book;
 import ee.bcs.myApp.library.book.BookDto;
@@ -38,7 +37,7 @@ public class BookAuthorService {
     }
 
     public List<BookDto> getAllBooksForAuthor(String lastName) {
-        List<BookAuthor> bookAuthors = bookAuthorRepository.findByAuthorIs(lastName);
+        List<BookAuthor> bookAuthors = bookAuthorRepository.findByAuthor(lastName);
         List<Book> books = new ArrayList<>();
         for (BookAuthor bookAuthor : bookAuthors) {
             books.add(bookAuthor.getBook());
@@ -51,5 +50,18 @@ public class BookAuthorService {
         authorRepository.save(bookAuthor.getAuthor());
         bookRepository.save(bookAuthor.getBook());
         bookAuthorRepository.save(bookAuthor);
+    }
+
+    public void addAuthorToBook(AddAuthorToBook authorToBook) {
+        Book book = bookRepository.getById(authorToBook.getBookId());
+        Author author = authorRepository.getById(authorToBook.getAuthorId());
+        BookAuthor bookAuthor = new BookAuthor();
+        bookAuthor.setBook(book);
+        bookAuthor.setAuthor(author);
+        bookAuthorRepository.save(bookAuthor);
+    }
+
+    public void deleteBookAuthorById(Integer bookAuthorId) {
+        bookAuthorRepository.deleteById(bookAuthorId);
     }
 }

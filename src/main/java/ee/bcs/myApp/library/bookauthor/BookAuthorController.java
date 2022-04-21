@@ -20,4 +20,15 @@ public class BookAuthorController {
         bookAuthorService.addBookAndAuthor(bookAuthorDto);
     }
 
+    @DeleteMapping("/")
+    @Operation(summary = "Kustutab bookauthori")
+    public void addAuthorToBook(@RequestParam Integer bookAuthorId) {
+        bookAuthorService.deleteBookAuthorById(bookAuthorId);
+    }
+    @PutMapping("/")
+    @Operation(summary = "Lisab olemasolevale raamatule olemasoleva autori")
+    public void addAuthorToBook(@RequestBody AddAuthorToBook authorToBook) {
+        bookAuthorService.addAuthorToBook(authorToBook);
+    }
+
 }
