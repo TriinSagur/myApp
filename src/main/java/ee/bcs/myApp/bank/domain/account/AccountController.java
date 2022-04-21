@@ -47,5 +47,11 @@ public class AccountController {
 
     }
 
+    @GetMapping
+    @Operation(summary = "otsib konto info kliendi Id järgi")
+    public List<AccountResponse> findAccountsInfoByCustomerId(@RequestParam Integer id) {
+        return accountService.findAccountInfoByCustomerId(id);
+    }
+
 
 }

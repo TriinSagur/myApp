@@ -15,6 +15,7 @@ public class ValidationService {
     public static final String DEPOSIT_OVER_LIMIT = "Deposiidi limiit on ületatud";
     public static final String WITHDRAW_OVER_LIMIT = "Raha väljastuse limiit on ületatud";
     public static final String INSUFFICIENT_FUNDS = "kontol pole piisavalt vahendeid tehingu sooritamiseks";
+    public static final String ISIKUKOOD_ALREADY_TAKEN = "isikukood on kasutusel";
 
     public void accountExists(Integer accountId, Optional<Account> account) {
         if (account.isEmpty()) {
@@ -48,6 +49,12 @@ public class ValidationService {
         if (amount > balance) {
             throw new BusinessExeption(INSUFFICIENT_FUNDS,
                     "summa € " + amount + " ületab konto jääki € " + balance);
+        }
+    }
+
+    public void isikukoodAlreadyExists(String isikukood, boolean customerExists) {
+        if (customerExists) {
+            throw new BusinessExeption(ISIKUKOOD_ALREADY_TAKEN, "isikukood " + isikukood + " on juba kasutusel. Sisesta uus kood");
         }
     }
 }

@@ -23,6 +23,8 @@ public class CustomerService {
         Customer customer = customerMapper.toEntity(customerDto);
         boolean customerExists = customerRepository.existsByIsikukood(customerDto.getIsikukood());
 
+            validationService.isikukoodAlreadyExists(customerDto.getIsikukood(), customerExists);
+
 
         customerRepository.save(customer);
         return customerMapper.toDto(customer);
