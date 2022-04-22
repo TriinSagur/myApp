@@ -9,6 +9,7 @@ public class AccountResponse {
     private String firstName;
     private String lastName;
     private String isikukood;
+    private String accountId;
     private String accountNumber;
     private Integer balance;
     private Boolean locked;
