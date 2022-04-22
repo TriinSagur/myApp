@@ -1,4 +1,4 @@
-package ee.bcs.myApp.bank.service;
+package ee.bcs.myApp.bank.service.transfer;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
-public class MoneyRequest {
+public class TransferRequest {
 
     @NotNull
     @Size(max = 11)
