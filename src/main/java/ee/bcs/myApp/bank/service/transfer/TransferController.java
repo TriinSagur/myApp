@@ -1,4 +1,4 @@
-package ee.bcs.myApp.bank.service;
+package ee.bcs.myApp.bank.service.transfer;
 
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,33 +12,33 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/bank")
-public class BankController {
+public class TransferController {
 
     @Resource
-    private BankService bankService;
+    private TransferService transferService;
 
     @PostMapping("/deposit")
     @Operation(summary = "Raha lisamine kontole / ATM")
     public void deposit(@RequestBody @Valid DepositRequest request) {
-        bankService.deposit(request);
+        transferService.deposit(request);
     }
 
     @PostMapping("/withdraw")
     @Operation(summary = "Raha väljastamine kontolt / ATM")
     public void withdraw(@RequestBody @Valid WithdrawRequest request) {
-        bankService.withdraw(request);
+        transferService.withdraw(request);
     }
 
     @PostMapping("/receive")
     @Operation(summary = "Receive money")
-    public TransactionResponse receiveMoney(@RequestBody @Valid MoneyRequest request) {
-        return bankService.receiveMoney(request);
+    public TransferResponse receiveMoney(@RequestBody @Valid TransferRequest request) {
+        return transferService.receiveMoney(request);
     }
 
     @PostMapping("/send")
     @Operation(summary = "Send money")
-    public TransactionResponse sendMoney(@RequestBody @Valid MoneyRequest request) {
-        return bankService.sendMoney(request);
+    public TransferResponse sendMoney(@RequestBody @Valid TransferRequest request) {
+        return transferService.sendMoney(request);
     }
 
 }

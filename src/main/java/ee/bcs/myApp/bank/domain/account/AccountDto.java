@@ -6,9 +6,9 @@ import java.io.Serializable;
 
 @Data
 public class AccountDto implements Serializable {
-    private final Integer id;
-    private final Integer customerId;
-    private final String accountNumber;
-    private final Integer balance = 0;
-    private final Boolean locked = false;
+    private Integer id;
+    private Integer customerId;
+    private String accountNumber;
+    private Integer balance = 0;
+    private Boolean locked = false;
 }

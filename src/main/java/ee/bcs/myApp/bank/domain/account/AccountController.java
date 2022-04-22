@@ -32,7 +32,7 @@ public class AccountController {
     }
 
     @GetMapping("/customer-id")
-    @Operation(summary = "Otsib konto info ID järgi")
+    @Operation(summary = "Otsib konto info kliendi ID järgi")
     public List<AccountResponse> findAccountsInfoByCustomerId(@RequestParam Integer id) {
         return accountService.findAccountsInfoByCustomerId(id);
     }
