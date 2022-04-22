@@ -1,8 +1,8 @@
 package ee.bcs.myApp.bank.domain.transaction;
 
-import ee.bcs.myApp.bank.service.DepositRequest;
-import ee.bcs.myApp.bank.service.MoneyRequest;
-import ee.bcs.myApp.bank.service.WithdrawRequest;
+import ee.bcs.myApp.bank.service.transfer.DepositRequest;
+import ee.bcs.myApp.bank.service.transfer.TransferRequest;
+import ee.bcs.myApp.bank.service.transfer.WithdrawRequest;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
@@ -47,7 +47,7 @@ public class TransactionMapperImpl implements TransactionMapper {
     }
 
     @Override
-    public Transaction toReceiveMoneyEntity(MoneyRequest request) {
+    public Transaction toReceiveMoneyEntity(TransferRequest request) {
         if ( request == null ) {
             return null;
         }
@@ -64,7 +64,7 @@ public class TransactionMapperImpl implements TransactionMapper {
     }
 
     @Override
-    public Transaction toSendMoneyEntity(MoneyRequest request) {
+    public Transaction toSendMoneyEntity(TransferRequest request) {
         if ( request == null ) {
             return null;
         }
