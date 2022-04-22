@@ -2,7 +2,7 @@ package ee.bcs.myApp.infrastructure;
 
 
 import ee.bcs.myApp.infrastructure.error.ApiError;
-import ee.bcs.myApp.infrastructure.exception.BusinessExeption;
+import ee.bcs.myApp.infrastructure.exception.BusinessException;
 import ee.bcs.myApp.infrastructure.exception.DataNotFoundException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpHeaders;
@@ -33,7 +33,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler
-    public ResponseEntity<ApiError> handleBusinessException(BusinessExeption exception) {
+    public ResponseEntity<ApiError> handleBusinessException(BusinessException exception) {
         ApiError apiError = new ApiError();
         apiError.setTitle(exception.getTitle());
         apiError.setStatusCode(HttpStatus.FORBIDDEN.value());
