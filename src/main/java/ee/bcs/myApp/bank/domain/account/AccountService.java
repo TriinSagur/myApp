@@ -88,6 +88,11 @@ public class AccountService {
         return accountRepository.existsByAccountNumber(accountNumber);
 
     }
+
+    public List<AccountResponse> findAccountsInfoByCustomerId(Integer id) {
+        List<Account> accounts = accountRepository.findByCustomerId(id);
+        return accountMapper.toResponses(accounts);
+    }
 //
 //    private Account findAccountById(Integer id, List<Account> accounts) {
 //        Account result = new Account();

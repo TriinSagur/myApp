@@ -1,4 +1,4 @@
-package ee.bcs.myApp.bank.service;
+package ee.bcs.myApp.bank.service.transfer;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
@@ -8,35 +8,37 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/bank")
-public class BankController {
+public class TransferController {
 
     @Resource
-    private BankService bankService;
+    private TransferService transferService;
 
     @PostMapping("/deposit")
     @Operation(summary = "Raha lisamine kontole.")
     public void deposit(@RequestBody @Valid DepositRequest request) {
-        bankService.deposit(request);
+        transferService.deposit(request);
     }
 
     @PostMapping("/withdraw")
     @Operation(summary = "Raha väljavõtmine kontolt.")
     public void withdraw(@RequestBody @Valid WithdrawRequest request) {
-        bankService.withdraw(request);
+        transferService.withdraw(request);
     }
 
 
     @PostMapping("/in")
     @Operation(summary = "Raha laekumine.")
-    public TransactionResponse receiveMoney(@RequestBody @Valid MoneyRequest request) {
-       return bankService.receiveMoney(request);
+    public TransferResponse receiveMoney(@RequestBody @Valid TransferRequest request) {
+       return transferService.receiveMoney(request);
     }
 
     @PostMapping("/out")
     @Operation(summary = "Raha väljaminek.")
-    public TransactionResponse sendMoney(@Valid @RequestBody MoneyRequest request) {
-        return bankService.sendMoney(request);
+    public TransferResponse sendMoney(@Valid @RequestBody TransferRequest request) {
+        return transferService.sendMoney(request);
     }
+
+
 
 
 
