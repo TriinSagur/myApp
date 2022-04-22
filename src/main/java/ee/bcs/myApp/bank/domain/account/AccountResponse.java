@@ -11,6 +11,7 @@ public class AccountResponse {
     private String lastName;
     private String isikukood;
     private String accountNumber;
+    private Integer accountId;
     private Integer balance;
     private Boolean locked;
 }

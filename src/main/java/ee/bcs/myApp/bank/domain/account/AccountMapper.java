@@ -6,20 +6,13 @@ import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface AccountMapper {
-    Account toEntity(AccountDto accountDto1);
 
-//    private Integer customerId;
-//    private String firstName;
-//    private String lastName;
-//    private String isikukood;
-//    private String accountNumber;
-//    private Integer balance;
-//    private Boolean locked;
 
     @Mapping(target = "customerId", source = "customer.id")
     @Mapping(target = "firstName", source = "customer.firstName")
     @Mapping(target = "lastName", source = "customer.lastName")
     @Mapping(target = "isikukood", source = "customer.isikukood")
+    @Mapping(target = "accountId", source = "id")
     AccountResponse toResponse(Account account);
 
     List<AccountResponse> toResponses(List<Account> account);

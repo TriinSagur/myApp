@@ -8,27 +8,11 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-21T10:01:54+0300",
+    date = "2022-04-22T10:49:38+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 16.0.2 (Amazon.com Inc.)"
 )
 @Component
 public class AccountMapperImpl implements AccountMapper {
-
-    @Override
-    public Account toEntity(AccountDto accountDto1) {
-        if ( accountDto1 == null ) {
-            return null;
-        }
-
-        Account account = new Account();
-
-        account.setId( accountDto1.getId() );
-        account.setAccountNumber( accountDto1.getAccountNumber() );
-        account.setBalance( accountDto1.getBalance() );
-        account.setLocked( accountDto1.getLocked() );
-
-        return account;
-    }
 
     @Override
     public AccountResponse toResponse(Account account) {
@@ -42,6 +26,7 @@ public class AccountMapperImpl implements AccountMapper {
         accountResponse.setFirstName( accountCustomerFirstName( account ) );
         accountResponse.setLastName( accountCustomerLastName( account ) );
         accountResponse.setIsikukood( accountCustomerIsikukood( account ) );
+        accountResponse.setAccountId( account.getId() );
         accountResponse.setAccountNumber( account.getAccountNumber() );
         accountResponse.setBalance( account.getBalance() );
         accountResponse.setLocked( account.getLocked() );
