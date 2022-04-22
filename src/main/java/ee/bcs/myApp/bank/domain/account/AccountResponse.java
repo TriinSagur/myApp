@@ -10,6 +10,7 @@ public class AccountResponse {
     private String lastName;
     private String isikukood;
     private String accountNumber;
+    private String accountId;
     private Integer balance;
     private Boolean locked;
 }

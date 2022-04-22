@@ -1,4 +1,4 @@
-package ee.bcs.myApp.bank.service;
+package ee.bcs.myApp.bank.service.transfer;
 
 
 import lombok.Data;
