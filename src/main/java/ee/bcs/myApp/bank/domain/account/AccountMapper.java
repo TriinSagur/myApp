@@ -8,11 +8,11 @@ import java.util.List;
 public interface AccountMapper {
 
 
+    @Mapping(target = "accountId", source = "id")
     @Mapping(target = "customerId", source = "customer.id")
     @Mapping(target = "firstName", source = "customer.firstName")
     @Mapping(target = "lastName", source = "customer.lastName")
     @Mapping(target = "isikukood", source = "customer.isikukood")
-    @Mapping(target = "accountId", source = "id")
     AccountResponse toResponse(Account entity);
 
     List<AccountResponse> toResponses(List<Account> entities);
