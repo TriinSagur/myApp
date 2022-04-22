@@ -8,63 +8,63 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-21T11:42:07+0300",
+    date = "2022-04-22T09:13:48+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
 public class AccountMapperImpl implements AccountMapper {
 
     @Override
-    public AccountResponse toResponse(Account account) {
-        if ( account == null ) {
+    public AccountResponse toResponse(Account entity) {
+        if ( entity == null ) {
             return null;
         }
 
         AccountResponse accountResponse = new AccountResponse();
 
-        accountResponse.setCustomerId( accountCustomerId( account ) );
-        accountResponse.setFirstName( accountCustomerFirstName( account ) );
-        accountResponse.setLastName( accountCustomerLastName( account ) );
-        accountResponse.setIsikukood( accountCustomerIsikukood( account ) );
-        accountResponse.setAccountNumber( account.getAccountNumber() );
-        accountResponse.setBalance( account.getBalance() );
-        accountResponse.setLocked( account.getLocked() );
+        accountResponse.setCustomerId( entityCustomerId( entity ) );
+        accountResponse.setFirstName( entityCustomerFirstName( entity ) );
+        accountResponse.setLastName( entityCustomerLastName( entity ) );
+        accountResponse.setIsikukood( entityCustomerIsikukood( entity ) );
+        accountResponse.setAccountNumber( entity.getAccountNumber() );
+        accountResponse.setBalance( entity.getBalance() );
+        accountResponse.setLocked( entity.getLocked() );
 
         return accountResponse;
     }
 
     @Override
-    public List<AccountResponse> toResponses(List<Account> account) {
-        if ( account == null ) {
+    public List<AccountResponse> toResponses(List<Account> entities) {
+        if ( entities == null ) {
             return null;
         }
 
-        List<AccountResponse> list = new ArrayList<AccountResponse>( account.size() );
-        for ( Account account1 : account ) {
-            list.add( toResponse( account1 ) );
+        List<AccountResponse> list = new ArrayList<AccountResponse>( entities.size() );
+        for ( Account account : entities ) {
+            list.add( toResponse( account ) );
         }
 
         return list;
     }
 
     @Override
-    public void updateEntity(AccountDto accountDto, Account account) {
-        if ( accountDto == null ) {
+    public void updateEntity(AccountDto dto, Account entity) {
+        if ( dto == null ) {
             return;
         }
 
-        if ( accountDto.getAccountNumber() != null ) {
-            account.setAccountNumber( accountDto.getAccountNumber() );
+        if ( dto.getAccountNumber() != null ) {
+            entity.setAccountNumber( dto.getAccountNumber() );
         }
-        if ( accountDto.getBalance() != null ) {
-            account.setBalance( accountDto.getBalance() );
+        if ( dto.getBalance() != null ) {
+            entity.setBalance( dto.getBalance() );
         }
-        if ( accountDto.getLocked() != null ) {
-            account.setLocked( accountDto.getLocked() );
+        if ( dto.getLocked() != null ) {
+            entity.setLocked( dto.getLocked() );
         }
     }
 
-    private Integer accountCustomerId(Account account) {
+    private Integer entityCustomerId(Account account) {
         if ( account == null ) {
             return null;
         }
@@ -79,7 +79,7 @@ public class AccountMapperImpl implements AccountMapper {
         return id;
     }
 
-    private String accountCustomerFirstName(Account account) {
+    private String entityCustomerFirstName(Account account) {
         if ( account == null ) {
             return null;
         }
@@ -94,7 +94,7 @@ public class AccountMapperImpl implements AccountMapper {
         return firstName;
     }
 
-    private String accountCustomerLastName(Account account) {
+    private String entityCustomerLastName(Account account) {
         if ( account == null ) {
             return null;
         }
@@ -109,7 +109,7 @@ public class AccountMapperImpl implements AccountMapper {
         return lastName;
     }
 
-    private String accountCustomerIsikukood(Account account) {
+    private String entityCustomerIsikukood(Account account) {
         if ( account == null ) {
             return null;
         }

@@ -48,8 +48,13 @@ public class ValidationService {
 
     public void isWithinBalance(Integer balance, Integer amount) {
         if (amount > balance) {
-            throw new BusinessException(INSUFFICIENT_FUNDS,
-                    "summa € " + amount + " ületab konto jääki € " + balance);
+            throw new BusinessException(INSUFFICIENT_FUNDS, "Summa €" + amount + " ületab kontojääki €" + balance);
+        }
+    }
+
+    public void customerExists(Integer customerId, Optional<Customer> customer) {
+        if (customer.isEmpty()) {
+            throw new DataNotFoundException(CUSTOMER_NOT_EXISTS, "Klienti ID'ga " + customerId + " ei leitud");
         }
     }
 
