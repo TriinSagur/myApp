@@ -26,9 +26,15 @@ public class AccountController {
     }
 
     @GetMapping("/id")
-    @Operation(summary = "otsib konto ID järgi (uus)")
-    public AccountResponse findAccountById(@RequestParam Integer id) {
+    @Operation(summary = "Otsib konto info ID järgi")
+    public AccountResponse findAccountInfoById(@RequestParam Integer id) {
         return accountService.findAccountInfoById(id);
+    }
+
+    @GetMapping("/customer-id")
+    @Operation(summary = "Otsib kontode info kliendi ID järgi")
+    public List<AccountResponse> findAccountsInfoByCustomerId(@RequestParam Integer id) {
+        return accountService.findAccountsInfoByCustomerId(id);
     }
 
     @DeleteMapping("/id")
@@ -43,15 +49,7 @@ public class AccountController {
 
     @GetMapping("/last-name")
     public List<AccountResponse> findAccountsInfoByLastName(@RequestParam String lastName) {
-       return accountService.findAccountsInfoByLastName(lastName);
-
+        return accountService.findAccountsInfoByLastName(lastName);
     }
-
-    @GetMapping
-    @Operation(summary = "otsib konto info kliendi Id järgi")
-    public List<AccountResponse> findAccountsInfoByCustomerId(@RequestParam Integer id) {
-        return accountService.findAccountInfoByCustomerId(id);
-    }
-
 
 }

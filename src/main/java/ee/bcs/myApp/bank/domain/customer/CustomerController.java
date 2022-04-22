@@ -1,6 +1,7 @@
 package ee.bcs.myApp.bank.domain.customer;
 
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -42,6 +43,6 @@ public class CustomerController {
     @Operation(summary = "uuendab andmebaasi id järgi klienti")
     public void updateCustomerById(@RequestParam Integer id, @Valid @RequestBody CustomerDto customerDto) {  // @ Valid et arvestaks ka not null ja size, lisada request body ette
         customerService.updateCustomerById(id, customerDto);
-
     }
+
 }

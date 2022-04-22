@@ -11,29 +11,30 @@ import java.util.Optional;
 public class ValidationService {
 
 
-    public static final String ACCOUNT_NOT_EXISTS = "sellist kontot ei eksisteeri";
+    public static final String ACCOUNT_NOT_EXISTS = "Sellist kontot ei eksisteeri";
+    public static final String CUSTOMER_NOT_EXISTS = "Sellist klienti ei eksisteeri";
     public static final String DEPOSIT_OVER_LIMIT = "Deposiidi limiit on ületatud";
-    public static final String WITHDRAW_OVER_LIMIT = "Raha väljastuse limiit on ületatud";
-    public static final String INSUFFICIENT_FUNDS = "kontol pole piisavalt vahendeid tehingu sooritamiseks";
-    public static final String ISIKUKOOD_ALREADY_TAKEN = "isikukood on kasutusel";
+    public static final String WITHDRAW_OVER_LIMIT = "Raha väljavõtmise limiit on ületatud";
+    public static final String INSUFFICIENT_FUNDS = "Kontol pole piisavalt vahendeid tehingu sooritamiseks";
+    public static final String ISIKUKOOD_ALREADY_TAKEN = "Isikukood on kasutusel";
 
     public void accountExists(Integer accountId, Optional<Account> account) {
         if (account.isEmpty()) {
-            throw new DataNotFoundException(ACCOUNT_NOT_EXISTS, "kontot ID'ga " + accountId + " ei leitud");
+            throw new DataNotFoundException(ACCOUNT_NOT_EXISTS, "Kontot ID'ga " + accountId + " ei leitud");
         }
     }
 
     public void accountExists(String accountNumber, Optional<Account> account) {
         if (account.isEmpty()) {
-            throw new DataNotFoundException(ACCOUNT_NOT_EXISTS, "kontot kontonumbriga " + accountNumber + " ei leitud");
+            throw new DataNotFoundException(ACCOUNT_NOT_EXISTS, "Kontot kontonumbriga " + accountNumber + " ei leitud");
         }
     }
 
     public void isValidDepositAmount(Integer amount) {
-        // productionis tuleks see väärtus andmebaasist
+        // productionsis tuleks see väärtus andmebaasist
         Integer limit = 5000;
         if (amount > limit) {
-            throw new BusinessExeption(DEPOSIT_OVER_LIMIT, "summa € " + amount + " ületab limiidi € " + limit);
+            throw new BusinessExeption(DEPOSIT_OVER_LIMIT, "Summa €" + amount + " ületab limiidi €" + limit);
         }
     }
 
