@@ -12,12 +12,12 @@ public interface AccountMapper {
     @Mapping(target = "firstName", source = "customer.firstName")
     @Mapping(target = "lastName", source = "customer.lastName")
     @Mapping(target = "isikukood", source = "customer.isikukood")
-    AccountResponse toResponse(Account account);
+    AccountResponse toResponse(Account entity);
 
-    List<AccountResponse> toResponses(List<Account> account);
+    List<AccountResponse> toResponses(List<Account> entities);
 
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)
-    void updateEntity(AccountDto accountDto, @MappingTarget Account account);
+    void updateEntity(AccountDto dto, @MappingTarget Account entity);
 }
