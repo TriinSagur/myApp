@@ -1,6 +1,7 @@
 package ee.bcs.myApp.validation;
 
 import ee.bcs.myApp.bank.domain.account.Account;
+import ee.bcs.myApp.bank.domain.customer.Customer;
 import ee.bcs.myApp.infrastructure.exception.BusinessException;
 import ee.bcs.myApp.infrastructure.exception.DataNotFoundException;
 import org.springframework.stereotype.Service;
@@ -39,10 +40,10 @@ public class ValidationService {
     }
 
     public void isValidWithdrawAmount(Integer amount) {
-// productionis tuleks see väärtus andmebaasist
+        // productionsis tuleks see väärtus andmebaasist
         Integer limit = 15000;
-        if (amount >= limit) {
-            throw new BusinessException(WITHDRAW_OVER_LIMIT, "summa € " + amount + " ületab limiidi € " + limit);
+        if (amount > limit) {
+            throw new BusinessException(WITHDRAW_OVER_LIMIT, "Summa €" + amount + " ületab limiidi €" + limit);
         }
     }
 
@@ -60,7 +61,7 @@ public class ValidationService {
 
     public void isikukoodAlreadyExists(String isikukood, boolean customerExists) {
         if (customerExists) {
-            throw new BusinessException(ISIKUKOOD_ALREADY_TAKEN, "isikukood " + isikukood + " on juba kasutusel. Sisesta uus kood");
+            throw new BusinessException(ISIKUKOOD_ALREADY_TAKEN, "Isikukood " + isikukood + " on juba kasutusel");
         }
     }
 }
