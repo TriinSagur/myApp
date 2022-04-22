@@ -3,13 +3,15 @@ package ee.bcs.myApp.bank.domain.transaction;
 import ee.bcs.myApp.bank.domain.account.Account;
 import ee.bcs.myApp.bank.domain.account.AccountService;
 import ee.bcs.myApp.bank.service.DepositRequest;
-import ee.bcs.myApp.bank.service.MoneyRequest;
+import ee.bcs.myApp.bank.service.statement.Statement;
+import ee.bcs.myApp.bank.service.transfer.TransferRequest;
 import ee.bcs.myApp.bank.service.WithdrawRequest;
 import ee.bcs.myApp.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.Instant;
+import java.util.List;
 
 @Service
 public class TransactionService {
@@ -47,7 +49,7 @@ public class TransactionService {
     }
 
 
-    public Transaction addReceiveMoneyTransaction(MoneyRequest request) {
+    public Transaction addReceiveMoneyTransaction(TransferRequest request) {
         Transaction transaction = transactionMapper.toReceiveMoneyEntity(request);
         Account account = accountService.getValidAccountByAccountNumber(request.getReceiverAccountNumber());
         Integer newBalance = calculateCreditBalance(account.getBalance(), request.getAmount());
@@ -55,7 +57,7 @@ public class TransactionService {
         return transaction;
     }
 
-    public Transaction addSendMoneyTransaction(MoneyRequest request) {
+    public Transaction addSendMoneyTransaction(TransferRequest request) {
         Transaction senderTransaction = transactionMapper.toSendMoneyEntity(request);
 
         // todo: SENDER TRANSACTION
@@ -74,6 +76,13 @@ public class TransactionService {
         }
 
         return senderTransaction;
+    }
+
+
+    public List<Statement> getStatementByAccountId(Integer accountId) {
+        List<Transaction> transactions = transactionRepository.findTransactionsByAccountId(accountId);
+        return transactionMapper.toStatements(transactions);
+
     }
 
 

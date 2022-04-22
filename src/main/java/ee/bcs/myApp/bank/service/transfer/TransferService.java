@@ -1,15 +1,17 @@
-package ee.bcs.myApp.bank.service;
+package ee.bcs.myApp.bank.service.transfer;
 
 import ee.bcs.myApp.bank.domain.account.AccountService;
 import ee.bcs.myApp.bank.domain.transaction.Transaction;
 import ee.bcs.myApp.bank.domain.transaction.TransactionService;
+import ee.bcs.myApp.bank.service.DepositRequest;
+import ee.bcs.myApp.bank.service.WithdrawRequest;
 import ee.bcs.myApp.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
 @Service
-public class BankService {
+public class TransferService {
 
     @Resource
     private AccountService accountService;
@@ -32,14 +34,14 @@ public class BankService {
         accountService.updateDebitPaymentBalance(transaction.getAccount(), request.getAmount());
     }
 
-    public TransactionResponse receiveMoney(MoneyRequest request) {
+    public TransferResponse receiveMoney(TransferRequest request) {
         Transaction transaction = transactionService.addReceiveMoneyTransaction(request);
         accountService.updateCreditPaymentBalance(transaction.getAccount(), request.getAmount());        
-        return new TransactionResponse(transaction.getId());
+        return new TransferResponse(transaction.getId());
     }
 
-    public TransactionResponse sendMoney(MoneyRequest request) {
+    public TransferResponse sendMoney(TransferRequest request) {
         Transaction transaction = transactionService.addSendMoneyTransaction(request);
-        return new TransactionResponse(transaction.getId());
+        return new TransferResponse(transaction.getId());
     }
 }
