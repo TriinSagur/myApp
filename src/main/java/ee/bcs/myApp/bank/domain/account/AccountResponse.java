@@ -6,6 +6,7 @@ import lombok.Data;
 public class AccountResponse {
 
     private Integer customerId;
+    private Integer accountId;
     private String firstName;
     private String lastName;
     private String isikukood;
