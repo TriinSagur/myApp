@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-19T13:27:19+0300",
+    date = "2022-04-22T10:50:21+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
@@ -22,6 +22,7 @@ public class AccountMapperImpl implements AccountMapper {
 
         AccountResponse accountResponse = new AccountResponse();
 
+        accountResponse.setAccountId( account.getId() );
         accountResponse.setCustomerId( accountCustomerId( account ) );
         accountResponse.setFirstName( accountCustomerFirstName( account ) );
         accountResponse.setLastName( accountCustomerLastName( account ) );
