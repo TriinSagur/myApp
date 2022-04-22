@@ -7,7 +7,7 @@ import java.util.List;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface CustomerMapper {
 
-    @Mapping(target = "id", ignore=true)
+    @Mapping(target = "id", ignore = true)
     Customer toEntity(CustomerDto dto);
 
     CustomerDto toDto(Customer entity);
@@ -16,6 +16,6 @@ public interface CustomerMapper {
 
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(target = "id", ignore=true)
+    @Mapping(target = "id", ignore = true)
     void updateEntity(CustomerDto dto, @MappingTarget Customer entity);
 }

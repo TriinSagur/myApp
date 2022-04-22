@@ -2,15 +2,15 @@ package ee.bcs.myApp.bank.domain.account;
 
 import lombok.Data;
 
-
 @Data
 public class AccountResponse {
 
-    private final Integer customerId;
+    private Integer customerId;
     private String firstName;
     private String lastName;
     private String isikukood;
-    private final String accountNumber;
-    private final Integer balance;
-    private final Boolean locked;
+    private String accountNumber;
+    private Integer accountId;
+    private Integer balance;
+    private Boolean locked;
 }

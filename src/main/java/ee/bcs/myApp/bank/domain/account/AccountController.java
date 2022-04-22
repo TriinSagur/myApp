@@ -15,42 +15,41 @@ public class AccountController {
     private AccountService accountService;
 
     @PostMapping
-    @Operation(summary = "Lisa uue konto")
-    public AccountDto addNewAccount(@RequestBody @Valid AccountDto accountDto) {
+    @Operation(summary = "Lisab uue konto")
+    public AccountDto addNewAccount(@Valid @RequestBody AccountDto accountDto) {
         return accountService.addNewAccount(accountDto);
     }
 
     @GetMapping("/all")
-    @Operation(summary = "Otsi kõik")
     public List<AccountResponse> findAllAccounts() {
         return accountService.findAllAccounts();
     }
 
     @GetMapping("/id")
-    @Operation(summary = "Otsi ")
-    public AccountResponse findAccountById(@RequestParam Integer id) {
+    @Operation(summary = "Otsib konto info ID järgi")
+    public AccountResponse findAccountInfoById(@RequestParam Integer id) {
         return accountService.findAccountInfoById(id);
     }
 
+    @GetMapping("/customer-id")
+    @Operation(summary = "Otsib kontode info kliendi ID järgi")
+    public List<AccountResponse> findAccountsInfoByCustomerId(@RequestParam Integer id) {
+        return accountService.findAccountsInfoByCustomerId(id);
+    }
 
     @DeleteMapping("/id")
-    @Operation(summary = "Otsi ")
     public void removeAccountById(@RequestParam Integer id) {
         accountService.removeAccountById(id);
     }
 
     @PutMapping("/id")
-    public void updateAccountById(@RequestParam Integer id, @RequestBody @Valid AccountDto accountDto) {
+    public void updateAccountById(@RequestParam Integer id, @RequestBody AccountDto accountDto) {
         accountService.updateAccountById(id, accountDto);
-
     }
 
     @GetMapping("/last-name")
-    public List<AccountResponse> findAccountInfoByLastName(@RequestParam String lastName) {
-        return accountService.findAccountInfoByLastName(lastName);
-
-
+    public List<AccountResponse> findAccountsInfoByLastName(@RequestParam String lastName) {
+        return accountService.findAccountsInfoByLastName(lastName);
     }
+
 }
-
-

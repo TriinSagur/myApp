@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--    <link rel="stylesheet" href="assets/styles.css">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+All customers
+<br>
+<textarea id="myTextArea" cols="30" rows="10">Esialgne text</textarea>
+
+<br>
+<button id="lisa" type="submit" onclick="addText()">Lisa mingi text</button>
+
+<br>
+<br>
+<button id="vota" onclick="getSomeText()" type="submit">Võta mingi text</button>
+
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+<h1>Tere tulemast minu kodulehele :)</h1>
+
+
+<table>
+    <tr>
+        <th>Eesnimi</th>
+        <th>Perekonnanimi</th>
+    </tr>
+    <tr>
+        <td>Otto</td>
+        <td>Triin</td>
+    </tr>
+    <tr>
+        <td>Hanno</td>
+        <td>Zombi - Erotica</td>
+    </tr>
+    </tr>
+</table>
+<br>
+
+
+<table class="table table-hover table-dark">
+    <thead>
+    <tr>
+        <th scope="col">Eesnimi</th>
+        <th scope="col">Perekonnanimi</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">Otto</th>
+        <td>Triin</td>
+    </tr>
+    <tr>
+        <th scope="row">Hanno</th>
+        <td>Zombie-Erotica</td>
+    </tr>
+    </tbody>
+</table>
+
+
+<!-- test -->
+<h2>Vali oma kaameli ratsanik</h2>
+<select name="test123" id="asdas">
+    <option value="0"></option>
+    <option value="1">Otto Triin</option>
+    <option value="2">Hanno</option>
+</select>
+
+<h2>Vali aeg</h2>
+
+
+<input type="datetime-local" name="asdasdas" id="">
+
+<br>
+<br>
+
+<br>
+<br>
+<img src="images/CamelCase(klass).png" alt="this is camel size 200 px" width="200">
+<br>
+<br>
+<br>
+
+<button type="submit">Vajuta siia</button>
+
+<br>
+<br>
+<br>
+<a href="https://www.google.com/">Siit saab googlisse</a>
+</body>
+
+<script>
+
+
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+    };
+
+    fetch("http://localhost:8080/customer/all", requestOptions)
+        .then(response => response.text())
+        .then(result => document.getElementById("myTextArea").value = result)
+        .catch(error => console.log('error', error));
+
+    function addText() {
+        let text = document.getElementById("myTextArea");
+        text.value = "See tekst läheb kasti sisse";
+    }
+
+    function getSomeText() {
+        let text = document.getElementById("myTextArea");
+        alert(text.value)
+    }
+
+
+
+</script>
+</html>
