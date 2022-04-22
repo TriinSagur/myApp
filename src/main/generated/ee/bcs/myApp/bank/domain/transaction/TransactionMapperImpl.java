@@ -1,14 +1,17 @@
 package ee.bcs.myApp.bank.domain.transaction;
 
-import ee.bcs.myApp.bank.service.DepositRequest;
-import ee.bcs.myApp.bank.service.MoneyRequest;
-import ee.bcs.myApp.bank.service.WithdrawRequest;
+import ee.bcs.myApp.bank.service.statement.Statement;
+import ee.bcs.myApp.bank.service.transfer.DepositRequest;
+import ee.bcs.myApp.bank.service.transfer.TransferRequest;
+import ee.bcs.myApp.bank.service.transfer.WithdrawRequest;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-18T16:31:46+0300",
+    date = "2022-04-22T12:16:56+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.13 (Oracle Corporation)"
 )
 @Component
@@ -47,7 +50,7 @@ public class TransactionMapperImpl implements TransactionMapper {
     }
 
     @Override
-    public Transaction toReceiveMoneyEntity(MoneyRequest request) {
+    public Transaction toReceiveMoneyEntity(TransferRequest request) {
         if ( request == null ) {
             return null;
         }
@@ -64,7 +67,7 @@ public class TransactionMapperImpl implements TransactionMapper {
     }
 
     @Override
-    public Transaction toSendMoneyEntity(MoneyRequest request) {
+    public Transaction toSendMoneyEntity(TransferRequest request) {
         if ( request == null ) {
             return null;
         }
@@ -78,5 +81,37 @@ public class TransactionMapperImpl implements TransactionMapper {
         transaction.setType( "s" );
 
         return transaction;
+    }
+
+    @Override
+    public List<Statement> toStatements(List<Transaction> transactions) {
+        if ( transactions == null ) {
+            return null;
+        }
+
+        List<Statement> list = new ArrayList<Statement>( transactions.size() );
+        for ( Transaction transaction : transactions ) {
+            list.add( transactionToStatement( transaction ) );
+        }
+
+        return list;
+    }
+
+    protected Statement transactionToStatement(Transaction transaction) {
+        if ( transaction == null ) {
+            return null;
+        }
+
+        Statement statement = new Statement();
+
+        statement.setId( transaction.getId() );
+        statement.setSenderAccountNumber( transaction.getSenderAccountNumber() );
+        statement.setReceiverAccountNumber( transaction.getReceiverAccountNumber() );
+        statement.setAmount( transaction.getAmount() );
+        statement.setBalance( transaction.getBalance() );
+        statement.setType( transaction.getType() );
+        statement.setTransactionDateTime( transaction.getTransactionDateTime() );
+
+        return statement;
     }
 }
