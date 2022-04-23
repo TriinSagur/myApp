@@ -10,7 +10,8 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-public class BookController {
+public class
+BookController {
 
 //    @Resource
 //    private BookService bookService;

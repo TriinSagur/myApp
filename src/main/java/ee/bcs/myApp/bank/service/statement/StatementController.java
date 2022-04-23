@@ -13,7 +13,7 @@ public class StatementController {
     private StatementService statementService;
 
     @GetMapping("/account-id")
-    @Operation(summary = "")
+    @Operation(summary = "leiab kontoväljavõtte konto id järgi")
     public StatementResponse getStatementByAccountId(@RequestParam Integer accountId) {
         return statementService.getStatementByAccountId(accountId);
     }
