@@ -20,16 +20,4 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
     @Query("select a from Account a where a.customer.id = ?1 order by a.accountNumber")
     List<Account> findByCustomerId(Integer id);
 
-
-
-
-
-
-
-
-
-
-
-
-
 }

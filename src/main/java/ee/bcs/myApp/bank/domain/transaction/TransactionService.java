@@ -29,9 +29,6 @@ public class TransactionService {
     private TransactionRepository transactionRepository;
 
 
-
-
-
     public Transaction addDepositTransaction(DepositRequest request) {
         Transaction transaction = transactionMapper.toDepositEntity(request);
         Account account = accountService.getValidAccountById(request.getAccountId());
