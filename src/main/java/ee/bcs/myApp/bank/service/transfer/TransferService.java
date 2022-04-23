@@ -19,7 +19,6 @@ public class TransferService {
     @Resource
     private ValidationService validationService;
 
-
     public void deposit(DepositRequest request) {
         validationService.isValidDepositAmount(request.getAmount());
         Transaction transaction = transactionService.addDepositTransaction(request);
@@ -32,17 +31,14 @@ public class TransferService {
         accountService.updateDebitPaymentBalance(transaction.getAccount(), request.getAmount());
     }
 
-
     public TransferResponse receiveMoney(TransferRequest request) {
         Transaction transaction = transactionService.addReceiveMoneyTransaction(request);
         accountService.updateCreditPaymentBalance(transaction.getAccount(), request.getAmount());
-
         return new TransferResponse(transaction.getId());
     }
 
     public TransferResponse sendMoney(TransferRequest request) {
         Transaction transaction = transactionService.addSendMoneyTransaction(request);
-
         return new TransferResponse(transaction.getId());
     }
 }

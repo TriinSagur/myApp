@@ -20,20 +20,22 @@ public class TransferController {
     }
 
     @PostMapping("/withdraw")
-    @Operation(summary = "Raha välja võtmine kontolt / ATM")
-    public void withdraw(@RequestBody WithdrawRequest request) {
+    @Operation(summary = "Raha väljavõtmine kontolt / ATM")
+    public void withdraw(@RequestBody @Valid WithdrawRequest request) {
         transferService.withdraw(request);
     }
 
-    @PostMapping("/")
+    @PostMapping("/in")
     @Operation(summary = "Raha laekumine")
     public TransferResponse receiveMoney(@Valid @RequestBody TransferRequest request) {
         return transferService.receiveMoney(request);
     }
 
     @PostMapping("/out")
+    @Operation(summary = "Raha saatmine")
     public TransferResponse sendMoney(@Valid @RequestBody TransferRequest request) {
         return transferService.sendMoney(request);
     }
+
 
 }
