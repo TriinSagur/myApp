@@ -1,10 +1,6 @@
 package ee.bcs.myApp.library.service;
 
-import ee.bcs.myApp.library.author.AuthorDto;
-import ee.bcs.myApp.library.book.Book;
 import ee.bcs.myApp.library.book.BookDto;
-import ee.bcs.myApp.library.bookauthor.AddBookAuthorDto;
-import ee.bcs.myApp.library.bookauthor.BookAuthorResponse;
 import ee.bcs.myApp.library.bookauthor.BookAuthorService;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +13,23 @@ public class LibraryService {
     @Resource
     private BookAuthorService bookAuthorService;
 
-    public List<BookAuthorResponse> getAllBookAuthors() {
-        return bookAuthorService.getAllBookAuthors();
+    public List<BookAuthorResponse> getAllBooksWithAuthors() {
+        return bookAuthorService.getAllBooksWithAuthors();
     }
 
     public List<BookDto> getAllBooksForAuthor(String lastName) {
         return bookAuthorService.getAllBooksForAuthor(lastName);
+    }
 
+    public void addBookAndAuthor(BookAuthorRequest bookAuthorDto) {
+        bookAuthorService.addBookAndAuthor(bookAuthorDto);
+    }
+
+    public void removeAuthorFromBook(Integer bookAuthorId) {
+        bookAuthorService.removeAuthorFromBook(bookAuthorId);
+    }
+
+    public void addAuthorToBook(Integer bookId, Integer authorId) {
+        bookAuthorService.addAuthorToBook(bookId,authorId);
     }
 }

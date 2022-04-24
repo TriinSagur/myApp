@@ -1,10 +1,6 @@
 package ee.bcs.myApp.library.service;
 
-import ee.bcs.myApp.library.author.AuthorDto;
-import ee.bcs.myApp.library.book.Book;
 import ee.bcs.myApp.library.book.BookDto;
-import ee.bcs.myApp.library.bookauthor.AddBookAuthorDto;
-import ee.bcs.myApp.library.bookauthor.BookAuthorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,15 +15,33 @@ public class LibraryController {
     private LibraryService libraryService;
 
     @GetMapping("/all")
-    @Operation (summary = "Tagastab kõik raamatud autoritega.")
-    public List <BookAuthorResponse> getAllBookAuthors() {
-        return libraryService.getAllBookAuthors();
+    @Operation(summary = "Tagastab kõik raamatud autoritega.")
+    public List<BookAuthorResponse> getAllBooksWithAuthors() {
+        return libraryService.getAllBooksWithAuthors();
     }
 
     @GetMapping("/all-from-author")
-    @Operation (summary = "Tagastab kõik ühe autori raamatud")
-    public List<BookDto> getAllBooksForAuthor (@RequestParam String lastName) {
+    @Operation(summary = "Tagastab kõik ühe autori raamatud")
+    public List<BookDto> getAllBooksForAuthor(@RequestParam String lastName) {
         return libraryService.getAllBooksForAuthor(lastName);
+    }
+
+    @PostMapping("/book-and-author")
+    @Operation(summary = "Lisab uue raamatu ja uue autori samaaegselt")
+    public void addBookAndAuthor(@RequestBody BookAuthorRequest bookAuthorDto) {
+        libraryService.addBookAndAuthor(bookAuthorDto);
+    }
+
+    @DeleteMapping("/")
+    @Operation(summary = "Kustutab autori ja raamatu vahelise seose")
+    public void removeAuthorFromBook(@RequestParam Integer bookAuthorId) {
+        libraryService.removeAuthorFromBook(bookAuthorId);
+    }
+
+    @PutMapping("/")
+    @Operation(summary = "Lisab olemasolevale raamatule olemasoleva autori")
+    public void addAuthorToBook(@RequestParam Integer bookId,@RequestParam Integer authorId) {
+        libraryService.addAuthorToBook(bookId,authorId);
     }
 
 }

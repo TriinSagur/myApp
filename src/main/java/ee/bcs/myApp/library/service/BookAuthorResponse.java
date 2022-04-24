@@ -1,12 +1,10 @@
-package ee.bcs.myApp.library.bookauthor;
+package ee.bcs.myApp.library.service;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
-public class BookAuthorDto implements Serializable {
-    private Integer id;
+public class BookAuthorResponse {
+
     private Integer bookId;
     private String bookTitle;
     private Integer bookYear;

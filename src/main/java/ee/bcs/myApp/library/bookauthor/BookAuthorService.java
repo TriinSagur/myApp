@@ -6,6 +6,8 @@ import ee.bcs.myApp.library.book.Book;
 import ee.bcs.myApp.library.book.BookDto;
 import ee.bcs.myApp.library.book.BookMapper;
 import ee.bcs.myApp.library.book.BookRepository;
+import ee.bcs.myApp.library.service.BookAuthorRequest;
+import ee.bcs.myApp.library.service.BookAuthorResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,7 +33,7 @@ public class BookAuthorService {
     private BookAuthorMapper bookAuthorMapper;
 
 
-    public List<BookAuthorResponse> getAllBookAuthors() {
+    public List<BookAuthorResponse> getAllBooksWithAuthors() {
         List<BookAuthor> bookAuthors = bookAuthorRepository.findAll();
         return bookAuthorMapper.toBookAuthorResponses(bookAuthors);
     }
@@ -45,23 +47,21 @@ public class BookAuthorService {
         return bookMapper.toDtos(books);
     }
 
-    public void addBookAndAuthor(AddBookAuthorDto bookAuthorDto) {
+    public void addBookAndAuthor(BookAuthorRequest bookAuthorDto) {
         BookAuthor bookAuthor = bookAuthorMapper.toAddBookAuthorEntity(bookAuthorDto);
         authorRepository.save(bookAuthor.getAuthor());
         bookRepository.save(bookAuthor.getBook());
         bookAuthorRepository.save(bookAuthor);
     }
 
-    public void addAuthorToBook(AddAuthorToBook authorToBook) {
-        Book book = bookRepository.getById(authorToBook.getBookId());
-        Author author = authorRepository.getById(authorToBook.getAuthorId());
-        BookAuthor bookAuthor = new BookAuthor();
-        bookAuthor.setBook(book);
-        bookAuthor.setAuthor(author);
+    public void addAuthorToBook(Integer bookId, Integer authorId) {
+        Book book = bookRepository.getById(bookId);
+        Author author = authorRepository.getById(authorId);
+        BookAuthor bookAuthor = new BookAuthor(book,author);
         bookAuthorRepository.save(bookAuthor);
     }
 
-    public void deleteBookAuthorById(Integer bookAuthorId) {
+    public void removeAuthorFromBook(Integer bookAuthorId) {
         bookAuthorRepository.deleteById(bookAuthorId);
     }
 }
