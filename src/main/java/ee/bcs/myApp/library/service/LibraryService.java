@@ -32,4 +32,8 @@ public class LibraryService {
     public void addAuthorToBook(Integer bookId, Integer authorId) {
         bookAuthorService.addAuthorToBook(bookId, authorId);
     }
+
+    public List<BookAuthorResponse> getBooksAndAuthorsByWord(String word) {
+        return bookAuthorService.getBooksAndAuthorsByWord(word);
+    }
 }

@@ -26,6 +26,12 @@ public class LibraryController {
         return libraryService.getAllBooksForAuthor(lastName);
     }
 
+    @GetMapping("/find")
+    @Operation(summary = "Otsib raamatuid ja autoreid märksõna järgi")
+    public List<BookAuthorResponse> getBooksAndAuthorsByWord(@RequestParam String word) {
+        return libraryService.getBooksAndAuthorsByWord(word);
+    }
+
     @PostMapping("/book-and-author")
     @Operation(summary = "Lisab uue raamatu ja uue autori samaaegselt")
     public void addBookAndAuthor(@RequestBody BookAuthorRequest bookAuthorDto) {

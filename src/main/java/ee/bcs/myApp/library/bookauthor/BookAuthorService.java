@@ -63,4 +63,9 @@ public class BookAuthorService {
     public void removeAuthorFromBook(Integer bookAuthorId) {
         bookAuthorRepository.deleteById(bookAuthorId);
     }
+
+    public List<BookAuthorResponse> getBooksAndAuthorsByWord(String word) {
+        List<BookAuthor> bookAuthors = bookAuthorRepository.findByWord(word, word, word);
+        return bookAuthorMapper.toBookAuthorResponses(bookAuthors);
+    }
 }
