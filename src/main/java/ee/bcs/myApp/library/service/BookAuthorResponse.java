@@ -5,10 +5,9 @@ import lombok.Data;
 @Data
 public class BookAuthorResponse {
 
-    private Integer bookId;
+    private Integer id;
     private String bookTitle;
     private Integer bookYear;
-    private Integer authorId;
     private String authorFirstName;
     private String authorLastName;
 }

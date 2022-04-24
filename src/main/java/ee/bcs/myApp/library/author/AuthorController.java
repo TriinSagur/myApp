@@ -32,13 +32,13 @@ public class AuthorController {
     }
 
     @DeleteMapping("/id")
-    @Operation(summary = "kustutab autori id järgi")
+    @Operation(summary = "Kustutab autori id järgi")
     public void removeAuthorById(@RequestParam Integer id) {
         authorService.removeAuthorById(id);
     }
 
     @PutMapping("/id")
-    @Operation(summary = "uuendab autori id järgi")
+    @Operation(summary = "Uuendab autori id järgi")
     public void updateAuthorById (@RequestParam Integer id, @RequestBody AuthorDto authorDto) {
         authorService.updateAuthorById(id, authorDto);
     }

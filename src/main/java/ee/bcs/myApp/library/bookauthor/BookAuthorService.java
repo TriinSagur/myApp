@@ -32,7 +32,6 @@ public class BookAuthorService {
     @Resource
     private BookAuthorMapper bookAuthorMapper;
 
-
     public List<BookAuthorResponse> getAllBooksWithAuthors() {
         List<BookAuthor> bookAuthors = bookAuthorRepository.findAll();
         return bookAuthorMapper.toBookAuthorResponses(bookAuthors);

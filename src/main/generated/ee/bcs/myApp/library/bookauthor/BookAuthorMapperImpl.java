@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-24T16:37:13+0300",
+    date = "2022-04-24T20:51:06+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
@@ -25,12 +25,11 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
 
         BookAuthorResponse bookAuthorResponse = new BookAuthorResponse();
 
-        bookAuthorResponse.setBookId( bookAuthorBookId( bookAuthor ) );
         bookAuthorResponse.setBookTitle( bookAuthorBookTitle( bookAuthor ) );
         bookAuthorResponse.setBookYear( bookAuthorBookYear( bookAuthor ) );
-        bookAuthorResponse.setAuthorId( bookAuthorAuthorId( bookAuthor ) );
         bookAuthorResponse.setAuthorFirstName( bookAuthorAuthorFirstName( bookAuthor ) );
         bookAuthorResponse.setAuthorLastName( bookAuthorAuthorLastName( bookAuthor ) );
+        bookAuthorResponse.setId( bookAuthor.getId() );
 
         return bookAuthorResponse;
     }
@@ -63,21 +62,6 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
         return bookAuthor;
     }
 
-    private Integer bookAuthorBookId(BookAuthor bookAuthor) {
-        if ( bookAuthor == null ) {
-            return null;
-        }
-        Book book = bookAuthor.getBook();
-        if ( book == null ) {
-            return null;
-        }
-        Integer id = book.getId();
-        if ( id == null ) {
-            return null;
-        }
-        return id;
-    }
-
     private String bookAuthorBookTitle(BookAuthor bookAuthor) {
         if ( bookAuthor == null ) {
             return null;
@@ -106,21 +90,6 @@ public class BookAuthorMapperImpl implements BookAuthorMapper {
             return null;
         }
         return year;
-    }
-
-    private Integer bookAuthorAuthorId(BookAuthor bookAuthor) {
-        if ( bookAuthor == null ) {
-            return null;
-        }
-        Author author = bookAuthor.getAuthor();
-        if ( author == null ) {
-            return null;
-        }
-        Integer id = author.getId();
-        if ( id == null ) {
-            return null;
-        }
-        return id;
     }
 
     private String bookAuthorAuthorFirstName(BookAuthor bookAuthor) {
