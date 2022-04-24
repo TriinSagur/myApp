@@ -6,6 +6,7 @@ import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface AuthorMapper {
+
     Author toEntity(AuthorDto authorDto);  // algne nimetus oli: authorDtoToAuthor, muutsin ära - DTO sisse välja "Entity" => toEntity
 
     AuthorDto toDto(Author author); // alne nimi authorToAuthorDto, uus nimi pandud , sest siisse autor ja välja DTO, siis toAutorDTO
