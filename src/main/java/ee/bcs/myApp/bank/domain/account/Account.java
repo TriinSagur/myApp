@@ -28,5 +28,4 @@ public class Account {
 
     @Column(name = "locked", nullable = false)
     private Boolean locked = false;
-
 }
