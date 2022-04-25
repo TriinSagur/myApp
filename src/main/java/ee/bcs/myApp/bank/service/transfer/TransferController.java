@@ -18,13 +18,13 @@ public class TransferController {
     private TransferService transferService;
 
     @PostMapping("/deposit")
-    @Operation(summary = "Raha juurde lisamine kontole")
+    @Operation(summary = "Raha juurde lisamine kontole / ATM")
     public void deposit(@RequestBody @Valid DepositRequest request) {
         transferService.deposit(request);
     }
 
     @PostMapping("/withdraw")
-    @Operation(summary = "Raha väljavõtmine kontolt")
+    @Operation(summary = "Raha väljavõtmine kontolt / ATM")
     public void withdraw(@RequestBody @Valid WithdrawRequest request) {
         transferService.withdraw(request);
     }
@@ -36,8 +36,8 @@ public class TransferController {
     }
 
     @PostMapping("/out")
-    @Operation(summary ="Raha saatmine")
-    public TransferResponse sendMoney(@Valid @RequestBody TransferRequest request) {
+    @Operation(summary = "Raha saatmine")
+    public TransferResponse sendMoney(@Valid @RequestBody SendRequest request) {
         return transferService.sendMoney(request);
     }
 }
