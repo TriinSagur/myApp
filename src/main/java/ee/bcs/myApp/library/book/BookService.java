@@ -1,51 +1,57 @@
 package ee.bcs.myApp.library.book;
 
-import ee.bcs.myApp.MyAppApplication;
-import ee.bcs.myApp.library.Library;
+import ee.bcs.myApp.library.bookauthor.BookAuthorDto;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class BookService {
 
+    @Resource
+    private BookMapper bookMapper;
 
-//    public List<BookDto> findAllBooks() {
-//        Library libraryRepository = MyAppApplication.libraryRepository;
-//        List<Book> books = libraryRepository.getBooks();
-//
-//        List<BookDto> bookDtos = new ArrayList<>();
-//        for (Book book : books) {
-//            BookDto bookDto = toDto(book);
-//            bookDtos.add(bookDto);
-//        }
-//        return bookDtos;
-//    }
-//
-//    public BookDto addNewBook(BookDto bookDto) {
-//        Book book = toEntity(bookDto);
-//        book.updateId();
-//        List<Book> books = MyAppApplication.libraryRepository.getBooks();
-//        books.add(book);
-//        return toDto(book);
-//
-//    }
-//
-//    private Book toEntity(BookDto bookDto) {
-//        Book book = new Book();
-//        book.setTitle(bookDto.getTitle());
-//        book.setYear(bookDto.getYear());
-//        return book;
-//    }
-//
-//    private BookDto toDto(Book book) {
-//        BookDto bookDto = new BookDto();
-//        bookDto.setId(book.getId());
-//        bookDto.setTitle(book.getTitle());
-//        bookDto.setYear(book.getYear());
-//        return bookDto;
-//    }
+    @Resource
+    private BookRepository bookRepository;
 
+    public List<BookDto> getAllBooks() {
+        List<Book> books = bookRepository.findAll();
+        return bookMapper.toDtos(books);
+    }
 
+    public BookDto getBookByTitel(String titel) {
+        Book book = bookRepository.findByTitle(titel);
+        bookMapper.toDto(book);
+        return bookMapper.toDto(book);
+    }
+
+    public BookDto addNewBook(BookDto bookDto) {
+        Book book = bookMapper.toEntity(bookDto);
+        Book save = bookRepository.save(book);
+        return bookMapper.toDto(save);
+    }
+
+    public void deleteBookById(Integer id) {
+        bookRepository.deleteById(id);
+    }
+
+    public void updateBookByTitle(String titel, BookDto bookDto) {
+        Book book = bookRepository.findByTitle(titel);
+        bookMapper.updateEntity(bookDto, book);
+        bookRepository.save(book);
+    }
+
+    public Book getAndSaveBook(BookAuthorDto bookAuthorDto) {
+        BookDto bookDto = new BookDto();
+        bookDto.setYear(bookAuthorDto.getBookYear());
+        bookDto.setTitle(bookAuthorDto.getBookTitle());
+        Book book = bookMapper.toEntity(bookDto);
+        bookRepository.save(book);
+        return book;
+    }
+
+    public Book getBookEntityById(Integer bookId) {
+        return bookRepository.getById(bookId);
+    }
 }

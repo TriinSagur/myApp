@@ -28,8 +28,8 @@ public class AuthorController {
 
     @PostMapping("/new")
     @Operation(summary = "Lisab uue autori")
-    public AuthorDto addNewAuthor(@Valid @RequestBody Author author) {
-        return authorService.addNewAuthor(author);
+    public AuthorDto addNewAuthor(@Valid @RequestBody AuthorDto authorDto) {
+        return authorService.addNewAuthor(authorDto);
     }
 
     @DeleteMapping("/delete-byLastName")
@@ -39,7 +39,7 @@ public class AuthorController {
     }
 
     @PutMapping("/update-byId")
-    @Operation(summary = "Uuendab autorit eesnime järgi")
+    @Operation(summary = "Uuendab autorit id järgi")
     public void updateAuthorById(@RequestParam Integer id, @RequestBody AuthorDto authorDto) {
         authorService.updateAuthorById(id, authorDto);
     }

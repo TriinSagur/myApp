@@ -1,22 +1,20 @@
-package ee.bcs.myApp.library.author;
+package ee.bcs.myApp.library.book;
 
 import org.mapstruct.*;
 
 import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
-public interface AuthorMapper {
-
+public interface BookMapper {
 
     @Mapping(target = "id", ignore = true)
-    Author toEntity(AuthorDto authorDto);
+    Book toEntity(BookDto bookDto);
 
-    AuthorDto toDto(Author author);
+    BookDto toDto(Book book);
 
-    List<AuthorDto> toDtos (List<Author> authors);
-
+    List<BookDto> toDtos(List<Book> book);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)
-    void updateEntity(AuthorDto authorDto, @MappingTarget Author author);
+    void updateEntity(BookDto bookDto, @MappingTarget Book book);
 }

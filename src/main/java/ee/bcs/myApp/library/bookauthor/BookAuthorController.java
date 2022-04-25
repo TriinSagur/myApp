@@ -1,51 +1,46 @@
 package ee.bcs.myApp.library.bookauthor;
 
-import ee.bcs.myApp.library.author.Author;
-import ee.bcs.myApp.library.author.AuthorRepository;
-import ee.bcs.myApp.library.book.Book;
-import ee.bcs.myApp.library.book.BookRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
-@RequestMapping("/book-author")
+@RequestMapping("/bookAuthor")
 public class BookAuthorController {
 
     @Resource
     private BookAuthorService bookAuthorService;
 
-    @Resource
-    private AuthorRepository authorRepository;
-
-
-    @Resource
-    private BookRepository bookRepository;
-
-
-    @Resource
-    private BookAuthorRepository bookAuthorRepository;
-
-
-
-    @GetMapping
-    public void demo1() {
-        Author author = authorRepository.getByLastName("Banderas");
-        Book book = bookRepository.findByTitle("Harry Potter");
-        BookAuthor bookAuthor = new BookAuthor();
-        bookAuthor.setAuthor(author);
-        bookAuthor.setBook(book);
-        bookAuthorRepository.save(bookAuthor);
+    @GetMapping("/all")
+    @Operation(summary = "Tagastab kõik raamtute ja autorite vahelised seosed")
+    public List<BookAuthorDto> getAllBookAuthors() {
+        return bookAuthorService.getAllBookAuthors();
     }
 
-    @PostMapping("/book-and-author")
-    @Operation(summary = "Lisab uue raamatu ja uue autori samaaegselt")
-    public void addBookAndAuthor(@RequestBody BookAuthorDto bookAuthorDto) {
-        bookAuthorService.addBookAndAuthor(bookAuthorDto);
+    @GetMapping("/id")
+    @Operation(summary = "Tagastab raamatu ja autori vahelise seose id järgi")
+    public BookAuthorDto getBookAuthorById(@RequestParam Integer id) {
+        return bookAuthorService.getBookAuthorById(id);
     }
 
+    @PostMapping("/new-book-and-author")
+    @Operation(summary = "Lisab uue raamatu ja autori")
+    public BookAuthorDto addNewBookAndAuthor(@Valid @RequestBody BookAuthorDto bookAuthorDto) {
+        return bookAuthorService.addNewBookAndAuthor(bookAuthorDto);
+    }
+
+    @PutMapping ("/update-bookAuthor-connection")
+    @Operation(summary = "Lisab/uuendab uue autori ja raamatu vahelise seose")
+    public void addBookAndAuthorConnection(@RequestParam Integer authorId, @RequestParam Integer bookId) {
+        bookAuthorService.addBookAndAuthorConnection(authorId, bookId);
+    }
+
+    @DeleteMapping("/delete")
+    @Operation(summary = "kustutab raamatu ja autori seose")
+    public void deleteBookAuthor(@RequestParam Integer id) {
+        bookAuthorService.deleteBookAuthor(id);
+    }
 }
-
-
-

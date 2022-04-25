@@ -7,10 +7,10 @@ import java.io.Serializable;
 
 @Data
 public class AuthorDto implements Serializable {
-    private final Integer id;
+    private Integer id;
     @NotNull
-    private final String firstName;
+    private String firstName;
     @NotNull
-    private final String lastName;
+    private String lastName;
 
 }

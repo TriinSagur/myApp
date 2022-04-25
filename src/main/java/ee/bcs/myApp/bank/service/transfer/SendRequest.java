@@ -7,11 +7,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
-public class TransferRequest {
+public class SendRequest {
 
     @NotNull
-    @Size(max = 11)
-    private String senderAccountNumber;
+
+    private Integer senderAccountId;
 
     @NotNull
     private String receiverAccountNumber;

@@ -1,5 +1,7 @@
 package ee.bcs.myApp.library.author;
 
+import ee.bcs.myApp.library.book.Book;
+import ee.bcs.myApp.library.bookauthor.BookAuthorDto;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,12 +27,10 @@ public class AuthorService {
         return authorMapper.toDtos(authors);
     }
 
-    public AuthorDto addNewAuthor(Author author) {
-        Author newAuthor = new Author();
-        newAuthor.setFirstName(author.getFirstName());
-        newAuthor.setLastName(author.getLastName());
-        authorRepository.save(newAuthor);
-        return authorMapper.toDto(newAuthor);
+    public AuthorDto addNewAuthor(AuthorDto authorDto) {
+        Author author = authorMapper.toEntity(authorDto);
+        authorRepository.save(author);
+        return authorMapper.toDto(author);
     }
 
     public void deleteAuthorByLastName(String lastName) {
@@ -39,8 +39,21 @@ public class AuthorService {
 
     public void updateAuthorById(Integer id, AuthorDto authorDto) {
         Author foundAuthor = authorRepository.getById(id);
-        authorMapper.updateAuthorFromAuthorDto(authorDto, foundAuthor);
+        authorMapper.updateEntity(authorDto, foundAuthor);
         authorRepository.save(foundAuthor);
+    }
 
+    public Author getAndSaveAuthor(BookAuthorDto bookAuthorDto) {
+        AuthorDto authorDto = new AuthorDto();
+        authorDto.setFirstName(bookAuthorDto.getAuthorFirstName());
+        authorDto.setLastName(bookAuthorDto.getAuthorLastName());
+        Author author = authorMapper.toEntity(authorDto);
+        authorRepository.save(author);
+        return author;
+    }
+
+
+    public Author getAuthorEntityById(Integer authorId) {
+        return authorRepository.getById(authorId);
     }
 }

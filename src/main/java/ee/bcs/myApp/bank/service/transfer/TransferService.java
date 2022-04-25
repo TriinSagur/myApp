@@ -1,5 +1,6 @@
 package ee.bcs.myApp.bank.service.transfer;
 
+import ee.bcs.myApp.bank.domain.account.Account;
 import ee.bcs.myApp.bank.domain.account.AccountService;
 import ee.bcs.myApp.bank.domain.transaction.Transaction;
 import ee.bcs.myApp.bank.domain.transaction.TransactionService;
@@ -40,8 +41,14 @@ public class TransferService {
         return new TransferResponse(transaction.getId());
     }
 
-    public TransferResponse sendMoney(TransferRequest request) {
-        Transaction transaction = transactionService.addSendMoneyTransaction(request);
+    public TransferResponse sendMoney(SendRequest request) {
+        Integer senderAccountId = request.getSenderAccountId();
+        Account account = accountService.getValidAccountById(senderAccountId);
+        TransferRequest transferRequest = new TransferRequest();
+        transferRequest.setSenderAccountNumber(account.getAccountNumber());
+        transferRequest.setReceiverAccountNumber(request.getReceiverAccountNumber());
+        transferRequest.setAmount(request.getAmount());
+        Transaction transaction = transactionService.addSendMoneyTransaction(transferRequest);
         return new TransferResponse(transaction.getId());
     }
 }
