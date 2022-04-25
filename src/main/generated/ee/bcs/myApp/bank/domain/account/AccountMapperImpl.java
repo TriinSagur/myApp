@@ -26,7 +26,6 @@ public class AccountMapperImpl implements AccountMapper {
         accountResponse.setFirstName( accountCustomerFirstName( account ) );
         accountResponse.setLastName( accountCustomerLastName( account ) );
         accountResponse.setIsikukood( accountCustomerIsikukood( account ) );
-        accountResponse.setAccountId( account.getId() );
         accountResponse.setAccountNumber( account.getAccountNumber() );
         accountResponse.setBalance( account.getBalance() );
         accountResponse.setLocked( account.getLocked() );

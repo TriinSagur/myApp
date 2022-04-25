@@ -29,7 +29,7 @@ public class AccountController {
     @GetMapping("/id")
     @Operation(summary = "Leiab konto info id järgi")
     public AccountResponse findAccountById(@RequestParam Integer id) {
-        return accountService.findAccountInfo(id);
+        return accountService.findAccountInfoById(id);
     }
 
     @GetMapping("/customer-id")
@@ -53,6 +53,6 @@ public class AccountController {
     @GetMapping("/last-name")
     @Operation(summary = "Leiab konto kasutaja perekonna nime järgi")
     public List<AccountResponse> findAccountsInfoByLastName(@RequestParam String lastName) {
-        return accountService.findAccountInfoByLastName(lastName);
+        return accountService.findAccountsInfoByLastName(lastName);
     }
 }
