@@ -37,7 +37,7 @@ public class TransferController {
 
     @PostMapping("/send")
     @Operation(summary = "Send money")
-    public TransferResponse sendMoney(@RequestBody @Valid TransferRequest request) {
+    public TransferResponse sendMoney(@RequestBody @Valid SendRequest request) {
         return transferService.sendMoney(request);
     }
 
