@@ -12,17 +12,14 @@ public class ImageController {
     @Resource
     private ImageService imageService;
 
-    @Resource
-    private ImageResponse imageResponse;
-
     @PostMapping("/in")
-    public void addPicture (@RequestBody ImageRequest request) {
+    public void addPicture(@RequestBody ImageRequest request) {
         imageService.addPicture(request);
     }
 
     @GetMapping("/all")
     public List<ImageResponse> getAllPictures() {
-       return imageService.getAllPictures();
-
+        return imageService.getAllPictures();
     }
+
 }
