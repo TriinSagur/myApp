@@ -2,10 +2,10 @@ package ee.bcs.myApp.bank.domain.transaction;
 
 import ee.bcs.myApp.bank.domain.account.Account;
 import ee.bcs.myApp.bank.domain.account.AccountService;
+import ee.bcs.myApp.bank.service.statement.Statement;
 import ee.bcs.myApp.bank.service.transfer.DepositRequest;
 import ee.bcs.myApp.bank.service.transfer.TransferRequest;
 import ee.bcs.myApp.bank.service.transfer.WithdrawRequest;
-import ee.bcs.myApp.bank.service.statement.Statement;
 import ee.bcs.myApp.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
@@ -77,13 +77,12 @@ public class TransactionService {
 
         return senderTransaction;
     }
+
+
     public List<Statement> getStatementsByAccountId(Integer accountId) {
         List<Transaction> transactions = transactionRepository.findTransactionsByAccountId(accountId);
         return transactionMapper.toStatements(transactions);
-
-
     }
-
 
     private Integer calculateCreditBalance(Integer balance, Integer amount) {
         return balance + amount;
@@ -100,6 +99,5 @@ public class TransactionService {
         transaction.setAccount(account);
         transactionRepository.save(transaction);
     }
-
 
 }

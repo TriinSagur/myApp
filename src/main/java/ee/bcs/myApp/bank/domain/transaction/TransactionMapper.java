@@ -1,11 +1,12 @@
 package ee.bcs.myApp.bank.domain.transaction;
 
-import ee.bcs.myApp.bank.service.transfer.TransferRequest;
-import ee.bcs.myApp.bank.service.transfer.DepositRequest;
-import ee.bcs.myApp.bank.service.transfer.WithdrawRequest;
 import ee.bcs.myApp.bank.service.statement.Statement;
+import ee.bcs.myApp.bank.service.transfer.DepositRequest;
+import ee.bcs.myApp.bank.service.transfer.TransferRequest;
+import ee.bcs.myApp.bank.service.transfer.WithdrawRequest;
 import org.mapstruct.*;
 
+import java.time.Instant;
 import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
