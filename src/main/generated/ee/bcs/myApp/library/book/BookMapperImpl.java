@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-26T19:19:11+0300",
+    date = "2022-04-26T19:44:17+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
@@ -21,7 +21,6 @@ public class BookMapperImpl implements BookMapper {
 
         Book book = new Book();
 
-        book.setId( bookDto.getId() );
         book.setTitle( bookDto.getTitle() );
         book.setYear( bookDto.getYear() );
 
@@ -67,9 +66,6 @@ public class BookMapperImpl implements BookMapper {
             return;
         }
 
-        if ( bookDto.getId() != null ) {
-            book.setId( bookDto.getId() );
-        }
         if ( bookDto.getTitle() != null ) {
             book.setTitle( bookDto.getTitle() );
         }

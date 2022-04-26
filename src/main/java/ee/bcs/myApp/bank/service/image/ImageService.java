@@ -14,12 +14,10 @@ public class ImageService {
 
     public void addPicture(ImageRequest request) {
         pictureService.addPicture(request);
-
     }
 
     public List<ImageResponse> getAllPictures() {
-        return  pictureService.getAllPictures();
-
+        return pictureService.getAllPictures();
 
     }
 }

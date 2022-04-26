@@ -9,6 +9,7 @@ import java.util.List;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface PictureMapper {
 
+
     @Mapping(target = "data", source = "data", qualifiedByName = "byteArrayToString")
     ImageResponse toResponse(Picture picture);
 
@@ -17,7 +18,5 @@ public interface PictureMapper {
     @Named("byteArrayToString")
     static String byteArrayToString(byte[] bytes) {
         return new String(bytes, StandardCharsets.UTF_8);
-
     }
-
 }

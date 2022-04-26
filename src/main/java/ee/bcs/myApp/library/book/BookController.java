@@ -16,7 +16,7 @@ public class BookController {
     private BookService bookService;
 
     @PostMapping
-    @Operation(summary = " lisab uue raamatu")
+    @Operation(summary = " lisab uue raamatu")                                  // ei tööta
     public BookDto addNewBook(@Valid @RequestBody BookDto bookDto) {
         return bookService.addNewBook(bookDto);
     }
@@ -36,13 +36,20 @@ public class BookController {
     }
 
     @GetMapping("/year")
-    @Operation(summary = "leiab raamatu aasta järgi")
+    @Operation(summary = "leiab raamatu aasta järgi")                                   // ei tööta
     public BookDto findBookByYear(@RequestParam Integer year) {
         return bookService.findBookByYear(year);
     }
+
     @GetMapping("/year2")
-    @Operation(summary = "leiab väljaandmise aasta järgi raamatud")
+    @Operation(summary = "leiab väljaandmise aasta järgi raamatud")                 // ei tööta
     public List<BookDto> findBooksByYear(@RequestParam Integer year) {
         return bookService.findBooksByYear(year);
+    }
+
+    @DeleteMapping("/id")
+    @Operation(summary = "kustutab raamatu andmebaasi ID järgi")   //  see töötaB
+    public void removeBookById(@RequestParam Integer id) {
+        bookService.removeBookById(id);
     }
 }

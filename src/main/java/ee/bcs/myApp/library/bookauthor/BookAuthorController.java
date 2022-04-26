@@ -38,8 +38,10 @@ public class BookAuthorController {
     }
 
     @PostMapping("/book-and-author")
-    @Operation(summary = "lisab raamatu ja autori")
+    @Operation(summary = "lisab raamatu ja autori samaaegselt")
     public void addBookAndAuthor(@RequestBody BookAuthorDto bookAuthorDto) {
         bookAuthorService.addBookAndAuthor(bookAuthorDto);
     }
+
+
 }

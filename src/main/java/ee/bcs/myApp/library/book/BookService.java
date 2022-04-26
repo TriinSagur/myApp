@@ -34,7 +34,7 @@ public class BookService {
 
 
     public BookDto findBookByYear(Integer year) {
-        Book byYear = bookRepository.findByYear(year);
+        Book byYear = bookRepository.findByYear(year);              // ei tööta
         return bookMapper.toBookDto(byYear);
     }
 
@@ -42,5 +42,11 @@ public class BookService {
         List<Book> books = BookRepository.findsByYear(year);
         return bookMapper.toDtos(books);
 
+    }
+
+    public void removeBookById(Integer id) {
+//        Book book = bookRepository.getById(id);
+//        bookRepository.delete(book);
+        bookRepository.deleteById(id);
     }
 }

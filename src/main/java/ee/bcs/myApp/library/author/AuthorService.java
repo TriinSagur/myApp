@@ -39,7 +39,7 @@ public class  AuthorService {
         authorRepository.deleteById(id);
     }
 
-    public void updateAuthorById(Integer id, AuthorDto authorDto) { // ei tööta
+    public void updateAuthorById(Integer id, AuthorDto authorDto) {                         // ei tööta
         Author author = authorRepository.getById(id);
         Author entity = authorMapper.toEntity(authorDto);
         authorMapper.updateEntity(authorDto, entity);  // ei saa sellest aru
@@ -47,7 +47,7 @@ public class  AuthorService {
 
     }
 
-    public void updateAuthorByLastName(String lastName, AuthorDto authorDto) {  // ei tööta
+    public void updateAuthorByLastName(String lastName, AuthorDto authorDto) {                  // ei tööta
 
         Author author = authorRepository.getByLastName(lastName);
 
