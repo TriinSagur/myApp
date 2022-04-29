@@ -3,6 +3,8 @@ package ee.bcs.myApp.bank.domain.customer;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,4 +54,17 @@ public class CustomerService {
     }
 
 
+//    public Integer updCust(Integer [] horses) {
+//        Integer cus = horses[1];
+//        return cus;
+//    }
+
+    public void updCust(Test horses) {
+        Test test = new Test();
+        ArrayList horses1 = test.getHorses();
+        System.out.println(horses1);
+        Object o = horses1.get(0);
+        System.out.println(o.toString());
+
+    }
 }

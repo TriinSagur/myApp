@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -52,5 +54,15 @@ public class CustomerController {
 
     }
 
+//    @GetMapping("/upd")
+//    public Integer updCust(@RequestBody Integer [] horses) {
+//        return customerService.updCust(horses);
+//    }
+
+    @PostMapping("/upd")
+    public void updCust(@RequestBody Test horses) {
+        System.out.println("horses" + horses);
+        customerService.updCust(horses);
+    }
 
 }
