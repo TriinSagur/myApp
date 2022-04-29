@@ -35,17 +35,17 @@ public class AccountService {
 
 
     public AccountResponse findAccountInfoById(Integer id) {
-        Account account = accountRepository.getById(id);
-        AccountResponse accountResponse = accountMapper.toResponse(account);
+        Account account = getValidAccountById(id);
         return accountMapper.toResponse(account);
     }
 
     public void removeAccountById(Integer id) {
-        accountRepository.deleteById(id);
+        Account account = getValidAccountById(id);
+        accountRepository.deleteById(account.getId());
     }
 
     public void updateAccountById(Integer id, AccountDto accountDto) {
-        Account account = accountRepository.getById(id);
+        Account account = getValidAccountById(id);
         accountMapper.updateEntity(accountDto, account);
         Customer customer = customerRepository.getById(accountDto.getCustomerId());
         account.setCustomer(customer);
@@ -54,13 +54,6 @@ public class AccountService {
     public List<AccountResponse> findAccountsInfoByLastName(String lastName) {
         List<Account> accounts = accountRepository.findByLastName(lastName);
         return accountMapper.toResponses(accounts);
-    }
-
-    public Account getValidAccountById(Integer accountId) {
-        Optional<Account> account = accountRepository.findById(accountId);
-        validationService.accountExists(accountId, account);
-
-        return account.get();
     }
 
     public void updateCreditPaymentBalance(Account account, Integer amount) {
@@ -80,7 +73,6 @@ public class AccountService {
     public Account getValidAccountByAccountNumber(String accountNumber) {
         Optional<Account> account = accountRepository.findByAccountNumber(accountNumber);
         validationService.accountExists(accountNumber, account);
-
         return account.get();
     }
 
@@ -88,9 +80,15 @@ public class AccountService {
         return accountRepository.existsByAccountNumber(accountNumber);
     }
 
-    public List<AccountResponse> findAccountInfoByCustomerId(Integer id) {
+
+    public Account getValidAccountById(Integer accountId) {
+        Optional<Account> account = accountRepository.findById(accountId);
+        validationService.accountExists(accountId, account);
+        return account.get();
+    }
+
+    public List<AccountResponse> findAccountsInfoByCustomerId(Integer id) {
         List<Account> accounts = accountRepository.findByCustomerId(id);
         return accountMapper.toResponses(accounts);
     }
-
 }

@@ -1,5 +1,6 @@
-package ee.bcs.myApp.bank.service;
+package ee.bcs.myApp.bank.service.transfer;
 
+import ee.bcs.myApp.bank.domain.account.Account;
 import ee.bcs.myApp.bank.domain.account.AccountService;
 import ee.bcs.myApp.bank.domain.transaction.Transaction;
 import ee.bcs.myApp.bank.domain.transaction.TransactionService;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 @Service
-public class BankService {
+public class TransferService {
 
     @Resource
     private AccountService accountService;
@@ -32,14 +33,20 @@ public class BankService {
         accountService.updateDebitPaymentBalance(transaction.getAccount(), request.getAmount());
     }
 
-    public TransactionResponse receiveMoney(MoneyRequest request) {
+    public TransferResponse receiveMoney(TransferRequest request) {
         Transaction transaction = transactionService.addReceiveMoneyTransaction(request);
         accountService.updateCreditPaymentBalance(transaction.getAccount(), request.getAmount());
-        return new TransactionResponse(transaction.getId());
+        return new TransferResponse(transaction.getId());
     }
 
-    public TransactionResponse sendMoney(MoneyRequest request) {
-        Transaction transaction = transactionService.addSendMoneyTransaction(request);
-        return new TransactionResponse(transaction.getId());
+    public TransferResponse sendMoney(SendRequest request) {
+        Integer senderAccountId = request.getSenderAccountId();
+        Account account = accountService.getValidAccountById(senderAccountId);
+        TransferRequest transferRequest = new TransferRequest();
+        transferRequest.setSenderAccountNumber(account.getAccountNumber());
+        transferRequest.setReceiverAccountNumber(request.getReceiverAccountNumber());
+        transferRequest.setAmount(request.getAmount());
+                Transaction transaction = transactionService.addSendMoneyTransaction(transferRequest);
+        return new TransferResponse(transaction.getId());
     }
 }

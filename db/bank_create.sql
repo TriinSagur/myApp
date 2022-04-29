@@ -50,6 +50,10 @@ ALTER TABLE bank.transaction ADD CONSTRAINT transaction_account
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
-
+CREATE TABLE picture_data (
+                              id serial  NOT NULL,
+                              data bytea  NOT NULL,
+                              CONSTRAINT picture_data_pk PRIMARY KEY (id)
+);
 -- End of file.
 
